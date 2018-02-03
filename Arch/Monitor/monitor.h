@@ -4,7 +4,7 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_MONITOR_H
-#define ARCH_MONITOR_H
+#ifndef ARCH_MONITOR_H_
+#define ARCH_MONITOR_H_
 
-#endif //ARCH_MONITOR_H
+#endif //ARCH_MONITOR_H_

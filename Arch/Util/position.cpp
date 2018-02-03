@@ -4,7 +4,11 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_BLACKBOARD_H_
-#define ARCH_BLACKBOARD_H_
+#include "position.h"
 
-#endif //ARCH_BLACKBOARD_H_
+Position::Position(double x_, double y_, double z_)
+{
+    x = x_;
+    y = y_;
+    z = z_;
+}

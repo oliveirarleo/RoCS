@@ -4,7 +4,9 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_BLACKBOARD_H_
-#define ARCH_BLACKBOARD_H_
+#include "fov.h"
 
-#endif //ARCH_BLACKBOARD_H_
+FOV::FOV(double start, double end) {
+    starting_angle = start;
+    ending_angle = end;
+}

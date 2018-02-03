@@ -7,13 +7,18 @@
 #ifndef ROCS_SENSOR_H_
 #define ROCS_SENSOR_H_
 
-class sensor
+#include "sensor_accessor.h"
+#include "../Util/position.h"
+
+class Sensor: public SensorAccessor
 {
-public:
 private:
     double weight;
     Position position;
-    int bandwidth;
+    double bandwidth;
+
+public:
+    Sensor(double weight_, Position_, double bandwidth_);
 };
 
 

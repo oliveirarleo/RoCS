@@ -4,7 +4,12 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_BLACKBOARD_H_
-#define ARCH_BLACKBOARD_H_
+#ifndef ARCH_COLOR_SYSTEM_H_
+#define ARCH_COLOR_SYSTEM_H_
 
-#endif //ARCH_BLACKBOARD_H_
+enum ColorSystem
+{
+    RGB, CMYK, PMS
+};
+
+#endif //ARCH_COLOR_SYSTEM_H_

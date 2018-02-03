@@ -4,7 +4,12 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_BLACKBOARD_H_
-#define ARCH_BLACKBOARD_H_
+#ifndef ARCH_SONAR_H_
+#define ARCH_SONAR_H_
 
-#endif //ARCH_BLACKBOARD_H_
+#include "range.h"
+
+class Sonar: public Range{
+};
+
+#endif //ARCH_SONAR_H_
