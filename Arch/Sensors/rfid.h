@@ -15,7 +15,7 @@ private:
     double max_range;
 
 public:
-    RFID(double);
+    RFID(double weight_, Position position_, double bandwidth_, double max_range_);
 };
 
 #endif //ARCH_RFID_H

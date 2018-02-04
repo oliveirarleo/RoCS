@@ -18,7 +18,7 @@ private:
     Range range_sensor;
 
 public:
-    RGBD(Camera, Range);
+    RGBD(double weight_, Position position_, double bandwidth_, Camera camera_, Range range_);
 };
 
 #endif //ARCH_RGB_D_H_

@@ -16,9 +16,6 @@ int main(int argc, char* argv[])
     using std::endl;
 
     Position pos{33, 44, 55};
-
-
-
     SonarExample sonar{1, pos, 2, 3, 4, 5, 6, 7};
 
 
