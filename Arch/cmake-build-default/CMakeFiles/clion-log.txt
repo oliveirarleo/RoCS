@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default

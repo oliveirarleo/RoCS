@@ -10,7 +10,7 @@
 #include "sensor_accessor.h"
 #include "../Util/position.h"
 
-class Sensor: public SensorAccessor
+class Sensor: public SensorAccessor<double>
 {
 private:
     double weight;
@@ -18,7 +18,7 @@ private:
     double bandwidth;
 
 public:
-    Sensor(double weight_, Position_, double bandwidth_);
+    Sensor(double weight_, Position position_, double bandwidth_);
 };
 
 

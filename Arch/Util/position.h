@@ -15,7 +15,7 @@ private:
     double z;
 
 public:
-    Position(double, double, double);
+    Position(double x_, double y_, double z_);
 };
 
 #endif //ARCH_POSITION_H_

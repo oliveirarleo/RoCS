@@ -14,14 +14,13 @@ class Range: public Sensor
 private:
     double max_range;
     double resolution;
-    double resolution;
+    double fov_angle;
     double beam_angle;
     double scan_interval;
-    FOV fov;
 
 public:
     Range(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
-          double resolution_, double beam_angle_, double scan_interval_);
+          double fov_angle_, double beam_angle_, double scan_interval_);
 };
 
 #endif //ARCH_RANGE_H_

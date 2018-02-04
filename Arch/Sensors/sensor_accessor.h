@@ -13,7 +13,7 @@ class SensorAccessor
 {
 
 public:
-    virtual DataType getData();
+    virtual DataType getData() = 0;
 };
 
 #endif // ROCS_SENSOR_ACCESSOR_H

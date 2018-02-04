@@ -6,8 +6,7 @@
 
 #include "position.h"
 
-Position::Position(double x_, double y_, double z_)
-{
+Position::Position(double x_, double y_, double z_){
     x = x_;
     y = y_;
     z = z_;

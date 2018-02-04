@@ -10,6 +10,9 @@
 #include "range.h"
 
 class Sonar: public Range{
+public:
+    Sonar(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
+          double fov_angle_, double beam_angle_, double scan_interval_);
 };
 
 #endif //ARCH_SONAR_H_
