@@ -19,5 +19,8 @@ int main(int argc, char* argv[])
     SonarExample sonar{1, pos, 2, 3, 4, 5, 6, 7};
 
 
+    cout << pos << endl;
+    cout << sonar << endl;
+
     cout << "hi" << endl;
 }

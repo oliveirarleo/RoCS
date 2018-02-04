@@ -11,3 +11,8 @@ Position::Position(double x_, double y_, double z_){
     y = y_;
     z = z_;
 }
+
+std::ostream &operator<<(std::ostream &os, const Position &position) {
+    os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " ";
+    return os;
+}

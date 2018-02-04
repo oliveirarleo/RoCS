@@ -4,6 +4,7 @@
 // Github:      https://github.com/oramleo
 //
 
+#include <string>
 #include "sonar_example.h"
 
 SonarExample::SonarExample(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
@@ -17,3 +18,5 @@ double SonarExample::getData()
 {
     return 99;
 }
+
+

@@ -7,16 +7,22 @@
 #IncludeRegexTransform: 
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./ConcreteClasses/Sensors/sonar_example.h
+ostream
+-
 ../../Sensors/sonar.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sonar.h
 ../../Util/position.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Util/position.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/range.h
+ostream
+-
 sensor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sensor.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sensor.h
+ostream
+-
 sensor_accessor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sensor_accessor.h
 ../Util/position.h
@@ -25,16 +31,24 @@ sensor_accessor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sensor_accessor.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/sonar.h
+ostream
+-
 range.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/range.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Util/position.h
+ostream
+-
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors/sonar_example.cpp
+string
+-
 sonar_example.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors/sonar_example.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors/sonar_example.h
+ostream
+-
 ../../Sensors/sonar.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.h
 ../../Util/position.h
@@ -45,6 +59,8 @@ range.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
+ostream
+-
 sensor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.h
 
@@ -53,6 +69,8 @@ sensor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.h
+ostream
+-
 sensor_accessor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor_accessor.h
 ../Util/position.h
@@ -65,6 +83,8 @@ sonar.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.h
+ostream
+-
 range.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
 
@@ -79,6 +99,8 @@ position.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
+ostream
+-
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/main.cpp
 iostream

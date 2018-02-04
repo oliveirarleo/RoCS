@@ -7,6 +7,7 @@
 #ifndef ROCS_SENSOR_H_
 #define ROCS_SENSOR_H_
 
+#include <ostream>
 #include "sensor_accessor.h"
 #include "../Util/position.h"
 
@@ -19,6 +20,14 @@ private:
 
 public:
     Sensor(double weight_, Position position_, double bandwidth_);
+
+    double getWeight() const;
+
+    const Position &getPosition() const;
+
+    double getBandwidth() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Sensor &sensor);
 };
 
 

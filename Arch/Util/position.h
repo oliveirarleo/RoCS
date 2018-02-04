@@ -7,6 +7,8 @@
 #ifndef ARCH_POSITION_H_
 #define ARCH_POSITION_H_
 
+#include <ostream>
+
 class Position
 {
 private:
@@ -16,6 +18,8 @@ private:
 
 public:
     Position(double x_, double y_, double z_);
+
+    friend std::ostream &operator<<(std::ostream &os, const Position &position);
 };
 
 #endif //ARCH_POSITION_H_

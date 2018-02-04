@@ -13,3 +13,4 @@ Odometer::Odometer(double weight_, Position position_, double bandwidth_, double
     resolution = resolution_;
     tires = tires_;
 }
+

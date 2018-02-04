@@ -7,6 +7,7 @@
 #ifndef ARCH_RANGE_H_
 #define ARCH_RANGE_H_
 
+#include <ostream>
 #include "sensor.h"
 
 class Range: public Sensor
@@ -21,6 +22,8 @@ private:
 public:
     Range(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
           double fov_angle_, double beam_angle_, double scan_interval_);
+
+    friend std::ostream &operator<<(std::ostream &os, const Range &range);
 };
 
 #endif //ARCH_RANGE_H_

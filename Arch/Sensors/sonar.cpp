@@ -12,3 +12,8 @@ Sonar::Sonar(double weight_, Position position_, double bandwidth_, double max_r
 {
 
 }
+
+std::ostream &operator<<(std::ostream &os, const Sonar &sonar) {
+    os << static_cast<const Range &>(sonar);
+    return os;
+}
