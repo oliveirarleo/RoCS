@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++1z
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses" -I"/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util" -I"/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors" 
+CXX_INCLUDES = 
 

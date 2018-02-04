@@ -44,9 +44,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include"/>
@@ -69,9 +66,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include"/>
