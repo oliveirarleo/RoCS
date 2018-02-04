@@ -18,7 +18,8 @@ private:
     double measurement_range;
 
 public:
-    Gyroscope(int, double, double, double, double);
+    Gyroscope(double weight_, Position position_, double bandwidth_, int number_of_axes_, double output_range_,
+              double sensitivity_, double bias_, double measurement_range_);
 };
 
 

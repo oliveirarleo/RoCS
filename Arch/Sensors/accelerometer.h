@@ -19,7 +19,8 @@ private:
     double measurement_range;
 
 public:
-    Accelerometer(int, double, double, double, double);
+    Accelerometer(double weight_, Position position_, double bandwidth_, int number_of_axes_, double output_range_,
+                  double sensitivity_, double zero_g_offset_, double measurement_range_);
 };
 
 #endif //ARCH_ACCELEROMETER_H_

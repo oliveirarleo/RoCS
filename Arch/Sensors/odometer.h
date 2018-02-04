@@ -19,7 +19,7 @@ private:
     std::vector<Tire> tires;
 
 public:
-    Odometer(double weight_, Position position_, double bandwidth_, double scan_interval_, double resolution_, std::vector<Tire>);
+    Odometer(double weight_, Position position_, double bandwidth_, double scan_interval_, double resolution_, std::vector<Tire> tires_);
 };
 
 
