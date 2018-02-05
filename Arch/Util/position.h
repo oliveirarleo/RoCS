@@ -17,9 +17,18 @@ private:
     double z;
 
 public:
-    Position(double x_, double y_, double z_);
+    Position(double x_, double y_, double z_)
+    {
+        x = x_;
+        y = y_;
+        z = z_;
+    }
 
-    friend std::ostream &operator<<(std::ostream &os, const Position &position);
+    friend std::ostream &operator<<(std::ostream &os, const Position &position)
+    {
+        os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " ";
+        return os;
+    }
 };
 
 #endif //ARCH_POSITION_H_

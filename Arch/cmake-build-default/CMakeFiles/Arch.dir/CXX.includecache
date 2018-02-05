@@ -65,6 +65,8 @@ analyze_observer.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
+../Util/observer.h
+/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
 ostream
@@ -88,41 +90,11 @@ ostream
 range.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
 
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.cpp
-fov.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.cpp
-observer.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.cpp
-pipeline.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.cpp
-position.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 ostream
 -
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.cpp
-publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.h
-vector
--
-observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/main.cpp
 iostream

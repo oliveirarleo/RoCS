@@ -14,7 +14,10 @@ private:
     double ending_angle;
 
 public:
-    FOV(double, double);
+    FOV(double start, double end):
+            starting_angle(start),
+            ending_angle(end)
+    {}
 };
 
 #endif //ARCH_FOV_H_

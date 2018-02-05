@@ -14,22 +14,7 @@ CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: ../Util/positio
 
 CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Plan/analyze_observer.cpp
 CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Plan/analyze_observer.h
-
-CMakeFiles/Arch.dir/Util/fov.cpp.o: ../Util/fov.cpp
-CMakeFiles/Arch.dir/Util/fov.cpp.o: ../Util/fov.h
-
-CMakeFiles/Arch.dir/Util/observer.cpp.o: ../Util/observer.cpp
-CMakeFiles/Arch.dir/Util/observer.cpp.o: ../Util/observer.h
-
-CMakeFiles/Arch.dir/Util/pipeline.cpp.o: ../Util/pipeline.cpp
-CMakeFiles/Arch.dir/Util/pipeline.cpp.o: ../Util/pipeline.h
-
-CMakeFiles/Arch.dir/Util/position.cpp.o: ../Util/position.cpp
-CMakeFiles/Arch.dir/Util/position.cpp.o: ../Util/position.h
-
-CMakeFiles/Arch.dir/Util/publisher.cpp.o: ../Util/observer.h
-CMakeFiles/Arch.dir/Util/publisher.cpp.o: ../Util/publisher.cpp
-CMakeFiles/Arch.dir/Util/publisher.cpp.o: ../Util/publisher.h
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Util/observer.h
 
 CMakeFiles/Arch.dir/main.cpp.o: .././ConcreteClasses/Sensors/sonar_example.h
 CMakeFiles/Arch.dir/main.cpp.o: .././Sensors/range.h

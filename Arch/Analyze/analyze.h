@@ -18,7 +18,7 @@ private:
     std::vector< Processor > processors;
     std::vector< Merger > mergers;
     std::vector< Observer > observers;
-    AnalyzePublisher& publisher;
+    AnalyzePublisher publisher;
 
 public:
     Analyze::Analyze(const std::vector<Processor> &processors, const std::vector<Merger> &mergers,

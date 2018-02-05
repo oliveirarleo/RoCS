@@ -100,36 +100,6 @@
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h">
 			<Option target="Arch"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.h">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.h">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.h">
-			<Option target="Arch"/>
-		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/main.cpp">
 			<Option target="Arch"/>
 		</Unit>

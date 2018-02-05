@@ -7,9 +7,12 @@
 #ifndef ARCH_ANALYZE_OBSERVER_H_
 #define ARCH_ANALYZE_OBSERVER_H_
 
+#include "../Util/observer.h"
 
-class AnalyzeObserver {
-
+class AnalyzeObserver: Observer
+{
+public:
+    virtual void update() = 0;
 };
 
 
