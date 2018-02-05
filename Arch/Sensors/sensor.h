@@ -11,7 +11,8 @@
 #include "sensor_accessor.h"
 #include "../Util/position.h"
 
-class Sensor: public SensorAccessor<double>
+template <class T>
+class Sensor: public SensorAccessor<T>
 {
 private:
     double weight;
@@ -19,15 +20,31 @@ private:
     double bandwidth;
 
 public:
-    Sensor(double weight_, Position position_, double bandwidth_);
+    Sensor(double weight_, Position position_, double bandwidth_):
+            position(position_)
+    {
+        weight = weight_;
+        bandwidth = bandwidth_;
+    }
 
-    double getWeight() const;
+    double getWeight() const {
+        return weight;
+    }
 
-    const Position &getPosition() const;
+    const Position& getPosition() const {
+        return position;
+    }
 
-    double getBandwidth() const;
+    double getBandwidth() const {
+        return bandwidth;
+    }
 
-    friend std::ostream &operator<<(std::ostream &os, const Sensor &sensor);
+    friend std::ostream &operator<<(std::ostream &os, const Sensor<T> &sensor)
+    {
+        os << "Weight: " << sensor.weight << " Position: " << sensor.position << " Bandwidth: "
+           << sensor.bandwidth << " ";
+        return os;
+    }
 };
 
 

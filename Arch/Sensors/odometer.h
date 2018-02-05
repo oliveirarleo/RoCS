@@ -11,7 +11,8 @@
 #include "vector"
 #include "sensor.h"
 
-class Odometer: public Sensor
+template <class T>
+class Odometer: public Sensor<T>
 {
 private:
     double scan_interval;
@@ -19,7 +20,14 @@ private:
     std::vector<Tire> tires;
 
 public:
-    Odometer(double weight_, Position position_, double bandwidth_, double scan_interval_, double resolution_, std::vector<Tire> tires_);
+    Odometer(double weight_, Position position_, double bandwidth_, double scan_interval_, double resolution_,
+             std::vector<Tire> tires_):
+            Sensor(weight_, position_, bandwidth_)
+    {
+        scan_interval = scan_interval_;
+        resolution = resolution_;
+        tires = tires_;
+    }
 };
 
 

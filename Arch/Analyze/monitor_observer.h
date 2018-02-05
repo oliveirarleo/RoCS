@@ -9,6 +9,7 @@
 
 #include "../Util/observer.h"
 
+
 class MonitorObserver: public Observer
 {
 public:

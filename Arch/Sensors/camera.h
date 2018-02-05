@@ -10,7 +10,8 @@
 #include "sensor.h"
 #include "../Util/fov.h"
 
-class Camera: public Sensor
+template <class T>
+class Camera: public Sensor<T>
 {
 private:
     double resolution_x;
@@ -20,7 +21,14 @@ private:
 
 public:
     Camera(double weight_, Position position_, double bandwidth_, double resolution_x_, double resolution_y_,
-           double resolution_z_);
+           double resolution_z_):
+            Sensor(weight_, position_, bandwidth_)
+    {
+        resolution_x = resolution_x_;
+        resolution_y = resolution_y_;
+        resolution_z = resolution_z_;
+
+    }
 };
 
 #endif //ARCH_CAMERA_H_

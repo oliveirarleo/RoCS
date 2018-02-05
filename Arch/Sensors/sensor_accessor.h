@@ -8,12 +8,11 @@
 #define ROCS_SENSOR_ACCESSOR_H
 
 
-template <typename DataType>
+template <class T>
 class SensorAccessor
 {
-
 public:
-    virtual DataType getData() = 0;
+    virtual T getData() = 0;
 };
 
 #endif // ROCS_SENSOR_ACCESSOR_H

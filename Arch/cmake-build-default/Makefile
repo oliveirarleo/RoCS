@@ -123,6 +123,222 @@ Arch/fast:
 	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/build
 .PHONY : Arch/fast
 
+Analyze/analyze.o: Analyze/analyze.cpp.o
+
+.PHONY : Analyze/analyze.o
+
+# target to build an object file
+Analyze/analyze.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze.cpp.o
+.PHONY : Analyze/analyze.cpp.o
+
+Analyze/analyze.i: Analyze/analyze.cpp.i
+
+.PHONY : Analyze/analyze.i
+
+# target to preprocess a source file
+Analyze/analyze.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze.cpp.i
+.PHONY : Analyze/analyze.cpp.i
+
+Analyze/analyze.s: Analyze/analyze.cpp.s
+
+.PHONY : Analyze/analyze.s
+
+# target to generate assembly for a file
+Analyze/analyze.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze.cpp.s
+.PHONY : Analyze/analyze.cpp.s
+
+Analyze/analyze_publisher.o: Analyze/analyze_publisher.cpp.o
+
+.PHONY : Analyze/analyze_publisher.o
+
+# target to build an object file
+Analyze/analyze_publisher.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o
+.PHONY : Analyze/analyze_publisher.cpp.o
+
+Analyze/analyze_publisher.i: Analyze/analyze_publisher.cpp.i
+
+.PHONY : Analyze/analyze_publisher.i
+
+# target to preprocess a source file
+Analyze/analyze_publisher.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.i
+.PHONY : Analyze/analyze_publisher.cpp.i
+
+Analyze/analyze_publisher.s: Analyze/analyze_publisher.cpp.s
+
+.PHONY : Analyze/analyze_publisher.s
+
+# target to generate assembly for a file
+Analyze/analyze_publisher.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.s
+.PHONY : Analyze/analyze_publisher.cpp.s
+
+Analyze/behavior.o: Analyze/behavior.cpp.o
+
+.PHONY : Analyze/behavior.o
+
+# target to build an object file
+Analyze/behavior.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/behavior.cpp.o
+.PHONY : Analyze/behavior.cpp.o
+
+Analyze/behavior.i: Analyze/behavior.cpp.i
+
+.PHONY : Analyze/behavior.i
+
+# target to preprocess a source file
+Analyze/behavior.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/behavior.cpp.i
+.PHONY : Analyze/behavior.cpp.i
+
+Analyze/behavior.s: Analyze/behavior.cpp.s
+
+.PHONY : Analyze/behavior.s
+
+# target to generate assembly for a file
+Analyze/behavior.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/behavior.cpp.s
+.PHONY : Analyze/behavior.cpp.s
+
+Analyze/execute_pipeline.o: Analyze/execute_pipeline.cpp.o
+
+.PHONY : Analyze/execute_pipeline.o
+
+# target to build an object file
+Analyze/execute_pipeline.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o
+.PHONY : Analyze/execute_pipeline.cpp.o
+
+Analyze/execute_pipeline.i: Analyze/execute_pipeline.cpp.i
+
+.PHONY : Analyze/execute_pipeline.i
+
+# target to preprocess a source file
+Analyze/execute_pipeline.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.i
+.PHONY : Analyze/execute_pipeline.cpp.i
+
+Analyze/execute_pipeline.s: Analyze/execute_pipeline.cpp.s
+
+.PHONY : Analyze/execute_pipeline.s
+
+# target to generate assembly for a file
+Analyze/execute_pipeline.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.s
+.PHONY : Analyze/execute_pipeline.cpp.s
+
+Analyze/merger.o: Analyze/merger.cpp.o
+
+.PHONY : Analyze/merger.o
+
+# target to build an object file
+Analyze/merger.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/merger.cpp.o
+.PHONY : Analyze/merger.cpp.o
+
+Analyze/merger.i: Analyze/merger.cpp.i
+
+.PHONY : Analyze/merger.i
+
+# target to preprocess a source file
+Analyze/merger.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/merger.cpp.i
+.PHONY : Analyze/merger.cpp.i
+
+Analyze/merger.s: Analyze/merger.cpp.s
+
+.PHONY : Analyze/merger.s
+
+# target to generate assembly for a file
+Analyze/merger.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/merger.cpp.s
+.PHONY : Analyze/merger.cpp.s
+
+Analyze/monitor_observer.o: Analyze/monitor_observer.cpp.o
+
+.PHONY : Analyze/monitor_observer.o
+
+# target to build an object file
+Analyze/monitor_observer.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o
+.PHONY : Analyze/monitor_observer.cpp.o
+
+Analyze/monitor_observer.i: Analyze/monitor_observer.cpp.i
+
+.PHONY : Analyze/monitor_observer.i
+
+# target to preprocess a source file
+Analyze/monitor_observer.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.i
+.PHONY : Analyze/monitor_observer.cpp.i
+
+Analyze/monitor_observer.s: Analyze/monitor_observer.cpp.s
+
+.PHONY : Analyze/monitor_observer.s
+
+# target to generate assembly for a file
+Analyze/monitor_observer.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.s
+.PHONY : Analyze/monitor_observer.cpp.s
+
+Analyze/processor.o: Analyze/processor.cpp.o
+
+.PHONY : Analyze/processor.o
+
+# target to build an object file
+Analyze/processor.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/processor.cpp.o
+.PHONY : Analyze/processor.cpp.o
+
+Analyze/processor.i: Analyze/processor.cpp.i
+
+.PHONY : Analyze/processor.i
+
+# target to preprocess a source file
+Analyze/processor.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/processor.cpp.i
+.PHONY : Analyze/processor.cpp.i
+
+Analyze/processor.s: Analyze/processor.cpp.s
+
+.PHONY : Analyze/processor.s
+
+# target to generate assembly for a file
+Analyze/processor.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/processor.cpp.s
+.PHONY : Analyze/processor.cpp.s
+
+ConcreteClasses/Monitor/monitor.o: ConcreteClasses/Monitor/monitor.cpp.o
+
+.PHONY : ConcreteClasses/Monitor/monitor.o
+
+# target to build an object file
+ConcreteClasses/Monitor/monitor.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o
+.PHONY : ConcreteClasses/Monitor/monitor.cpp.o
+
+ConcreteClasses/Monitor/monitor.i: ConcreteClasses/Monitor/monitor.cpp.i
+
+.PHONY : ConcreteClasses/Monitor/monitor.i
+
+# target to preprocess a source file
+ConcreteClasses/Monitor/monitor.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.i
+.PHONY : ConcreteClasses/Monitor/monitor.cpp.i
+
+ConcreteClasses/Monitor/monitor.s: ConcreteClasses/Monitor/monitor.cpp.s
+
+.PHONY : ConcreteClasses/Monitor/monitor.s
+
+# target to generate assembly for a file
+ConcreteClasses/Monitor/monitor.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.s
+.PHONY : ConcreteClasses/Monitor/monitor.cpp.s
+
 ConcreteClasses/Sensors/sonar_example.o: ConcreteClasses/Sensors/sonar_example.cpp.o
 
 .PHONY : ConcreteClasses/Sensors/sonar_example.o
@@ -150,86 +366,86 @@ ConcreteClasses/Sensors/sonar_example.cpp.s:
 	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.s
 .PHONY : ConcreteClasses/Sensors/sonar_example.cpp.s
 
-Sensors/range.o: Sensors/range.cpp.o
+Monitor/monitor.o: Monitor/monitor.cpp.o
 
-.PHONY : Sensors/range.o
-
-# target to build an object file
-Sensors/range.cpp.o:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/range.cpp.o
-.PHONY : Sensors/range.cpp.o
-
-Sensors/range.i: Sensors/range.cpp.i
-
-.PHONY : Sensors/range.i
-
-# target to preprocess a source file
-Sensors/range.cpp.i:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/range.cpp.i
-.PHONY : Sensors/range.cpp.i
-
-Sensors/range.s: Sensors/range.cpp.s
-
-.PHONY : Sensors/range.s
-
-# target to generate assembly for a file
-Sensors/range.cpp.s:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/range.cpp.s
-.PHONY : Sensors/range.cpp.s
-
-Sensors/sensor.o: Sensors/sensor.cpp.o
-
-.PHONY : Sensors/sensor.o
+.PHONY : Monitor/monitor.o
 
 # target to build an object file
-Sensors/sensor.cpp.o:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sensor.cpp.o
-.PHONY : Sensors/sensor.cpp.o
+Monitor/monitor.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor.cpp.o
+.PHONY : Monitor/monitor.cpp.o
 
-Sensors/sensor.i: Sensors/sensor.cpp.i
+Monitor/monitor.i: Monitor/monitor.cpp.i
 
-.PHONY : Sensors/sensor.i
+.PHONY : Monitor/monitor.i
 
 # target to preprocess a source file
-Sensors/sensor.cpp.i:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sensor.cpp.i
-.PHONY : Sensors/sensor.cpp.i
+Monitor/monitor.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor.cpp.i
+.PHONY : Monitor/monitor.cpp.i
 
-Sensors/sensor.s: Sensors/sensor.cpp.s
+Monitor/monitor.s: Monitor/monitor.cpp.s
 
-.PHONY : Sensors/sensor.s
+.PHONY : Monitor/monitor.s
 
 # target to generate assembly for a file
-Sensors/sensor.cpp.s:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sensor.cpp.s
-.PHONY : Sensors/sensor.cpp.s
+Monitor/monitor.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor.cpp.s
+.PHONY : Monitor/monitor.cpp.s
 
-Sensors/sonar.o: Sensors/sonar.cpp.o
+Monitor/monitor_publisher.o: Monitor/monitor_publisher.cpp.o
 
-.PHONY : Sensors/sonar.o
+.PHONY : Monitor/monitor_publisher.o
 
 # target to build an object file
-Sensors/sonar.cpp.o:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sonar.cpp.o
-.PHONY : Sensors/sonar.cpp.o
+Monitor/monitor_publisher.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o
+.PHONY : Monitor/monitor_publisher.cpp.o
 
-Sensors/sonar.i: Sensors/sonar.cpp.i
+Monitor/monitor_publisher.i: Monitor/monitor_publisher.cpp.i
 
-.PHONY : Sensors/sonar.i
+.PHONY : Monitor/monitor_publisher.i
 
 # target to preprocess a source file
-Sensors/sonar.cpp.i:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sonar.cpp.i
-.PHONY : Sensors/sonar.cpp.i
+Monitor/monitor_publisher.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.i
+.PHONY : Monitor/monitor_publisher.cpp.i
 
-Sensors/sonar.s: Sensors/sonar.cpp.s
+Monitor/monitor_publisher.s: Monitor/monitor_publisher.cpp.s
 
-.PHONY : Sensors/sonar.s
+.PHONY : Monitor/monitor_publisher.s
 
 # target to generate assembly for a file
-Sensors/sonar.cpp.s:
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sonar.cpp.s
-.PHONY : Sensors/sonar.cpp.s
+Monitor/monitor_publisher.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.s
+.PHONY : Monitor/monitor_publisher.cpp.s
+
+Plan/analyze_observer.o: Plan/analyze_observer.cpp.o
+
+.PHONY : Plan/analyze_observer.o
+
+# target to build an object file
+Plan/analyze_observer.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o
+.PHONY : Plan/analyze_observer.cpp.o
+
+Plan/analyze_observer.i: Plan/analyze_observer.cpp.i
+
+.PHONY : Plan/analyze_observer.i
+
+# target to preprocess a source file
+Plan/analyze_observer.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.i
+.PHONY : Plan/analyze_observer.cpp.i
+
+Plan/analyze_observer.s: Plan/analyze_observer.cpp.s
+
+.PHONY : Plan/analyze_observer.s
+
+# target to generate assembly for a file
+Plan/analyze_observer.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.s
+.PHONY : Plan/analyze_observer.cpp.s
 
 Util/fov.o: Util/fov.cpp.o
 
@@ -258,6 +474,60 @@ Util/fov.cpp.s:
 	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/fov.cpp.s
 .PHONY : Util/fov.cpp.s
 
+Util/observer.o: Util/observer.cpp.o
+
+.PHONY : Util/observer.o
+
+# target to build an object file
+Util/observer.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/observer.cpp.o
+.PHONY : Util/observer.cpp.o
+
+Util/observer.i: Util/observer.cpp.i
+
+.PHONY : Util/observer.i
+
+# target to preprocess a source file
+Util/observer.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/observer.cpp.i
+.PHONY : Util/observer.cpp.i
+
+Util/observer.s: Util/observer.cpp.s
+
+.PHONY : Util/observer.s
+
+# target to generate assembly for a file
+Util/observer.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/observer.cpp.s
+.PHONY : Util/observer.cpp.s
+
+Util/pipeline.o: Util/pipeline.cpp.o
+
+.PHONY : Util/pipeline.o
+
+# target to build an object file
+Util/pipeline.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/pipeline.cpp.o
+.PHONY : Util/pipeline.cpp.o
+
+Util/pipeline.i: Util/pipeline.cpp.i
+
+.PHONY : Util/pipeline.i
+
+# target to preprocess a source file
+Util/pipeline.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/pipeline.cpp.i
+.PHONY : Util/pipeline.cpp.i
+
+Util/pipeline.s: Util/pipeline.cpp.s
+
+.PHONY : Util/pipeline.s
+
+# target to generate assembly for a file
+Util/pipeline.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/pipeline.cpp.s
+.PHONY : Util/pipeline.cpp.s
+
 Util/position.o: Util/position.cpp.o
 
 .PHONY : Util/position.o
@@ -284,6 +554,60 @@ Util/position.s: Util/position.cpp.s
 Util/position.cpp.s:
 	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/position.cpp.s
 .PHONY : Util/position.cpp.s
+
+Util/publisher.o: Util/publisher.cpp.o
+
+.PHONY : Util/publisher.o
+
+# target to build an object file
+Util/publisher.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/publisher.cpp.o
+.PHONY : Util/publisher.cpp.o
+
+Util/publisher.i: Util/publisher.cpp.i
+
+.PHONY : Util/publisher.i
+
+# target to preprocess a source file
+Util/publisher.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/publisher.cpp.i
+.PHONY : Util/publisher.cpp.i
+
+Util/publisher.s: Util/publisher.cpp.s
+
+.PHONY : Util/publisher.s
+
+# target to generate assembly for a file
+Util/publisher.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/publisher.cpp.s
+.PHONY : Util/publisher.cpp.s
+
+Util/tire.o: Util/tire.cpp.o
+
+.PHONY : Util/tire.o
+
+# target to build an object file
+Util/tire.cpp.o:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/tire.cpp.o
+.PHONY : Util/tire.cpp.o
+
+Util/tire.i: Util/tire.cpp.i
+
+.PHONY : Util/tire.i
+
+# target to preprocess a source file
+Util/tire.cpp.i:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/tire.cpp.i
+.PHONY : Util/tire.cpp.i
+
+Util/tire.s: Util/tire.cpp.s
+
+.PHONY : Util/tire.s
+
+# target to generate assembly for a file
+Util/tire.cpp.s:
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/tire.cpp.s
+.PHONY : Util/tire.cpp.s
 
 main.o: main.cpp.o
 
@@ -321,24 +645,60 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Arch"
+	@echo "... Analyze/analyze.o"
+	@echo "... Analyze/analyze.i"
+	@echo "... Analyze/analyze.s"
+	@echo "... Analyze/analyze_publisher.o"
+	@echo "... Analyze/analyze_publisher.i"
+	@echo "... Analyze/analyze_publisher.s"
+	@echo "... Analyze/behavior.o"
+	@echo "... Analyze/behavior.i"
+	@echo "... Analyze/behavior.s"
+	@echo "... Analyze/execute_pipeline.o"
+	@echo "... Analyze/execute_pipeline.i"
+	@echo "... Analyze/execute_pipeline.s"
+	@echo "... Analyze/merger.o"
+	@echo "... Analyze/merger.i"
+	@echo "... Analyze/merger.s"
+	@echo "... Analyze/monitor_observer.o"
+	@echo "... Analyze/monitor_observer.i"
+	@echo "... Analyze/monitor_observer.s"
+	@echo "... Analyze/processor.o"
+	@echo "... Analyze/processor.i"
+	@echo "... Analyze/processor.s"
+	@echo "... ConcreteClasses/Monitor/monitor.o"
+	@echo "... ConcreteClasses/Monitor/monitor.i"
+	@echo "... ConcreteClasses/Monitor/monitor.s"
 	@echo "... ConcreteClasses/Sensors/sonar_example.o"
 	@echo "... ConcreteClasses/Sensors/sonar_example.i"
 	@echo "... ConcreteClasses/Sensors/sonar_example.s"
-	@echo "... Sensors/range.o"
-	@echo "... Sensors/range.i"
-	@echo "... Sensors/range.s"
-	@echo "... Sensors/sensor.o"
-	@echo "... Sensors/sensor.i"
-	@echo "... Sensors/sensor.s"
-	@echo "... Sensors/sonar.o"
-	@echo "... Sensors/sonar.i"
-	@echo "... Sensors/sonar.s"
+	@echo "... Monitor/monitor.o"
+	@echo "... Monitor/monitor.i"
+	@echo "... Monitor/monitor.s"
+	@echo "... Monitor/monitor_publisher.o"
+	@echo "... Monitor/monitor_publisher.i"
+	@echo "... Monitor/monitor_publisher.s"
+	@echo "... Plan/analyze_observer.o"
+	@echo "... Plan/analyze_observer.i"
+	@echo "... Plan/analyze_observer.s"
 	@echo "... Util/fov.o"
 	@echo "... Util/fov.i"
 	@echo "... Util/fov.s"
+	@echo "... Util/observer.o"
+	@echo "... Util/observer.i"
+	@echo "... Util/observer.s"
+	@echo "... Util/pipeline.o"
+	@echo "... Util/pipeline.i"
+	@echo "... Util/pipeline.s"
 	@echo "... Util/position.o"
 	@echo "... Util/position.i"
 	@echo "... Util/position.s"
+	@echo "... Util/publisher.o"
+	@echo "... Util/publisher.i"
+	@echo "... Util/publisher.s"
+	@echo "... Util/tire.o"
+	@echo "... Util/tire.i"
+	@echo "... Util/tire.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

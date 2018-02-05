@@ -192,32 +192,8 @@ CMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Value Computed by CMake
-CSensors_BINARY_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/ConcreteClasses/Sensors
-
-//Value Computed by CMake
-CSensors_SOURCE_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors
-
-//Value Computed by CMake
-Concrete_BINARY_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/ConcreteClasses
-
-//Value Computed by CMake
-Concrete_SOURCE_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses
-
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
-
-//Value Computed by CMake
-Sensors_BINARY_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/Sensors
-
-//Value Computed by CMake
-Sensors_SOURCE_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors
-
-//Value Computed by CMake
-Util_BINARY_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/Util
-
-//Value Computed by CMake
-Util_SOURCE_DIR:STATIC=/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util
 
 
 ########################

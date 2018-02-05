@@ -12,15 +12,21 @@
 #include "magnetometer.h"
 #include "gyroscope.h"
 
+template <class T, class AccelerometerT, class GyroscopeT, class MagnetometerT>
 class IMU: public Sensor
 {
 private:
-    Accelerometer accelerometer;
-    Gyroscope gyroscope;
-    Magnetometer magnetometer;
+    Accelerometer<AccelerometerT> accelerometer;
+    Gyroscope<GyroscopeT> gyroscope;
+    Magnetometer<MagnetometerT> magnetometer;
 
 public:
-    IMU(Accelerometer, Gyroscope, Magnetometer);
+    IMU(Accelerometer<AccelerometerT> accelerometer_, Gyroscope<GyroscopeT> gyroscope_,
+        Magnetometer<MagnetometerT> magnetometer_):
+            Accelerometer(accelerometer_),
+            Gyroscope(gyroscope_),
+            Magnetometer(magnetometer_)
+    {}
 };
 
 #endif //ARCH_IMU_H_

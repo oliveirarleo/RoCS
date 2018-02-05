@@ -4,13 +4,14 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_PROCESSOR_H_
-#define ARCH_PROCESSOR_H_
+#ifndef ARCH_BEHAVIOR_H_
+#define ARCH_BEHAVIOR_H_
 
-class Processor {
+
+class Behavior {
 public:
-    virtual void process() = 0;
+    virtual void configure() = 0;
 };
 
 
-#endif // ARCH_PROCESSOR_H_
+#endif // ARCH_BEHAVIOR_H_

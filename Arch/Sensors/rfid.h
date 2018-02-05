@@ -9,13 +9,18 @@
 
 #include "sensor.h"
 
-class RFID: public Sensor
+template <class T>
+class RFID: public Sensor<T>
 {
 private:
     double max_range;
 
 public:
-    RFID(double weight_, Position position_, double bandwidth_, double max_range_);
+    RFID(double weight_, Position position_, double bandwidth_, double max_range_):
+            Sensor(weight_, position_, bandwidth_)
+    {
+        max_range = max_range_;
+    }
 };
 
 #endif //ARCH_RFID_H

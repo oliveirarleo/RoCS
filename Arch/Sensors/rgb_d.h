@@ -11,14 +11,17 @@
 #include "camera.h"
 #include "range.h"
 
-class RGBD: public Sensor
+template <class T, CameraT, RangeT>
+class RGBD: public Sensor<T>
 {
 private:
-    Camera camera;
-    Range range_sensor;
+    Camera camera<CameraT>;
+    Range range_sensor<RangeT>;
 
 public:
-    RGBD(double weight_, Position position_, double bandwidth_, Camera camera_, Range range_);
+    RGBD(double weight_, Position position_, double bandwidth_, Camera camera_, Range range_):
+            Sensor(weight_, position_, bandwidth_), Camera(camera_), Range(range_)
+    {}
 };
 
 #endif //ARCH_RGB_D_H_

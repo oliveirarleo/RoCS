@@ -81,81 +81,249 @@ CMakeFiles/Arch.dir/main.cpp.o.provides: CMakeFiles/Arch.dir/main.cpp.o.requires
 CMakeFiles/Arch.dir/main.cpp.o.provides.build: CMakeFiles/Arch.dir/main.cpp.o
 
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.o: CMakeFiles/Arch.dir/flags.make
-CMakeFiles/Arch.dir/Sensors/range.cpp.o: ../Sensors/range.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Arch.dir/Sensors/range.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Sensors/range.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.cpp"
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.o: ../Analyze/analyze.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Arch.dir/Analyze/analyze.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/analyze.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.cpp"
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Sensors/range.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.cpp" > CMakeFiles/Arch.dir/Sensors/range.cpp.i
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/analyze.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.cpp" > CMakeFiles/Arch.dir/Analyze/analyze.cpp.i
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Sensors/range.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.cpp" -o CMakeFiles/Arch.dir/Sensors/range.cpp.s
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/analyze.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.cpp" -o CMakeFiles/Arch.dir/Analyze/analyze.cpp.s
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.o.requires:
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.requires:
 
-.PHONY : CMakeFiles/Arch.dir/Sensors/range.cpp.o.requires
+.PHONY : CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.requires
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.o.provides: CMakeFiles/Arch.dir/Sensors/range.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/range.cpp.o.provides.build
-.PHONY : CMakeFiles/Arch.dir/Sensors/range.cpp.o.provides
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.provides
 
-CMakeFiles/Arch.dir/Sensors/range.cpp.o.provides.build: CMakeFiles/Arch.dir/Sensors/range.cpp.o
-
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.o: CMakeFiles/Arch.dir/flags.make
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.o: ../Sensors/sensor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Arch.dir/Sensors/sensor.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Sensors/sensor.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.cpp"
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Sensors/sensor.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.cpp" > CMakeFiles/Arch.dir/Sensors/sensor.cpp.i
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Sensors/sensor.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.cpp" -o CMakeFiles/Arch.dir/Sensors/sensor.cpp.s
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.requires:
-
-.PHONY : CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.requires
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.provides: CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.provides.build
-.PHONY : CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.provides
-
-CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.provides.build: CMakeFiles/Arch.dir/Sensors/sensor.cpp.o
+CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/analyze.cpp.o
 
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.o: CMakeFiles/Arch.dir/flags.make
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.o: ../Sensors/sonar.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Arch.dir/Sensors/sonar.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Sensors/sonar.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.cpp"
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o: ../Analyze/analyze_publisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.cpp"
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Sensors/sonar.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.cpp" > CMakeFiles/Arch.dir/Sensors/sonar.cpp.i
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.cpp" > CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.i
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Sensors/sonar.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.cpp" -o CMakeFiles/Arch.dir/Sensors/sonar.cpp.s
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.cpp" -o CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.s
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.requires:
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.requires:
 
-.PHONY : CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.requires
+.PHONY : CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.requires
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.provides: CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.provides.build
-.PHONY : CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.provides
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.provides
 
-CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.provides.build: CMakeFiles/Arch.dir/Sensors/sonar.cpp.o
+CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o
+
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.o: ../Analyze/behavior.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Arch.dir/Analyze/behavior.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/behavior.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.cpp"
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/behavior.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.cpp" > CMakeFiles/Arch.dir/Analyze/behavior.cpp.i
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/behavior.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.cpp" -o CMakeFiles/Arch.dir/Analyze/behavior.cpp.s
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.requires
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.provides
+
+CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/behavior.cpp.o
+
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o: ../Analyze/execute_pipeline.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.cpp"
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.cpp" > CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.i
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.cpp" -o CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.s
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.requires
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.provides
+
+CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o
+
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/merger.cpp.o: ../Analyze/merger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Arch.dir/Analyze/merger.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/merger.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.cpp"
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/merger.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.cpp" > CMakeFiles/Arch.dir/Analyze/merger.cpp.i
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/merger.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.cpp" -o CMakeFiles/Arch.dir/Analyze/merger.cpp.s
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Analyze/merger.cpp.o.requires
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/merger.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/merger.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/merger.cpp.o.provides
+
+CMakeFiles/Arch.dir/Analyze/merger.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/merger.cpp.o
+
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o: ../Analyze/monitor_observer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.cpp"
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.cpp" > CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.i
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.cpp" -o CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.s
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.requires
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.provides
+
+CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o
+
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Analyze/processor.cpp.o: ../Analyze/processor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Arch.dir/Analyze/processor.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Analyze/processor.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.cpp"
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Analyze/processor.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.cpp" > CMakeFiles/Arch.dir/Analyze/processor.cpp.i
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Analyze/processor.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.cpp" -o CMakeFiles/Arch.dir/Analyze/processor.cpp.s
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Analyze/processor.cpp.o.requires
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.o.provides: CMakeFiles/Arch.dir/Analyze/processor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Analyze/processor.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Analyze/processor.cpp.o.provides
+
+CMakeFiles/Arch.dir/Analyze/processor.cpp.o.provides.build: CMakeFiles/Arch.dir/Analyze/processor.cpp.o
+
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.o: ../Monitor/monitor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Arch.dir/Monitor/monitor.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Monitor/monitor.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.cpp"
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Monitor/monitor.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.cpp" > CMakeFiles/Arch.dir/Monitor/monitor.cpp.i
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Monitor/monitor.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.cpp" -o CMakeFiles/Arch.dir/Monitor/monitor.cpp.s
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.requires
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.provides: CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.provides
+
+CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.provides.build: CMakeFiles/Arch.dir/Monitor/monitor.cpp.o
+
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o: ../Monitor/monitor_publisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.cpp"
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.cpp" > CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.i
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.cpp" -o CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.s
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.requires
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.provides: CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.provides
+
+CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.provides.build: CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o
+
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Plan/analyze_observer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp"
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp" > CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.i
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp" -o CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.s
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.requires
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.provides: CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.provides
+
+CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.provides.build: CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o
 
 
 CMakeFiles/Arch.dir/Util/fov.cpp.o: CMakeFiles/Arch.dir/flags.make
 CMakeFiles/Arch.dir/Util/fov.cpp.o: ../Util/fov.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Arch.dir/Util/fov.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Arch.dir/Util/fov.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/fov.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/fov.cpp"
 
 CMakeFiles/Arch.dir/Util/fov.cpp.i: cmake_force
@@ -177,9 +345,57 @@ CMakeFiles/Arch.dir/Util/fov.cpp.o.provides: CMakeFiles/Arch.dir/Util/fov.cpp.o.
 CMakeFiles/Arch.dir/Util/fov.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/fov.cpp.o
 
 
+CMakeFiles/Arch.dir/Util/observer.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Util/observer.cpp.o: ../Util/observer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Arch.dir/Util/observer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/observer.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.cpp"
+
+CMakeFiles/Arch.dir/Util/observer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Util/observer.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.cpp" > CMakeFiles/Arch.dir/Util/observer.cpp.i
+
+CMakeFiles/Arch.dir/Util/observer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Util/observer.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.cpp" -o CMakeFiles/Arch.dir/Util/observer.cpp.s
+
+CMakeFiles/Arch.dir/Util/observer.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Util/observer.cpp.o.requires
+
+CMakeFiles/Arch.dir/Util/observer.cpp.o.provides: CMakeFiles/Arch.dir/Util/observer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/observer.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Util/observer.cpp.o.provides
+
+CMakeFiles/Arch.dir/Util/observer.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/observer.cpp.o
+
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Util/pipeline.cpp.o: ../Util/pipeline.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Arch.dir/Util/pipeline.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/pipeline.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.cpp"
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Util/pipeline.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.cpp" > CMakeFiles/Arch.dir/Util/pipeline.cpp.i
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Util/pipeline.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.cpp" -o CMakeFiles/Arch.dir/Util/pipeline.cpp.s
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Util/pipeline.cpp.o.requires
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.o.provides: CMakeFiles/Arch.dir/Util/pipeline.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/pipeline.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Util/pipeline.cpp.o.provides
+
+CMakeFiles/Arch.dir/Util/pipeline.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/pipeline.cpp.o
+
+
 CMakeFiles/Arch.dir/Util/position.cpp.o: CMakeFiles/Arch.dir/flags.make
 CMakeFiles/Arch.dir/Util/position.cpp.o: ../Util/position.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Arch.dir/Util/position.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Arch.dir/Util/position.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/position.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.cpp"
 
 CMakeFiles/Arch.dir/Util/position.cpp.i: cmake_force
@@ -201,9 +417,81 @@ CMakeFiles/Arch.dir/Util/position.cpp.o.provides: CMakeFiles/Arch.dir/Util/posit
 CMakeFiles/Arch.dir/Util/position.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/position.cpp.o
 
 
+CMakeFiles/Arch.dir/Util/publisher.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Util/publisher.cpp.o: ../Util/publisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Arch.dir/Util/publisher.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/publisher.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.cpp"
+
+CMakeFiles/Arch.dir/Util/publisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Util/publisher.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.cpp" > CMakeFiles/Arch.dir/Util/publisher.cpp.i
+
+CMakeFiles/Arch.dir/Util/publisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Util/publisher.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.cpp" -o CMakeFiles/Arch.dir/Util/publisher.cpp.s
+
+CMakeFiles/Arch.dir/Util/publisher.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Util/publisher.cpp.o.requires
+
+CMakeFiles/Arch.dir/Util/publisher.cpp.o.provides: CMakeFiles/Arch.dir/Util/publisher.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/publisher.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Util/publisher.cpp.o.provides
+
+CMakeFiles/Arch.dir/Util/publisher.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/publisher.cpp.o
+
+
+CMakeFiles/Arch.dir/Util/tire.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/Util/tire.cpp.o: ../Util/tire.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Arch.dir/Util/tire.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/Util/tire.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.cpp"
+
+CMakeFiles/Arch.dir/Util/tire.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/Util/tire.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.cpp" > CMakeFiles/Arch.dir/Util/tire.cpp.i
+
+CMakeFiles/Arch.dir/Util/tire.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/Util/tire.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.cpp" -o CMakeFiles/Arch.dir/Util/tire.cpp.s
+
+CMakeFiles/Arch.dir/Util/tire.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/Util/tire.cpp.o.requires
+
+CMakeFiles/Arch.dir/Util/tire.cpp.o.provides: CMakeFiles/Arch.dir/Util/tire.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/Util/tire.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/Util/tire.cpp.o.provides
+
+CMakeFiles/Arch.dir/Util/tire.cpp.o.provides.build: CMakeFiles/Arch.dir/Util/tire.cpp.o
+
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o: CMakeFiles/Arch.dir/flags.make
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o: ../ConcreteClasses/Monitor/monitor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Monitor/monitor.cpp"
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Monitor/monitor.cpp" > CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.i
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Monitor/monitor.cpp" -o CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.s
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.requires:
+
+.PHONY : CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.requires
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.provides: CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Arch.dir/build.make CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.provides.build
+.PHONY : CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.provides
+
+CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.provides.build: CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o
+
+
 CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: CMakeFiles/Arch.dir/flags.make
 CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: ../ConcreteClasses/Sensors/sonar_example.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o -c "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors/sonar_example.cpp"
 
 CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.i: cmake_force
@@ -228,26 +516,50 @@ CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o.provides.build: 
 # Object files for target Arch
 Arch_OBJECTS = \
 "CMakeFiles/Arch.dir/main.cpp.o" \
-"CMakeFiles/Arch.dir/Sensors/range.cpp.o" \
-"CMakeFiles/Arch.dir/Sensors/sensor.cpp.o" \
-"CMakeFiles/Arch.dir/Sensors/sonar.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/analyze.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/behavior.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/merger.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o" \
+"CMakeFiles/Arch.dir/Analyze/processor.cpp.o" \
+"CMakeFiles/Arch.dir/Monitor/monitor.cpp.o" \
+"CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o" \
+"CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o" \
 "CMakeFiles/Arch.dir/Util/fov.cpp.o" \
+"CMakeFiles/Arch.dir/Util/observer.cpp.o" \
+"CMakeFiles/Arch.dir/Util/pipeline.cpp.o" \
 "CMakeFiles/Arch.dir/Util/position.cpp.o" \
+"CMakeFiles/Arch.dir/Util/publisher.cpp.o" \
+"CMakeFiles/Arch.dir/Util/tire.cpp.o" \
+"CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o" \
 "CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o"
 
 # External object files for target Arch
 Arch_EXTERNAL_OBJECTS =
 
 Arch: CMakeFiles/Arch.dir/main.cpp.o
-Arch: CMakeFiles/Arch.dir/Sensors/range.cpp.o
-Arch: CMakeFiles/Arch.dir/Sensors/sensor.cpp.o
-Arch: CMakeFiles/Arch.dir/Sensors/sonar.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/analyze.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/behavior.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/merger.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o
+Arch: CMakeFiles/Arch.dir/Analyze/processor.cpp.o
+Arch: CMakeFiles/Arch.dir/Monitor/monitor.cpp.o
+Arch: CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o
+Arch: CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o
 Arch: CMakeFiles/Arch.dir/Util/fov.cpp.o
+Arch: CMakeFiles/Arch.dir/Util/observer.cpp.o
+Arch: CMakeFiles/Arch.dir/Util/pipeline.cpp.o
 Arch: CMakeFiles/Arch.dir/Util/position.cpp.o
+Arch: CMakeFiles/Arch.dir/Util/publisher.cpp.o
+Arch: CMakeFiles/Arch.dir/Util/tire.cpp.o
+Arch: CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o
 Arch: CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o
 Arch: CMakeFiles/Arch.dir/build.make
 Arch: CMakeFiles/Arch.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Arch"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable Arch"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Arch.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -256,11 +568,23 @@ CMakeFiles/Arch.dir/build: Arch
 .PHONY : CMakeFiles/Arch.dir/build
 
 CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/main.cpp.o.requires
-CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Sensors/range.cpp.o.requires
-CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Sensors/sensor.cpp.o.requires
-CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Sensors/sonar.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/analyze.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/analyze_publisher.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/behavior.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/execute_pipeline.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/merger.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/monitor_observer.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Analyze/processor.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Monitor/monitor.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Monitor/monitor_publisher.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o.requires
 CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/fov.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/observer.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/pipeline.cpp.o.requires
 CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/position.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/publisher.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/Util/tire.cpp.o.requires
+CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/ConcreteClasses/Monitor/monitor.cpp.o.requires
 CMakeFiles/Arch.dir/requires: CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o.requires
 
 .PHONY : CMakeFiles/Arch.dir/requires

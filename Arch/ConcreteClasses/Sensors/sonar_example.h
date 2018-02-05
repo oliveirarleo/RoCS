@@ -11,7 +11,7 @@
 #include "../../Sensors/sonar.h"
 #include "../../Util/position.h"
 
-class SonarExample: public Sonar
+class SonarExample: public Sonar<double>
 {
 public:
     SonarExample(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,

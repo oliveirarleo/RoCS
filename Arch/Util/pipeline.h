@@ -4,13 +4,14 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ARCH_PROCESSOR_H_
-#define ARCH_PROCESSOR_H_
+#ifndef ARCH_PIPELINE_H_
+#define ARCH_PIPELINE_H_
 
-class Processor {
+template <typename T>
+class Pipeline {
 public:
-    virtual void process() = 0;
+    T next();
 };
 
 
-#endif // ARCH_PROCESSOR_H_
+#endif // ARCH_PIPELINE_H_
