@@ -15,7 +15,7 @@
 template <class T, class AccelerometerT, class GyroscopeT, class MagnetometerT>
 class IMU: public Sensor
 {
-private:
+protected:
     Accelerometer<AccelerometerT> accelerometer;
     Gyroscope<GyroscopeT> gyroscope;
     Magnetometer<MagnetometerT> magnetometer;

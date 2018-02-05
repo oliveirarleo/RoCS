@@ -12,7 +12,7 @@
 template <class T>
 class Accelerometer: public Sensor<T>
 {
-private:
+protected:
     int number_of_axes;
     double output_range;
     double sensitivity;

@@ -14,30 +14,15 @@
 template <class T>
 class Sensor: public SensorAccessor<T>
 {
-private:
+protected:
     double weight;
     Position position;
     double bandwidth;
 
 public:
     Sensor(double weight_, Position position_, double bandwidth_):
-            position(position_)
-    {
-        weight = weight_;
-        bandwidth = bandwidth_;
-    }
-
-    double getWeight() const {
-        return weight;
-    }
-
-    const Position& getPosition() const {
-        return position;
-    }
-
-    double getBandwidth() const {
-        return bandwidth;
-    }
+            position(position_), weight(weight_), bandwidth(bandwidth_)
+    {}
 
     friend std::ostream &operator<<(std::ostream &os, const Sensor<T> &sensor)
     {

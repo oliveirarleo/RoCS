@@ -14,7 +14,7 @@
 template <class T>
 class Odometer: public Sensor<T>
 {
-private:
+protected:
     double scan_interval;
     double resolution;
     std::vector<Tire> tires;

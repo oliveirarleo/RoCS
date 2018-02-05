@@ -11,7 +11,7 @@
 
 template <class T>
 class Magnetometer: public Sensor<T> {
-private:
+protected:
     int number_of_axes;
     double output_range;
     double sensitivity;

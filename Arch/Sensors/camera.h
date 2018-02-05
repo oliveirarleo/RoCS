@@ -13,7 +13,7 @@
 template <class T>
 class Camera: public Sensor<T>
 {
-private:
+protected:
     double resolution_x;
     double resolution_y;
     ColorSystem color_system;

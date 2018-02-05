@@ -13,7 +13,7 @@
 template <typename T>
 class Range: public Sensor <T>
 {
-private:
+protected:
     double max_range;
     double resolution;
     double fov_angle;

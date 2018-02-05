@@ -19,4 +19,22 @@ double SonarExample::getData()
     return 99;
 }
 
+double SonarExample::getWeight() const {
+    return weight;
+}
+
+const Position& SonarExample::getPosition() const {
+    return position;
+}
+
+double SonarExample::getBandwidth() const {
+    return bandwidth;
+}
+
+std::ostream &operator<<(std::ostream &os, const SonarExample &example) {
+    os << static_cast<const Sonar<double> &>(example);
+    return os;
+}
+
+
 

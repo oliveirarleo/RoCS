@@ -18,7 +18,11 @@ public:
                  double fov_angle_, double beam_angle_, double scan_interval_);
     double getData();
 
+    friend std::ostream &operator<<(std::ostream &os, const SonarExample &example);
 
+    double getBandwidth() const;
+    const Position& getPosition() const;
+    double getWeight() const;
 };
 
 #endif //ARCH_SONAR_EXAMPLE_H_

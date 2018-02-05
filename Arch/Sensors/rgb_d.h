@@ -14,7 +14,7 @@
 template <class T, CameraT, RangeT>
 class RGBD: public Sensor<T>
 {
-private:
+protected:
     Camera camera<CameraT>;
     Range range_sensor<RangeT>;
 

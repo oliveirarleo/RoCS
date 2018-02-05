@@ -12,7 +12,7 @@
 template <class T>
 class RFID: public Sensor<T>
 {
-private:
+protected:
     double max_range;
 
 public:
