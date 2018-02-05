@@ -11,7 +11,6 @@
 
 class AnalyzePublisher: Publisher
 {
-public:
     virtual void attach() = 0;
 };
 

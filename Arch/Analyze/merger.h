@@ -8,10 +8,9 @@
 #define ARCH_MERGER_H_
 
 
-template <typename DataTypeIn, typename DataTypeOut, typename... Args>
 class Merger {
 public:
-    virtual DataTypeOut merge(DataTypeIn, Args...) = 0;
+    virtual void merge() = 0;
 
 };
 

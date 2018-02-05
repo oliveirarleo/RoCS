@@ -40,64 +40,6 @@ range.h
 ostream
 -
 
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.cpp
-analyze.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze.h
-vector
--
-merger.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.h
-processor.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.h
-analyze_publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.h
-../Plan/analyze_observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.cpp
-analyze_publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/analyze_publisher.h
-../Util/publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.cpp
-behavior.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/behavior.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.cpp
-execute_pipeline.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/execute_pipeline.h
-../Util/pipeline.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/pipeline.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.cpp
-merger.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/merger.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.cpp
-monitor_observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.h
-../Util/observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.cpp
-processor.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/processor.h
-
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Monitor/monitor.cpp
 monitor.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Monitor/monitor.h
@@ -117,32 +59,6 @@ ostream
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.h
 ../../Util/position.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/interpteter.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.cpp
-monitor.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor.h
-interpteter.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/interpteter.h
-../Sensors/sensor.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor.h
-monitor_publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.cpp
-monitor_publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Monitor/monitor_publisher.h
-vector
--
-../Util/publisher.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/publisher.h
-../Analyze/monitor_observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Analyze/monitor_observer.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp
 analyze_observer.h
@@ -207,14 +123,6 @@ vector
 -
 observer.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.cpp
-tire.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/tire.h
-position.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/main.cpp
 iostream

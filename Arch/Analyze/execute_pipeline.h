@@ -7,7 +7,9 @@
 #ifndef ARCH_EXECUTE_PIPELINE_H_
 #define ARCH_EXECUTE_PIPELINE_H_
 
+#include "behavior.h"
 #include "../Util/pipeline.h"
+
 
 class ExecutePipeline: public Pipeline <Behavior>
 {

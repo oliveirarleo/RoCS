@@ -7,11 +7,10 @@
 #ifndef ARCH_INTERPTETER_H_
 #define ARCH_INTERPTETER_H_
 
-template <typename DataTypeIn, typename DataTypeOut>
 class Interpreter
 {
 public:
-    virtual DataTypeOut interpret(DataTypeIn) = 0;
+    virtual void interpret() = 0;
 
 };
 
