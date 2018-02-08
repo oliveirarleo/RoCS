@@ -12,10 +12,6 @@ CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o
  /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sensor_accessor.h
  /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/sonar.h
  /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
-CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o
- /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp
- /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
- /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
 CMakeFiles/Arch.dir/main.cpp.o
  /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./ConcreteClasses/Sensors/sonar_example.h
  /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/./Sensors/range.h

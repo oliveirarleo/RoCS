@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch"
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch"
 -- The C compiler identification is AppleClang 9.0.0.9000039
 -- The CXX compiler identification is AppleClang 9.0.0.9000039
 -- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default
+-- Build files have been written to: /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-debug

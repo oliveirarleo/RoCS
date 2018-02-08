@@ -12,10 +12,6 @@ CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: ../Sensors/sens
 CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: ../Sensors/sonar.h
 CMakeFiles/Arch.dir/ConcreteClasses/Sensors/sonar_example.cpp.o: ../Util/position.h
 
-CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Plan/analyze_observer.cpp
-CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Plan/analyze_observer.h
-CMakeFiles/Arch.dir/Plan/analyze_observer.cpp.o: ../Util/observer.h
-
 CMakeFiles/Arch.dir/main.cpp.o: .././ConcreteClasses/Sensors/sonar_example.h
 CMakeFiles/Arch.dir/main.cpp.o: .././Sensors/range.h
 CMakeFiles/Arch.dir/main.cpp.o: .././Sensors/sensor.h

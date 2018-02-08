@@ -13,12 +13,11 @@
 #include "monitor_publisher.h"
 
 template <class T>
-class Monitor
+class Monitor: public MonitorPublisher
 {
 private:
     std::vector < Interpreter > interpreters;
     Sensor sensor;
-    MonitorPublisher monitor_publisher;
 
 public:
     Monitor(const Sensor<T> &sensor, const MonitorPublisher &monitor_publisher):

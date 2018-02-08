@@ -60,14 +60,6 @@ ostream
 ../../Util/position.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp
-analyze_observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h
-../Util/observer.h
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
-
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
 ostream
 -
@@ -89,8 +81,6 @@ ostream
 -
 range.h
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Sensors/range.h
-
-/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/observer.h
 
 /Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Util/position.h
 ostream

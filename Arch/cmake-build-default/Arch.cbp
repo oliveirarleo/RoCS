@@ -94,12 +94,6 @@
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/ConcreteClasses/Sensors/sonar_example.h">
 			<Option target="Arch"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.cpp">
-			<Option target="Arch"/>
-		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/Plan/analyze_observer.h">
-			<Option target="Arch"/>
-		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/main.cpp">
 			<Option target="Arch"/>
 		</Unit>

@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default"
+CMAKE_BINARY_DIR = "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-debug/CMakeFiles" "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-debug/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-default/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/Arch/cmake-build-debug/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
