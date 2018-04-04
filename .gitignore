@@ -1,7 +1,5 @@
 .DS_Store
-.idea/RoCS.iml
-.idea/modules.xml
-.idea/workspace.xml
+.idea/
 CMakeCache.txt
 CMakeFiles/
 Makefile
