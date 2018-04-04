@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-#include "Util/position.h"
-#include "./ConcreteClasses/Sensors/sonar_example.h"
+#include "../Arch/Util/position.h"
+#include "./Sensors/sonar_example.h"
 
 int main(int argc, char* argv[])
 {

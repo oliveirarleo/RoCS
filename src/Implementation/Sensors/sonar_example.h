@@ -8,8 +8,8 @@
 #define ARCH_SONAR_EXAMPLE_H_
 
 #include <ostream>
-#include "../../Sensors/sonar.h"
-#include "../../Util/position.h"
+#include "../../Arch/Sensors/sonar.h"
+#include "../../Arch/Util/position.h"
 
 class SonarExample: public Sonar<double>
 {
