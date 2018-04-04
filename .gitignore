@@ -1,1 +1,11 @@
 .DS_Store
+.idea/RoCS.iml
+.idea/modules.xml
+.idea/workspace.xml
+CMakeCache.txt
+CMakeFiles/
+Makefile
+Project.cbp
+RoCS.cbp
+cmake_install.cmake
+cmpl
