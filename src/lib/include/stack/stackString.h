@@ -5,14 +5,16 @@
 class CStackString : public CStackObject
 {
 public:
-    CStackString(const char* str,int l);
-    virtual ~CStackString();
+	CStackString(const char *str, int l);
 
-    CStackObject* copyYourself();
+	virtual ~CStackString();
 
-    std::string getValue();
-    void setValue(const char* str,int l);
+	CStackObject *copyYourself();
+
+	std::string getValue();
+
+	void setValue(const char *str, int l);
 
 protected:
-    std::string _value;
+	std::string _value;
 };

@@ -6,8 +6,10 @@
 
 
 #include "Robot/pioneer_p_3_dx.h"
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
-	Pioneer_p3dx p3dx{};
+	std::string name = "Pioneer_p3dx";
+	Pioneer_p3dx p3dx{name};
 }

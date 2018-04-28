@@ -5,16 +5,20 @@
 class CStackNumber : public CStackObject
 {
 public:
-    CStackNumber(double n);
-    virtual ~CStackNumber();
+	CStackNumber(double n);
 
-    CStackObject* copyYourself();
+	virtual ~CStackNumber();
 
-    float getFloatValue();
-    double getValue();
-    void setFloatValue(float n);
-    void setValue(double n);
+	CStackObject *copyYourself();
+
+	float getFloatValue();
+
+	double getValue();
+
+	void setFloatValue(float n);
+
+	void setValue(double n);
 
 protected:
-    double _value;
+	double _value;
 };

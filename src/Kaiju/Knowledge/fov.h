@@ -15,8 +15,8 @@ private:
 
 public:
 	FOV(double start, double end) :
-			starting_angle(start),
-			ending_angle(end)
+		starting_angle(start),
+		ending_angle(end)
 	{
 	}
 };

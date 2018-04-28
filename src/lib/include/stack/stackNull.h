@@ -5,8 +5,9 @@
 class CStackNull : public CStackObject
 {
 public:
-    CStackNull();
-    virtual ~CStackNull();
+	CStackNull();
 
-    CStackObject* copyYourself();
+	virtual ~CStackNull();
+
+	CStackObject *copyYourself();
 };

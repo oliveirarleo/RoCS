@@ -23,11 +23,11 @@ private:
 
 public:
 	Analyze::Analyze(const std::vector<Processor> &processors, const std::vector<Merger> &mergers,
-					 const std::vector<Observer> &observers, AnalyzePublisher &publisher) :
-			processors(processors),
-			mergers(mergers),
-			observers(observers),
-			publisher(publisher)
+									 const std::vector<Observer> &observers, AnalyzePublisher &publisher) :
+		processors(processors),
+		mergers(mergers),
+		observers(observers),
+		publisher(publisher)
 	{
 	}
 

@@ -1,10 +1,12 @@
 #include "stackString.h"
 
-CStackString::CStackString(const char* str,int l)
+CStackString::CStackString(const char *str, int l)
 {
-    _objectType=STACK_STRING;
-    if (l>0)
-        _value.assign(str,str+l);
+	_objectType = STACK_STRING;
+	if (l > 0)
+	{
+		_value.assign(str, str + l);
+	}
 }
 
 CStackString::~CStackString()
@@ -13,19 +15,23 @@ CStackString::~CStackString()
 
 std::string CStackString::getValue()
 {
-    return(_value);
+	return (_value);
 }
 
-void CStackString::setValue(const char* str,int l)
+void CStackString::setValue(const char *str, int l)
 {
-    if (l>0)
-        _value.assign(str,str+l);
-    else
-        _value.clear();
+	if (l > 0)
+	{
+		_value.assign(str, str + l);
+	}
+	else
+	{
+		_value.clear();
+	}
 }
 
-CStackObject* CStackString::copyYourself()
+CStackObject *CStackString::copyYourself()
 {
-    CStackString* retVal=new CStackString(_value.c_str(),int(_value.length()));
-    return(retVal);
+	CStackString *retVal = new CStackString(_value.c_str(), int(_value.length()));
+	return (retVal);
 }

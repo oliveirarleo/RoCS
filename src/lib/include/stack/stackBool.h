@@ -5,14 +5,16 @@
 class CStackBool : public CStackObject
 {
 public:
-    CStackBool(bool theValue);
-    virtual ~CStackBool();
+	CStackBool(bool theValue);
 
-    CStackObject* copyYourself();
+	virtual ~CStackBool();
 
-    bool getValue();
-    void setValue(bool theValue);
+	CStackObject *copyYourself();
+
+	bool getValue();
+
+	void setValue(bool theValue);
 
 protected:
-    bool _value;
+	bool _value;
 };

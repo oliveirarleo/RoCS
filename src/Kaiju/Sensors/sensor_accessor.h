@@ -4,15 +4,14 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef ROCS_SENSOR_ACCESSOR_H
-#define ROCS_SENSOR_ACCESSOR_H
-
+#ifndef ROCS_SENSOR_ACCESSOR_H_
+#define ROCS_SENSOR_ACCESSOR_H_
 
 template<class T>
 class SensorAccessor
 {
 public:
-	virtual bool getData(T&) = 0;
+	virtual bool getData(T &) = 0;
 };
 
-#endif // ROCS_SENSOR_ACCESSOR_H
+#endif // ROCS_SENSOR_ACCESSOR_H_

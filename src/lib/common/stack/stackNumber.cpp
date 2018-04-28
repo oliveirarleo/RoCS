@@ -2,8 +2,8 @@
 
 CStackNumber::CStackNumber(double n)
 {
-    _objectType=STACK_NUMBER;
-    _value=n;
+	_objectType = STACK_NUMBER;
+	_value = n;
 }
 
 CStackNumber::~CStackNumber()
@@ -12,26 +12,26 @@ CStackNumber::~CStackNumber()
 
 float CStackNumber::getFloatValue()
 {
-    return((float)_value);
+	return ((float) _value);
 }
 
 double CStackNumber::getValue()
 {
-    return(_value);
+	return (_value);
 }
 
 void CStackNumber::setFloatValue(float n)
 {
-    _value=(double)n;
+	_value = (double) n;
 }
 
 void CStackNumber::setValue(double n)
 {
-    _value=n;
+	_value = n;
 }
 
-CStackObject* CStackNumber::copyYourself()
+CStackObject *CStackNumber::copyYourself()
 {
-    CStackNumber* retVal=new CStackNumber(_value);
-    return(retVal);
+	CStackNumber *retVal = new CStackNumber(_value);
+	return (retVal);
 }

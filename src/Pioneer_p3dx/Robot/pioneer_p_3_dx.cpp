@@ -16,9 +16,9 @@ extern "C"
 
 class connection;
 
-Pioneer_p3dx::Pioneer_p3dx()
+Pioneer_p3dx::Pioneer_p3dx(std::string &name) : robot_name(name)
 {
-//	Connect to server via ip and
+	//	Connect to server via ip and
 	verifyConnection();
 
 	getRobotInfo();
@@ -33,9 +33,13 @@ void Pioneer_p3dx::verifyConnection()
 	using namespace std;
 
 	if (connection.isConnected())
+	{
 		cout << "Connected to client: " << connection.getClientId() << endl;
+	}
 	else
+	{
 		cout << "Not connected to client" << endl;
+	}
 }
 
 void Pioneer_p3dx::getRobotPosition()
@@ -48,13 +52,14 @@ void Pioneer_p3dx::getRobotPosition()
 void Pioneer_p3dx::getRobotInfo()
 {
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) robot_name.c_str(), (simxInt *) &robot_handle,
-							(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
+													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 	{
 		is_connected = true;
 		std::cout << "Connected to robot: " << robot_name << std::endl;
 
 		getRobotPosition();
-	} else
+	}
+	else
 	{
 		std::cout << "Not connected to robot: " << robot_name << std::endl;
 	}

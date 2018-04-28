@@ -17,7 +17,7 @@ protected:
 
 public:
 	RFID(double weight_, Position position_, double bandwidth_, double max_range_) :
-			Sensor(weight_, position_, bandwidth_)
+		Sensor(weight_, position_, bandwidth_)
 	{
 		max_range = max_range_;
 	}

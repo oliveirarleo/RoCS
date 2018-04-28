@@ -11,20 +11,17 @@
 #include "interpteter.h"
 #include "../Sensors/sensor.h"
 #include "monitor_publisher.h"
+#include "../Analyze/monitor_observer.h"
 
 template<class T>
 class Monitor : public MonitorPublisher
 {
 private:
 	std::vector<Interpreter> interpreters;
-	Sensor sensor;
+	Sensor<T> sensor;
 
 public:
-	Monitor(const Sensor<T> &sensor, const MonitorPublisher &monitor_publisher) :
-			sensor(sensor),
-			monitor_publisher(monitor_publisher)
-	{
-	}
+	virtual Monitor(const Sensor<T> &sensor, const std::vector<MonitorObserver> observers) = 0;
 
 	virtual void run() = 0;
 };

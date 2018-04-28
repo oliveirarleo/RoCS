@@ -2,15 +2,15 @@
 
 CStackNull::CStackNull()
 {
-    _objectType=STACK_NULL;
+	_objectType = STACK_NULL;
 }
 
 CStackNull::~CStackNull()
 {
 }
 
-CStackObject* CStackNull::copyYourself()
+CStackObject *CStackNull::copyYourself()
 {
-    CStackNull* retVal=new CStackNull();
-    return(retVal);
+	CStackNull *retVal = new CStackNull();
+	return (retVal);
 }

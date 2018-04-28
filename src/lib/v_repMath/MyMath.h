@@ -13,20 +13,27 @@
 #include "4X4FullMatrix.h"
 #include "MMatrix.h"
 
-class CMath  
+class CMath
 {
 public:
-    CMath();
-    virtual ~CMath();
+	CMath();
 
-    static void limitValue(float minValue,float maxValue,float &value);
-    static void limitValue(int minValue,int maxValue,int &value);
+	virtual ~CMath();
+
+	static void limitValue(float minValue, float maxValue, float &value);
+
+	static void limitValue(int minValue, int maxValue, int &value);
 
 
-    static float robustAsin(float v);
-    static float robustAcos(float v);
-    static float robustFmod(float v,float w);
-    static double robustmod(double v,double w);
-    static bool isFloatNumberOk(float v);
-    static bool isDoubleNumberOk(double v);
+	static float robustAsin(float v);
+
+	static float robustAcos(float v);
+
+	static float robustFmod(float v, float w);
+
+	static double robustmod(double v, double w);
+
+	static bool isFloatNumberOk(float v);
+
+	static bool isDoubleNumberOk(double v);
 };

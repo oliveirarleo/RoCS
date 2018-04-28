@@ -22,10 +22,10 @@ protected:
 
 public:
 	IMU(Accelerometer<AccelerometerT> accelerometer_, Gyroscope<GyroscopeT> gyroscope_,
-		Magnetometer<MagnetometerT> magnetometer_) :
-			Accelerometer(accelerometer_),
-			Gyroscope(gyroscope_),
-			Magnetometer(magnetometer_)
+			Magnetometer<MagnetometerT> magnetometer_) :
+		Accelerometer(accelerometer_),
+		Gyroscope(gyroscope_),
+		Magnetometer(magnetometer_)
 	{
 	}
 };

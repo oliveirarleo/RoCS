@@ -21,14 +21,14 @@ protected:
 
 public:
 	Sensor(double weight_, Position position_, double bandwidth_) :
-			weight(weight_), position(position_), bandwidth(bandwidth_)
+		weight(weight_), position(position_), bandwidth(bandwidth_)
 	{
 	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Sensor<T> &sensor)
 	{
 		os << "Weight: " << sensor.weight << " Position: " << sensor.position << " Bandwidth: "
-		   << sensor.bandwidth << " ";
+			 << sensor.bandwidth << " ";
 		return os;
 	}
 };

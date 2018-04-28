@@ -9,9 +9,12 @@
 
 #include "Monitor/monitor_publisher.h"
 
-class SonarVREPPublisher: public MonitorPublisher
+class SonarVREPPublisher : public MonitorPublisher
 {
+public:
+	SonarVREPPublisher(const std::vector<MonitorObserver> &observers);
 
+	void attach(Observer observer) override;
 };
 
 

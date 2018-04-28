@@ -2,8 +2,8 @@
 
 CStackBool::CStackBool(bool theValue)
 {
-    _objectType=STACK_BOOL;
-    _value=theValue;
+	_objectType = STACK_BOOL;
+	_value = theValue;
 }
 
 CStackBool::~CStackBool()
@@ -12,16 +12,16 @@ CStackBool::~CStackBool()
 
 bool CStackBool::getValue()
 {
-    return(_value);
+	return (_value);
 }
 
 void CStackBool::setValue(bool theValue)
 {
-    _value=theValue;
+	_value = theValue;
 }
 
-CStackObject* CStackBool::copyYourself()
+CStackObject *CStackBool::copyYourself()
 {
-    CStackBool* retVal=new CStackBool(_value);
-    return(retVal);
+	CStackBool *retVal = new CStackBool(_value);
+	return (retVal);
 }

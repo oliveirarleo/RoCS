@@ -6,17 +6,20 @@
 #include <stdio.h>
 
 #ifdef _WIN32
-	#include <windows.h>
-	#include <memory.h> 
+#include <windows.h>
+#include <memory.h>
 #elif defined (__linux) || defined (__APPLE__)
-	#include <fcntl.h>      /* Defines O_ * constants */
-	#include <sys/stat.h>   /* Defines mode constants */
-	#include <sys/mman.h>
-	#include <unistd.h>
-	#include <sys/types.h>
+
+#include <fcntl.h>      /* Defines O_ * constants */
+#include <sys/stat.h>   /* Defines mode constants */
+#include <sys/mman.h>
+#include <unistd.h>
+#include <sys/types.h>
+
 #endif
 
-void reset_shared_memory_pointer(shared_memory_info_t* info) {
+void reset_shared_memory_pointer(shared_memory_info_t *info)
+{
 	info->buffer = NULL;
 #ifdef _WIN32
 	info->handle = NULL;
@@ -25,7 +28,7 @@ void reset_shared_memory_pointer(shared_memory_info_t* info) {
 #endif
 }
 
-bool create_shared_memory(shared_memory_info_t* info)
+bool create_shared_memory(shared_memory_info_t *info)
 {
 	info->header_size = 20;
 #ifdef _WIN32
@@ -37,7 +40,7 @@ bool create_shared_memory(shared_memory_info_t* info)
 #endif /* _WIN32 */
 }
 
-bool destroy_shared_memory(shared_memory_info_t* info)
+bool destroy_shared_memory(shared_memory_info_t *info)
 {
 	bool ok = false;
 #ifdef _WIN32
@@ -49,7 +52,7 @@ bool destroy_shared_memory(shared_memory_info_t* info)
 	return ok;
 }
 
-bool open_shared_memory(shared_memory_info_t* info)
+bool open_shared_memory(shared_memory_info_t *info)
 {
 	info->header_size = 20;
 #ifdef _WIN32
@@ -61,7 +64,7 @@ bool open_shared_memory(shared_memory_info_t* info)
 #endif /* _WIN32 */
 }
 
-bool close_shared_memory(shared_memory_info_t* info)
+bool close_shared_memory(shared_memory_info_t *info)
 {
 	bool ok = false;
 #ifdef _WIN32
@@ -73,24 +76,25 @@ bool close_shared_memory(shared_memory_info_t* info)
 	return ok;
 }
 
-bool map_shared_memory(shared_memory_info_t* info)
+bool map_shared_memory(shared_memory_info_t *info)
 {
 #ifdef _WIN32
 	info->buffer = (unsigned char*) MapViewOfFile(info->handle, FILE_MAP_ALL_ACCESS, 0,0, info->size + info->header_size);
 	return info->buffer != NULL;
 #elif defined (__linux) || defined (__APPLE__)
-	info->buffer = (unsigned char*) mmap(NULL, info->size + info->header_size, PROT_READ | PROT_WRITE, MAP_SHARED, info->handle, 0);
+	info->buffer = (unsigned char *) mmap(NULL, info->size + info->header_size, PROT_READ | PROT_WRITE, MAP_SHARED,
+																				info->handle, 0);
 	return info->buffer != MAP_FAILED;
 #endif /* _WIN32 */
 }
 
-bool unmap_shared_memory(shared_memory_info_t* info)
+bool unmap_shared_memory(shared_memory_info_t *info)
 {
 #ifdef _WIN32
 	return UnmapViewOfFile(info->handle);
 #elif defined (__linux) || defined (__APPLE__)
 	bool ok = true;
-	if(info->buffer != NULL)
+	if (info->buffer != NULL)
 	{
 		ok = munmap(info->buffer, info->size + info->header_size) == 0;
 		info->buffer = NULL;
@@ -99,24 +103,26 @@ bool unmap_shared_memory(shared_memory_info_t* info)
 #endif /* _WIN32 */
 }
 
-void set_shared_memory_name(shared_memory_info_t* info, int identifier)
+void set_shared_memory_name(shared_memory_info_t *info, int identifier)
 {
-	if(identifier < 0) {
+	if (identifier < 0)
+	{
 		identifier = -identifier;
 	}
 #ifdef _WIN32
-	sprintf(info->name, "Local\\VREP_REMOTE_API%05d", identifier);
+		sprintf(info->name, "Local\\VREP_REMOTE_API%05d", identifier);
 #elif defined (__linux) || defined (__APPLE__)
 	sprintf(info->name, "/LocalVREP_REMOTE_API%05d", identifier);
 #endif /* _WIN32 */
 }
 
-void set_shared_memory_size(shared_memory_info_t* info, size_t size)
+void set_shared_memory_size(shared_memory_info_t *info, size_t size)
 {
 	info->size = size;
 }
 
-bool is_valid_shared_memory_handle(shared_memory_info_t* info) {
+bool is_valid_shared_memory_handle(shared_memory_info_t *info)
+{
 #ifdef _WIN32
 	return info->handle != NULL;
 #elif defined (__linux) || defined (__APPLE__)

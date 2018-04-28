@@ -20,11 +20,11 @@ private:
 
 public:
 	Tire(const Position &position, double weight, double size_x, double size_y, double size_z) :
-			position(position),
-			weight(weight),
-			size_x(size_x),
-			size_y(size_y),
-			size_z(size_z)
+		position(position),
+		weight(weight),
+		size_x(size_x),
+		size_y(size_y),
+		size_z(size_z)
 	{
 	}
 

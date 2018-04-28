@@ -17,10 +17,8 @@ private:
 	std::vector<MonitorObserver> observers;
 
 public:
-	virtual void attach(MonitorObserver observer) = 0;
-
 	explicit MonitorPublisher(const std::vector<MonitorObserver> &observers) :
-			observers(observers)
+		observers(observers)
 	{
 	}
 };

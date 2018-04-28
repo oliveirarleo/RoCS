@@ -4,3 +4,9 @@
 // Github:      https://github.com/oramleo
 //
 
+#include "range_sensor_monitor.h"
+
+RangeSensorMonitor::RangeSensorMonitor(const SonarVREP &sensor, const std::vector<MonitorObserver> &observers)
+	: Monitor(sensor, observers)
+{
+}

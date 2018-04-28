@@ -11,7 +11,6 @@ class Interpreter
 {
 public:
 	virtual void interpret() = 0;
-
 };
 
 #endif //ARCH_INTERPTETER_H_

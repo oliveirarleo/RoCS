@@ -4,4 +4,12 @@
 // Github:      https://github.com/oramleo
 //
 
-#include "SonarVREPPublisher.h"
+#include "sonar_vrep_publisher.h"
+
+SonarVREPPublisher::SonarVREPPublisher(const std::vector<MonitorObserver> &observers) : MonitorPublisher(observers)
+{
+}
+
+void SonarVREPPublisher::attach(Observer observer)
+{
+}
