@@ -13,15 +13,17 @@
 #include "monitor_publisher.h"
 #include "../Analyze/monitor_observer.h"
 
-template<class T>
+template<class MonitorSensor>
 class Monitor : public MonitorPublisher
 {
 private:
 	std::vector<Interpreter> interpreters;
-	Sensor<T> sensor;
+	MonitorSensor sensor;
 
 public:
-	virtual Monitor(const Sensor<T> &sensor, const std::vector<MonitorObserver> observers) = 0;
+	Monitor(const MonitorSensor &sensor, const std::vector<Observer *> &observers)
+	{
+	}
 
 	virtual void run() = 0;
 };

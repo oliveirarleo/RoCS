@@ -12,7 +12,13 @@
 
 class Publisher
 {
+private:
+	std::vector<Observer *> observers;
 public:
+	Publisher(const std::vector<Observer *> &observers) : observers(observers)
+	{
+	}
+
 	virtual void attach(Observer observer) = 0;
 };
 

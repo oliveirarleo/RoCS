@@ -7,12 +7,10 @@
 #ifndef ARCH_OBSERVER_H_
 #define ARCH_OBSERVER_H_
 
-
 class Observer
 {
 public:
 	virtual void update() = 0;
 };
-
 
 #endif // ARCH_OBSERVER_H_

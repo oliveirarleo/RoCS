@@ -9,16 +9,11 @@
 
 #include <vector>
 #include "../Util/publisher.h"
-#include "../Analyze/monitor_observer.h"
 
 class MonitorPublisher : public Publisher
 {
-private:
-	std::vector<MonitorObserver> observers;
-
 public:
-	explicit MonitorPublisher(const std::vector<MonitorObserver> &observers) :
-		observers(observers)
+	explicit MonitorPublisher(const std::vector<Observer *> &observers) : Publisher(observers)
 	{
 	}
 };

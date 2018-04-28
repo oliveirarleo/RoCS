@@ -19,8 +19,8 @@ add_definitions(-DNON_MATLAB_PARSING)
 add_definitions(-DMAX_EXT_API_CONNECTIONS=255)
 #add_definitions(-DO_NOT_USE_SHARED_MEMORY)
 
-file(GLOB SOURCES "src/Pioneer_p3dx/*.cpp" "src/Pioneer_p3dx/*/*.cpp" "src/lib/*/*.cpp" "src/lib/*/*/*.cpp" "src/lib/*/*.c")
-file(GLOB HEADERS "src/Pioneer_p3dx/*.h" "src/Pioneer_p3dx/*/*.h" "src/lib/*/*.h" "src/lib/*/*/*.h")
+file(GLOB SOURCES "src/Pioneer_p3dx/main.cpp" "src/Pioneer_p3dx/*/*.cpp" "src/lib/*/*.cpp" "src/lib/*/*/*.cpp" "src/lib/*/*.c")
+file(GLOB HEADERS "src/Pioneer_p3dx/*/*.h" "src/lib/*/*.h" "src/lib/*/*/*.h" )
 
 find_package(Threads)
 
