@@ -10,7 +10,7 @@ extern "C" {
 
 #include <iostream>
 #include "sonar_vrep.h"
-#include "../Robot/pioneer_p_3_dx.h"
+#include "../Robot/pioneer_p3dx.h"
 
 
 SonarVREP::SonarVREP(std::string name_, Connection &connection_, Robot *robot_, double weight_, Position position_,

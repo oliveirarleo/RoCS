@@ -7,13 +7,13 @@
 #ifndef ROCS_ROBOT_H_
 #define ROCS_ROBOT_H_
 
+#include <vector>
 
 class Robot
 {
 public:
 	Robot()
 	{
-
 	};
 };
 

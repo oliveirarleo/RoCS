@@ -17,14 +17,11 @@
 class Pioneer_p3dx : public Robot
 {
 private:
-	bool is_connected = false;
+	bool is_connected;
 	std::string robot_name;
-	Position robot_position = Position{0, 0, 0};
-	int robot_handle = -1;
-	Connection connection{};
-
-	//		std::vector<> range_sensors;
-	//		std::vector<Actuator<double> > actuators;
+	Position robot_position;
+	int robot_handle;
+	Connection connection;
 
 	void verifyConnection();
 
@@ -32,12 +29,9 @@ private:
 
 	void getRobotInfo();
 
-	void instantiateSensors();
-
-	void instantiateActuators();
-
 public:
-	explicit Pioneer_p3dx(std::string &name);
+	Pioneer_p3dx();
+
 
 	int getHandle();
 

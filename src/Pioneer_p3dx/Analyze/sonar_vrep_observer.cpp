@@ -4,10 +4,8 @@
 // Github:      https://github.com/oramleo
 //
 
+#include "sonar_vrep_observer.h"
 
-#include "Robot/pioneer_p3dx.h"
-
-int main(int argc, char *argv[])
+SonarVREPObserver::SonarVREPObserver()
 {
-	Pioneer_p3dx p3dx{};
 }
