@@ -7,10 +7,10 @@
 #ifndef ROCS_CONNECTION_H_
 #define ROCS_CONNECTION_H_
 
-#import <string>
+#include <string>
 
 extern "C" {
-#include "extApi.h"
+#include "../../lib/remoteApi/extApi.h"
 }
 
 class Connection

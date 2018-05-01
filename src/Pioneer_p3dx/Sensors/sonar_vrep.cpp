@@ -6,6 +6,7 @@
 
 extern "C" {
 #include "extApi.h"
+#include "v_repConst.h"
 }
 
 #include <iostream>

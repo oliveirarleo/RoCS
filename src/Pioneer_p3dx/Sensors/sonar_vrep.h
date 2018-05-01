@@ -9,7 +9,7 @@
 
 
 extern "C" {
-#include "extApi.h"
+#include "../../lib/remoteApi/extApi.h"
 }
 
 #include <ostream>
