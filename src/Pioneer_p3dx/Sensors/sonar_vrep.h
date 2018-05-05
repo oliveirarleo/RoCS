@@ -39,7 +39,7 @@ public:
 
 	bool getData(Position &position) override;
 
-	bool getData(Position &position, char** state);
+	bool getData(Position &position, char& state);
 
 	friend std::ostream &operator<<(std::ostream &os, const SonarVREP &example);
 

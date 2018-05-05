@@ -51,18 +51,19 @@ void PlannerPioneerP3DX::runPlanner()
 		{
 			char state;
 
-//			Position coord{0,0,0};
-			float coord[3];
+			Position coord{0,0,0};
+//			float coord[3];
 			AnalyzePioneerP3DX an = (AnalyzePioneerP3DX)analyzes[0];
 			std::vector<MonitorSonarVrep> monits = an.getMonitors();
 //			std::cout << monits[i].getSonar().getSonarHandle() << std::endl;
-			int id = connection.getClientId();
-			if (simxReadProximitySensor(id, monits[i].getSonar().getSonarHandle(), (simxUChar*) &state, coord, NULL, NULL,
-																	simx_opmode_buffer) == simx_return_ok)
-//			if (((AnalyzePioneerP3DX&)analyzes[0]).getSonarData(i, coord, (&state)))
+
+//			int id = connection.getClientId();
+//			if (simxReadProximitySensor(id, monits[i].getSonar().getSonarHandle(), (simxUChar*) &state, coord, NULL, NULL,
+//																	simx_opmode_buffer) == simx_return_ok)
+			if (((AnalyzePioneerP3DX&)analyzes[0]).getSonarData(i, coord, state))
 			{
 //				double dist = coord.getZ();
-				double dist = coord[2];
+				double dist = coord.getZ();
 				if (state > 0 && (dist < no_detection_dist))
 				{
 					if (dist < max_detection_dist)
@@ -77,9 +78,9 @@ void PlannerPioneerP3DX::runPlanner()
 			}
 			else
 				detect[i] = 0;
-			std::cout << detect[i];
+//			std::cout << detect[i];
 		}
-		std::cout << std::endl;
+//		std::cout << std::endl;
 
 		v_left = v0;
 		v_right = v0;
@@ -95,6 +96,6 @@ void PlannerPioneerP3DX::runPlanner()
 		simxSetJointTargetVelocity(connection.getClientId(), rightMotorHandle, (simxFloat) v_right, simx_opmode_streaming);
 
 		// espera um pouco antes de reiniciar a leitura dos sensores
-		extApi_sleepMs(5);
+		extApi_sleepMs(50);
 	}
 }

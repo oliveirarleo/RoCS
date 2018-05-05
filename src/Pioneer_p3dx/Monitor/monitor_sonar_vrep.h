@@ -16,7 +16,7 @@ class MonitorSonarVrep : public Monitor<SonarVREP>
 public:
 	MonitorSonarVrep(SonarVREP &sensor_, std::vector<Observer *> &observers_);
 
-	bool getSonarData(Position& position, char** state);
+	bool getSonarData(Position& position, char& state);
 
 	friend std::ostream &operator<<(std::ostream &os, const MonitorSonarVrep &vrep);
 

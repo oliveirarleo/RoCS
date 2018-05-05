@@ -12,7 +12,7 @@ MonitorSonarVrep::MonitorSonarVrep(SonarVREP &sensor_, std::vector<Observer *> &
 
 }
 
-bool MonitorSonarVrep::getSonarData(Position& position, char** state)
+bool MonitorSonarVrep::getSonarData(Position& position, char& state)
 {
 	return sensor.getData(position, state);
 }

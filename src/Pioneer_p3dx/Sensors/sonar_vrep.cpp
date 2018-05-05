@@ -25,7 +25,7 @@ SonarVREP::SonarVREP(const std::string &name_, Connection &connection_, Robot &r
 	{
 		is_connected = true;
 		simxReadProximitySensor(connection.getClientId(), sonar_handle, NULL, NULL, NULL, NULL, simx_opmode_streaming);
-		std::cout << "Connected to sensor " << name << std::endl;
+		std::cout << "Connected to sensor " << name << " Handle: " << sonar_handle <<std::endl;
 	}
 	else
 	{
@@ -41,7 +41,8 @@ SonarVREP::SonarVREP(const std::string &name_, Connection &connection_, const Ro
 													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 	{
 		is_connected = true;
-		std::cout << "Connected to sensor " << name << std::endl;
+		simxReadProximitySensor(connection.getClientId(), sonar_handle, NULL, NULL, NULL, NULL, simx_opmode_streaming);
+		std::cout << "Connected to sensor " << name << " Handle: " << sonar_handle <<std::endl;
 	}
 	else
 	{
@@ -54,16 +55,18 @@ bool SonarVREP::sensorIsConnected()
 	return is_connected;
 }
 
-bool SonarVREP::getData(Position &position, char** state)
+bool SonarVREP::getData(Position &position, char& state)
 {
 
 	float point[3];
-	if (simxReadProximitySensor(connection.getClientId(), sonar_handle, (simxUChar *) *state, point,
+	if (simxReadProximitySensor(connection.getClientId(), sonar_handle, (simxUChar *) &state, point,
 															nullptr, nullptr, simx_opmode_buffer) == simx_return_ok)
 	{
 		position.setPosition((double) point[0], (double) point[1], (double) point[2]);
+//		std::cout << position << std::endl;
 		return true;
 	}
+//	std::cout << point[0] << point[1]<< point[2]<< std::endl;
 	return false;
 }
 

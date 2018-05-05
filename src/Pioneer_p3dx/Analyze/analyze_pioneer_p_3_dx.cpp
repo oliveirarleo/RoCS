@@ -22,7 +22,7 @@ AnalyzePioneerP3DX::AnalyzePioneerP3DX( std::vector<MonitorSonarVrep> &monitors_
 //
 //}
 
-bool AnalyzePioneerP3DX::getSonarData(int id, Position& position, char** state)
+bool AnalyzePioneerP3DX::getSonarData(int id, Position& position, char& state)
 {
 	return ((MonitorSonarVrep)monitors[id]).getSonarData(position, state);
 }

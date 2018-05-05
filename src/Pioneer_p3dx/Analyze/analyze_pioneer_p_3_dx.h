@@ -26,7 +26,7 @@ public:
 
 //	void update() override;
 
-	bool getSonarData(int id, Position& position, char** state);
+	bool getSonarData(int id, Position& position, char& state);
 
 	std::vector<MonitorSonarVrep> &getMonitors() const;
 };
