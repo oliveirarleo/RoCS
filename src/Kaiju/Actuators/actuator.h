@@ -10,8 +10,7 @@
 #include "actuator_accessor.h"
 #include "../Knowledge/position.h"
 
-template<class T>
-class Actuator : public ActuatorAccessor<T>
+class Actuator : public ActuatorAccessor
 {
 protected:
 	double weight;

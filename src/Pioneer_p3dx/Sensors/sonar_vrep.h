@@ -25,18 +25,21 @@ private:
 	bool is_connected = false;
 	int sonar_handle;
 
-	std::string name;
-	Connection connection;
-	Robot *robot;
+	Connection& connection;
+	Robot robot;
 
 public:
-	SonarVREP(std::string name_, Connection &connection_, Robot *robot_, double weight_, Position position_,
+	SonarVREP(const std::string &name_, Connection &connection_, Robot &robot_, double weight_, Position position_,
 						double bandwidth_, double max_range_, double resolution_, double fov_angle_, double beam_angle_,
 						double scan_interval_);
+
+	SonarVREP(const std::string &name_, Connection &connection_, const Robot &robot_);
 
 	bool sensorIsConnected();
 
 	bool getData(Position &position) override;
+
+	bool getData(Position &position, char** state);
 
 	friend std::ostream &operator<<(std::ostream &os, const SonarVREP &example);
 
@@ -46,7 +49,7 @@ public:
 
 	double getWeight() const;
 
-	int getSonar_handle() const;
+	int getSonarHandle() const;
 
 	const std::string &getName() const;
 

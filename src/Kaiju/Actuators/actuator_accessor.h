@@ -7,12 +7,10 @@
 #ifndef ARCH_ACTUATOR_ACCESSOR_H_
 #define ARCH_ACTUATOR_ACCESSOR_H_
 
-template<class T>
-
 class ActuatorAccessor
 {
 public:
-	virtual void setData(T) = 0;
+	virtual void setData() = 0;
 };
 
 #endif //ARCH_ACTUATOR_ACCESSOR_H_

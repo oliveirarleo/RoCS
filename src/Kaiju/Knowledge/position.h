@@ -37,6 +37,20 @@ public:
 		z = z_;
 	}
 
+	double getX()
+	{
+		return x;
+	}
+
+	double getY()
+	{
+		return y;
+	}
+
+	double getZ()
+	{
+		return z;
+	}
 
 };
 

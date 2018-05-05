@@ -15,6 +15,9 @@ extern "C"
 }
 
 #include "../Connection/connection.h"
+#include "../Monitor/monitor_sonar_vrep.h"
+#include "../Analyze/analyze_pioneer_p_3_dx.h"
+#include "../Plan/planner_pioneer_p3dx.h"
 
 Pioneer_p3dx::Pioneer_p3dx() : is_connected{false},
 															 robot_name{"Pioneer_p3dx"},
@@ -24,8 +27,30 @@ Pioneer_p3dx::Pioneer_p3dx() : is_connected{false},
 {
 	//	Connect to server via ip and
 	verifyConnection();
-
 	getRobotInfo();
+
+	std::vector<MonitorSonarVrep> sonars;
+	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
+	{
+		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
+		SonarVREP sonar{sonar_name, connection, *this};
+		std::vector<Observer *> observers;
+		MonitorSonarVrep sonar_monitor{sonar, observers};
+		sonars.push_back(sonar_monitor);
+
+	}
+
+	{
+		std::cout << (sonars[0]);
+	}
+
+
+	AnalyzePioneerP3DX analyze{sonars};
+	std::vector< AnalyzePioneerP3DX > analyzes;
+	analyzes.push_back(analyze);
+
+	PlannerPioneerP3DX planner{*this, connection, analyzes};
+	planner.runPlanner();
 
 }
 
@@ -40,6 +65,7 @@ void Pioneer_p3dx::verifyConnection()
 	else
 	{
 		cout << "Not connected to client" << endl;
+		exit(1);
 	}
 }
 
@@ -69,4 +95,24 @@ void Pioneer_p3dx::getRobotInfo()
 int Pioneer_p3dx::getHandle()
 {
 	return robot_handle;
+}
+
+const std::string &Pioneer_p3dx::getRobotName() const
+{
+	return robot_name;
+}
+
+const Position &Pioneer_p3dx::getRobotPosition() const
+{
+	return robot_position;
+}
+
+int Pioneer_p3dx::getRobotHandle() const
+{
+	return robot_handle;
+}
+
+const Connection &Pioneer_p3dx::getConnection() const
+{
+	return connection;
 }

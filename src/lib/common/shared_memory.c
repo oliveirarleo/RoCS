@@ -110,7 +110,7 @@ void set_shared_memory_name(shared_memory_info_t *info, int identifier)
 		identifier = -identifier;
 	}
 #ifdef _WIN32
-		sprintf(info->name, "Local\\VREP_REMOTE_API%05d", identifier);
+	sprintf(info->name, "Local\\VREP_REMOTE_API%05d", identifier);
 #elif defined (__linux) || defined (__APPLE__)
 	sprintf(info->name, "/LocalVREP_REMOTE_API%05d", identifier);
 #endif /* _WIN32 */

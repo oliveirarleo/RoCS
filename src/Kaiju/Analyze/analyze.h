@@ -11,27 +11,28 @@
 #include "merger.h"
 #include "processor.h"
 #include "analyze_publisher.h"
-#include "../Plan/analyze_observer.h"
+#include "monitor_observer.h"
+#include "Monitor/monitor.h"
 
-class Analyze
+class Analyze : public MonitorObserver
 {
-private:
-	std::vector<Processor> processors;
-	std::vector<Merger> mergers;
-	std::vector<Observer> observers;
-	AnalyzePublisher publisher;
+protected:
+//	std::vector<Processor> processors;
+//	std::vector<Merger> mergers;
+//	AnalyzePublisher publisher;
 
 public:
-	Analyze::Analyze(const std::vector<Processor> &processors, const std::vector<Merger> &mergers,
-									 const std::vector<Observer> &observers, AnalyzePublisher &publisher) :
-		processors(processors),
-		mergers(mergers),
-		observers(observers),
-		publisher(publisher)
+//	Analyze(const std::vector<Processor> &processors, const std::vector<Merger> &mergers)
+//		: processors(processors),
+//			mergers(mergers)
+//			publisher(publisher)
+//	{
+//	}
+	Analyze()
 	{
 	}
 
-	virtual void run() = 0;
+//	virtual void run() = 0;
 
 };
 

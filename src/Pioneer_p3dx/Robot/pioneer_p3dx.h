@@ -35,6 +35,14 @@ public:
 
 	int getHandle();
 
+	const std::string &getRobotName() const;
+
+	const Position &getRobotPosition() const;
+
+	int getRobotHandle() const;
+
+	const Connection &getConnection() const;
+
 };
 
 

@@ -21,15 +21,19 @@ protected:
 	double scan_interval;
 
 public:
-	Range(double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
+	Range(std::string name_, double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
 				double fov_angle_, double beam_angle_, double scan_interval_) :
-		Sensor<T>(weight_, position_, bandwidth_)
+		Sensor<T>(name_, weight_, position_, bandwidth_)
 	{
 		max_range = max_range_;
 		resolution = resolution_;
 		fov_angle = fov_angle_;
 		beam_angle = beam_angle_;
 		scan_interval = scan_interval_;
+	}
+
+	Range(std::string name_) : Sensor<T>(name_), max_range{0}, resolution{0}, fov_angle{0}, beam_angle{0}, scan_interval{0}
+	{
 	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Range<T> &range)

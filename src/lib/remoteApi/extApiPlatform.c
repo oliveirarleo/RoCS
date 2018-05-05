@@ -673,7 +673,7 @@ simxInt extApi_send_sharedMem(simxInt clientID, const simxUChar *data, simxInt d
 	}
 	return (initDataLength);
 #else
-	return(0);
+	return (0);
 #endif
 }
 
@@ -719,6 +719,6 @@ simxUChar *extApi_recv_sharedMem(simxInt clientID, simxInt *dataLength)
 	dataLength[0] = retDataOff;
 	return (retData);
 #else
-	return(0);
+	return (0);
 #endif
 }

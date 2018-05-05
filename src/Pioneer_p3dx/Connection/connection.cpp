@@ -22,11 +22,19 @@ Connection::Connection()
 	waitUntilConnected = true;
 	doNotReconnectOnceDisconnected = true;
 
-	std::cout << "Connection started" << std::endl;
+	std::cout << "Connection starting" << std::endl;
 	client_id = -1;
 
 	client_id = simxStart((simxChar *) server_ip.c_str(), (simxInt) server_port, (simxUChar) waitUntilConnected,
 												(simxUChar) doNotReconnectOnceDisconnected, time_out_in_ms, comm_thread_cycle_in_ms);
+
+	if(isConnected())
+	{
+		std::cout << "Connection successful" << std::endl;
+	}
+	else{
+		std::cout << "Connection failed" << std::endl;
+	}
 }
 
 Connection::Connection(const std::string &server_ip, int server_port, simxInt time_out_in_ms,
@@ -44,12 +52,18 @@ Connection::Connection(const std::string &server_ip, int server_port, simxInt ti
 
 bool Connection::isConnected()
 {
-	return client_id != -1;
+	return simxGetConnectionId(client_id)!= -1;
 }
 
 int Connection::getClientId() const
 {
 	return client_id;
+}
+
+Connection::~Connection()
+{
+	simxFinish(client_id); // fechando conexao com o servidor
+	std::cout << "Conexao fechada!" << std::endl;
 }
 
 

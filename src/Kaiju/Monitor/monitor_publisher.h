@@ -13,7 +13,7 @@
 class MonitorPublisher : public Publisher
 {
 public:
-	explicit MonitorPublisher(const std::vector<Observer *> &observers) : Publisher(observers)
+	explicit MonitorPublisher(std::vector<Observer *> &observers) : Publisher(observers)
 	{
 	}
 };

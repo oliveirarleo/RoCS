@@ -12,14 +12,14 @@
 
 class Publisher
 {
-private:
-	std::vector<Observer *> observers;
+protected:
+	std::vector<Observer *>& observers;
 public:
-	Publisher(const std::vector<Observer *> &observers) : observers(observers)
+	Publisher(std::vector<Observer *> &observers_) : observers(observers_)
 	{
 	}
 
-	virtual void attach(Observer observer) = 0;
+//	virtual void attach(Observer observer) = 0;
 };
 
 
