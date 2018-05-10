@@ -20,7 +20,7 @@ class AnalyzePioneerP3DX: public Analyze
 private:
 	std::vector<MonitorSonarVrep> &monitors;
 public:
-	AnalyzePioneerP3DX(std::vector<MonitorSonarVrep> &monitors_);
+	explicit AnalyzePioneerP3DX(std::vector<MonitorSonarVrep> &monitors_);
 
 //	void run() override;
 

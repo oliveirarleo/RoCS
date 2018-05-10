@@ -12,7 +12,7 @@ include_directories(lib/include/stack lib/remoteApi lib/include Kaiju)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -DBUILD_SHARED_LIBS=OFF")
-set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(ARCH_SOURCES
         Kaiju/Monitor/monitor.h

@@ -37,7 +37,6 @@ Pioneer_p3dx::Pioneer_p3dx() : is_connected{false},
 		std::vector<Observer *> observers;
 		MonitorSonarVrep sonar_monitor{sonar, observers};
 		sonars.push_back(sonar_monitor);
-
 	}
 
 	{
