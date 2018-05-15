@@ -15,9 +15,8 @@
 
 class PlannerPioneerP3DX : public Planner
 {
-public:
-	Robot &robot;
-	Connection &connection;
+private:
+	RobotModel &robot;
 	std::vector< AnalyzePioneerP3DX > analyzes;
 //	Execute execute;
 	double no_detection_dist;
@@ -31,7 +30,7 @@ public:
 
 
 public:
-	PlannerPioneerP3DX(Robot &robot_, Connection &connection_, std::vector<AnalyzePioneerP3DX> &analyzes_);
+	PlannerPioneerP3DX(RobotModel &robot_, std::vector<AnalyzePioneerP3DX> &analyzes_);
 	void runPlanner();
 };
 

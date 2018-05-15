@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	Pioneer_p3dx p3dx{};
+	PioneerP3DX p3dx{};
 
 	return 0;
 }

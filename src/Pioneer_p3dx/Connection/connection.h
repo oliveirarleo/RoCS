@@ -35,7 +35,7 @@ public:
 
 	virtual ~Connection();
 
-	bool isConnected();
+	bool isConnected() const;
 
 	int getClientId() const;
 };

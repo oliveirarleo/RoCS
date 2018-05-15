@@ -50,7 +50,7 @@ Connection::Connection(const std::string &server_ip, int server_port, simxInt ti
 												(simxUChar) doNotReconnectOnceDisconnected, time_out_in_ms, comm_thread_cycle_in_ms);
 }
 
-bool Connection::isConnected()
+bool Connection::isConnected() const
 {
 	return simxGetConnectionId(client_id)!= -1;
 }

@@ -8,130 +8,132 @@
 		<Option virtualFolders="CMake Files\;CMake Files\lib\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install/local">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="install/strip">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="install">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
+			<Target title="install/local">
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="list_install_components">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Pioneer">
-				<Option output="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Pioneer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
+				<Option output="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Pioneer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include/stack"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Kaiju"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include/stack"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/remoteApi"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/Kaiju"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pioneer"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pioneer"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Pioneer/fast">
-				<Option output="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Pioneer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug"/>
+				<Option output="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Pioneer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include/stack"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Kaiju"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include/stack"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/remoteApi"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/Kaiju"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pioneer/fast"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 Pioneer/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="remote_api">
-				<Option output="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/libremote_api.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib"/>
+				<Option output="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/libremote_api.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -139,26 +141,27 @@
 					<Add option="-DNON_MATLAB_PARSING"/>
 					<Add option="-DMAX_EXT_API_CONNECTIONS=255"/>
 					<Add option="-DDO_NOT_USE_SHARED_MEMORY"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/remoteApi"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 remote_api"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 remote_api"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="remote_api/fast">
-				<Option output="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/libremote_api.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib"/>
+				<Option output="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/libremote_api.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -166,82 +169,89 @@
 					<Add option="-DNON_MATLAB_PARSING"/>
 					<Add option="-DMAX_EXT_API_CONNECTIONS=255"/>
 					<Add option="-DDO_NOT_USE_SHARED_MEMORY"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
-					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/include"/>
+					<Add directory="/home/kaiju/kaiju/ROCs/src/lib/remoteApi"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 remote_api/fast"/>
-					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/leleco/Google\ Drive/inpc/unicamp/ic/code/RoCS/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 remote_api/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kaiju/kaiju/ROCs/src/cmake-build-debug/lib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Kaiju/Monitor/monitor.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Kaiju/Monitor/monitor.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Connection/connection.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Connection/connection.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Connection/connection.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Connection/connection.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Monitor/monitor_sonar_vrep.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Knowledge/pioneer_p3dx_model.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Monitor/monitor_sonar_vrep.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Knowledge/pioneer_p3dx_model.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Plan/planner_pioneer_p3dx.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Monitor/monitor_sonar_vrep.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Plan/planner_pioneer_p3dx.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Monitor/monitor_sonar_vrep.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Robot/pioneer_p3dx.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Plan/planner_pioneer_p3dx.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Robot/pioneer_p3dx.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Plan/planner_pioneer_p3dx.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Sensors/sonar_vrep.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Robot/pioneer_p3dx.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Sensors/sonar_vrep.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Robot/pioneer_p3dx.h">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/main.cpp">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Sensors/sonar_vrep.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApi.c">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Sensors/sonar_vrep.h">
+			<Option target="Pioneer"/>
+		</Unit>
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/main.cpp">
+			<Option target="Pioneer"/>
+		</Unit>
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/lib/remoteApi/extApi.c">
 			<Option target="remote_api"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApi.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/lib/remoteApi/extApi.h">
 			<Option target="remote_api"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApiPlatform.c">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/lib/remoteApi/extApiPlatform.c">
 			<Option target="remote_api"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApiPlatform.h">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/lib/remoteApi/extApiPlatform.h">
 			<Option target="remote_api"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/CMakeLists.txt">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/CMakeLists.txt">
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/lib/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\lib\"/>
 		</Unit>
 	</Project>

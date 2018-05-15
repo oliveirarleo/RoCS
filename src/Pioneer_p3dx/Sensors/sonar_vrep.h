@@ -16,7 +16,7 @@ extern "C" {
 #include <string>
 #include "Sensors/sonar.h"
 #include "Knowledge/position.h"
-#include "Robot/robot.h"
+#include "Knowledge/robot_model.h"
 #include "../Connection/connection.h"
 
 class SonarVREP : public Sonar<Position>
@@ -26,14 +26,14 @@ private:
 	int sonar_handle;
 
 	Connection& connection;
-	Robot robot;
+	RobotModel robot;
 
 public:
-	SonarVREP(const std::string &name_, Connection &connection_, Robot &robot_, double weight_, Position position_,
+	SonarVREP(const std::string &name_, Connection &connection_, RobotModel &robot_, double weight_, Position position_,
 						double bandwidth_, double max_range_, double resolution_, double fov_angle_, double beam_angle_,
 						double scan_interval_);
 
-	SonarVREP(const std::string &name_, Connection &connection_, const Robot &robot_);
+	SonarVREP(const std::string &name_, Connection &connection_, const RobotModel &robot_);
 
 	bool sensorIsConnected();
 
