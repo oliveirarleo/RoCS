@@ -35,8 +35,9 @@ SonarVREP::SonarVREP(const std::string &name_, Connection &connection_, RobotMod
 }
 
 SonarVREP::SonarVREP(const std::string &name_, Connection &connection_, const RobotModel &robot_)
-	: Sonar(name_), connection(connection_), robot(robot_)
+	: Sonar(name_), connection(connection_), robot(const_cast<RobotModel &>(robot_))
 {
+	std::cout << ((PioneerP3DXModel &) robot).getConnection().getClientId() << std::endl;
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &sonar_handle,
 													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 	{

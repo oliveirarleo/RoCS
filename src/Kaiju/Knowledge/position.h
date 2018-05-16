@@ -24,6 +24,10 @@ public:
 		z = z_;
 	}
 
+	Position() : x{0}, y{0}, z{0}
+	{
+	}
+
 	friend std::ostream &operator<<(std::ostream &os, const Position &position)
 	{
 		os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " ";

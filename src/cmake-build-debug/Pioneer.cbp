@@ -191,6 +191,12 @@
 		<Unit filename="/home/kaiju/kaiju/ROCs/src/Kaiju/Monitor/monitor.h">
 			<Option target="Pioneer"/>
 		</Unit>
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Actuators/wheel_vrep.cpp">
+			<Option target="Pioneer"/>
+		</Unit>
+		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Actuators/wheel_vrep.h">
+			<Option target="Pioneer"/>
+		</Unit>
 		<Unit filename="/home/kaiju/kaiju/ROCs/src/Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.cpp">
 			<Option target="Pioneer"/>
 		</Unit>

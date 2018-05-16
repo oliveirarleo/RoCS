@@ -10,7 +10,7 @@
 class ActuatorAccessor
 {
 public:
-	virtual void setData() = 0;
+//	virtual void setData() = 0;
 };
 
 #endif //ARCH_ACTUATOR_ACCESSOR_H_

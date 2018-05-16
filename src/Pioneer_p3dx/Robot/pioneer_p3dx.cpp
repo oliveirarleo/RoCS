@@ -31,14 +31,13 @@ PioneerP3DX::PioneerP3DX()
 
 	Connection connection = p3dx_model.getConnection();
 
-	std::vector<MonitorSonarVrep> sonars;
+	std::vector< SonarVREP > sonars = p3dx_model.getSonars();
+	std::vector<MonitorSonarVrep> sonars_monitors;
 	std::vector<Observer *> sonar_observers;
-	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
+	for (int num_sonars = 0; num_sonars < 16; ++num_sonars)
 	{
-		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
-		SonarVREP sonar{sonar_name, connection, p3dx_model};
-		MonitorSonarVrep sonar_monitor{sonar, sonar_observers};
-		sonars.push_back(sonar_monitor);
+		MonitorSonarVrep sonar_monitor{sonars[num_sonars], sonar_observers};
+		sonars_monitors.push_back(sonar_monitor);
 	}
 
 	{
@@ -46,7 +45,8 @@ PioneerP3DX::PioneerP3DX()
 	}
 
 
-	AnalyzePioneerP3DX analyze{sonars};
+
+	AnalyzePioneerP3DX analyze{sonars_monitors};
 	std::vector< AnalyzePioneerP3DX > analyzes;
 	analyzes.push_back(analyze);
 

@@ -26,7 +26,7 @@ private:
 	int sonar_handle;
 
 	Connection& connection;
-	RobotModel robot;
+	RobotModel& robot;
 
 public:
 	SonarVREP(const std::string &name_, Connection &connection_, RobotModel &robot_, double weight_, Position position_,

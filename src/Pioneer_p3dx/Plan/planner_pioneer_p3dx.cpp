@@ -28,22 +28,7 @@ PlannerPioneerP3DX::PlannerPioneerP3DX(RobotModel &robot_, std::vector<AnalyzePi
 
 void PlannerPioneerP3DX::runPlanner()
 {
-	//	Temporary
-	// inicialização dos motores
-	int leftMotorHandle = 0;
-	int rightMotorHandle = 0;
-	if (simxGetObjectHandle(((PioneerP3DXModel&)robot).getConnection().getClientId(), (const simxChar *) "Pioneer_p3dx_leftMotor", (simxInt *) &leftMotorHandle,
-													(simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
-		std::cout << "Handle do motor esquerdo nao encontrado!" << std::endl;
-	else
-		std::cout << "Conectado ao motor esquerdo!" << std::endl;
-
-	if (simxGetObjectHandle(((PioneerP3DXModel&)robot).getConnection().getClientId(), (const simxChar *) "Pioneer_p3dx_rightMotor", (simxInt *) &rightMotorHandle,
-													(simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
-		std::cout << "Handle do motor direito nao encontrado!" << std::endl;
-	else
-		std::cout << "Conectado ao motor direito!" << std::endl;
-
+	std::vector< WheelVREP > wheels = ((PioneerP3DXModel&) robot).getWheels();
 
 	while (((PioneerP3DXModel&)robot).getConnection().isConnected()) // enquanto a simulação estiver ativa
 	{
@@ -53,13 +38,9 @@ void PlannerPioneerP3DX::runPlanner()
 
 			Position coord{0,0,0};
 //			float coord[3];
-			AnalyzePioneerP3DX an = (AnalyzePioneerP3DX)analyzes[0];
+			auto an = (AnalyzePioneerP3DX)analyzes[0];
 			std::vector<MonitorSonarVrep> monits = an.getMonitors();
-//			std::cout << monits[i].getSonar().getSonarHandle() << std::endl;
 
-//			int id = connection.getClientId();
-//			if (simxReadProximitySensor(id, monits[i].getSonar().getSonarHandle(), (simxUChar*) &state, coord, NULL, NULL,
-//																	simx_opmode_buffer) == simx_return_ok)
 			if (((AnalyzePioneerP3DX&)analyzes[0]).getSonarData(i, coord, state))
 			{
 //				double dist = coord.getZ();
@@ -92,8 +73,10 @@ void PlannerPioneerP3DX::runPlanner()
 		}
 
 		// atualiza velocidades dos motores
-		simxSetJointTargetVelocity(((PioneerP3DXModel&)robot).getConnection().getClientId(), leftMotorHandle, (simxFloat) v_left, simx_opmode_streaming);
-		simxSetJointTargetVelocity(((PioneerP3DXModel&)robot).getConnection().getClientId(), rightMotorHandle, (simxFloat) v_right, simx_opmode_streaming);
+		wheels[0].setSpeed(v_left);
+		wheels[1].setSpeed(v_right);
+//		simxSetJointTargetVelocity(((PioneerP3DXModel&)robot).getConnection().getClientId(), leftMotorHandle, (simxFloat) v_left, simx_opmode_streaming);
+//		simxSetJointTargetVelocity(((PioneerP3DXModel&)robot).getConnection().getClientId(), rightMotorHandle, (simxFloat) v_right, simx_opmode_streaming);
 
 		// espera um pouco antes de reiniciar a leitura dos sensores
 		extApi_sleepMs(50);

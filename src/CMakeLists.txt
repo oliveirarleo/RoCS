@@ -25,7 +25,7 @@ set(SOURCES
         Pioneer_p3dx/Connection/connection.cpp
         Pioneer_p3dx/Sensors/sonar_vrep.cpp
         Pioneer_p3dx/Monitor/monitor_sonar_vrep.cpp
-        Pioneer_p3dx/Monitor/monitor_sonar_vrep.h Pioneer_p3dx/Plan/planner_pioneer_p3dx.cpp Pioneer_p3dx/Plan/planner_pioneer_p3dx.h Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.cpp Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.h Pioneer_p3dx/Knowledge/pioneer_p3dx_model.cpp Pioneer_p3dx/Knowledge/pioneer_p3dx_model.h)
+        Pioneer_p3dx/Monitor/monitor_sonar_vrep.h Pioneer_p3dx/Plan/planner_pioneer_p3dx.cpp Pioneer_p3dx/Plan/planner_pioneer_p3dx.h Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.cpp Pioneer_p3dx/Analyze/analyze_pioneer_p_3_dx.h Pioneer_p3dx/Knowledge/pioneer_p3dx_model.cpp Pioneer_p3dx/Knowledge/pioneer_p3dx_model.h Pioneer_p3dx/Actuators/wheel_vrep.cpp Pioneer_p3dx/Actuators/wheel_vrep.h)
 
 find_package(Threads)
 
