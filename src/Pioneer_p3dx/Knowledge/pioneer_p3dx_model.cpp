@@ -8,7 +8,6 @@
 
 extern "C"
 {
-#include "extApi.h"
 #include "v_repConst.h"
 }
 
@@ -18,7 +17,6 @@ PioneerP3DXModel::PioneerP3DXModel():	robot_name{"Pioneer_p3dx"},
 																			 connection{},
 																			 robot_position{},
 																			 sonars{}
-
 {
 }
 
@@ -59,48 +57,25 @@ void PioneerP3DXModel::connectToSonars()
 	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
 	{
 		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
-		SonarVREP sonar{sonar_name, connection, *this};
+		SonarVREP sonar{sonar_name, *this};
 		sonars.push_back(sonar);
 	}
 }
 
 void PioneerP3DXModel::connectToWheels()
 {
-	std::cout << "aaaaa"<< connection.getClientId() << "\n";
-
 	std::string left_wheel_name = "Pioneer_p3dx_leftMotor";
-	WheelVREP left_wheel{left_wheel_name, *this, connection};
-	std::cout << "aaaaa7\n";
+	WheelVREP left_wheel{left_wheel_name, *this};
 	wheels.push_back(left_wheel);
 
-	std::cout << "aaaaa3\n";
-
 	std::string right_wheel_name = "Pioneer_p3dx_rightMotor";
-	WheelVREP right_wheel{right_wheel_name, *this, connection};
+	WheelVREP right_wheel{right_wheel_name, *this};
 	wheels.push_back(right_wheel);
-
-	std::cout << "aaaaa2\n";
-
-//	int leftMotorHandle = 0;
-//	int rightMotorHandle = 0;
-//	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) "Pioneer_p3dx_leftMotor", (simxInt *) &leftMotorHandle,
-//													(simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
-//		std::cout << "Handle do motor esquerdo nao encontrado!" << std::endl;
-//	else
-//		std::cout << "Conectado ao motor esquerdo!" << std::endl;
-//
-//	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) "Pioneer_p3dx_rightMotor", (simxInt *) &rightMotorHandle,
-//													(simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
-//		std::cout << "Handle do motor direito nao encontrado!" << std::endl;
-//	else
-//		std::cout << "Conectado ao motor direito!" << std::endl;
-
 }
 
 //
 // Get methods
 //
-
 int PioneerP3DXModel::getHandle()
 {
 	return robot_handle;

@@ -139,6 +139,7 @@
 					<Add option="-DNON_MATLAB_PARSING"/>
 					<Add option="-DMAX_EXT_API_CONNECTIONS=255"/>
 					<Add option="-DDO_NOT_USE_SHARED_MEMORY"/>
+					<Add option="-DCMAKE_OSX_ARCHITECTURES=x86_64"/>
 					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
 					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
@@ -166,6 +167,7 @@
 					<Add option="-DNON_MATLAB_PARSING"/>
 					<Add option="-DMAX_EXT_API_CONNECTIONS=255"/>
 					<Add option="-DDO_NOT_USE_SHARED_MEMORY"/>
+					<Add option="-DCMAKE_OSX_ARCHITECTURES=x86_64"/>
 					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include"/>
 					<Add directory="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
@@ -184,9 +186,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Kaiju/Monitor/monitor.h">
-			<Option target="Pioneer"/>
-		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/Actuators/wheel_vrep.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
@@ -238,10 +237,19 @@
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/Pioneer_p3dx/main.cpp">
 			<Option target="Pioneer"/>
 		</Unit>
+		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include/v_repConst.h">
+			<Option target="remote_api"/>
+		</Unit>
+		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/include/v_repLib.h">
+			<Option target="remote_api"/>
+		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApi.c">
 			<Option target="remote_api"/>
 		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApi.h">
+			<Option target="remote_api"/>
+		</Unit>
+		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApiInternal.h">
 			<Option target="remote_api"/>
 		</Unit>
 		<Unit filename="/Users/leleco/Google Drive/inpc/unicamp/ic/code/RoCS/src/lib/remoteApi/extApiPlatform.c">

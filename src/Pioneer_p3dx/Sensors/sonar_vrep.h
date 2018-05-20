@@ -35,6 +35,8 @@ public:
 
 	SonarVREP(const std::string &name_, Connection &connection_, const RobotModel &robot_);
 
+	SonarVREP(const std::string &name_, const RobotModel &robot_);
+
 	bool sensorIsConnected();
 
 	bool getData(Position &position) override;
