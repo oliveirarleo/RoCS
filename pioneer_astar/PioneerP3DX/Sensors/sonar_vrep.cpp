@@ -14,10 +14,11 @@ extern "C"
 #include <include/v_repConst.h>
 }
 
-#include "../Knowledge/pioneer_p_3_dx_model.h"
+#include "../Knowledge/pioneer_p3dx_model.h"
 
-SonarVREP::SonarVREP(const std::string &name_, RobotModel robot_) : Range(name_), connection(
-				const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection())), robot(const_cast<RobotModel &>(robot_))
+SonarVREP::SonarVREP(const std::string &name_, RobotModel& robot_)
+				: Range(name_), robot(robot_),
+					connection(const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection()))
 {
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &handle,
 													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)

@@ -8,6 +8,7 @@
 #define ARCH_OBSERVER_H_
 
 
+#include <iostream>
 #include <vector>
 #include "observer.h"
 
@@ -28,12 +29,6 @@ public:
 	void printValue();
 
 	void update(Value value);
-
-	friend std::ostream &operator<<(std::ostream &os, const Observer<double> &observer)
-	{
-		os << "Value: " << observer.value;
-		return os;
-	}
 };
 
 // CONSTRUCTORS
@@ -49,21 +44,21 @@ Observer<Value>::Observer() : value{0}
 
 // GET VALUE
 template<typename Value>
-Value getValue()
+Value Observer<Value>::getValue()
 {
 	return value;
 }
 
 // PRINT VALUE
 template<typename Value>
-void printValue()
+void Observer<Value>::printValue()
 {
 	std::cout << "value is: " << value << std::endl;
 }
 
 // UPDATE
 template<typename Value>
-void update(Value value)
+void Observer<Value>::update(Value value)
 {
 //	std::cout << "Updating value from " << this->value << " to " << value << std::endl;
 	Observer::value = value;

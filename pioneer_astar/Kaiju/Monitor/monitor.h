@@ -9,30 +9,48 @@
 
 #include <vector>
 #include <ostream>
+#include <thread>
 
 #include "Sensors/sensor.h"
 #include "Util/publisher.h"
 
 template<typename Value>
-class Monitor : public Publisher
+class Monitor : public Publisher<Value>
 {
 protected:
-	Sensor sensor;
+	Sensor<Value>& sensor;
+	bool publishing;
+	std::thread publish_thread;
 
 public:
-	Monitor(Sensor &sensor_);
+	Monitor(Sensor<Value> &sensor_);
+
+	~Monitor();
+
+	virtual void publishLoop() = 0;
 
 	friend std::ostream &operator<<(std::ostream &os, const Monitor &monitor)
 	{
 		os << " sensor: " << monitor.sensor << std::endl;
 		return os;
 	}
+
+
 };
 
 // CONSTRUCTOR
 template<typename Value>
-Monitor<Value>::Monitor(Sensor &sensor_): sensor(sensor_)
+Monitor<Value>::Monitor(Sensor<Value> &sensor_): sensor(sensor_), publishing(true), publish_thread(&Monitor::publishLoop, this)
 {
+}
+
+// DESTRUCTOR
+template<typename Value>
+Monitor<Value>::~Monitor()
+{
+	publishing = false;
+	if(publish_thread.joinable())
+		publish_thread.join();
 }
 
 #endif // ARCH_MONITOR_H_

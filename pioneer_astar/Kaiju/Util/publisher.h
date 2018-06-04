@@ -34,7 +34,7 @@ Publisher<Value>::Publisher()
 template<typename Value>
 void Publisher<Value>::attach(Observer<Value> *observer)
 {
-	std::cout << name << " attached to observer " << *observer << std::endl;
+//	std::cout << "Attached to observer " << *observer << std::endl;
 	observers.push_back(observer);
 }
 
@@ -49,7 +49,7 @@ void Publisher<Value>::detach(Observer<Value> *observer)
 template<typename Value>
 void Publisher<Value>::publish(Value value)
 {
-	std::cout << "Publishing value: " << value << std::endl;
+//	std::cout << "Publishing value: " << value << std::endl;
 	typename std::vector<Observer<Value> *>::const_iterator iter;
 	for (iter = observers.begin(); iter != observers.end(); ++iter)
 	{

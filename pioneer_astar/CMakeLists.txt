@@ -28,14 +28,16 @@ set(HEADERS
         Kaiju/Actuators/rotary_motor.h
         Kaiju/Monitor/monitor.h
         Kaiju/Analyze/analyze.h
-        Kaiju/Knowledge/robot_model.h)
+        Kaiju/Knowledge/robot_model.h
+        Kaiju/Util/publisher.h
+        Kaiju/Util/observer.h)
 
 set(ARCH_SOURCES
         )
 
 set(SOURCES
         ${ARCH_SOURCES}
-        main.cpp PioneerP3DX/AStarPioneer/a_star_pioneer.cpp PioneerP3DX/AStarPioneer/a_star_pioneer.h PioneerP3DX/Knowledge/pioneer_p_3_dx_model.cpp PioneerP3DX/Knowledge/pioneer_p_3_dx_model.h PioneerP3DX/Connection/connection.cpp PioneerP3DX/Connection/connection.h PioneerP3DX/Sensors/sonar_vrep.cpp PioneerP3DX/Sensors/sonar_vrep.h PioneerP3DX/Actuators/wheel_vrep.cpp PioneerP3DX/Actuators/wheel_vrep.h)
+        main.cpp PioneerP3DX/AStarPioneer/a_star_pioneer.cpp PioneerP3DX/AStarPioneer/a_star_pioneer.h PioneerP3DX/Knowledge/pioneer_p3dx_model.cpp PioneerP3DX/Knowledge/pioneer_p3dx_model.h PioneerP3DX/Connection/connection.cpp PioneerP3DX/Connection/connection.h PioneerP3DX/Sensors/sonar_vrep.cpp PioneerP3DX/Sensors/sonar_vrep.h PioneerP3DX/Actuators/wheel_vrep.cpp PioneerP3DX/Actuators/wheel_vrep.h PioneerP3DX/Monitor/sonar_vrep_monitor.cpp PioneerP3DX/Monitor/sonar_vrep_monitor.h)
 
 find_package(Threads)
 

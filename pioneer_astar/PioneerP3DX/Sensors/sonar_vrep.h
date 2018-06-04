@@ -19,7 +19,7 @@ private:
 	Connection& connection;
 
 public:
-	SonarVREP(const std::string &name_, RobotModel robot_);
+	SonarVREP(const std::string &name_, RobotModel& robot_);
 
 	bool getData(Position &value) override;
 

@@ -3,7 +3,7 @@
 // Created by:  Leonardo de Oliveira Ramos
 // Github:      https://github.com/oramleo
 //
-#include "pioneer_p_3_dx_model.h"
+#include "pioneer_p3dx_model.h"
 
 #include <iostream>
 
@@ -56,6 +56,7 @@ void PioneerP3DXModel::connectToRobot()
 
 void PioneerP3DXModel::connectToSonars()
 {
+
 	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
 	{
 		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);

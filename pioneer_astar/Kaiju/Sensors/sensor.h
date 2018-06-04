@@ -36,6 +36,46 @@ public:
 			 << sensor.bandwidth << " ";
 		return os;
 	}
+
+	const std::string &getName() const
+	{
+		return name;
+	}
+
+	void setName(const std::string &name)
+	{
+		Sensor::name = name;
+	}
+
+	double getWeight() const
+	{
+		return weight;
+	}
+
+	void setWeight(double weight)
+	{
+		Sensor::weight = weight;
+	}
+
+	const Position &getPosition() const
+	{
+		return position;
+	}
+
+	void setPosition(const Position &position)
+	{
+		Sensor::position = position;
+	}
+
+	double getBandwidth() const
+	{
+		return bandwidth;
+	}
+
+	void setBandwidth(double bandwidth)
+	{
+		Sensor::bandwidth = bandwidth;
+	}
 };
 
 
