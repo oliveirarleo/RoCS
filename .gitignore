@@ -7,3 +7,5 @@ Project.cbp
 RoCS.cbp
 cmake_install.cmake
 cmpl
+cmake-build-debug/*
+src/cmake-build-debug/
