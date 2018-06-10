@@ -7,10 +7,9 @@
 #ifndef ARCH_ACTUATOR_H_
 #define ARCH_ACTUATOR_H_
 
-#include "actuator_accessor.h"
 #include "../Knowledge/position.h"
 
-class Actuator : public ActuatorAccessor
+class Actuator
 {
 protected:
 	std::string name;

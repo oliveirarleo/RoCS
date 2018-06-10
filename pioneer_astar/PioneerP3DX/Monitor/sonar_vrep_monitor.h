@@ -9,14 +9,12 @@
 
 #include <Monitor/monitor.h>
 #include <thread>
+#include "../Sensors/sonar_output.h"
 
-class SonarVREPMonitor: public Monitor<Position>
+class SonarVREPMonitor: public Monitor<SonarOutput>
 {
-private:
-	bool publishing = true;
-
 public:
-	SonarVREPMonitor(Sensor<Position> &sensor_);
+	SonarVREPMonitor(Sensor<SonarOutput> &sensor_);
 
 	void publishLoop() override;
 

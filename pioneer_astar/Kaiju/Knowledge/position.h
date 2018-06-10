@@ -11,7 +11,7 @@
 
 class Position
 {
-private:
+protected:
 	double x;
 	double y;
 	double z;

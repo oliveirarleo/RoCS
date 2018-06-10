@@ -12,14 +12,14 @@
 
 class Action
 {
-private:
-	std::vector<Action> actions;
-	std::vector<Actuator> actuators;
-
-	virtual std::vector<Action> decompose(Action action) = 0;
+protected:
 
 public:
-	virtual void act();
+	Action()
+	{
+	}
+
+	virtual void act() = 0;
 };
 
 #endif //ARCH_ACTION_H_

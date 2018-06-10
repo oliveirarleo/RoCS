@@ -15,50 +15,35 @@ class Publisher
 protected:
 	std::vector<Observer<Value> *> observers;
 public:
-	Publisher();
-
-	void attach(Observer<Value> *observer);
-
-	void detach(Observer<Value> *observer);
-
-	void publish(Value value);
-};
-
-// CONSTRUCTOR
-template<typename Value>
-Publisher<Value>::Publisher()
-{
-}
-
-// ATTACH
-template<typename Value>
-void Publisher<Value>::attach(Observer<Value> *observer)
-{
-//	std::cout << "Attached to observer " << *observer << std::endl;
-	observers.push_back(observer);
-}
-
-// DETACH
-template<typename Value>
-void Publisher<Value>::detach(Observer<Value> *observer)
-{
-	observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
-}
-
-// PUBLISH(VALUE)
-template<typename Value>
-void Publisher<Value>::publish(Value value)
-{
-//	std::cout << "Publishing value: " << value << std::endl;
-	typename std::vector<Observer<Value> *>::const_iterator iter;
-	for (iter = observers.begin(); iter != observers.end(); ++iter)
+	Publisher()
 	{
-		if (*iter != 0)
+	}
+
+	void attach(Observer<Value> *observer)
+	{
+//	std::cout << "Attached to observer " << *observer << std::endl;
+		observers.push_back(observer);
+	}
+
+
+	void detach(Observer<Value> *observer)
+	{
+		observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
+	}
+
+	void publish(Value value)
+	{
+//	std::cout << "Publishing value: " << value << std::endl;
+		typename std::vector<Observer<Value> *>::const_iterator iter;
+		for (iter = observers.begin(); iter != observers.end(); ++iter)
 		{
-			(*iter)->update(value);
+			if (*iter != 0)
+			{
+				(*iter)->update(value);
+			}
 		}
 	}
-}
+};
 
 
 #endif // ARCH_PUBLISHER_H_

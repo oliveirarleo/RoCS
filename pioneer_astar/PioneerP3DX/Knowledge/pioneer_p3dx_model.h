@@ -24,9 +24,9 @@ private:
 	int robot_handle;
 	Connection connection;
 	Position robot_position;
-	std::vector<SonarVREP> sonars;
+	std::vector<SonarVREP *> sonars;
 //		std::vector< ForceSensorVREP > force_sensors;
-	std::vector<WheelVREP> wheels;
+	std::vector<WheelVREP *> wheels;
 
 public:
 	PioneerP3DXModel();
@@ -43,17 +43,17 @@ public:
 
 	int getHandle();
 
-	const std::string &getRobotName() const;
+	std::string &getRobotName();
 
-	int getRobotHandle() const;
+	int getRobotHandle();
 
-	const Connection &getConnection() const;
+	Connection &getConnection();
 
-	const Position &getRobotPosition();
+	Position &getRobotPosition();
 
-	const std::vector<SonarVREP> &getSonars() const;
+	std::vector<SonarVREP *> &getSonars();
 
-	const std::vector<WheelVREP> &getWheels() const;
+	std::vector<WheelVREP *> &getWheels();
 
 };
 

@@ -29,6 +29,12 @@ public:
 	void printValue();
 
 	void update(Value value);
+
+	friend std::ostream &operator<<(std::ostream &os, const Observer<Value> &observer)
+	{
+		os << "value: " << observer.value;
+		return os;
+	}
 };
 
 // CONSTRUCTORS
@@ -37,8 +43,10 @@ Observer<Value>::Observer(Value value) : value(value)
 {
 }
 
+
+
 template<typename Value>
-Observer<Value>::Observer() : value{0}
+Observer<Value>::Observer() : value{}
 {
 }
 

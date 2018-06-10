@@ -18,14 +18,27 @@ template<typename Value>
 class Monitor : public Publisher<Value>
 {
 protected:
-	Sensor<Value>& sensor;
+	Sensor<Value> &sensor;
 	bool publishing;
-	std::thread publish_thread;
+	std::thread *publish_thread;
 
 public:
-	Monitor(Sensor<Value> &sensor_);
+	Monitor(Sensor<Value> &sensor_): sensor(sensor_)
+	{
 
-	~Monitor();
+	}
+
+	~Monitor()
+	{
+		publishing = false;
+		if (publish_thread && publish_thread->joinable())
+			publish_thread->join();
+	}
+
+	void startThread()
+	{
+		publish_thread = new std::thread(&Monitor::publishLoop, this);
+	}
 
 	virtual void publishLoop() = 0;
 
@@ -35,22 +48,7 @@ public:
 		return os;
 	}
 
-
 };
 
-// CONSTRUCTOR
-template<typename Value>
-Monitor<Value>::Monitor(Sensor<Value> &sensor_): sensor(sensor_), publishing(true), publish_thread(&Monitor::publishLoop, this)
-{
-}
-
-// DESTRUCTOR
-template<typename Value>
-Monitor<Value>::~Monitor()
-{
-	publishing = false;
-	if(publish_thread.joinable())
-		publish_thread.join();
-}
 
 #endif // ARCH_MONITOR_H_

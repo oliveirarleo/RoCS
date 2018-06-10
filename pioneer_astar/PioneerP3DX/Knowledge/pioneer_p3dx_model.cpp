@@ -60,20 +60,17 @@ void PioneerP3DXModel::connectToSonars()
 	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
 	{
 		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
-		SonarVREP sonar{sonar_name, *this};
-		sonars.push_back(sonar);
+		sonars.push_back(new SonarVREP{sonar_name, *this});
 	}
 }
 
 void PioneerP3DXModel::connectToWheels()
 {
 	std::string left_wheel_name = "Pioneer_p3dx_leftMotor";
-	WheelVREP left_wheel{left_wheel_name, *this};
-	wheels.push_back(left_wheel);
+	wheels.push_back(new WheelVREP{left_wheel_name, *this});
 
 	std::string right_wheel_name = "Pioneer_p3dx_rightMotor";
-	WheelVREP right_wheel{right_wheel_name, *this};
-	wheels.push_back(right_wheel);
+	wheels.push_back(new WheelVREP{right_wheel_name, *this});
 }
 
 //
@@ -84,12 +81,12 @@ int PioneerP3DXModel::getHandle()
 	return robot_handle;
 }
 
-const std::string &PioneerP3DXModel::getRobotName() const
+std::string &PioneerP3DXModel::getRobotName()
 {
 	return robot_name;
 }
 
-const Position &PioneerP3DXModel::getRobotPosition()
+Position &PioneerP3DXModel::getRobotPosition()
 {
 	float pos[3];
 	simxGetObjectPosition(connection.getClientId(), robot_handle, -1, pos, simx_opmode_streaming);
@@ -101,22 +98,22 @@ const Position &PioneerP3DXModel::getRobotPosition()
 }
 
 
-int PioneerP3DXModel::getRobotHandle() const
+int PioneerP3DXModel::getRobotHandle()
 {
 	return robot_handle;
 }
 
-const Connection &PioneerP3DXModel::getConnection() const
+Connection &PioneerP3DXModel::getConnection()
 {
 	return connection;
 }
 
-const std::vector<SonarVREP> &PioneerP3DXModel::getSonars() const
+std::vector<SonarVREP *> &PioneerP3DXModel::getSonars()
 {
 	return sonars;
 }
 
-const std::vector<WheelVREP> &PioneerP3DXModel::getWheels() const
+std::vector<WheelVREP *> &PioneerP3DXModel::getWheels()
 {
 	return wheels;
 }

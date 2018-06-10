@@ -8,25 +8,24 @@
 #define ROCS_SENSOR_H_
 
 #include <ostream>
-#include "sensor_accessor.h"
 #include "../Knowledge/position.h"
 
 template<typename Value>
-class Sensor : public SensorAccessor<Value>
+class Sensor
 {
 protected:
 	std::string name;
 	double weight;
 	Position position;
-	double bandwidth;
+	int bandwidth;
 
 public:
-	Sensor(std::string name, double weight_, Position position_, double bandwidth_) :
+	Sensor(std::string name, double weight_, Position position_, int bandwidth_) :
 					name(name), weight(weight_), position(position_), bandwidth(bandwidth_)
 	{
 	}
 
-	Sensor(std::string name_) : name(name_), weight{0}, position{0, 0, 0}, bandwidth{0}
+	Sensor(std::string name_) : name(name_), weight{0}, position{0, 0, 0}, bandwidth{25}
 	{
 	}
 
@@ -36,6 +35,8 @@ public:
 			 << sensor.bandwidth << " ";
 		return os;
 	}
+
+	virtual bool getData(Value& value) = 0;
 
 	const std::string &getName() const
 	{
@@ -67,12 +68,12 @@ public:
 		Sensor::position = position;
 	}
 
-	double getBandwidth() const
+	int getBandwidth() const
 	{
 		return bandwidth;
 	}
 
-	void setBandwidth(double bandwidth)
+	void setBandwidth(int bandwidth)
 	{
 		Sensor::bandwidth = bandwidth;
 	}

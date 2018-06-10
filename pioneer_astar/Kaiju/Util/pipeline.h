@@ -7,11 +7,16 @@
 #ifndef ARCH_PIPELINE_H_
 #define ARCH_PIPELINE_H_
 
-template<typename T>
+
+#include <Execute/action.h>
+
 class Pipeline
 {
+protected:
+	std::vector<Action *> actions;
 public:
-	T next();
+	void push(Action* action);
+	Action* next();
 };
 
 
