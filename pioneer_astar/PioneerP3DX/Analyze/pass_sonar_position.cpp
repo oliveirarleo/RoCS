@@ -20,7 +20,7 @@ void PassSonarPosition::publishLoop()
 
 //		using namespace std::chrono_literals;
 //		std::this_thread::sleep_for(50ms);
-		extApi_sleepMs(5);
+		extApi_sleepMs(25);
 	}
 
 }

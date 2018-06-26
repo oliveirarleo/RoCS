@@ -18,6 +18,9 @@ class Observer
 {
 protected:
 	Value value;
+	std::mutex write_mu;
+	std::unique_lock<std::mutex> ul;
+
 
 public:
 	Observer(Value value);
@@ -38,15 +41,15 @@ public:
 };
 
 // CONSTRUCTORS
-template<typename Value>
-Observer<Value>::Observer(Value value) : value(value)
-{
-}
+//template<typename Value>
+//Observer<Value>::Observer(Value value) : value(value), write_mu{}, ul{write_mu, std::defer_lock}
+//{
+//}
 
 
 
 template<typename Value>
-Observer<Value>::Observer() : value{}
+Observer<Value>::Observer() : value{}, write_mu{}, ul{write_mu, std::defer_lock}
 {
 }
 
@@ -54,14 +57,17 @@ Observer<Value>::Observer() : value{}
 template<typename Value>
 Value Observer<Value>::getValue()
 {
-	return value;
+	if (!ul.owns_lock())
+		return value;
+	else
+		std::cout << "erroo\n";
 }
 
 // PRINT VALUE
 template<typename Value>
 void Observer<Value>::printValue()
 {
-	std::cout << "value is: " << value << std::endl;
+//	std::cout << "value is: " << value << std::endl;
 }
 
 // UPDATE
@@ -69,7 +75,9 @@ template<typename Value>
 void Observer<Value>::update(Value value)
 {
 //	std::cout << "Updating value from " << this->value << " to " << value << std::endl;
+	ul.lock();
 	Observer::value = value;
+	ul.unlock();
 }
 
 
