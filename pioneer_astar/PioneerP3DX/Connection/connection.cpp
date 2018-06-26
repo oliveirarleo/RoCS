@@ -9,6 +9,7 @@ extern "C" {
 }
 
 #include <iostream>
+#include <thread>
 #include "connection.h"
 
 Connection::Connection() : server_ip("127.0.0.1"), server_port(19999), time_out_in_ms(2000), comm_thread_cycle_in_ms(5),
@@ -21,7 +22,7 @@ Connection::Connection() : server_ip("127.0.0.1"), server_port(19999), time_out_
 
 		client_id = simxStart((simxChar *) server_ip.c_str(), (simxInt) server_port, (simxUChar) waitUntilConnected,
 													(simxUChar) doNotReconnectOnceDisconnected, time_out_in_ms, comm_thread_cycle_in_ms);
-
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 	std::cout << "Connection successful" << std::endl;
 

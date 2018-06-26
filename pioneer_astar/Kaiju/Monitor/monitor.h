@@ -15,15 +15,15 @@
 #include "Util/publisher.h"
 
 template<typename Value>
-class Monitor : public Publisher<Value>
+class Monitor : public Publisher<std::vector<Value>>
 {
 protected:
-	Sensor<Value> &sensor;
+	std::vector<Sensor<Value> *> &sensors;
 	bool publishing;
 	std::thread *publish_thread;
 
 public:
-	Monitor(Sensor<Value> &sensor_): sensor(sensor_)
+	Monitor(std::vector<Sensor<Value> *>& sensors_): sensors(sensors_), publishing(true)
 	{
 
 	}
@@ -41,12 +41,6 @@ public:
 	}
 
 	virtual void publishLoop() = 0;
-
-	friend std::ostream &operator<<(std::ostream &os, const Monitor &monitor)
-	{
-		os << " sensor: " << monitor.sensor << std::endl;
-		return os;
-	}
 
 };
 

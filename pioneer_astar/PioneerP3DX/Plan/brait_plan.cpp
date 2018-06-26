@@ -14,7 +14,7 @@ BraitPlan::BraitPlan(RobotModel &robot, std::vector<PassSonarPosition *> &sonar_
 					max_detection_dist(0.2), detect{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 					braitenberg_l{-0.2, -0.4, -0.6, -0.8, -1, -1.2, -1.4, -1.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
 					braitenberg_r{-1.6, -1.4, -1.2, -1, -0.8, -0.6, -0.4, -0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-					v0(1.2), v_left(0), v_right(0)
+					v0(2), v_left(0), v_right(0)
 {
 }
 
@@ -25,10 +25,10 @@ void BraitPlan::run()
 	while (running && ((PioneerP3DXModel &) robot).getConnection().isConnected())
 	{
 //		std::cout << "running" << std::endl;
+		std::vector<SonarOutput> so = sonar_analyze_observers[0]->getValue();
 		for (int i = 0; i < 16; i++)
 		{
-			SonarOutput coord;
-			coord = sonar_analyze_observers[i]->getValue();
+			SonarOutput coord = so[i];
 
 //			sonars[i]->getData(coord);
 

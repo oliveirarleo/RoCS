@@ -10,11 +10,12 @@
 #include <Monitor/monitor.h>
 #include <thread>
 #include "../Sensors/sonar_output.h"
+#include "../Sensors/sonar_vrep.h"
 
-class SonarVREPMonitor: public Monitor<SonarOutput>
+class SonarsVREPMonitor: public Monitor<SonarOutput>
 {
 public:
-	SonarVREPMonitor(Sensor<SonarOutput> &sensor_);
+	SonarsVREPMonitor(std::vector<SonarVREP *> &sensors_);
 
 	void publishLoop() override;
 
