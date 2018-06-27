@@ -57,10 +57,8 @@ Observer<Value>::Observer() : value{}, write_mu{}, ul{write_mu, std::defer_lock}
 template<typename Value>
 Value Observer<Value>::getValue()
 {
-	if (!ul.owns_lock())
-		return value;
-	else
-		std::cout << "erroo\n";
+	while (ul.owns_lock());
+	return value;
 }
 
 // PRINT VALUE
