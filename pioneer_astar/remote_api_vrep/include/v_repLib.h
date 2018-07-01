@@ -7,14 +7,14 @@
 #include "v_repTypes.h"
 
 #ifdef QT_FRAMEWORK
-#include <QLibrary>
-#define LIBRARY QLibrary*
-#define __cdecl
-#define FARPROC void*
+																																																												#include <QLibrary>
+    #define LIBRARY QLibrary*
+    #define __cdecl
+    #define FARPROC void*
 #else
 #ifdef _WIN32
-#include <Windows.h>
-#define LIBRARY HINSTANCE
+																																																												#include <Windows.h>
+        #define LIBRARY HINSTANCE
 #elif defined (__linux) || defined (__APPLE__)
 #define __cdecl
 #define FARPROC void*
@@ -30,11 +30,9 @@ void unloadVrepLibrary(LIBRARY lib);
 
 FARPROC _getProcAddress(LIBRARY lib, const char *funcName);
 
-typedef simInt (__cdecl *ptrSimRunSimulator)(const simChar *applicationName, simInt options, simVoid(*initCallBack)(),
-																						 simVoid(*loopCallBack)(), simVoid(*deinitCallBack)());
+typedef simInt (__cdecl *ptrSimRunSimulator)(const simChar *applicationName, simInt options, simVoid(*initCallBack)(), simVoid(*loopCallBack)(), simVoid(*deinitCallBack)());
 
-typedef simChar *(__cdecl *ptrSimGetSimulatorMessage)(simInt *messageID, simInt *auxiliaryData,
-																											simInt *returnedDataSize);
+typedef simChar *(__cdecl *ptrSimGetSimulatorMessage)(simInt *messageID, simInt *auxiliaryData, simInt *returnedDataSize);
 
 typedef simVoid *(__cdecl *ptrSimGetMainWindow)(simInt type);
 
@@ -44,8 +42,7 @@ typedef simInt (__cdecl *ptrSimLoadModule)(const simChar *filenameAndPath, const
 
 typedef simInt (__cdecl *ptrSimUnloadModule)(simInt pluginhandle);
 
-typedef simVoid *(__cdecl *ptrSimSendModuleMessage)(simInt message, simInt *auxiliaryData, simVoid *customData,
-																										simInt *replyData);
+typedef simVoid *(__cdecl *ptrSimSendModuleMessage)(simInt message, simInt *auxiliaryData, simVoid *customData, simInt *replyData);
 
 typedef simInt (__cdecl *ptrSimSetBooleanParameter)(simInt parameter, simBool boolState);
 
@@ -101,20 +98,15 @@ typedef simInt (__cdecl *ptrSimSetCollectionName)(simInt collectionHandle, const
 
 typedef simInt (__cdecl *ptrSimGetObjectMatrix)(simInt objectHandle, simInt relativeToObjectHandle, simFloat *matrix);
 
-typedef simInt (__cdecl *ptrSimSetObjectMatrix)(simInt objectHandle, simInt relativeToObjectHandle,
-																								const simFloat *matrix);
+typedef simInt (__cdecl *ptrSimSetObjectMatrix)(simInt objectHandle, simInt relativeToObjectHandle, const simFloat *matrix);
 
-typedef simInt (__cdecl *ptrSimGetObjectPosition)(simInt objectHandle, simInt relativeToObjectHandle,
-																									simFloat *position);
+typedef simInt (__cdecl *ptrSimGetObjectPosition)(simInt objectHandle, simInt relativeToObjectHandle, simFloat *position);
 
-typedef simInt (__cdecl *ptrSimSetObjectPosition)(simInt objectHandle, simInt relativeToObjectHandle,
-																									const simFloat *position);
+typedef simInt (__cdecl *ptrSimSetObjectPosition)(simInt objectHandle, simInt relativeToObjectHandle, const simFloat *position);
 
-typedef simInt (__cdecl *ptrSimGetObjectOrientation)(simInt objectHandle, simInt relativeToObjectHandle,
-																										 simFloat *eulerAngles);
+typedef simInt (__cdecl *ptrSimGetObjectOrientation)(simInt objectHandle, simInt relativeToObjectHandle, simFloat *eulerAngles);
 
-typedef simInt (__cdecl *ptrSimSetObjectOrientation)(simInt objectHandle, simInt relativeToObjectHandle,
-																										 const simFloat *eulerAngles);
+typedef simInt (__cdecl *ptrSimSetObjectOrientation)(simInt objectHandle, simInt relativeToObjectHandle, const simFloat *eulerAngles);
 
 typedef simInt (__cdecl *ptrSimGetJointPosition)(simInt objectHandle, simFloat *position);
 
@@ -160,11 +152,9 @@ typedef simInt (__cdecl *ptrSimGetEulerAnglesFromMatrix)(const simFloat *matrix,
 
 typedef simInt (__cdecl *ptrSimInvertMatrix)(simFloat *matrix);
 
-typedef simInt (__cdecl *ptrSimMultiplyMatrices)(const simFloat *matrixIn1, const simFloat *matrixIn2,
-																								 simFloat *matrixOut);
+typedef simInt (__cdecl *ptrSimMultiplyMatrices)(const simFloat *matrixIn1, const simFloat *matrixIn2, simFloat *matrixOut);
 
-typedef simInt (__cdecl *ptrSimInterpolateMatrices)(const simFloat *matrixIn1, const simFloat *matrixIn2,
-																										simFloat interpolFactor, simFloat *matrixOut);
+typedef simInt (__cdecl *ptrSimInterpolateMatrices)(const simFloat *matrixIn1, const simFloat *matrixIn2, simFloat interpolFactor, simFloat *matrixOut);
 
 typedef simInt (__cdecl *ptrSimTransformVector)(const simFloat *matrix, simFloat *vect);
 
@@ -218,18 +208,15 @@ typedef simInt (__cdecl *ptrSimHandleDistance)(simInt distanceObjectHandle, simF
 
 typedef simInt (__cdecl *ptrSimReadDistance)(simInt distanceObjectHandle, simFloat *smallestDistance);
 
-typedef simInt (__cdecl *ptrSimHandleProximitySensor)(simInt sensorHandle, simFloat *detectedPoint,
-																											simInt *detectedObjectHandle, simFloat *normalVector);
+typedef simInt (__cdecl *ptrSimHandleProximitySensor)(simInt sensorHandle, simFloat *detectedPoint, simInt *detectedObjectHandle, simFloat *normalVector);
 
-typedef simInt (__cdecl *ptrSimReadProximitySensor)(simInt sensorHandle, simFloat *detectedPoint,
-																										simInt *detectedObjectHandle, simFloat *normalVector);
+typedef simInt (__cdecl *ptrSimReadProximitySensor)(simInt sensorHandle, simFloat *detectedPoint, simInt *detectedObjectHandle, simFloat *normalVector);
 
 typedef simInt (__cdecl *ptrSimHandleMill)(simInt millHandle, simFloat *removedSurfaceAndVolume);
 
 typedef simInt (__cdecl *ptrSimHandleIkGroup)(simInt ikGroupHandle);
 
-typedef simInt (__cdecl *ptrSimCheckIkGroup)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles,
-																						 simFloat *jointValues, const simInt *jointOptions);
+typedef simInt (__cdecl *ptrSimCheckIkGroup)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles, simFloat *jointValues, const simInt *jointOptions);
 
 typedef simInt (__cdecl *ptrSimHandleDynamics)(simFloat deltaTime);
 
@@ -243,8 +230,7 @@ typedef simInt (__cdecl *ptrSimSetScriptText)(simInt scriptHandle, const simChar
 
 typedef const simChar *(__cdecl *ptrSimGetScriptText)(simInt scriptHandle);
 
-typedef simInt (__cdecl *ptrSimGetScriptProperty)(simInt scriptHandle, simInt *scriptProperty,
-																									simInt *associatedObjectHandle);
+typedef simInt (__cdecl *ptrSimGetScriptProperty)(simInt scriptHandle, simInt *scriptProperty, simInt *associatedObjectHandle);
 
 typedef simInt (__cdecl *ptrSimAssociateScriptWithObject)(simInt scriptHandle, simInt associatedObjectHandle);
 
@@ -284,15 +270,9 @@ typedef simInt (__cdecl *ptrSimResetMill)(simInt millHandle);
 
 typedef simInt (__cdecl *ptrSimCheckProximitySensor)(simInt sensorHandle, simInt entityHandle, simFloat *detectedPoint);
 
-typedef simInt (__cdecl *ptrSimCheckProximitySensorEx)(simInt sensorHandle, simInt entityHandle, simInt detectionMode,
-																											 simFloat detectionThreshold, simFloat maxAngle,
-																											 simFloat *detectedPoint, simInt *detectedObjectHandle,
-																											 simFloat *normalVector);
+typedef simInt (__cdecl *ptrSimCheckProximitySensorEx)(simInt sensorHandle, simInt entityHandle, simInt detectionMode, simFloat detectionThreshold, simFloat maxAngle, simFloat *detectedPoint, simInt *detectedObjectHandle, simFloat *normalVector);
 
-typedef simInt (__cdecl *ptrSimCheckProximitySensorEx2)(simInt sensorHandle, simFloat *vertexPointer, simInt itemType,
-																												simInt itemCount, simInt detectionMode,
-																												simFloat detectionThreshold, simFloat maxAngle,
-																												simFloat *detectedPoint, simFloat *normalVector);
+typedef simInt (__cdecl *ptrSimCheckProximitySensorEx2)(simInt sensorHandle, simFloat *vertexPointer, simInt itemType, simInt itemCount, simInt detectionMode, simFloat detectionThreshold, simFloat maxAngle, simFloat *detectedPoint, simFloat *normalVector);
 
 typedef simChar *(__cdecl *ptrSimCreateBuffer)(simInt size);
 
@@ -300,11 +280,9 @@ typedef simInt (__cdecl *ptrSimReleaseBuffer)(simChar *buffer);
 
 typedef simInt (__cdecl *ptrSimCheckCollision)(simInt entity1Handle, simInt entity2Handle);
 
-typedef simInt (__cdecl *ptrSimCheckCollisionEx)(simInt entity1Handle, simInt entity2Handle,
-																								 simFloat **intersectionSegments);
+typedef simInt (__cdecl *ptrSimCheckCollisionEx)(simInt entity1Handle, simInt entity2Handle, simFloat **intersectionSegments);
 
-typedef simInt (__cdecl *ptrSimCheckDistance)(simInt entity1Handle, simInt entity2Handle, simFloat threshold,
-																							simFloat *distanceData);
+typedef simInt (__cdecl *ptrSimCheckDistance)(simInt entity1Handle, simInt entity2Handle, simFloat threshold, simFloat *distanceData);
 
 typedef simChar *(__cdecl *ptrSimGetObjectConfiguration)(simInt objectHandle);
 
@@ -338,19 +316,15 @@ typedef simVoid *(__cdecl *ptrSimBroadcastMessage)(simInt *auxiliaryData, simVoi
 
 typedef simChar *(__cdecl *ptrSimGetModuleName)(simInt index, simUChar *moduleVersion);
 
-typedef simChar *(__cdecl *ptrSimGetScriptSimulationParameter)(simInt scriptHandle, const simChar *parameterName,
-																															 simInt *parameterLength);
+typedef simChar *(__cdecl *ptrSimGetScriptSimulationParameter)(simInt scriptHandle, const simChar *parameterName, simInt *parameterLength);
 
-typedef simInt (__cdecl *ptrSimSetScriptSimulationParameter)(simInt scriptHandle, const simChar *parameterName,
-																														 const simChar *parameterValue, simInt parameterLength);
+typedef simInt (__cdecl *ptrSimSetScriptSimulationParameter)(simInt scriptHandle, const simChar *parameterName, const simChar *parameterValue, simInt parameterLength);
 
-typedef simInt (__cdecl *ptrSimFloatingViewAdd)(simFloat posX, simFloat posY, simFloat sizeX, simFloat sizeY,
-																								simInt options);
+typedef simInt (__cdecl *ptrSimFloatingViewAdd)(simFloat posX, simFloat posY, simFloat sizeX, simFloat sizeY, simInt options);
 
 typedef simInt (__cdecl *ptrSimFloatingViewRemove)(simInt floatingViewHandle);
 
-typedef simInt (__cdecl *ptrSimAdjustView)(simInt viewHandleOrIndex, simInt associatedViewableObjectHandle,
-																					 simInt options, const simChar *viewLabel);
+typedef simInt (__cdecl *ptrSimAdjustView)(simInt viewHandleOrIndex, simInt associatedViewableObjectHandle, simInt options, const simChar *viewLabel);
 
 typedef simInt (__cdecl *ptrSimSetLastError)(const simChar *funcName, const simChar *errorMessage);
 
@@ -366,9 +340,7 @@ typedef simInt (__cdecl *ptrSimSetPage)(simInt index);
 
 typedef simInt (__cdecl *ptrSimGetPage)();
 
-typedef simInt (__cdecl *ptrSimDisplayDialog)(const simChar *titleText, const simChar *mainText, simInt dialogType,
-																							const simChar *initialText, const simFloat *titleColors,
-																							const simFloat *dialogColors, simInt *elementHandle);
+typedef simInt (__cdecl *ptrSimDisplayDialog)(const simChar *titleText, const simChar *mainText, simInt dialogType, const simChar *initialText, const simFloat *titleColors, const simFloat *dialogColors, simInt *elementHandle);
 
 typedef simInt (__cdecl *ptrSimGetDialogResult)(simInt genericDialogHandle);
 
@@ -376,12 +348,9 @@ typedef simChar *(__cdecl *ptrSimGetDialogInput)(simInt genericDialogHandle);
 
 typedef simInt (__cdecl *ptrSimEndDialog)(simInt genericDialogHandle);
 
-typedef simInt (__cdecl *ptrSimRegisterScriptCallbackFunction)(const simChar *funcNameAtPluginName,
-																															 const simChar *callTips,
-																															 simVoid(*callBack)(struct SScriptCallBack *cb));
+typedef simInt (__cdecl *ptrSimRegisterScriptCallbackFunction)(const simChar *funcNameAtPluginName, const simChar *callTips, simVoid(*callBack)(struct SScriptCallBack *cb));
 
-typedef simInt (__cdecl *ptrSimRegisterScriptVariable)(const simChar *varName, const simChar *varValue,
-																											 simInt stackHandle);
+typedef simInt (__cdecl *ptrSimRegisterScriptVariable)(const simChar *varName, const simChar *varValue, simInt stackHandle);
 
 typedef simInt (__cdecl *ptrSimSetJointTargetVelocity)(simInt objectHandle, simFloat targetVelocity);
 
@@ -399,8 +368,7 @@ typedef simInt (__cdecl *ptrSimCopyPasteObjects)(simInt *objectHandles, simInt o
 
 typedef simInt (__cdecl *ptrSimScaleSelectedObjects)(simFloat scalingFactor, simBool scalePositionsToo);
 
-typedef simInt (__cdecl *ptrSimScaleObjects)(const simInt *objectHandles, simInt objectCount, simFloat scalingFactor,
-																						 simBool scalePositionsToo);
+typedef simInt (__cdecl *ptrSimScaleObjects)(const simInt *objectHandles, simInt objectCount, simFloat scalingFactor, simBool scalePositionsToo);
 
 typedef simInt (__cdecl *ptrSimDeleteSelectedObjects)();
 
@@ -408,32 +376,21 @@ typedef simInt (__cdecl *ptrSimGetObjectUniqueIdentifier)(simInt objectHandle, s
 
 typedef simInt (__cdecl *ptrSimGetNameSuffix)(const simChar *name);
 
-typedef simInt (__cdecl *ptrSimSendData)(simInt targetID, simInt dataHeader, const simChar *dataName,
-																				 const simChar *data, simInt dataLength, simInt antennaHandle,
-																				 simFloat actionRadius, simFloat emissionAngle1, simFloat emissionAngle2,
-																				 simFloat persistence);
+typedef simInt (__cdecl *ptrSimSendData)(simInt targetID, simInt dataHeader, const simChar *dataName, const simChar *data, simInt dataLength, simInt antennaHandle, simFloat actionRadius, simFloat emissionAngle1, simFloat emissionAngle2, simFloat persistence);
 
-typedef simChar *(__cdecl *ptrSimReceiveData)(simInt dataHeader, const simChar *dataName, simInt antennaHandle,
-																							simInt index, simInt *dataLength, simInt *senderID, simInt *dataHeaderR,
-																							simChar **dataNameR);
+typedef simChar *(__cdecl *ptrSimReceiveData)(simInt dataHeader, const simChar *dataName, simInt antennaHandle, simInt index, simInt *dataLength, simInt *senderID, simInt *dataHeaderR, simChar **dataNameR);
 
 typedef simInt (__cdecl *ptrSimSetGraphUserData)(simInt graphHandle, const simChar *dataStreamName, simFloat data);
 
 typedef simInt (__cdecl *ptrSimSetNameSuffix)(simInt nameSuffixNumber);
 
-typedef simInt (__cdecl *ptrSimAddDrawingObject)(simInt objectType, simFloat size, simFloat duplicateTolerance,
-																								 simInt parentObjectHandle, simInt maxItemCount,
-																								 const simFloat *ambient_diffuse, const simFloat *setToNULL,
-																								 const simFloat *specular, const simFloat *emission);
+typedef simInt (__cdecl *ptrSimAddDrawingObject)(simInt objectType, simFloat size, simFloat duplicateTolerance, simInt parentObjectHandle, simInt maxItemCount, const simFloat *ambient_diffuse, const simFloat *setToNULL, const simFloat *specular, const simFloat *emission);
 
 typedef simInt (__cdecl *ptrSimRemoveDrawingObject)(simInt objectHandle);
 
 typedef simInt (__cdecl *ptrSimAddDrawingObjectItem)(simInt objectHandle, const simFloat *itemData);
 
-typedef simInt (__cdecl *ptrSimAddParticleObject)(simInt objectType, simFloat size, simFloat density,
-																									const simVoid *params, simFloat lifeTime, simInt maxItemCount,
-																									const simFloat *ambient_diffuse, const simFloat *setToNULL,
-																									const simFloat *specular, const simFloat *emission);
+typedef simInt (__cdecl *ptrSimAddParticleObject)(simInt objectType, simFloat size, simFloat density, const simVoid *params, simFloat lifeTime, simInt maxItemCount, const simFloat *ambient_diffuse, const simFloat *setToNULL, const simFloat *specular, const simFloat *emission);
 
 typedef simInt (__cdecl *ptrSimRemoveParticleObject)(simInt objectHandle);
 
@@ -459,8 +416,7 @@ typedef simInt (__cdecl *ptrSimGetFloatSignal)(const simChar *signalName, simFlo
 
 typedef simInt (__cdecl *ptrSimClearFloatSignal)(const simChar *signalName);
 
-typedef simInt (__cdecl *ptrSimSetStringSignal)(const simChar *signalName, const simChar *signalValue,
-																								simInt stringLength);
+typedef simInt (__cdecl *ptrSimSetStringSignal)(const simChar *signalName, const simChar *signalValue, simInt stringLength);
 
 typedef simChar *(__cdecl *ptrSimGetStringSignal)(const simChar *signalName, simInt *stringLength);
 
@@ -478,35 +434,27 @@ typedef simInt (__cdecl *ptrSimGetObjectSpecialProperty)(simInt objectHandle);
 
 typedef simInt (__cdecl *ptrSimGetPositionOnPath)(simInt pathHandle, simFloat relativeDistance, simFloat *position);
 
-typedef simInt (__cdecl *ptrSimGetOrientationOnPath)(simInt pathHandle, simFloat relativeDistance,
-																										 simFloat *eulerAngles);
+typedef simInt (__cdecl *ptrSimGetOrientationOnPath)(simInt pathHandle, simFloat relativeDistance, simFloat *eulerAngles);
 
-typedef simInt (__cdecl *ptrSimGetDataOnPath)(simInt pathHandle, simFloat relativeDistance, simInt dataType,
-																							simInt *intData, simFloat *floatData);
+typedef simInt (__cdecl *ptrSimGetDataOnPath)(simInt pathHandle, simFloat relativeDistance, simInt dataType, simInt *intData, simFloat *floatData);
 
-typedef simInt (__cdecl *ptrSimGetClosestPositionOnPath)(simInt pathHandle, simFloat *absolutePosition,
-																												 simFloat *pathPosition);
+typedef simInt (__cdecl *ptrSimGetClosestPositionOnPath)(simInt pathHandle, simFloat *absolutePosition, simFloat *pathPosition);
 
 typedef simInt (__cdecl *ptrSimReadForceSensor)(simInt objectHandle, simFloat *forceVector, simFloat *torqueVector);
 
 typedef simInt (__cdecl *ptrSimBreakForceSensor)(simInt objectHandle);
 
-typedef simInt (__cdecl *ptrSimGetShapeVertex)(simInt shapeHandle, simInt groupElementIndex, simInt vertexIndex,
-																							 simFloat *relativePosition);
+typedef simInt (__cdecl *ptrSimGetShapeVertex)(simInt shapeHandle, simInt groupElementIndex, simInt vertexIndex, simFloat *relativePosition);
 
-typedef simInt (__cdecl *ptrSimGetShapeTriangle)(simInt shapeHandle, simInt groupElementIndex, simInt triangleIndex,
-																								 simInt *vertexIndices, simFloat *triangleNormals);
+typedef simInt (__cdecl *ptrSimGetShapeTriangle)(simInt shapeHandle, simInt groupElementIndex, simInt triangleIndex, simInt *vertexIndices, simFloat *triangleNormals);
 
-typedef simInt (__cdecl *ptrSimSetLightParameters)(simInt objectHandle, simInt state, const simFloat *setToNULL,
-																									 const simFloat *diffusePart, const simFloat *specularPart);
+typedef simInt (__cdecl *ptrSimSetLightParameters)(simInt objectHandle, simInt state, const simFloat *setToNULL, const simFloat *diffusePart, const simFloat *specularPart);
 
-typedef simInt (__cdecl *ptrSimGetLightParameters)(simInt objectHandle, simFloat *setToNULL, simFloat *diffusePart,
-																									 simFloat *specularPart);
+typedef simInt (__cdecl *ptrSimGetLightParameters)(simInt objectHandle, simFloat *setToNULL, simFloat *diffusePart, simFloat *specularPart);
 
 typedef simInt (__cdecl *ptrSimGetVelocity)(simInt shapeHandle, simFloat *linearVelocity, simFloat *angularVelocity);
 
-typedef simInt (__cdecl *ptrSimGetObjectVelocity)(simInt objectHandle, simFloat *linearVelocity,
-																									simFloat *angularVelocity);
+typedef simInt (__cdecl *ptrSimGetObjectVelocity)(simInt objectHandle, simFloat *linearVelocity, simFloat *angularVelocity);
 
 typedef simInt (__cdecl *ptrSimAddForceAndTorque)(simInt shapeHandle, const simFloat *force, const simFloat *torque);
 
@@ -524,11 +472,9 @@ typedef simInt (__cdecl *ptrSimSetModelProperty)(simInt objectHandle, simInt mod
 
 typedef simInt (__cdecl *ptrSimGetModelProperty)(simInt objectHandle);
 
-typedef simInt (__cdecl *ptrSimSetShapeColor)(simInt shapeHandle, const simChar *colorName, simInt colorComponent,
-																							const simFloat *rgbData);
+typedef simInt (__cdecl *ptrSimSetShapeColor)(simInt shapeHandle, const simChar *colorName, simInt colorComponent, const simFloat *rgbData);
 
-typedef simInt (__cdecl *ptrSimGetShapeColor)(simInt shapeHandle, const simChar *colorName, simInt colorComponent,
-																							simFloat *rgbData);
+typedef simInt (__cdecl *ptrSimGetShapeColor)(simInt shapeHandle, const simChar *colorName, simInt colorComponent, simFloat *rgbData);
 
 typedef simInt (__cdecl *ptrSimResetDynamicObject)(simInt objectHandle);
 
@@ -536,8 +482,7 @@ typedef simInt (__cdecl *ptrSimSetJointMode)(simInt jointHandle, simInt jointMod
 
 typedef simInt (__cdecl *ptrSimGetJointMode)(simInt jointHandle, simInt *options);
 
-typedef simInt (__cdecl *ptrSimSerialOpen)(const simChar *portString, simInt baudRate, simVoid *reserved1,
-																					 simVoid *reserved2);
+typedef simInt (__cdecl *ptrSimSerialOpen)(const simChar *portString, simInt baudRate, simVoid *reserved1, simVoid *reserved2);
 
 typedef simInt (__cdecl *ptrSimSerialClose)(simInt portHandle);
 
@@ -547,13 +492,11 @@ typedef simInt (__cdecl *ptrSimSerialRead)(simInt portHandle, simChar *buffer, s
 
 typedef simInt (__cdecl *ptrSimSerialCheck)(simInt portHandle);
 
-typedef simInt (__cdecl *ptrSimGetContactInfo)(simInt dynamicPass, simInt objectHandle, simInt index,
-																							 simInt *objectHandles, simFloat *contactInfo);
+typedef simInt (__cdecl *ptrSimGetContactInfo)(simInt dynamicPass, simInt objectHandle, simInt index, simInt *objectHandles, simFloat *contactInfo);
 
 typedef simInt (__cdecl *ptrSimSetThreadIsFree)(simBool freeMode);
 
-typedef simInt (__cdecl *ptrSimTubeOpen)(simInt dataHeader, const simChar *dataName, simInt readBufferSize,
-																				 simBool notUsedButKeepFalse);
+typedef simInt (__cdecl *ptrSimTubeOpen)(simInt dataHeader, const simChar *dataName, simInt readBufferSize, simBool notUsedButKeepFalse);
 
 typedef simInt (__cdecl *ptrSimTubeClose)(simInt tubeHandle);
 
@@ -563,9 +506,7 @@ typedef simChar *(__cdecl *ptrSimTubeRead)(simInt tubeHandle, simInt *dataLength
 
 typedef simInt (__cdecl *ptrSimTubeStatus)(simInt tubeHandle, simInt *readPacketsCount, simInt *writePacketsCount);
 
-typedef simInt (__cdecl *ptrSimAuxiliaryConsoleOpen)(const simChar *title, simInt maxLines, simInt mode,
-																										 const simInt *position, const simInt *size,
-																										 const simFloat *textColor, const simFloat *backgroundColor);
+typedef simInt (__cdecl *ptrSimAuxiliaryConsoleOpen)(const simChar *title, simInt maxLines, simInt mode, const simInt *position, const simInt *size, const simFloat *textColor, const simFloat *backgroundColor);
 
 typedef simInt (__cdecl *ptrSimAuxiliaryConsoleClose)(simInt consoleHandle);
 
@@ -573,58 +514,37 @@ typedef simInt (__cdecl *ptrSimAuxiliaryConsoleShow)(simInt consoleHandle, simBo
 
 typedef simInt (__cdecl *ptrSimAuxiliaryConsolePrint)(simInt consoleHandle, const simChar *text);
 
-typedef simInt (__cdecl *ptrSimImportShape)(simInt fileformat, const simChar *pathAndFilename, simInt options,
-																						simFloat identicalVerticeTolerance, simFloat scalingFactor);
+typedef simInt (__cdecl *ptrSimImportShape)(simInt fileformat, const simChar *pathAndFilename, simInt options, simFloat identicalVerticeTolerance, simFloat scalingFactor);
 
-typedef simInt (__cdecl *ptrSimImportMesh)(simInt fileformat, const simChar *pathAndFilename, simInt options,
-																					 simFloat identicalVerticeTolerance, simFloat scalingFactor,
-																					 simFloat ***vertices, simInt **verticesSizes, simInt ***indices,
-																					 simInt **indicesSizes, simFloat ***reserved, simChar ***names);
+typedef simInt (__cdecl *ptrSimImportMesh)(simInt fileformat, const simChar *pathAndFilename, simInt options, simFloat identicalVerticeTolerance, simFloat scalingFactor, simFloat ***vertices, simInt **verticesSizes, simInt ***indices, simInt **indicesSizes, simFloat ***reserved, simChar ***names);
 
-typedef simInt (__cdecl *ptrSimExportMesh)(simInt fileformat, const simChar *pathAndFilename, simInt options,
-																					 simFloat scalingFactor, simInt elementCount, simFloat **vertices,
-																					 const simInt *verticesSizes, simInt **indices, const simInt *indicesSizes,
-																					 simFloat **reserved, simChar **names);
+typedef simInt (__cdecl *ptrSimExportMesh)(simInt fileformat, const simChar *pathAndFilename, simInt options, simFloat scalingFactor, simInt elementCount, simFloat **vertices, const simInt *verticesSizes, simInt **indices, const simInt *indicesSizes, simFloat **reserved, simChar **names);
 
-typedef simInt (__cdecl *ptrSimCreateMeshShape)(simInt options, simFloat shadingAngle, const simFloat *vertices,
-																								simInt verticesSize, const simInt *indices, simInt indicesSize,
-																								simFloat *reserved);
+typedef simInt (__cdecl *ptrSimCreateMeshShape)(simInt options, simFloat shadingAngle, const simFloat *vertices, simInt verticesSize, const simInt *indices, simInt indicesSize, simFloat *reserved);
 
-typedef simInt (__cdecl *ptrSimCreatePureShape)(simInt primitiveType, simInt options, const simFloat *sizes,
-																								simFloat mass, const simInt *precision);
+typedef simInt (__cdecl *ptrSimCreatePureShape)(simInt primitiveType, simInt options, const simFloat *sizes, simFloat mass, const simInt *precision);
 
-typedef simInt (__cdecl *ptrSimCreateHeightfieldShape)(simInt options, simFloat shadingAngle, simInt xPointCount,
-																											 simInt yPointCount, simFloat xSize, const simFloat *heights);
+typedef simInt (__cdecl *ptrSimCreateHeightfieldShape)(simInt options, simFloat shadingAngle, simInt xPointCount, simInt yPointCount, simFloat xSize, const simFloat *heights);
 
-typedef simInt (__cdecl *ptrSimGetShapeMesh)(simInt shapeHandle, simFloat **vertices, simInt *verticesSize,
-																						 simInt **indices, simInt *indicesSize, simFloat **normals);
+typedef simInt (__cdecl *ptrSimGetShapeMesh)(simInt shapeHandle, simFloat **vertices, simInt *verticesSize, simInt **indices, simInt *indicesSize, simFloat **normals);
 
-typedef simInt (__cdecl *ptrSimAddBanner)(const simChar *label, simFloat size, simInt options,
-																					const simFloat *positionAndEulerAngles, simInt parentObjectHandle,
-																					const simFloat *labelColors, const simFloat *backgroundColors);
+typedef simInt (__cdecl *ptrSimAddBanner)(const simChar *label, simFloat size, simInt options, const simFloat *positionAndEulerAngles, simInt parentObjectHandle, const simFloat *labelColors, const simFloat *backgroundColors);
 
 typedef simInt (__cdecl *ptrSimRemoveBanner)(simInt bannerID);
 
-typedef simInt (__cdecl *ptrSimCreateJoint)(simInt jointType, simInt jointMode, simInt options, const simFloat *sizes,
-																						const simFloat *colorA, const simFloat *colorB);
+typedef simInt (__cdecl *ptrSimCreateJoint)(simInt jointType, simInt jointMode, simInt options, const simFloat *sizes, const simFloat *colorA, const simFloat *colorB);
 
 typedef simInt (__cdecl *ptrSimCreateDummy)(simFloat size, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimCreateForceSensor)(simInt options, const simInt *intParams, const simFloat *floatParams,
-																									const simFloat *color);
+typedef simInt (__cdecl *ptrSimCreateForceSensor)(simInt options, const simInt *intParams, const simFloat *floatParams, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimCreateVisionSensor)(simInt options, const simInt *intParams, const simFloat *floatParams,
-																									 const simFloat *color);
+typedef simInt (__cdecl *ptrSimCreateVisionSensor)(simInt options, const simInt *intParams, const simFloat *floatParams, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimCreateProximitySensor)(simInt sensorType, simInt subType, simInt options,
-																											const simInt *intParams, const simFloat *floatParams,
-																											const simFloat *color);
+typedef simInt (__cdecl *ptrSimCreateProximitySensor)(simInt sensorType, simInt subType, simInt options, const simInt *intParams, const simFloat *floatParams, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimCreatePath)(simInt attributes, const simInt *intParams, const simFloat *floatParams,
-																					 const simFloat *color);
+typedef simInt (__cdecl *ptrSimCreatePath)(simInt attributes, const simInt *intParams, const simFloat *floatParams, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimInsertPathCtrlPoints)(simInt pathHandle, simInt options, simInt startIndex, simInt ptCnt,
-																										 const simVoid *ptData);
+typedef simInt (__cdecl *ptrSimInsertPathCtrlPoints)(simInt pathHandle, simInt options, simInt startIndex, simInt ptCnt, const simVoid *ptData);
 
 typedef simInt (__cdecl *ptrSimCutPathCtrlPoints)(simInt pathHandle, simInt startIndex, simInt ptCnt);
 
@@ -640,19 +560,15 @@ typedef simInt (__cdecl *ptrSimGetObjectFloatParameter)(simInt objectHandle, sim
 
 typedef simInt (__cdecl *ptrSimSetObjectFloatParameter)(simInt objectHandle, simInt parameterID, simFloat parameter);
 
-typedef simChar *(__cdecl *ptrSimGetObjectStringParameter)(simInt objectHandle, simInt parameterID,
-																													 simInt *parameterLength);
+typedef simChar *(__cdecl *ptrSimGetObjectStringParameter)(simInt objectHandle, simInt parameterID, simInt *parameterLength);
 
-typedef simInt (__cdecl *ptrSimSetObjectStringParameter)(simInt objectHandle, simInt parameterID, simChar *parameter,
-																												 simInt parameterLength);
+typedef simInt (__cdecl *ptrSimSetObjectStringParameter)(simInt objectHandle, simInt parameterID, simChar *parameter, simInt parameterLength);
 
 typedef simInt (__cdecl *ptrSimSetSimulationPassesPerRenderingPass)(simInt p);
 
-typedef simInt (__cdecl *ptrSimGetRotationAxis)(const simFloat *matrixStart, const simFloat *matrixGoal, simFloat *axis,
-																								simFloat *angle);
+typedef simInt (__cdecl *ptrSimGetRotationAxis)(const simFloat *matrixStart, const simFloat *matrixGoal, simFloat *axis, simFloat *angle);
 
-typedef simInt (__cdecl *ptrSimRotateAroundAxis)(const simFloat *matrixIn, const simFloat *axis,
-																								 const simFloat *axisPos, simFloat angle, simFloat *matrixOut);
+typedef simInt (__cdecl *ptrSimRotateAroundAxis)(const simFloat *matrixIn, const simFloat *axis, const simFloat *axisPos, simFloat angle, simFloat *matrixOut);
 
 typedef simInt (__cdecl *ptrSimGetJointForce)(simInt jointHandle, simFloat *forceOrTorque);
 
@@ -660,43 +576,33 @@ typedef simInt (__cdecl *ptrSimSetArrayParameter)(simInt parameter, const simVoi
 
 typedef simInt (__cdecl *ptrSimGetArrayParameter)(simInt parameter, simVoid *arrayOfValues);
 
-typedef simInt (__cdecl *ptrSimSetIkGroupProperties)(simInt ikGroupHandle, simInt resolutionMethod,
-																										 simInt maxIterations, simFloat damping, void *reserved);
+typedef simInt (__cdecl *ptrSimSetIkGroupProperties)(simInt ikGroupHandle, simInt resolutionMethod, simInt maxIterations, simFloat damping, void *reserved);
 
-typedef simInt (__cdecl *ptrSimSetIkElementProperties)(simInt ikGroupHandle, simInt tipDummyHandle, simInt constraints,
-																											 const simFloat *precision, const simFloat *weight,
-																											 void *reserved);
+typedef simInt (__cdecl *ptrSimSetIkElementProperties)(simInt ikGroupHandle, simInt tipDummyHandle, simInt constraints, const simFloat *precision, const simFloat *weight, void *reserved);
 
-typedef simInt (__cdecl *ptrSimCameraFitToView)(simInt viewHandleOrIndex, simInt objectCount,
-																								const simInt *objectHandles, simInt options, simFloat scaling);
+typedef simInt (__cdecl *ptrSimCameraFitToView)(simInt viewHandleOrIndex, simInt objectCount, const simInt *objectHandles, simInt options, simFloat scaling);
 
-typedef simInt (__cdecl *ptrSimPersistentDataWrite)(const simChar *dataName, const simChar *dataValue,
-																										simInt dataLength, simInt options);
+typedef simInt (__cdecl *ptrSimPersistentDataWrite)(const simChar *dataName, const simChar *dataValue, simInt dataLength, simInt options);
 
 typedef simChar *(__cdecl *ptrSimPersistentDataRead)(const simChar *dataName, simInt *dataLength);
 
 typedef simInt (__cdecl *ptrSimIsHandleValid)(simInt generalObjectHandle, simInt generalObjectType);
 
-typedef simInt (__cdecl *ptrSimHandleVisionSensor)(simInt visionSensorHandle, simFloat **auxValues,
-																									 simInt **auxValuesCount);
+typedef simInt (__cdecl *ptrSimHandleVisionSensor)(simInt visionSensorHandle, simFloat **auxValues, simInt **auxValuesCount);
 
-typedef simInt (__cdecl *ptrSimReadVisionSensor)(simInt visionSensorHandle, simFloat **auxValues,
-																								 simInt **auxValuesCount);
+typedef simInt (__cdecl *ptrSimReadVisionSensor)(simInt visionSensorHandle, simFloat **auxValues, simInt **auxValuesCount);
 
 typedef simInt (__cdecl *ptrSimResetVisionSensor)(simInt visionSensorHandle);
 
-typedef simInt (__cdecl *ptrSimCheckVisionSensor)(simInt visionSensorHandle, simInt entityHandle, simFloat **auxValues,
-																									simInt **auxValuesCount);
+typedef simInt (__cdecl *ptrSimCheckVisionSensor)(simInt visionSensorHandle, simInt entityHandle, simFloat **auxValues, simInt **auxValuesCount);
 
-typedef simFloat *(__cdecl *ptrSimCheckVisionSensorEx)(simInt visionSensorHandle, simInt entityHandle,
-																											 simBool returnImage);
+typedef simFloat *(__cdecl *ptrSimCheckVisionSensorEx)(simInt visionSensorHandle, simInt entityHandle, simBool returnImage);
 
 typedef simInt (__cdecl *ptrSimGetVisionSensorResolution)(simInt visionSensorHandle, simInt *resolution);
 
 typedef simFloat *(__cdecl *ptrSimGetVisionSensorImage)(simInt visionSensorHandle);
 
-typedef simUChar *(__cdecl *ptrSimGetVisionSensorCharImage)(simInt visionSensorHandle, simInt *resolutionX,
-																														simInt *resolutionY);
+typedef simUChar *(__cdecl *ptrSimGetVisionSensorCharImage)(simInt visionSensorHandle, simInt *resolutionX, simInt *resolutionY);
 
 typedef simInt (__cdecl *ptrSimSetVisionSensorImage)(simInt visionSensorHandle, const simFloat *image);
 
@@ -704,32 +610,19 @@ typedef simInt (__cdecl *ptrSimSetVisionSensorCharImage)(simInt visionSensorHand
 
 typedef simFloat *(__cdecl *ptrSimGetVisionSensorDepthBuffer)(simInt visionSensorHandle);
 
-typedef simInt (__cdecl *ptrSimGetObjectQuaternion)(simInt objectHandle, simInt relativeToObjectHandle,
-																										simFloat *quaternion);
+typedef simInt (__cdecl *ptrSimGetObjectQuaternion)(simInt objectHandle, simInt relativeToObjectHandle, simFloat *quaternion);
 
-typedef simInt (__cdecl *ptrSimSetObjectQuaternion)(simInt objectHandle, simInt relativeToObjectHandle,
-																										const simFloat *quaternion);
+typedef simInt (__cdecl *ptrSimSetObjectQuaternion)(simInt objectHandle, simInt relativeToObjectHandle, const simFloat *quaternion);
 
-typedef simInt (__cdecl *ptrSimRMLPosition)(simInt dofs, simDouble timeStep, simInt flags,
-																						const simDouble *currentPosVelAccel, const simDouble *maxVelAccelJerk,
-																						const simBool *selection, const simDouble *targetPosVel,
-																						simDouble *newPosVelAccel, simVoid *auxData);
+typedef simInt (__cdecl *ptrSimRMLPosition)(simInt dofs, simDouble timeStep, simInt flags, const simDouble *currentPosVelAccel, const simDouble *maxVelAccelJerk, const simBool *selection, const simDouble *targetPosVel, simDouble *newPosVelAccel, simVoid *auxData);
 
-typedef simInt (__cdecl *ptrSimRMLVelocity)(simInt dofs, simDouble timeStep, simInt flags,
-																						const simDouble *currentPosVelAccel, const simDouble *maxAccelJerk,
-																						const simBool *selection, const simDouble *targetVel,
-																						simDouble *newPosVelAccel, simVoid *auxData);
+typedef simInt (__cdecl *ptrSimRMLVelocity)(simInt dofs, simDouble timeStep, simInt flags, const simDouble *currentPosVelAccel, const simDouble *maxAccelJerk, const simBool *selection, const simDouble *targetVel, simDouble *newPosVelAccel, simVoid *auxData);
 
-typedef simInt (__cdecl *ptrSimRMLPos)(simInt dofs, simDouble smallestTimeStep, simInt flags,
-																			 const simDouble *currentPosVelAccel, const simDouble *maxVelAccelJerk,
-																			 const simBool *selection, const simDouble *targetPosVel, simVoid *auxData);
+typedef simInt (__cdecl *ptrSimRMLPos)(simInt dofs, simDouble smallestTimeStep, simInt flags, const simDouble *currentPosVelAccel, const simDouble *maxVelAccelJerk, const simBool *selection, const simDouble *targetPosVel, simVoid *auxData);
 
-typedef simInt (__cdecl *ptrSimRMLVel)(simInt dofs, simDouble smallestTimeStep, simInt flags,
-																			 const simDouble *currentPosVelAccel, const simDouble *maxAccelJerk,
-																			 const simBool *selection, const simDouble *targetVel, simVoid *auxData);
+typedef simInt (__cdecl *ptrSimRMLVel)(simInt dofs, simDouble smallestTimeStep, simInt flags, const simDouble *currentPosVelAccel, const simDouble *maxAccelJerk, const simBool *selection, const simDouble *targetVel, simVoid *auxData);
 
-typedef simInt (__cdecl *ptrSimRMLStep)(simInt handle, simDouble timeStep, simDouble *newPosVelAccel, simVoid *auxData,
-																				simVoid *reserved);
+typedef simInt (__cdecl *ptrSimRMLStep)(simInt handle, simDouble timeStep, simDouble *newPosVelAccel, simVoid *auxData, simVoid *reserved);
 
 typedef simInt (__cdecl *ptrSimRMLRemove)(simInt handle);
 
@@ -737,31 +630,25 @@ typedef simInt (__cdecl *ptrSimBuildMatrixQ)(const simFloat *position, const sim
 
 typedef simInt (__cdecl *ptrSimGetQuaternionFromMatrix)(const simFloat *matrix, simFloat *quaternion);
 
-typedef simChar *(__cdecl *ptrSimFileDialog)(simInt mode, const simChar *title, const simChar *startPath,
-																						 const simChar *initName, const simChar *extName, const simChar *ext);
+typedef simChar *(__cdecl *ptrSimFileDialog)(simInt mode, const simChar *title, const simChar *startPath, const simChar *initName, const simChar *extName, const simChar *ext);
 
 typedef simChar *(__cdecl *ptrSimMsgBox)(simInt dlgType, simInt buttons, const simChar *title, const simChar *message);
 
-typedef simInt (__cdecl *ptrSimSetShapeMassAndInertia)(simInt shapeHandle, simFloat mass, const simFloat *inertiaMatrix,
-																											 const simFloat *centerOfMass, const simFloat *transformation);
+typedef simInt (__cdecl *ptrSimSetShapeMassAndInertia)(simInt shapeHandle, simFloat mass, const simFloat *inertiaMatrix, const simFloat *centerOfMass, const simFloat *transformation);
 
-typedef simInt (__cdecl *ptrSimGetShapeMassAndInertia)(simInt shapeHandle, simFloat *mass, simFloat *inertiaMatrix,
-																											 simFloat *centerOfMass, const simFloat *transformation);
+typedef simInt (__cdecl *ptrSimGetShapeMassAndInertia)(simInt shapeHandle, simFloat *mass, simFloat *inertiaMatrix, simFloat *centerOfMass, const simFloat *transformation);
 
 typedef simInt (__cdecl *ptrSimGroupShapes)(const simInt *shapeHandles, simInt shapeCount);
 
 typedef simInt *(__cdecl *ptrSimUngroupShape)(simInt shapeHandle, simInt *shapeCount);
 
-typedef simInt (__cdecl *ptrSimConvexDecompose)(simInt shapeHandle, simInt options, const simInt *intParams,
-																								const simFloat *floatParams);
+typedef simInt (__cdecl *ptrSimConvexDecompose)(simInt shapeHandle, simInt options, const simInt *intParams, const simFloat *floatParams);
 
 typedef simFloat *(__cdecl *ptrSimGetIkGroupMatrix)(simInt ikGroupHandle, simInt options, simInt *matrixSize);
 
-typedef simInt (__cdecl *ptrSimAddGhost)(simInt ghostGroup, simInt objectHandle, simInt options, simFloat startTime,
-																				 simFloat endTime, const simFloat *color);
+typedef simInt (__cdecl *ptrSimAddGhost)(simInt ghostGroup, simInt objectHandle, simInt options, simFloat startTime, simFloat endTime, const simFloat *color);
 
-typedef simInt (__cdecl *ptrSimModifyGhost)(simInt ghostGroup, simInt ghostId, simInt operation, simFloat floatValue,
-																						simInt options, simInt optionsMask, const simFloat *colorOrTransformation);
+typedef simInt (__cdecl *ptrSimModifyGhost)(simInt ghostGroup, simInt ghostId, simInt operation, simFloat floatValue, simInt options, simInt optionsMask, const simFloat *colorOrTransformation);
 
 typedef simVoid (__cdecl *ptrSimQuitSimulator)(simBool doNotDisplayMessages);
 
@@ -777,47 +664,33 @@ typedef simInt (__cdecl *ptrSimSetShapeMaterial)(simInt shapeHandle, simInt mate
 
 typedef simInt (__cdecl *ptrSimGetTextureId)(const simChar *textureName, simInt *resolution);
 
-typedef simChar *(__cdecl *ptrSimReadTexture)(simInt textureId, simInt options, simInt posX, simInt posY, simInt sizeX,
-																							simInt sizeY);
+typedef simChar *(__cdecl *ptrSimReadTexture)(simInt textureId, simInt options, simInt posX, simInt posY, simInt sizeX, simInt sizeY);
 
-typedef simInt (__cdecl *ptrSimWriteTexture)(simInt textureId, simInt options, const simChar *data, simInt posX,
-																						 simInt posY, simInt sizeX, simInt sizeY, simFloat interpol);
+typedef simInt (__cdecl *ptrSimWriteTexture)(simInt textureId, simInt options, const simChar *data, simInt posX, simInt posY, simInt sizeX, simInt sizeY, simFloat interpol);
 
-typedef simInt (__cdecl *ptrSimCreateTexture)(const simChar *fileName, simInt options, const simFloat *planeSizes,
-																							const simFloat *scalingUV, const simFloat *xy_g, simInt fixedResolution,
-																							simInt *textureId, simInt *resolution, const simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCreateTexture)(const simChar *fileName, simInt options, const simFloat *planeSizes, const simFloat *scalingUV, const simFloat *xy_g, simInt fixedResolution, simInt *textureId, simInt *resolution, const simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimWriteCustomDataBlock)(simInt objectHandle, const simChar *tagName, const simChar *data,
-																										 simInt dataSize);
+typedef simInt (__cdecl *ptrSimWriteCustomDataBlock)(simInt objectHandle, const simChar *tagName, const simChar *data, simInt dataSize);
 
 typedef simChar *(__cdecl *ptrSimReadCustomDataBlock)(simInt objectHandle, const simChar *tagName, simInt *dataSize);
 
 typedef simChar *(__cdecl *ptrSimReadCustomDataBlockTags)(simInt objectHandle, simInt *tagCount);
 
-typedef simInt (__cdecl *ptrSimAddPointCloud)(simInt pageMask, simInt layerMask, simInt objectHandle, simInt options,
-																							simFloat pointSize, simInt ptCnt, const simFloat *pointCoordinates,
-																							const simChar *defaultColors, const simChar *pointColors,
-																							const simFloat *pointNormals);
+typedef simInt (__cdecl *ptrSimAddPointCloud)(simInt pageMask, simInt layerMask, simInt objectHandle, simInt options, simFloat pointSize, simInt ptCnt, const simFloat *pointCoordinates, const simChar *defaultColors, const simChar *pointColors, const simFloat *pointNormals);
 
-typedef simInt (__cdecl *ptrSimModifyPointCloud)(simInt pointCloudHandle, simInt operation, const simInt *intParam,
-																								 const simFloat *floatParam);
+typedef simInt (__cdecl *ptrSimModifyPointCloud)(simInt pointCloudHandle, simInt operation, const simInt *intParam, const simFloat *floatParam);
 
-typedef simInt (__cdecl *ptrSimGetShapeGeomInfo)(simInt shapeHandle, simInt *intData, simFloat *floatData,
-																								 simVoid *reserved);
+typedef simInt (__cdecl *ptrSimGetShapeGeomInfo)(simInt shapeHandle, simInt *intData, simFloat *floatData, simVoid *reserved);
 
-typedef simInt *(__cdecl *ptrSimGetObjectsInTree)(simInt treeBaseHandle, simInt objectType, simInt options,
-																									simInt *objectCount);
+typedef simInt *(__cdecl *ptrSimGetObjectsInTree)(simInt treeBaseHandle, simInt objectType, simInt options, simInt *objectCount);
 
 typedef simInt (__cdecl *ptrSimSetObjectSizeValues)(simInt objectHandle, const simFloat *sizeValues);
 
 typedef simInt (__cdecl *ptrSimGetObjectSizeValues)(simInt objectHandle, simFloat *sizeValues);
 
-typedef simInt (__cdecl *ptrSimScaleObject)(simInt objectHandle, simFloat xScale, simFloat yScale, simFloat zScale,
-																						simInt options);
+typedef simInt (__cdecl *ptrSimScaleObject)(simInt objectHandle, simFloat xScale, simFloat yScale, simFloat zScale, simInt options);
 
-typedef simInt (__cdecl *ptrSimSetShapeTexture)(simInt shapeHandle, simInt textureId, simInt mappingMode,
-																								simInt options, const simFloat *uvScaling, const simFloat *position,
-																								const simFloat *orientation);
+typedef simInt (__cdecl *ptrSimSetShapeTexture)(simInt shapeHandle, simInt textureId, simInt mappingMode, simInt options, const simFloat *uvScaling, const simFloat *position, const simFloat *orientation);
 
 typedef simInt (__cdecl *ptrSimGetShapeTextureId)(simInt shapeHandle);
 
@@ -825,72 +698,47 @@ typedef simInt *(__cdecl *ptrSimGetCollectionObjects)(simInt collectionHandle, s
 
 typedef simInt (__cdecl *ptrSimHandleCustomizationScripts)(simInt callType);
 
-typedef simInt (__cdecl *ptrSimSetScriptAttribute)(simInt scriptHandle, simInt attributeID, simFloat floatVal,
-																									 simInt intOrBoolVal);
+typedef simInt (__cdecl *ptrSimSetScriptAttribute)(simInt scriptHandle, simInt attributeID, simFloat floatVal, simInt intOrBoolVal);
 
-typedef simInt (__cdecl *ptrSimGetScriptAttribute)(simInt scriptHandle, simInt attributeID, simFloat *floatVal,
-																									 simInt *intOrBoolVal);
+typedef simInt (__cdecl *ptrSimGetScriptAttribute)(simInt scriptHandle, simInt attributeID, simFloat *floatVal, simInt *intOrBoolVal);
 
-typedef simInt (__cdecl *ptrSimReorientShapeBoundingBox)(simInt shapeHandle, simInt relativeToHandle,
-																												 simInt reservedSetToZero);
+typedef simInt (__cdecl *ptrSimReorientShapeBoundingBox)(simInt shapeHandle, simInt relativeToHandle, simInt reservedSetToZero);
 
 typedef simInt (__cdecl *ptrSimSwitchThread)();
 
-typedef simInt (__cdecl *ptrSimCreateIkGroup)(simInt options, const simInt *intParams, const simFloat *floatParams,
-																							const simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCreateIkGroup)(simInt options, const simInt *intParams, const simFloat *floatParams, const simVoid *reserved);
 
 typedef simInt (__cdecl *ptrSimRemoveIkGroup)(simInt ikGroupHandle);
 
-typedef simInt (__cdecl *ptrSimCreateIkElement)(simInt ikGroupHandle, simInt options, const simInt *intParams,
-																								const simFloat *floatParams, const simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCreateIkElement)(simInt ikGroupHandle, simInt options, const simInt *intParams, const simFloat *floatParams, const simVoid *reserved);
 
 typedef simInt (__cdecl *ptrSimCreateCollection)(const simChar *collectionName, simInt options);
 
-typedef simInt (__cdecl *ptrSimAddObjectToCollection)(simInt collectionHandle, simInt objectHandle, simInt what,
-																											simInt options);
+typedef simInt (__cdecl *ptrSimAddObjectToCollection)(simInt collectionHandle, simInt objectHandle, simInt what, simInt options);
 
-typedef simInt (__cdecl *ptrSimSaveImage)(const simUChar *image, const simInt *resolution, simInt options,
-																					const simChar *filename, simInt quality, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimSaveImage)(const simUChar *image, const simInt *resolution, simInt options, const simChar *filename, simInt quality, simVoid *reserved);
 
-typedef simUChar *(__cdecl *ptrSimLoadImage)(simInt *resolution, simInt options, const simChar *filename,
-																						 simVoid *reserved);
+typedef simUChar *(__cdecl *ptrSimLoadImage)(simInt *resolution, simInt options, const simChar *filename, simVoid *reserved);
 
-typedef simUChar *(__cdecl *ptrSimGetScaledImage)(const simUChar *imageIn, const simInt *resolutionIn,
-																									simInt *resolutionOut, simInt options, simVoid *reserved);
+typedef simUChar *(__cdecl *ptrSimGetScaledImage)(const simUChar *imageIn, const simInt *resolutionIn, simInt *resolutionOut, simInt options, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimTransformImage)(simUChar *image, const simInt *resolution, simInt options,
-																							 const simFloat *floatParams, const simInt *intParams, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimTransformImage)(simUChar *image, const simInt *resolution, simInt options, const simFloat *floatParams, const simInt *intParams, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimGetQHull)(const simFloat *inVertices, simInt inVerticesL, simFloat **verticesOut,
-																				 simInt *verticesOutL, simInt **indicesOut, simInt *indicesOutL,
-																				 simInt reserved1, const simFloat *reserved2);
+typedef simInt (__cdecl *ptrSimGetQHull)(const simFloat *inVertices, simInt inVerticesL, simFloat **verticesOut, simInt *verticesOutL, simInt **indicesOut, simInt *indicesOutL, simInt reserved1, const simFloat *reserved2);
 
-typedef simInt (__cdecl *ptrSimGetDecimatedMesh)(const simFloat *inVertices, simInt inVerticesL,
-																								 const simInt *inIndices, simInt inIndicesL, simFloat **verticesOut,
-																								 simInt *verticesOutL, simInt **indicesOut, simInt *indicesOutL,
-																								 simFloat decimationPercent, simInt reserved1,
-																								 const simFloat *reserved2);
+typedef simInt (__cdecl *ptrSimGetDecimatedMesh)(const simFloat *inVertices, simInt inVerticesL, const simInt *inIndices, simInt inIndicesL, simFloat **verticesOut, simInt *verticesOutL, simInt **indicesOut, simInt *indicesOutL, simFloat decimationPercent, simInt reserved1, const simFloat *reserved2);
 
 typedef simInt (__cdecl *ptrSimExportIk)(const simChar *pathAndFilename, simInt reserved1, simVoid *reserved2);
 
-typedef simInt (__cdecl *ptrSimCallScriptFunction)(simInt scriptHandleOrType, const simChar *functionNameAtScriptName,
-																									 SLuaCallBack *data, const simChar *reservedSetToNull);
+typedef simInt (__cdecl *ptrSimCallScriptFunction)(simInt scriptHandleOrType, const simChar *functionNameAtScriptName, SLuaCallBack *data, const simChar *reservedSetToNull);
 
-typedef simInt (__cdecl *ptrSimCallScriptFunctionEx)(simInt scriptHandleOrType, const simChar *functionNameAtScriptName,
-																										 simInt stackId);
+typedef simInt (__cdecl *ptrSimCallScriptFunctionEx)(simInt scriptHandleOrType, const simChar *functionNameAtScriptName, simInt stackId);
 
 typedef simInt (__cdecl *ptrSimComputeJacobian)(simInt ikGroupHandle, simInt options, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimGetConfigForTipPose)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles,
-																										simFloat thresholdDist, simInt maxTimeInMs, simFloat *retConfig,
-																										const simFloat *metric, simInt collisionPairCnt,
-																										const simInt *collisionPairs, const simInt *jointOptions,
-																										const simFloat *lowLimits, const simFloat *ranges,
-																										simVoid *reserved);
+typedef simInt (__cdecl *ptrSimGetConfigForTipPose)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles, simFloat thresholdDist, simInt maxTimeInMs, simFloat *retConfig, const simFloat *metric, simInt collisionPairCnt, const simInt *collisionPairs, const simInt *jointOptions, const simFloat *lowLimits, const simFloat *ranges, simVoid *reserved);
 
-typedef simFloat *(__cdecl *ptrSimGenerateIkPath)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles,
-																									simInt ptCnt, simInt collisionPairCnt, const simInt *collisionPairs,
-																									const simInt *jointOptions, simVoid *reserved);
+typedef simFloat *(__cdecl *ptrSimGenerateIkPath)(simInt ikGroupHandle, simInt jointCnt, const simInt *jointHandles, simInt ptCnt, simInt collisionPairCnt, const simInt *collisionPairs, const simInt *jointOptions, simVoid *reserved);
 
 typedef simChar *(__cdecl *ptrSimGetExtensionString)(simInt objectHandle, simInt index, const char *key);
 
@@ -958,78 +806,51 @@ typedef simInt (__cdecl *ptrSimUnfoldStackTable)(simInt stackHandle);
 
 typedef simInt (__cdecl *ptrSimDebugStack)(simInt stackHandle, simInt cIndex);
 
-typedef simInt (__cdecl *ptrSimSetScriptVariable)(simInt scriptHandleOrType, const simChar *variableNameAtScriptName,
-																									simInt stackHandle);
+typedef simInt (__cdecl *ptrSimSetScriptVariable)(simInt scriptHandleOrType, const simChar *variableNameAtScriptName, simInt stackHandle);
 
-typedef simFloat (__cdecl *ptrSimGetEngineFloatParameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																													simBool *ok);
+typedef simFloat (__cdecl *ptrSimGetEngineFloatParameter)(simInt paramId, simInt objectHandle, const simVoid *object, simBool *ok);
 
-typedef simInt (__cdecl *ptrSimGetEngineInt32Parameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																												simBool *ok);
+typedef simInt (__cdecl *ptrSimGetEngineInt32Parameter)(simInt paramId, simInt objectHandle, const simVoid *object, simBool *ok);
 
-typedef simBool (__cdecl *ptrSimGetEngineBoolParameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																												simBool *ok);
+typedef simBool (__cdecl *ptrSimGetEngineBoolParameter)(simInt paramId, simInt objectHandle, const simVoid *object, simBool *ok);
 
-typedef simInt (__cdecl *ptrSimSetEngineFloatParameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																												simFloat val);
+typedef simInt (__cdecl *ptrSimSetEngineFloatParameter)(simInt paramId, simInt objectHandle, const simVoid *object, simFloat val);
 
-typedef simInt (__cdecl *ptrSimSetEngineInt32Parameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																												simInt val);
+typedef simInt (__cdecl *ptrSimSetEngineInt32Parameter)(simInt paramId, simInt objectHandle, const simVoid *object, simInt val);
 
-typedef simInt (__cdecl *ptrSimSetEngineBoolParameter)(simInt paramId, simInt objectHandle, const simVoid *object,
-																											 simBool val);
+typedef simInt (__cdecl *ptrSimSetEngineBoolParameter)(simInt paramId, simInt objectHandle, const simVoid *object, simBool val);
 
 typedef simInt (__cdecl *ptrSimCreateOctree)(simFloat voxelSize, simInt options, simFloat pointSize, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimCreatePointCloud)(simFloat maxVoxelSize, simInt maxPtCntPerVoxel, simInt options,
-																								 simFloat pointSize, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCreatePointCloud)(simFloat maxVoxelSize, simInt maxPtCntPerVoxel, simInt options, simFloat pointSize, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimSetPointCloudOptions)(simInt pointCloudHandle, simFloat maxVoxelSize,
-																										 simInt maxPtCntPerVoxel, simInt options, simFloat pointSize,
-																										 simVoid *reserved);
+typedef simInt (__cdecl *ptrSimSetPointCloudOptions)(simInt pointCloudHandle, simFloat maxVoxelSize, simInt maxPtCntPerVoxel, simInt options, simFloat pointSize, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimGetPointCloudOptions)(simInt pointCloudHandle, simFloat *maxVoxelSize,
-																										 simInt *maxPtCntPerVoxel, simInt *options, simFloat *pointSize,
-																										 simVoid *reserved);
+typedef simInt (__cdecl *ptrSimGetPointCloudOptions)(simInt pointCloudHandle, simFloat *maxVoxelSize, simInt *maxPtCntPerVoxel, simInt *options, simFloat *pointSize, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimInsertVoxelsIntoOctree)(simInt octreeHandle, simInt options, const simFloat *pts,
-																											 simInt ptCnt, const simUChar *color, const simUInt *tag,
-																											 simVoid *reserved);
+typedef simInt (__cdecl *ptrSimInsertVoxelsIntoOctree)(simInt octreeHandle, simInt options, const simFloat *pts, simInt ptCnt, const simUChar *color, const simUInt *tag, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimRemoveVoxelsFromOctree)(simInt octreeHandle, simInt options, const simFloat *pts,
-																											 simInt ptCnt, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimRemoveVoxelsFromOctree)(simInt octreeHandle, simInt options, const simFloat *pts, simInt ptCnt, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimInsertPointsIntoPointCloud)(simInt pointCloudHandle, simInt options, const simFloat *pts,
-																													 simInt ptCnt, const simUChar *color,
-																													 simVoid *optionalValues);
+typedef simInt (__cdecl *ptrSimInsertPointsIntoPointCloud)(simInt pointCloudHandle, simInt options, const simFloat *pts, simInt ptCnt, const simUChar *color, simVoid *optionalValues);
 
-typedef simInt (__cdecl *ptrSimRemovePointsFromPointCloud)(simInt pointCloudHandle, simInt options, const simFloat *pts,
-																													 simInt ptCnt, simFloat tolerance, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimRemovePointsFromPointCloud)(simInt pointCloudHandle, simInt options, const simFloat *pts, simInt ptCnt, simFloat tolerance, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimIntersectPointsWithPointCloud)(simInt pointCloudHandle, simInt options,
-																															const simFloat *pts, simInt ptCnt, simFloat tolerance,
-																															simVoid *reserved);
+typedef simInt (__cdecl *ptrSimIntersectPointsWithPointCloud)(simInt pointCloudHandle, simInt options, const simFloat *pts, simInt ptCnt, simFloat tolerance, simVoid *reserved);
 
 typedef const float *(__cdecl *ptrSimGetOctreeVoxels)(simInt octreeHandle, simInt *ptCnt, simVoid *reserved);
 
 typedef const float *(__cdecl *ptrSimGetPointCloudPoints)(simInt pointCloudHandle, simInt *ptCnt, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimInsertObjectIntoOctree)(simInt octreeHandle, simInt objectHandle, simInt options,
-																											 const simUChar *color, simUInt tag, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimInsertObjectIntoOctree)(simInt octreeHandle, simInt objectHandle, simInt options, const simUChar *color, simUInt tag, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimSubtractObjectFromOctree)(simInt octreeHandle, simInt objectHandle, simInt options,
-																												 simVoid *reserved);
+typedef simInt (__cdecl *ptrSimSubtractObjectFromOctree)(simInt octreeHandle, simInt objectHandle, simInt options, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimInsertObjectIntoPointCloud)(simInt pointCloudHandle, simInt objectHandle, simInt options,
-																													 simFloat gridSize, const simUChar *color,
-																													 simVoid *optionalValues);
+typedef simInt (__cdecl *ptrSimInsertObjectIntoPointCloud)(simInt pointCloudHandle, simInt objectHandle, simInt options, simFloat gridSize, const simUChar *color, simVoid *optionalValues);
 
-typedef simInt (__cdecl *ptrSimSubtractObjectFromPointCloud)(simInt pointCloudHandle, simInt objectHandle,
-																														 simInt options, simFloat tolerance, simVoid *reserved);
+typedef simInt (__cdecl *ptrSimSubtractObjectFromPointCloud)(simInt pointCloudHandle, simInt objectHandle, simInt options, simFloat tolerance, simVoid *reserved);
 
-typedef simInt (__cdecl *ptrSimCheckOctreePointOccupancy)(simInt octreeHandle, simInt options, const simFloat *points,
-																													simInt ptCnt, simUInt *tag, simUInt64 *location,
-																													simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCheckOctreePointOccupancy)(simInt octreeHandle, simInt options, const simFloat *points, simInt ptCnt, simUInt *tag, simUInt64 *location, simVoid *reserved);
 
 typedef simChar *(__cdecl *ptrSimOpenTextEditor)(const simChar *initText, const simChar *xml, simInt *various);
 
@@ -1037,34 +858,25 @@ typedef simChar *(__cdecl *ptrSimPackTable)(simInt stackHandle, simInt *bufferSi
 
 typedef simInt (__cdecl *ptrSimUnpackTable)(simInt stackHandle, const simChar *buffer, simInt bufferSize);
 
-typedef simInt (__cdecl *ptrSimSetVisionSensorFilter)(simInt visionSensorHandle, simInt filterIndex, simInt options,
-																											const simInt *pSizes, const simUChar *bytes, const simInt *ints,
-																											const simFloat *floats, const simUChar *custom);
+typedef simInt (__cdecl *ptrSimSetVisionSensorFilter)(simInt visionSensorHandle, simInt filterIndex, simInt options, const simInt *pSizes, const simUChar *bytes, const simInt *ints, const simFloat *floats, const simUChar *custom);
 
-typedef simInt (__cdecl *ptrSimGetVisionSensorFilter)(simInt visionSensorHandle, simInt filterIndex, simInt *options,
-																											simInt *pSizes, simUChar **bytes, simInt **ints,
-																											simFloat **floats, simUChar **custom);
+typedef simInt (__cdecl *ptrSimGetVisionSensorFilter)(simInt visionSensorHandle, simInt filterIndex, simInt *options, simInt *pSizes, simUChar **bytes, simInt **ints, simFloat **floats, simUChar **custom);
 
-typedef simInt (__cdecl *ptrSimSetReferencedHandles)(simInt objectHandle, simInt count, const simInt *referencedHandles,
-																										 const simInt *reserved1, const simInt *reserved2);
+typedef simInt (__cdecl *ptrSimSetReferencedHandles)(simInt objectHandle, simInt count, const simInt *referencedHandles, const simInt *reserved1, const simInt *reserved2);
 
-typedef simInt (__cdecl *ptrSimGetReferencedHandles)(simInt objectHandle, simInt **referencedHandles,
-																										 simInt **reserved1, simInt **reserved2);
+typedef simInt (__cdecl *ptrSimGetReferencedHandles)(simInt objectHandle, simInt **referencedHandles, simInt **reserved1, simInt **reserved2);
 
 typedef simInt (__cdecl *ptrSimGetShapeViz)(simInt shapeHandle, simInt index, struct SShapeVizInfo *info);
 
-typedef simInt (__cdecl *ptrSimExecuteScriptString)(simInt scriptHandleOrType, const simChar *stringAtScriptName,
-																										simInt stackHandle);
+typedef simInt (__cdecl *ptrSimExecuteScriptString)(simInt scriptHandleOrType, const simChar *stringAtScriptName, simInt stackHandle);
 
 typedef simChar *(__cdecl *ptrSimGetApiFunc)(simInt scriptHandleOrType, const simChar *apiWord);
 
 typedef simChar *(__cdecl *ptrSimGetApiInfo)(simInt scriptHandleOrType, const simChar *apiWord);
 
-typedef simInt (__cdecl *ptrSimSetModuleInfo)(const simChar *moduleName, simInt infoType, const simChar *stringInfo,
-																							simInt intInfo);
+typedef simInt (__cdecl *ptrSimSetModuleInfo)(const simChar *moduleName, simInt infoType, const simChar *stringInfo, simInt intInfo);
 
-typedef simInt (__cdecl *ptrSimGetModuleInfo)(const simChar *moduleName, simInt infoType, simChar **stringInfo,
-																							simInt *intInfo);
+typedef simInt (__cdecl *ptrSimGetModuleInfo)(const simChar *moduleName, simInt infoType, simChar **stringInfo, simInt *intInfo);
 
 
 typedef simInt (__cdecl *ptr_simGetContactCallbackCount)();
@@ -1095,18 +907,13 @@ typedef const simVoid *(__cdecl *ptr_simGetIkGroupObject)(int ikGroupID);
 
 typedef simInt (__cdecl *ptr_simMpHandleIkGroupObject)(const simVoid *ikGroup);
 
-typedef simVoid (__cdecl *ptr_simGetObjectLocalTransformation)(const simVoid *object, simFloat *pos, simFloat *quat,
-																															 simBool excludeFirstJointTransformation);
+typedef simVoid (__cdecl *ptr_simGetObjectLocalTransformation)(const simVoid *object, simFloat *pos, simFloat *quat, simBool excludeFirstJointTransformation);
 
-typedef simVoid (__cdecl *ptr_simSetObjectLocalTransformation)(simVoid *object, const simFloat *pos,
-																															 const simFloat *quat);
+typedef simVoid (__cdecl *ptr_simSetObjectLocalTransformation)(simVoid *object, const simFloat *pos, const simFloat *quat);
 
-typedef simVoid (__cdecl *ptr_simSetObjectCumulativeTransformation)(simVoid *object, const simFloat *pos,
-																																		const simFloat *quat, simBool keepChildrenInPlace);
+typedef simVoid (__cdecl *ptr_simSetObjectCumulativeTransformation)(simVoid *object, const simFloat *pos, const simFloat *quat, simBool keepChildrenInPlace);
 
-typedef simVoid (__cdecl *ptr_simGetObjectCumulativeTransformation)(const simVoid *object, simFloat *pos,
-																																		simFloat *quat,
-																																		simBool excludeFirstJointTransformation);
+typedef simVoid (__cdecl *ptr_simGetObjectCumulativeTransformation)(const simVoid *object, simFloat *pos, simFloat *quat, simBool excludeFirstJointTransformation);
 
 typedef simBool (__cdecl *ptr_simIsShapeDynamicallyStatic)(const simVoid *shape);
 
@@ -1158,22 +965,19 @@ typedef simBool (__cdecl *ptr_simGetGeomProxyDynamicsFullRefreshFlag)(const simV
 
 typedef simBool (__cdecl *ptr_simGetParentFollowsDynamic)(const simVoid *shape);
 
-typedef simVoid (__cdecl *ptr_simSetShapeDynamicVelocity)(simVoid *shape, const simFloat *linear,
-																													const simFloat *angular);
+typedef simVoid (__cdecl *ptr_simSetShapeDynamicVelocity)(simVoid *shape, const simFloat *linear, const simFloat *angular);
 
 typedef simVoid (__cdecl *ptr_simGetAdditionalForceAndTorque)(const simVoid *shape, simFloat *force, simFloat *torque);
 
 typedef simVoid (__cdecl *ptr_simClearAdditionalForceAndTorque)(const simVoid *shape);
 
-typedef simBool (__cdecl *ptr_simGetJointPositionInterval)(const simVoid *joint, simFloat *minValue,
-																													 simFloat *rangeValue);
+typedef simBool (__cdecl *ptr_simGetJointPositionInterval)(const simVoid *joint, simFloat *minValue, simFloat *rangeValue);
 
 typedef simInt (__cdecl *ptr_simGetJointType)(const simVoid *joint);
 
 typedef simBool (__cdecl *ptr_simIsForceSensorBroken)(const simVoid *forceSensor);
 
-typedef simVoid (__cdecl *ptr_simGetDynamicForceSensorLocalTransformationPart2)(const simVoid *forceSensor,
-																																								simFloat *pos, simFloat *quat);
+typedef simVoid (__cdecl *ptr_simGetDynamicForceSensorLocalTransformationPart2)(const simVoid *forceSensor, simFloat *pos, simFloat *quat);
 
 typedef simBool (__cdecl *ptr_simIsDynamicMotorEnabled)(const simVoid *joint);
 
@@ -1181,8 +985,7 @@ typedef simBool (__cdecl *ptr_simIsDynamicMotorPositionCtrlEnabled)(const simVoi
 
 typedef simBool (__cdecl *ptr_simIsDynamicMotorTorqueModulationEnabled)(const simVoid *joint);
 
-typedef simVoid (__cdecl *ptr_simGetMotorPid)(const simVoid *joint, simFloat *pParam, simFloat *iParam,
-																							simFloat *dParam);
+typedef simVoid (__cdecl *ptr_simGetMotorPid)(const simVoid *joint, simFloat *pParam, simFloat *iParam, simFloat *dParam);
 
 typedef simFloat (__cdecl *ptr_simGetDynamicMotorTargetPosition)(const simVoid *joint);
 
@@ -1196,24 +999,17 @@ typedef simVoid (__cdecl *ptr_simSetDynamicMotorReflectedPositionFromDynamicEngi
 
 typedef simVoid (__cdecl *ptr_simSetJointSphericalTransformation)(simVoid *joint, const simFloat *quat);
 
-typedef simVoid (__cdecl *ptr_simAddForceSensorCumulativeForcesAndTorques)(simVoid *forceSensor, const simFloat *force,
-																																					 const simFloat *torque,
-																																					 int totalPassesCount);
+typedef simVoid (__cdecl *ptr_simAddForceSensorCumulativeForcesAndTorques)(simVoid *forceSensor, const simFloat *force, const simFloat *torque, int totalPassesCount);
 
-typedef simVoid (__cdecl *ptr_simAddJointCumulativeForcesOrTorques)(simVoid *joint, simFloat forceOrTorque,
-																																		int totalPassesCount);
+typedef simVoid (__cdecl *ptr_simAddJointCumulativeForcesOrTorques)(simVoid *joint, simFloat forceOrTorque, int totalPassesCount);
 
-typedef simVoid (__cdecl *ptr_simSetDynamicJointLocalTransformationPart2)(simVoid *joint, const simFloat *pos,
-																																					const simFloat *quat);
+typedef simVoid (__cdecl *ptr_simSetDynamicJointLocalTransformationPart2)(simVoid *joint, const simFloat *pos, const simFloat *quat);
 
-typedef simVoid (__cdecl *ptr_simSetDynamicForceSensorLocalTransformationPart2)(simVoid *forceSensor,
-																																								const simFloat *pos,
-																																								const simFloat *quat);
+typedef simVoid (__cdecl *ptr_simSetDynamicForceSensorLocalTransformationPart2)(simVoid *forceSensor, const simFloat *pos, const simFloat *quat);
 
 typedef simVoid (__cdecl *ptr_simSetDynamicJointLocalTransformationPart2IsValid)(simVoid *joint, simBool valid);
 
-typedef simVoid (__cdecl *ptr_simSetDynamicForceSensorLocalTransformationPart2IsValid)(simVoid *forceSensor,
-																																											 simBool valid);
+typedef simVoid (__cdecl *ptr_simSetDynamicForceSensorLocalTransformationPart2IsValid)(simVoid *forceSensor, simBool valid);
 
 typedef const simVoid *(__cdecl *ptr_simGetGeomWrapFromGeomProxy)(const simVoid *geomData);
 
@@ -1235,11 +1031,9 @@ typedef simVoid (__cdecl *ptr_simMakeDynamicAnnouncement)(int announceType);
 
 typedef simVoid (__cdecl *ptr_simGetVerticesLocalFrame)(const simVoid *geometric, simFloat *pos, simFloat *quat);
 
-typedef const simFloat *(__cdecl *ptr_simGetHeightfieldData)(const simVoid *geometric, simInt *xCount, simInt *yCount,
-																														 simFloat *minHeight, simFloat *maxHeight);
+typedef const simFloat *(__cdecl *ptr_simGetHeightfieldData)(const simVoid *geometric, simInt *xCount, simInt *yCount, simFloat *minHeight, simFloat *maxHeight);
 
-typedef simVoid (__cdecl *ptr_simGetCumulativeMeshes)(const simVoid *geomInfo, simFloat **vertices,
-																											simInt *verticesSize, simInt **indices, simInt *indicesSize);
+typedef simVoid (__cdecl *ptr_simGetCumulativeMeshes)(const simVoid *geomInfo, simFloat **vertices, simInt *verticesSize, simInt **indices, simInt *indicesSize);
 
 typedef simFloat (__cdecl *ptr_simGetMass)(const simVoid *geomInfo);
 
@@ -1249,23 +1043,13 @@ typedef simVoid (__cdecl *ptr_simGetGravity)(simFloat *gravity);
 
 typedef simInt (__cdecl *ptr_simGetTimeDiffInMs)(simInt previousTime);
 
-typedef simBool (__cdecl *ptr_simDoEntitiesCollide)(simInt entity1ID, simInt entity2ID, simInt *cacheBuffer,
-																										simBool overrideCollidableFlagIfShape1,
-																										simBool overrideCollidableFlagIfShape2,
-																										simBool pathPlanningRoutineCalling);
+typedef simBool (__cdecl *ptr_simDoEntitiesCollide)(simInt entity1ID, simInt entity2ID, simInt *cacheBuffer, simBool overrideCollidableFlagIfShape1, simBool overrideCollidableFlagIfShape2, simBool pathPlanningRoutineCalling);
 
-typedef simBool (__cdecl *ptr_simGetDistanceBetweenEntitiesIfSmaller)(simInt entity1ID, simInt entity2ID,
-																																			simFloat *distance, simFloat *ray,
-																																			simInt *cacheBuffer,
-																																			simBool overrideMeasurableFlagIfNonCollection1,
-																																			simBool overrideMeasurableFlagIfNonCollection2,
-																																			simBool pathPlanningRoutineCalling);
+typedef simBool (__cdecl *ptr_simGetDistanceBetweenEntitiesIfSmaller)(simInt entity1ID, simInt entity2ID, simFloat *distance, simFloat *ray, simInt *cacheBuffer, simBool overrideMeasurableFlagIfNonCollection1, simBool overrideMeasurableFlagIfNonCollection2, simBool pathPlanningRoutineCalling);
 
-typedef simInt (__cdecl *ptr_simHandleJointControl)(const simVoid *joint, simInt auxV, const simInt *inputValuesInt,
-																										const simFloat *inputValuesFloat, simFloat *outputValues);
+typedef simInt (__cdecl *ptr_simHandleJointControl)(const simVoid *joint, simInt auxV, const simInt *inputValuesInt, const simFloat *inputValuesFloat, simFloat *outputValues);
 
-typedef simInt (__cdecl *ptr_simHandleCustomContact)(simInt objHandle1, simInt objHandle2, simInt engine,
-																										 simInt *dataInt, simFloat *dataFloat);
+typedef simInt (__cdecl *ptr_simHandleCustomContact)(simInt objHandle1, simInt objHandle2, simInt engine, simInt *dataInt, simFloat *dataFloat);
 
 typedef simFloat (__cdecl *ptr_simGetPureHollowScaling)(const simVoid *geometric);
 
@@ -1798,8 +1582,7 @@ typedef simInt (__cdecl *ptrSimGetShapeMaterial)(simInt shapeHandle);
 
 typedef simInt (__cdecl *ptrSimHandleVarious)();
 
-typedef simInt (__cdecl *ptrSimSerialPortOpen)(simInt portNumber, simInt baudRate, simVoid *reserved1,
-																							 simVoid *reserved2);
+typedef simInt (__cdecl *ptrSimSerialPortOpen)(simInt portNumber, simInt baudRate, simVoid *reserved1, simVoid *reserved2);
 
 typedef simInt (__cdecl *ptrSimSerialPortClose)(simInt portNumber);
 
@@ -1813,47 +1596,23 @@ typedef simInt (__cdecl *ptrSimGetPathPlanningHandle)(const simChar *pathPlannin
 
 typedef simInt (__cdecl *ptrSimGetMotionPlanningHandle)(const simChar *motionPlanningObjectName);
 
-typedef simInt (__cdecl *ptrSimGetMpConfigForTipPose)(simInt motionPlanningObjectHandle, simInt options,
-																											simFloat closeNodesDistance, simInt trialCount,
-																											const simFloat *tipPose, simInt maxTimeInMs,
-																											simFloat *outputJointPositions, const simFloat *referenceConfigs,
-																											simInt referenceConfigCount, const simFloat *jointWeights,
-																											const simInt *jointBehaviour, simInt correctionPasses);
+typedef simInt (__cdecl *ptrSimGetMpConfigForTipPose)(simInt motionPlanningObjectHandle, simInt options, simFloat closeNodesDistance, simInt trialCount, const simFloat *tipPose, simInt maxTimeInMs, simFloat *outputJointPositions, const simFloat *referenceConfigs, simInt referenceConfigCount, const simFloat *jointWeights, const simInt *jointBehaviour, simInt correctionPasses);
 
-typedef simFloat *(__cdecl *ptrSimFindMpPath)(simInt motionPlanningObjectHandle, const simFloat *startConfig,
-																							const simFloat *goalConfig, simInt options, simFloat stepSize,
-																							simInt *outputConfigsCnt, simInt maxTimeInMs, simFloat *reserved,
-																							const simInt *auxIntParams, const simFloat *auxFloatParams);
+typedef simFloat *(__cdecl *ptrSimFindMpPath)(simInt motionPlanningObjectHandle, const simFloat *startConfig, const simFloat *goalConfig, simInt options, simFloat stepSize, simInt *outputConfigsCnt, simInt maxTimeInMs, simFloat *reserved, const simInt *auxIntParams, const simFloat *auxFloatParams);
 
-typedef simFloat *(__cdecl *ptrSimSimplifyMpPath)(simInt motionPlanningObjectHandle, const simFloat *pathBuffer,
-																									simInt configCnt, simInt options, simFloat stepSize, simInt increment,
-																									simInt *outputConfigsCnt, simInt maxTimeInMs, simFloat *reserved,
-																									const simInt *auxIntParams, const simFloat *auxFloatParams);
+typedef simFloat *(__cdecl *ptrSimSimplifyMpPath)(simInt motionPlanningObjectHandle, const simFloat *pathBuffer, simInt configCnt, simInt options, simFloat stepSize, simInt increment, simInt *outputConfigsCnt, simInt maxTimeInMs, simFloat *reserved, const simInt *auxIntParams, const simFloat *auxFloatParams);
 
-typedef simFloat *(__cdecl *ptrSimFindIkPath)(simInt motionPlanningObjectHandle, const simFloat *startConfig,
-																							const simFloat *goalPose, simInt options, simFloat stepSize,
-																							simInt *outputConfigsCnt, simFloat *reserved, const simInt *auxIntParams,
-																							const simFloat *auxFloatParams);
+typedef simFloat *(__cdecl *ptrSimFindIkPath)(simInt motionPlanningObjectHandle, const simFloat *startConfig, const simFloat *goalPose, simInt options, simFloat stepSize, simInt *outputConfigsCnt, simFloat *reserved, const simInt *auxIntParams, const simFloat *auxFloatParams);
 
-typedef simFloat *(__cdecl *ptrSimGetMpConfigTransition)(simInt motionPlanningObjectHandle, const simFloat *startConfig,
-																												 const simFloat *goalConfig, simInt options,
-																												 const simInt *select, simFloat calcStepSize,
-																												 simFloat maxOutStepSize, simInt wayPointCnt,
-																												 const simFloat *wayPoints, simInt *outputConfigsCnt,
-																												 const simInt *auxIntParams, const simFloat *auxFloatParams);
+typedef simFloat *(__cdecl *ptrSimGetMpConfigTransition)(simInt motionPlanningObjectHandle, const simFloat *startConfig, const simFloat *goalConfig, simInt options, const simInt *select, simFloat calcStepSize, simFloat maxOutStepSize, simInt wayPointCnt, const simFloat *wayPoints, simInt *outputConfigsCnt, const simInt *auxIntParams, const simFloat *auxFloatParams);
 
-typedef simInt (__cdecl *ptrSimCreateMotionPlanning)(simInt jointCnt, const simInt *jointHandles,
-																										 const simInt *jointRangeSubdivisions,
-																										 const simFloat *jointMetricWeights, simInt options,
-																										 const simInt *intParams, const simFloat *floatParams,
-																										 const simVoid *reserved);
+typedef simInt (__cdecl *ptrSimCreateMotionPlanning)(simInt jointCnt, const simInt *jointHandles, const simInt *jointRangeSubdivisions, const simFloat *jointMetricWeights, simInt options, const simInt *intParams, const simFloat *floatParams, const simVoid *reserved);
 
 typedef simInt (__cdecl *ptrSimRemoveMotionPlanning)(simInt motionPlanningHandle);
 
 typedef simInt (__cdecl *ptrSimSearchPath)(simInt pathPlanningObjectHandle, simFloat maximumSearchTime);
 
-typedef simInt (__cdecl *ptrSimInitializePathSearch)(simInt pathPlanningObjectHandle, simFloat maximumSearchTime,
-																										 simFloat searchTimeStep);
+typedef simInt (__cdecl *ptrSimInitializePathSearch)(simInt pathPlanningObjectHandle, simFloat maximumSearchTime, simFloat searchTimeStep);
 
 typedef simInt (__cdecl *ptrSimPerformPathSearchStep)(simInt temporaryPathSearchObject, simBool abortSearch);
 
@@ -1869,34 +1628,25 @@ typedef simInt (__cdecl *ptrSimResetJoint)(simInt jointHandle);
 
 typedef simInt (__cdecl *ptrSimHandleJoint)(simInt jointHandle, simFloat deltaTime);
 
-typedef simInt (__cdecl *ptrSimAppendScriptArrayEntry)(const simChar *reservedSetToNull, simInt scriptHandleOrType,
-																											 const simChar *arrayNameAtScriptName, const simChar *keyName,
-																											 const simChar *data, const simInt *what);
+typedef simInt (__cdecl *ptrSimAppendScriptArrayEntry)(const simChar *reservedSetToNull, simInt scriptHandleOrType, const simChar *arrayNameAtScriptName, const simChar *keyName, const simChar *data, const simInt *what);
 
-typedef simInt (__cdecl *ptrSimClearScriptVariable)(const simChar *reservedSetToNull, simInt scriptHandleOrType,
-																										const simChar *variableNameAtScriptName);
+typedef simInt (__cdecl *ptrSimClearScriptVariable)(const simChar *reservedSetToNull, simInt scriptHandleOrType, const simChar *variableNameAtScriptName);
 
-typedef simVoid (__cdecl *ptr_simGetJointOdeParameters)(const simVoid *joint, simFloat *stopERP, simFloat *stopCFM,
-																												simFloat *bounce, simFloat *fudge, simFloat *normalCFM);
+typedef simVoid (__cdecl *ptr_simGetJointOdeParameters)(const simVoid *joint, simFloat *stopERP, simFloat *stopCFM, simFloat *bounce, simFloat *fudge, simFloat *normalCFM);
 
-typedef simVoid (__cdecl *ptr_simGetJointBulletParameters)(const simVoid *joint, simFloat *stopERP, simFloat *stopCFM,
-																													 simFloat *normalCFM);
+typedef simVoid (__cdecl *ptr_simGetJointBulletParameters)(const simVoid *joint, simFloat *stopERP, simFloat *stopCFM, simFloat *normalCFM);
 
-typedef simVoid (__cdecl *ptr_simGetOdeMaxContactFrictionCFMandERP)(const simVoid *geomInfo, simInt *maxContacts,
-																																		simFloat *friction, simFloat *cfm, simFloat *erp);
+typedef simVoid (__cdecl *ptr_simGetOdeMaxContactFrictionCFMandERP)(const simVoid *geomInfo, simInt *maxContacts, simFloat *friction, simFloat *cfm, simFloat *erp);
 
-typedef simBool (__cdecl *ptr_simGetBulletCollisionMargin)(const simVoid *geomInfo, simFloat *margin,
-																													 simInt *otherProp);
+typedef simBool (__cdecl *ptr_simGetBulletCollisionMargin)(const simVoid *geomInfo, simFloat *margin, simInt *otherProp);
 
 typedef simBool (__cdecl *ptr_simGetBulletStickyContact)(const simVoid *geomInfo);
 
 typedef simFloat (__cdecl *ptr_simGetBulletRestitution)(const simVoid *geomInfo);
 
-typedef simVoid (__cdecl *ptr_simGetVortexParameters)(const simVoid *object, simInt version, simFloat *floatParams,
-																											simInt *intParams);
+typedef simVoid (__cdecl *ptr_simGetVortexParameters)(const simVoid *object, simInt version, simFloat *floatParams, simInt *intParams);
 
-typedef simVoid (__cdecl *ptr_simGetNewtonParameters)(const simVoid *object, simInt *version, simFloat *floatParams,
-																											simInt *intParams);
+typedef simVoid (__cdecl *ptr_simGetNewtonParameters)(const simVoid *object, simInt *version, simFloat *floatParams, simInt *intParams);
 
 typedef simVoid (__cdecl *ptr_simGetDamping)(const simVoid *geomInfo, simFloat *linDamping, simFloat *angDamping);
 
@@ -1908,18 +1658,15 @@ typedef simInt (__cdecl *ptrSimGetSceneCustomDataLength)(simInt header);
 
 typedef simInt (__cdecl *ptrSimGetSceneCustomData)(simInt header, simChar *data);
 
-typedef simInt (__cdecl *ptrSimAddObjectCustomData)(simInt objectHandle, simInt header, const simChar *data,
-																										simInt dataLength);
+typedef simInt (__cdecl *ptrSimAddObjectCustomData)(simInt objectHandle, simInt header, const simChar *data, simInt dataLength);
 
 typedef simInt (__cdecl *ptrSimGetObjectCustomDataLength)(simInt objectHandle, simInt header);
 
 typedef simInt (__cdecl *ptrSimGetObjectCustomData)(simInt objectHandle, simInt header, simChar *data);
 
-typedef simInt (__cdecl *ptrSimCreateUI)(const simChar *uiName, simInt menuAttributes, const simInt *clientSize,
-																				 const simInt *cellSize, simInt *buttonHandles);
+typedef simInt (__cdecl *ptrSimCreateUI)(const simChar *uiName, simInt menuAttributes, const simInt *clientSize, const simInt *cellSize, simInt *buttonHandles);
 
-typedef simInt (__cdecl *ptrSimCreateUIButton)(simInt uiHandle, const simInt *position, const simInt *size,
-																							 simInt buttonProperty);
+typedef simInt (__cdecl *ptrSimCreateUIButton)(simInt uiHandle, const simInt *position, const simInt *size, simInt buttonProperty);
 
 typedef simInt (__cdecl *ptrSimGetUIHandle)(const simChar *uiName);
 
@@ -1935,8 +1682,7 @@ typedef simInt (__cdecl *ptrSimSetUIButtonProperty)(simInt uiHandle, simInt butt
 
 typedef simInt (__cdecl *ptrSimGetUIButtonSize)(simInt uiHandle, simInt buttonHandle, simInt *size);
 
-typedef simInt (__cdecl *ptrSimSetUIButtonLabel)(simInt uiHandle, simInt buttonHandle, const simChar *upStateLabel,
-																								 const simChar *downStateLabel);
+typedef simInt (__cdecl *ptrSimSetUIButtonLabel)(simInt uiHandle, simInt buttonHandle, const simChar *upStateLabel, const simChar *downStateLabel);
 
 typedef simChar *(__cdecl *ptrSimGetUIButtonLabel)(simInt uiHandle, simInt buttonHandle);
 
@@ -1944,16 +1690,13 @@ typedef simInt (__cdecl *ptrSimSetUISlider)(simInt uiHandle, simInt buttonHandle
 
 typedef simInt (__cdecl *ptrSimGetUISlider)(simInt uiHandle, simInt buttonHandle);
 
-typedef simInt (__cdecl *ptrSimSetUIButtonColor)(simInt uiHandle, simInt buttonHandle, const simFloat *upStateColor,
-																								 const simFloat *downStateColor, const simFloat *labelColor);
+typedef simInt (__cdecl *ptrSimSetUIButtonColor)(simInt uiHandle, simInt buttonHandle, const simFloat *upStateColor, const simFloat *downStateColor, const simFloat *labelColor);
 
-typedef simInt (__cdecl *ptrSimSetUIButtonTexture)(simInt uiHandle, simInt buttonHandle, const simInt *size,
-																									 const simChar *textureData);
+typedef simInt (__cdecl *ptrSimSetUIButtonTexture)(simInt uiHandle, simInt buttonHandle, const simInt *size, const simChar *textureData);
 
 typedef simInt (__cdecl *ptrSimCreateUIButtonArray)(simInt uiHandle, simInt buttonHandle);
 
-typedef simInt (__cdecl *ptrSimSetUIButtonArrayColor)(simInt uiHandle, simInt buttonHandle, const simInt *position,
-																											const simFloat *color);
+typedef simInt (__cdecl *ptrSimSetUIButtonArrayColor)(simInt uiHandle, simInt buttonHandle, const simInt *position, const simFloat *color);
 
 typedef simInt (__cdecl *ptrSimDeleteUIButtonArray)(simInt uiHandle, simInt buttonHandle);
 
@@ -1967,17 +1710,13 @@ typedef simInt (__cdecl *ptrSimLoadUI)(const simChar *filename, int maxCount, in
 
 typedef simInt (__cdecl *ptrSimSaveUI)(int count, const int *uiHandles, const simChar *filename);
 
-typedef simInt (__cdecl *ptrSimHandleGeneralCallbackScript)(simInt callbackId, simInt callbackTag,
-																														simVoid *additionalData);
+typedef simInt (__cdecl *ptrSimHandleGeneralCallbackScript)(simInt callbackId, simInt callbackTag, simVoid *additionalData);
 
-typedef simInt (__cdecl *ptrSimRegisterCustomLuaFunction)(const simChar *funcName, const simChar *callTips,
-																													const simInt *inputArgumentTypes,
-																													simVoid(*callBack)(struct SLuaCallBack *p));
+typedef simInt (__cdecl *ptrSimRegisterCustomLuaFunction)(const simChar *funcName, const simChar *callTips, const simInt *inputArgumentTypes, simVoid(*callBack)(struct SLuaCallBack *p));
 
 typedef simInt (__cdecl *ptrSimRegisterCustomLuaVariable)(const simChar *varName, const simChar *varValue);
 
-typedef simInt (__cdecl *ptrSimRegisterContactCallback)(
-				simInt(*callBack)(simInt, simInt, simInt, simInt *, simFloat *));
+typedef simInt (__cdecl *ptrSimRegisterContactCallback)(simInt(*callBack)(simInt, simInt, simInt, simInt *, simFloat *));
 
 extern ptrSimGetMaterialId simGetMaterialId;
 extern ptrSimGetShapeMaterial simGetShapeMaterial;

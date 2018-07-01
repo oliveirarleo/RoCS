@@ -11,16 +11,16 @@
 #include <Execute/action.h>
 #include "../../Actuators/wheel_vrep.h"
 
-class MoveWheels: public Action
+class MoveWheels : public Action
 {
 private:
-	std::vector<WheelVREP *>& wheels;
+	std::vector<WheelVREP *> &wheels;
 	double v_left;
 	double v_right;
 public:
 	void act() override;
 
-	MoveWheels(std::vector<WheelVREP *>& wheels, double v_left, double v_right);
+	MoveWheels(std::vector<WheelVREP *> &wheels, double v_left, double v_right);
 
 };
 

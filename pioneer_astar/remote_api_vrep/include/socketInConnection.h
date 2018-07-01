@@ -33,8 +33,7 @@ typedef socklen_t _socklen;
 class CSocketInConnection
 {
 public:
-	CSocketInConnection(int theConnectionPort, unsigned short maxPacketSize = 250, char headerID1 = 59,
-											char headerID2 = 57);
+	CSocketInConnection(int theConnectionPort, unsigned short maxPacketSize = 250, char headerID1 = 59, char headerID2 = 57);
 
 	virtual ~CSocketInConnection();
 

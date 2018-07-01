@@ -10,7 +10,7 @@ EulerAngle::EulerAngle(double alpha, double beta, double gama) : alpha(alpha), b
 {
 }
 
-EulerAngle::EulerAngle(): alpha(0), beta(0), gama(0), valid(false)
+EulerAngle::EulerAngle() : alpha(0), beta(0), gama(0), valid(false)
 {
 }
 

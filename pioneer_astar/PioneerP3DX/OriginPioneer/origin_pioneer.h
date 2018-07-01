@@ -8,10 +8,17 @@
 #define PIONEER_A_STAR_PIONEER_H_
 
 
+#include "../Knowledge/RobotModels/pioneer_p3dx_model.h"
+
 class OriginPioneer
 {
 public:
+	PioneerP3DXModel p3dx_model;
+
+public:
 	OriginPioneer();
+
+	virtual ~OriginPioneer();
 };
 
 

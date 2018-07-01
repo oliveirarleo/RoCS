@@ -5,9 +5,9 @@
 //
 
 #include "avoid_wall_model.h"
-#include "../Execute/Actions/move_wheels.h"
-#include "sonar_output.h"
-#include "pioneer_p3dx_model.h"
+#include "../../Execute/Actions/move_wheels.h"
+#include "../Data/sonar_output.h"
+#include "../RobotModels/pioneer_p3dx_model.h"
 
 AvoidWallModel::AvoidWallModel(RobotModel &robot, Pipeline &pipeline)
 				: ReactiveModel(robot, pipeline), no_detection_dist(0.5), max_detection_dist(0.2),

@@ -14,8 +14,7 @@ public:
 
 	//------------------------
 	// Use following to read args coming from a script call to this plugin, and to return args back to a script
-	bool readDataFromStack(int stackHandle, const int *expectedArguments, int requiredArgumentCount,
-												 const char *functionName);
+	bool readDataFromStack(int stackHandle, const int *expectedArguments, int requiredArgumentCount, const char *functionName);
 
 	std::vector<CScriptFunctionDataItem> *getInDataPtr();
 
@@ -31,16 +30,13 @@ public:
 
 	void writeDataToStack_scriptFunctionCall(int stackHandle);
 
-	bool readDataFromStack_scriptFunctionCall(int stackHandle, const int *expectedArguments, int requiredArgumentCount,
-																						const char *functionName);
+	bool readDataFromStack_scriptFunctionCall(int stackHandle, const int *expectedArguments, int requiredArgumentCount, const char *functionName);
 
 	std::vector<CScriptFunctionDataItem> *getOutDataPtr_scriptFunctionCall();
 	//------------------------
 
 protected:
-	bool _readData(int stack, const int *expectedArguments, int requiredArgumentCount, const char *functionName,
-								 const char *argumentText1, const char *argumentText2,
-								 std::vector<CScriptFunctionDataItem> &inOutData);
+	bool _readData(int stack, const int *expectedArguments, int requiredArgumentCount, const char *functionName, const char *argumentText1, const char *argumentText2, std::vector<CScriptFunctionDataItem> &inOutData);
 
 	void _writeData(int stack, std::vector<CScriptFunctionDataItem> &inOutData);
 

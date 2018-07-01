@@ -9,7 +9,7 @@
 #include <utility>
 #include <iostream>
 #include "wheel_vrep.h"
-#include "../Knowledge/pioneer_p3dx_model.h"
+#include "../Knowledge/RobotModels/pioneer_p3dx_model.h"
 
 WheelVREP::WheelVREP(const std::string &name_, RobotModel &robot_)
 				: RotaryMotor(name_), handle(-1), robot(robot_),

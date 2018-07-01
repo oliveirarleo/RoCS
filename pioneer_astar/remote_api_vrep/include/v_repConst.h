@@ -308,8 +308,8 @@ enum
 	sim_displayattribute_nodrawingobjects = 0x2000000,
 	sim_displayattribute_noparticles = 0x4000000,
 	sim_displayattribute_colorcodedtriangles = 0x8000000
-	/*        sim_displayattribute_mode1                  =0x10000000,
-					sim_displayattribute_mode2                  =0x20000000 */
+/*        sim_displayattribute_mode1                  =0x10000000,
+        sim_displayattribute_mode2                  =0x20000000 */
 };
 
 enum

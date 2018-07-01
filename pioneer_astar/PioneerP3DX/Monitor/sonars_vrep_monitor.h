@@ -9,10 +9,10 @@
 
 #include <Monitor/monitor.h>
 #include <thread>
-#include "../Knowledge/sonar_output.h"
+#include "../Knowledge/Data/sonar_output.h"
 #include "../Sensors/range_vrep.h"
 
-class SonarsVREPMonitor: public Monitor<SonarOutput>
+class SonarsVREPMonitor : public Monitor<SonarOutput>
 {
 public:
 	SonarsVREPMonitor(std::vector<RangeVREP *> &sensors_);

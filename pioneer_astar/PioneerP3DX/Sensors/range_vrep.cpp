@@ -10,11 +10,10 @@
 
 extern "C"
 {
-#include <remoteApi/extApi.h>
 #include <include/v_repConst.h>
 }
 
-#include "../Knowledge/pioneer_p3dx_model.h"
+#include "../Knowledge/RobotModels/pioneer_p3dx_model.h"
 
 RangeVREP::RangeVREP(const std::string &name_, RobotModel &robot_)
 				: Range(name_), robot(robot_), handle(-1),

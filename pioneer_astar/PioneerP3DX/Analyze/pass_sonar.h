@@ -11,13 +11,13 @@
 #include <Analyze/analyze.h>
 #include <thread>
 #include <Knowledge/robot_model.h>
-#include "../Knowledge/sonar_output.h"
+#include "../Knowledge/Data/sonar_output.h"
 
-class PassSonarPosition : public Analyze<std::vector<SonarOutput>, std::vector<SonarOutput>>
+class PassSonar : public Analyze<std::vector<SonarOutput>, std::vector<SonarOutput>>
 {
 
 public:
-	PassSonarPosition(const RobotModel &robot);
+	PassSonar(const RobotModel &robot);
 
 	void publishLoop() override;
 

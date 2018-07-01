@@ -23,7 +23,7 @@ protected:
 	std::thread *publish_thread;
 
 public:
-	Monitor(std::vector< Sensor<Value> * >& sensors_): sensors(sensors_), publishing(true)
+	Monitor(std::vector<Sensor<Value> *> &sensors_) : sensors(sensors_), publishing(true)
 	{
 
 	}

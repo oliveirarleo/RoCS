@@ -17,15 +17,14 @@ class Planner
 {
 protected:
 	RobotModel &robot;
-	Pipeline& pipeline;
+	Pipeline &pipeline;
 
 	bool running;
-	std::thread* planner_thread;
-
+	std::thread *planner_thread;
 
 
 public:
-	Planner(RobotModel &robot, Pipeline& pipeline) : robot(robot), pipeline(pipeline), running(true)
+	Planner(RobotModel &robot, Pipeline &pipeline) : robot(robot), pipeline(pipeline), running(true)
 	{
 
 	}

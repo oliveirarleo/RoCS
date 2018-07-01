@@ -11,12 +11,12 @@
 #include <Knowledge/robot_model.h>
 #include "../Connection/connection.h"
 
-class WheelVREP: public RotaryMotor
+class WheelVREP : public RotaryMotor
 {
 private:
 	int handle;
-	RobotModel& robot;
-	Connection& connection;
+	RobotModel &robot;
+	Connection &connection;
 public:
 	WheelVREP(const std::string &name_, RobotModel &robot);
 

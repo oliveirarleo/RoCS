@@ -53,9 +53,7 @@ simxVoid _increaseClientCount()
 simxVoid _decreaseClientCount(simxUChar useSoftLock)
 {
 	if (useSoftLock != 0)
-	{
-		_softLock();
-	} /* simple and not fail-safe. Init/deinit routines would probably be better... */
+		_softLock(); /* simple and not fail-safe. Init/deinit routines would probably be better... */
 	if (_clientsCount > 0)
 	{
 		extApi_globalSimpleLock();
@@ -68,14 +66,10 @@ simxVoid _decreaseClientCount(simxUChar useSoftLock)
 		}
 	}
 	if (useSoftLock != 0)
-	{
 		_softUnlock();
-	}
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxStart(const simxChar *connectionAddress, simxInt connectionPort, simxUChar waitUntilConnected,
-					simxUChar doNotReconnectOnceDisconnected, simxInt timeOutInMs, simxInt commThreadCycleInMs)
+EXTAPI_DLLEXPORT simxInt simxStart(const simxChar *connectionAddress, simxInt connectionPort, simxUChar waitUntilConnected, simxUChar doNotReconnectOnceDisconnected, simxInt timeOutInMs, simxInt commThreadCycleInMs)
 {
 	simxInt startTime, i, clientID;
 
@@ -138,9 +132,7 @@ simxStart(const simxChar *connectionAddress, simxInt connectionPort, simxUChar w
 	{ /* using sockets */
 		_connectionIP[clientID] = (simxChar *) extApi_allocateBuffer(extApi_getStringLength(connectionAddress) + 1);
 		for (i = 0; i < extApi_getStringLength(connectionAddress) + 1; i++)
-		{
 			_connectionIP[clientID][i] = connectionAddress[i];
-		}
 	}
 
 	/* Prepare various buffers */
@@ -192,9 +184,7 @@ simxStart(const simxChar *connectionAddress, simxInt connectionPort, simxUChar w
 	extApi_globalSimpleUnlock();
 
 	if (waitUntilConnected == 0)
-	{
-		return (clientID);
-	} /* we do not wait until connected */
+		return (clientID); /* we do not wait until connected */
 
 	startTime = extApi_getTimeInMs();
 	while ((extApi_getTimeDiffInMs(startTime) < timeOutInMs) && (_connectionID[clientID] == -1))
@@ -211,9 +201,7 @@ EXTAPI_DLLEXPORT simxVoid simxFinish(simxInt clientID)
 {
 	simxInt returnValue, i;
 	if ((clientID < -1) || (clientID >= MAX_EXT_API_CONNECTIONS))
-	{
 		return;
-	}
 
 	_softLock();
 	if (_clientsCount <= 0)
@@ -313,15 +301,11 @@ simxVoid _waitUntilMessageArrived(simxInt clientID, simxInt *error)
 			extApi_unlockResources(clientID);
 			if ((extApi_getTimeDiffInMs(startTime) >= _replyWaitTimeoutInMs[clientID]) ||
 					(lastReceivedMessageIDCopy >= _waitBeforeSendingAgainWhenMessageIDArrived[clientID]))
-			{
 				break;
-			}
 			extApi_switchThread();
 		}
 		if (lastReceivedMessageIDCopy < _waitBeforeSendingAgainWhenMessageIDArrived[clientID])
-		{
 			error[0] |= simx_return_timeout_flag;
-		}
 	}
 }
 
@@ -336,31 +320,23 @@ simxUChar *_setLastFetchedCmd(simxInt clientID, simxUChar *cmdPtr, simxInt *erro
 		{ /* we need more memory here for the fetched command buffer */
 			incr = blockSize - _commandReceived_bufferSize[clientID];
 			if (incr < SIMX_MIN_BUFF_INCR)
-			{
 				incr = SIMX_MIN_BUFF_INCR;
-			}
 			newCommand = (simxUChar *) extApi_allocateBuffer(_commandReceived_bufferSize[clientID] + incr);
 			extApi_releaseBuffer(_commandReceived[clientID]);
 			_commandReceived[clientID] = newCommand;
 			_commandReceived_bufferSize[clientID] += incr;
 		}
 		for (i = 0; i < blockSize; i++)
-		{
 			_commandReceived[clientID][i] = cmdPtr[i];
-		}
 		cmdPtr = _commandReceived[clientID];
 		status = cmdPtr[simx_cmdheaderoffset_status];
 		_commandReceived_simulationTime[clientID] = extApi_endianConversionInt(
 						((simxInt *) (cmdPtr + simx_cmdheaderoffset_sim_time))[0]);
 		if (status & 1)
-		{
-			error[0] |= simx_return_remote_error_flag;
-		} /* command caused an error on the server side */
+			error[0] |= simx_return_remote_error_flag; /* command caused an error on the server side */
 	}
 	else
-	{
 		error[0] |= simx_return_novalue_flag;
-	}
 	return (cmdPtr);
 }
 
@@ -381,15 +357,10 @@ simxUChar *_exec_null(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUCha
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
-			cmdPtr = _getCommandPointer_(cmdRaw, _splitCommandsToSend[clientID],
-																	 _splitCommandsToSend_dataSize[clientID]);
+			cmdPtr = _getCommandPointer_(cmdRaw, _splitCommandsToSend[clientID], _splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
-			{
 				error[0] |= simx_return_split_progress_flag; /* Command already there */
-			}
 			else
 			{ /* Command not there. Add it */
 				_splitCommandsToSend[clientID] = _appendCommand_(cmdRaw + opMode, options, delayOrSplit,
@@ -404,24 +375,19 @@ simxUChar *_exec_null(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUCha
 																	 _messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 			if ((cmdPtr == 0) || (options & 1))
 			{ /* Command not there (or cmd cannot be overwritten). Add it */
-				_messageToSend[clientID] = _appendCommand_(cmdRaw + opMode, options, delayOrSplit,
-																									 _messageToSend[clientID],
+				_messageToSend[clientID] = _appendCommand_(cmdRaw + opMode, options, delayOrSplit, _messageToSend[clientID],
 																									 &_messageToSend_bufferSize[clientID],
 																									 &_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list */
@@ -432,16 +398,13 @@ simxUChar *_exec_null(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUCha
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_null(clientID, cmdRaw);
-	}
 	return (cmdPtr);
 }
 
 
-simxUChar *_exec_null_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxUChar *buffer,
-														 simxInt bufferSize, simxInt *error)
+simxUChar *_exec_null_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxUChar *buffer, simxInt bufferSize, simxInt *error)
 {
 	simxUShort delayOrSplit;
 	simxUChar *cmdPtr = 0;
@@ -458,64 +421,51 @@ simxUChar *_exec_null_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, s
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
-			cmdPtr = _getCommandPointer_(cmdRaw, _splitCommandsToSend[clientID],
-																	 _splitCommandsToSend_dataSize[clientID]);
+			cmdPtr = _getCommandPointer_(cmdRaw, _splitCommandsToSend[clientID], _splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
 			{ /* Command already there */
 				/* Now make sure we have the same command size, otherwise we have to remove the old cmd and add freshly the new */
 				if (extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]) ==
 						SIMX_SUBHEADER_SIZE + 4 + bufferSize)
-				{
 					error[0] |= simx_return_split_progress_flag; /* ok, we have the same size */
-				}
 				else
 				{ /* we don't have the same size! Remove the old command */
-					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr, extApi_endianConversionInt(
-									((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr,
+																 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 																 &_splitCommandsToSend_dataSize[clientID]);
 					cmdPtr = 0; /* so that we will add the new command in next section */
 				}
 			}
 			if (cmdPtr == 0)
-			{
 				_splitCommandsToSend[clientID] = _appendCommand_null_buff(cmdRaw + opMode, options, buffer, bufferSize,
 																																	delayOrSplit, _splitCommandsToSend[clientID],
 																																	&_splitCommandsToSend_bufferSize[clientID],
 																																	&_splitCommandsToSend_dataSize[clientID]);
-			}
 		}
 		else
 		{
 			cmdPtr = _getCommandPointer_(cmdRaw, _messageToSend[clientID] + SIMX_HEADER_SIZE,
 																	 _messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 
-			if ((cmdPtr != 0) && ((options & 1) ==
-														0))
-			{ /* Command already there, and we can overwrite it. We remove it and add it again */
-				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr, extApi_endianConversionInt(
-								((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
-															 &_messageToSend_dataSize[clientID]);
-			} /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
-			_messageToSend[clientID] = _appendCommand_null_buff(cmdRaw + opMode, options, buffer, bufferSize,
-																													delayOrSplit, _messageToSend[clientID],
+			if ((cmdPtr != 0) &&
+					((options & 1) == 0)) /* Command already there, and we can overwrite it. We remove it and add it again */
+				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr,
+															 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+															 &_messageToSend_dataSize[clientID]); /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
+			_messageToSend[clientID] = _appendCommand_null_buff(cmdRaw + opMode, options, buffer, bufferSize, delayOrSplit,
+																													_messageToSend[clientID],
 																													&_messageToSend_bufferSize[clientID],
 																													&_messageToSend_dataSize[clientID]);
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -526,16 +476,13 @@ simxUChar *_exec_null_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, s
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_null(clientID, cmdRaw);
-	}
 	return (cmdPtr);
 }
 
 
-simxUChar *
-_exec_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxInt *error)
+simxUChar *_exec_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxInt *error)
 {
 	simxUShort delayOrSplit;
 	simxUChar *cmdPtr = 0;
@@ -551,15 +498,11 @@ _exec_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, s
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
-			{
 				error[0] |= simx_return_split_progress_flag; /* Command already there */
-			}
 			else
 			{ /* Command not there. Add it */
 				_splitCommandsToSend[clientID] = _appendCommand_i(cmdRaw + opMode, options, intValue, delayOrSplit,
@@ -579,23 +522,18 @@ _exec_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, s
 			else
 			{ /* Command not there. Add it */
 				_messageToSend[clientID] = _appendCommand_i(cmdRaw + opMode, options, intValue, delayOrSplit,
-																										_messageToSend[clientID],
-																										&_messageToSend_bufferSize[clientID],
+																										_messageToSend[clientID], &_messageToSend_bufferSize[clientID],
 																										&_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list */
@@ -606,16 +544,12 @@ _exec_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, s
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_int(clientID, cmdRaw, intValue);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *
-_exec_intint(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1, simxInt intValue2,
-						 simxInt *error)
+simxUChar *_exec_intint(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1, simxInt intValue2, simxInt *error)
 {
 	simxUShort delayOrSplit;
 	simxUChar *cmdPtr = 0;
@@ -631,19 +565,15 @@ _exec_intint(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_ii(cmdRaw, intValue1, intValue2, _splitCommandsToSend[clientID],
 																		 _splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
-			{
 				error[0] |= simx_return_split_progress_flag; /* Command already there */
-			}
 			else
 			{ /* Command not there. Add it */
-				_splitCommandsToSend[clientID] = _appendCommand_ii(cmdRaw + opMode, options, intValue1, intValue2,
-																													 delayOrSplit, _splitCommandsToSend[clientID],
+				_splitCommandsToSend[clientID] = _appendCommand_ii(cmdRaw + opMode, options, intValue1, intValue2, delayOrSplit,
+																													 _splitCommandsToSend[clientID],
 																													 &_splitCommandsToSend_bufferSize[clientID],
 																													 &_splitCommandsToSend_dataSize[clientID]);
 			}
@@ -658,24 +588,19 @@ _exec_intint(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 			}
 			else
 			{ /* Command not there. Add it */
-				_messageToSend[clientID] = _appendCommand_ii(cmdRaw + opMode, options, intValue1, intValue2,
-																										 delayOrSplit, _messageToSend[clientID],
-																										 &_messageToSend_bufferSize[clientID],
+				_messageToSend[clientID] = _appendCommand_ii(cmdRaw + opMode, options, intValue1, intValue2, delayOrSplit,
+																										 _messageToSend[clientID], &_messageToSend_bufferSize[clientID],
 																										 &_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list */
@@ -686,16 +611,12 @@ _exec_intint(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_intint(clientID, cmdRaw, intValue1, intValue2);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *
-_exec_string(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, const simxUChar *stringValue,
-						 simxInt *error)
+simxUChar *_exec_string(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, const simxUChar *stringValue, simxInt *error)
 {
 	simxUShort delayOrSplit;
 	simxUChar *cmdPtr = 0;
@@ -712,9 +633,7 @@ _exec_string(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_s(cmdRaw, stringValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -740,23 +659,18 @@ _exec_string(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 			else
 			{ /* Command not there. Add it */
 				_messageToSend[clientID] = _appendCommand_s(cmdRaw + opMode, options, stringValue, delayOrSplit,
-																										_messageToSend[clientID],
-																										&_messageToSend_bufferSize[clientID],
+																										_messageToSend[clientID], &_messageToSend_bufferSize[clientID],
 																										&_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list */
@@ -767,16 +681,12 @@ _exec_string(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_string(clientID, cmdRaw, stringValue);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *
-_exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxInt intValue2,
-							simxInt *error)
+simxUChar *_exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxInt intValue2, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -793,9 +703,7 @@ _exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar option
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if ((cmdPtr != 0) && ((options & 1) == 0))
@@ -804,8 +712,8 @@ _exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar option
 			}
 			else
 			{ /* Command not there. Add it */
-				_splitCommandsToSend[clientID] = _appendCommand_i_i(cmdRaw + opMode, options, intValue, intValue2,
-																														delayOrSplit, _splitCommandsToSend[clientID],
+				_splitCommandsToSend[clientID] = _appendCommand_i_i(cmdRaw + opMode, options, intValue, intValue2, delayOrSplit,
+																														_splitCommandsToSend[clientID],
 																														&_splitCommandsToSend_bufferSize[clientID],
 																														&_splitCommandsToSend_dataSize[clientID]);
 			}
@@ -821,24 +729,19 @@ _exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar option
 			}
 			else
 			{ /* Command not there. Add it */
-				_messageToSend[clientID] = _appendCommand_i_i(cmdRaw + opMode, options, intValue, intValue2,
-																											delayOrSplit, _messageToSend[clientID],
-																											&_messageToSend_bufferSize[clientID],
+				_messageToSend[clientID] = _appendCommand_i_i(cmdRaw + opMode, options, intValue, intValue2, delayOrSplit,
+																											_messageToSend[clientID], &_messageToSend_bufferSize[clientID],
 																											&_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -849,15 +752,12 @@ _exec_int_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar option
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_int(clientID, cmdRaw, intValue);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1,
-														simxInt intValue2, simxInt intValue3, simxInt *error)
+simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1, simxInt intValue2, simxInt intValue3, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -874,9 +774,7 @@ simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_ii(cmdRaw, intValue1, intValue2, _splitCommandsToSend[clientID],
 																		 _splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -885,9 +783,8 @@ simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 			}
 			else
 			{ /* Command not there. Add it */
-				_splitCommandsToSend[clientID] = _appendCommand_ii_i(cmdRaw + opMode, options, intValue1, intValue2,
-																														 intValue3, delayOrSplit,
-																														 _splitCommandsToSend[clientID],
+				_splitCommandsToSend[clientID] = _appendCommand_ii_i(cmdRaw + opMode, options, intValue1, intValue2, intValue3,
+																														 delayOrSplit, _splitCommandsToSend[clientID],
 																														 &_splitCommandsToSend_bufferSize[clientID],
 																														 &_splitCommandsToSend_dataSize[clientID]);
 			}
@@ -903,24 +800,20 @@ simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 			}
 			else
 			{ /* Command not there. Add it */
-				_messageToSend[clientID] = _appendCommand_ii_i(cmdRaw + opMode, options, intValue1, intValue2,
-																											 intValue3, delayOrSplit, _messageToSend[clientID],
+				_messageToSend[clientID] = _appendCommand_ii_i(cmdRaw + opMode, options, intValue1, intValue2, intValue3,
+																											 delayOrSplit, _messageToSend[clientID],
 																											 &_messageToSend_bufferSize[clientID],
 																											 &_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -931,15 +824,12 @@ simxUChar *_exec_intint_int(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_intint(clientID, cmdRaw, intValue1, intValue2);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1,
-															 simxInt intValue2, simxUChar *buffer, simxInt bufferSize, simxInt *error)
+simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue1, simxInt intValue2, simxUChar *buffer, simxInt bufferSize, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -956,9 +846,7 @@ simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode,
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_ii(cmdRaw, intValue1, intValue2, _splitCommandsToSend[clientID],
 																		 _splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -967,8 +855,8 @@ simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode,
 			}
 			else
 			{ /* Command not there. Add it */
-				_splitCommandsToSend[clientID] = _appendCommand_ii_buff(cmdRaw + opMode, options, intValue1, intValue2,
-																																buffer, bufferSize, delayOrSplit,
+				_splitCommandsToSend[clientID] = _appendCommand_ii_buff(cmdRaw + opMode, options, intValue1, intValue2, buffer,
+																																bufferSize, delayOrSplit,
 																																_splitCommandsToSend[clientID],
 																																&_splitCommandsToSend_bufferSize[clientID],
 																																&_splitCommandsToSend_dataSize[clientID]);
@@ -980,8 +868,8 @@ simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode,
 																		 _messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 			if ((cmdPtr != 0) && ((options & 1) == 0))
 			{ /* Command already there, and we can overwrite it. Remove it, we'll add it again just after */
-				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr, extApi_endianConversionInt(
-								((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr,
+															 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 															 &_messageToSend_dataSize[clientID]); /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
 			}
 			/* Add it: */
@@ -992,16 +880,12 @@ simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode,
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -1012,15 +896,12 @@ simxUChar *_exec_intint_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode,
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_intint(clientID, cmdRaw, intValue1, intValue2);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *_exec_int_float(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue,
-													 simxFloat floatValue, simxInt *error)
+simxUChar *_exec_int_float(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxFloat floatValue, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -1037,9 +918,7 @@ simxUChar *_exec_int_float(simxInt clientID, simxInt cmdRaw, simxInt opMode, sim
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -1065,24 +944,19 @@ simxUChar *_exec_int_float(simxInt clientID, simxInt cmdRaw, simxInt opMode, sim
 			}
 			else
 			{ /* Command not there. Add it */
-				_messageToSend[clientID] = _appendCommand_i_f(cmdRaw + opMode, options, intValue, floatValue,
-																											delayOrSplit, _messageToSend[clientID],
-																											&_messageToSend_bufferSize[clientID],
+				_messageToSend[clientID] = _appendCommand_i_f(cmdRaw + opMode, options, intValue, floatValue, delayOrSplit,
+																											_messageToSend[clientID], &_messageToSend_bufferSize[clientID],
 																											&_messageToSend_dataSize[clientID]);
 			}
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -1093,15 +967,12 @@ simxUChar *_exec_int_float(simxInt clientID, simxInt cmdRaw, simxInt opMode, sim
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_int(clientID, cmdRaw, intValue);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue,
-														simxUChar *buffer, simxInt bufferSize, simxInt *error)
+simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, simxUChar *buffer, simxInt bufferSize, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -1118,9 +989,7 @@ simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -1128,38 +997,31 @@ simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 				/* Now make sure we have the same command size, otherwise we have to remove the old cmd and add freshly the new */
 				if (extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]) ==
 						SIMX_SUBHEADER_SIZE + 4 + bufferSize)
-				{
 					error[0] |= simx_return_split_progress_flag; /* ok, we have the same size */
-				}
 				else
 				{ /* we don't have the same size! Remove the old command */
-					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr, extApi_endianConversionInt(
-									((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr,
+																 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 																 &_splitCommandsToSend_dataSize[clientID]);
 					cmdPtr = 0; /* so that we will add the new command in next section */
 				}
 			}
 			if (cmdPtr == 0)
-			{
-				_splitCommandsToSend[clientID] = _appendCommand_i_buff(cmdRaw + opMode, options, intValue, buffer,
-																															 bufferSize, delayOrSplit,
-																															 _splitCommandsToSend[clientID],
+				_splitCommandsToSend[clientID] = _appendCommand_i_buff(cmdRaw + opMode, options, intValue, buffer, bufferSize,
+																															 delayOrSplit, _splitCommandsToSend[clientID],
 																															 &_splitCommandsToSend_bufferSize[clientID],
 																															 &_splitCommandsToSend_dataSize[clientID]);
-			}
 		}
 		else
 		{
 			cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _messageToSend[clientID] + SIMX_HEADER_SIZE,
 																		_messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 
-			if ((cmdPtr != 0) && ((options & 1) ==
-														0))
-			{ /* Command already there, and we can overwrite it. We remove it and add it again */
-				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr, extApi_endianConversionInt(
-								((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
-															 &_messageToSend_dataSize[clientID]);
-			} /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
+			if ((cmdPtr != 0) &&
+					((options & 1) == 0)) /* Command already there, and we can overwrite it. We remove it and add it again */
+				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr,
+															 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+															 &_messageToSend_dataSize[clientID]); /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
 			_messageToSend[clientID] = _appendCommand_i_buff(cmdRaw + opMode, options, intValue, buffer, bufferSize,
 																											 delayOrSplit, _messageToSend[clientID],
 																											 &_messageToSend_bufferSize[clientID],
@@ -1167,16 +1029,12 @@ simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -1187,17 +1045,13 @@ simxUChar *_exec_int_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, si
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_int(clientID, cmdRaw, intValue);
-	}
 	return (cmdPtr);
 }
 
 
-simxUChar *
-_exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, const simxUChar *stringValue,
-										simxUChar *buffer, simxInt bufferSize, simxInt *error)
+simxUChar *_exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, const simxUChar *stringValue, simxUChar *buffer, simxInt bufferSize, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -1214,9 +1068,7 @@ _exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar 
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
 			cmdPtr = _getCommandPointer_s(cmdRaw, stringValue, _splitCommandsToSend[clientID],
 																		_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
@@ -1224,37 +1076,30 @@ _exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar 
 				/* Now make sure we have the same command size, otherwise we have to remove the old cmd and add freshly the new */
 				if (extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]) ==
 						SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue) + 1 + bufferSize)
-				{
 					error[0] |= simx_return_split_progress_flag; /* ok, we have the same size */
-				}
 				else
 				{ /* we don't have the same size! Remove the old command */
-					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr, extApi_endianConversionInt(
-									((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr,
+																 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 																 &_splitCommandsToSend_dataSize[clientID]);
 					cmdPtr = 0; /* so that we will add the new command in next section */
 				}
 			}
 			if (cmdPtr == 0)
-			{
 				_splitCommandsToSend[clientID] = _appendCommand_s_buff(cmdRaw + opMode, options, stringValue, buffer,
-																															 bufferSize, delayOrSplit,
-																															 _splitCommandsToSend[clientID],
+																															 bufferSize, delayOrSplit, _splitCommandsToSend[clientID],
 																															 &_splitCommandsToSend_bufferSize[clientID],
 																															 &_splitCommandsToSend_dataSize[clientID]);
-			}
 		}
 		else
 		{
 			cmdPtr = _getCommandPointer_s(cmdRaw, stringValue, _messageToSend[clientID] + SIMX_HEADER_SIZE,
 																		_messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 			if ((cmdPtr != 0) &&
-					((options & 1) == 0))
-			{  /* Command already there, and we can overwrite it. Remove it and add it again */
-				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr, extApi_endianConversionInt(
-								((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
-															 &_messageToSend_dataSize[clientID]);
-			} /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
+					((options & 1) == 0))  /* Command already there, and we can overwrite it. Remove it and add it again */
+				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr,
+															 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+															 &_messageToSend_dataSize[clientID]); /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
 			_messageToSend[clientID] = _appendCommand_s_buff(cmdRaw + opMode, options, stringValue, buffer, bufferSize,
 																											 delayOrSplit, _messageToSend[clientID],
 																											 &_messageToSend_bufferSize[clientID],
@@ -1262,16 +1107,12 @@ _exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar 
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -1282,17 +1123,12 @@ _exec_string_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar 
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_string(clientID, cmdRaw, stringValue);
-	}
 	return (cmdPtr);
 }
 
-simxUChar *
-_exec_intstringstring_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue,
-														 const simxUChar *stringValue1, const simxUChar *stringValue2, simxUChar *buffer,
-														 simxInt bufferSize, simxInt *error)
+simxUChar *_exec_intstringstring_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, simxUChar options, simxInt intValue, const simxUChar *stringValue1, const simxUChar *stringValue2, simxUChar *buffer, simxInt bufferSize, simxInt *error)
 {
 	simxUChar *cmdPtr;
 	simxUShort delayOrSplit;
@@ -1309,36 +1145,30 @@ _exec_intstringstring_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, s
 		if (opMode == simx_opmode_oneshot_split)
 		{
 			if (delayOrSplit < _MIN_SPLIT_AMOUNT_IN_BYTES)
-			{
 				delayOrSplit = _MIN_SPLIT_AMOUNT_IN_BYTES;
-			}
-			cmdPtr = _getCommandPointer_iss(cmdRaw, intValue, stringValue1, stringValue2,
-																			_splitCommandsToSend[clientID], _splitCommandsToSend_dataSize[clientID]);
+			cmdPtr = _getCommandPointer_iss(cmdRaw, intValue, stringValue1, stringValue2, _splitCommandsToSend[clientID],
+																			_splitCommandsToSend_dataSize[clientID]);
 			if (cmdPtr != 0)
 			{ /* Command already there */
 				/* Now make sure we have the same command size, otherwise we have to remove the old cmd and add freshly the new */
 				if (extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]) ==
 						SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue1) +
 						extApi_getStringLength((simxChar *) stringValue2) + 6 + bufferSize)
-				{
 					error[0] |= simx_return_split_progress_flag; /* ok, we have the same size */
-				}
 				else
 				{ /* we don't have the same size! Remove the old command */
-					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr, extApi_endianConversionInt(
-									((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+					_removeChunkFromBuffer(_splitCommandsToSend[clientID], cmdPtr,
+																 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 																 &_splitCommandsToSend_dataSize[clientID]);
 					cmdPtr = 0; /* so that we will add the new command in next section */
 				}
 			}
 			if (cmdPtr == 0)
-			{
-				_splitCommandsToSend[clientID] = _appendCommand_iss_buff(cmdRaw + opMode, options, intValue,
-																																 stringValue1, stringValue2, buffer, bufferSize,
-																																 delayOrSplit, _splitCommandsToSend[clientID],
+				_splitCommandsToSend[clientID] = _appendCommand_iss_buff(cmdRaw + opMode, options, intValue, stringValue1,
+																																 stringValue2, buffer, bufferSize, delayOrSplit,
+																																 _splitCommandsToSend[clientID],
 																																 &_splitCommandsToSend_bufferSize[clientID],
 																																 &_splitCommandsToSend_dataSize[clientID]);
-			}
 		}
 		else
 		{
@@ -1346,30 +1176,23 @@ _exec_intstringstring_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, s
 																			_messageToSend[clientID] + SIMX_HEADER_SIZE,
 																			_messageToSend_dataSize[clientID] - SIMX_HEADER_SIZE);
 			if ((cmdPtr != 0) &&
-					((options & 1) == 0))
-			{  /* Command already there, and we can overwrite it. Remove it and add it again */
-				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr, extApi_endianConversionInt(
-								((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
-															 &_messageToSend_dataSize[clientID]);
-			} /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
-			_messageToSend[clientID] = _appendCommand_iss_buff(cmdRaw + opMode, options, intValue, stringValue1,
-																												 stringValue2, buffer, bufferSize, delayOrSplit,
-																												 _messageToSend[clientID],
+					((options & 1) == 0))  /* Command already there, and we can overwrite it. Remove it and add it again */
+				_removeChunkFromBuffer(_messageToSend[clientID], cmdPtr,
+															 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
+															 &_messageToSend_dataSize[clientID]); /* we remove then add the command again (b/c no guarantee the buffer has the same size) */
+			_messageToSend[clientID] = _appendCommand_iss_buff(cmdRaw + opMode, options, intValue, stringValue1, stringValue2,
+																												 buffer, bufferSize, delayOrSplit, _messageToSend[clientID],
 																												 &_messageToSend_bufferSize[clientID],
 																												 &_messageToSend_dataSize[clientID]);
 		}
 
 		if (opMode == simx_opmode_blocking)
-		{
 			_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = _nextMessageIDToSend[clientID];
-		}
 		extApi_unlockResources(clientID);
 
 		/* wait until we received a reply, or a timeout (if we wanna wait for the reply) */
 		if (_waitBeforeSendingAgainWhenMessageIDArrived[clientID] != -1)
-		{
 			_waitUntilMessageArrived(clientID, error);
-		}
 	}
 
 	/* Check if the command is present in the input list (we might have this situation when we want to check if there was an error on the server side) */
@@ -1381,10 +1204,8 @@ _exec_intstringstring_buffer(simxInt clientID, simxInt cmdRaw, simxInt opMode, s
 	_waitBeforeSendingAgainWhenMessageIDArrived[clientID] = -1; /* make sure to enable the communication thread again! */
 	extApi_unlockResources(clientID);
 	if (opMode ==
-			simx_opmode_blocking)
-	{ /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
+			simx_opmode_blocking) /* A cmd reply stays in the inbox always.. except when the mode is simx_opmode_blocking (to avoid polluting the inbox) */
 		_removeCommandReply_intstringstring(clientID, cmdRaw, intValue, stringValue1, stringValue2);
-	}
 	return (cmdPtr);
 }
 
@@ -1441,8 +1262,7 @@ simxInt _readPureDataInt(simxUChar *commandPointer, simxInt stringCnt, simxInt b
 			stringCnt--;
 		}
 		additionalOffset += byteOffset;
-		retVal = extApi_endianConversionInt(
-						extApi_getIntFromPtr(commandPointer + SIMX_SUBHEADER_SIZE + additionalOffset));
+		retVal = extApi_endianConversionInt(extApi_getIntFromPtr(commandPointer + SIMX_SUBHEADER_SIZE + additionalOffset));
 	}
 	return (retVal);
 }
@@ -1465,8 +1285,7 @@ simxUChar *_getCommandPointer_(simxInt cmdRaw, const simxUChar *commandBufferSta
 	return (retVal);
 }
 
-simxUChar *
-_getCommandPointer_i(simxInt cmdRaw, simxInt intValue, const simxUChar *commandBufferStart, simxInt commandBufferSize)
+simxUChar *_getCommandPointer_i(simxInt cmdRaw, simxInt intValue, const simxUChar *commandBufferStart, simxInt commandBufferSize)
 {
 	simxUChar *retVal = 0;
 	simxInt offset = 0;
@@ -1488,9 +1307,7 @@ _getCommandPointer_i(simxInt cmdRaw, simxInt intValue, const simxUChar *commandB
 	return (retVal);
 }
 
-simxUChar *
-_getCommandPointer_ii(simxInt cmdRaw, simxInt intValue1, simxInt intValue2, const simxUChar *commandBufferStart,
-											simxInt commandBufferSize)
+simxUChar *_getCommandPointer_ii(simxInt cmdRaw, simxInt intValue1, simxInt intValue2, const simxUChar *commandBufferStart, simxInt commandBufferSize)
 {
 	simxUChar *retVal = 0;
 	simxInt offset = 0;
@@ -1516,8 +1333,7 @@ _getCommandPointer_ii(simxInt cmdRaw, simxInt intValue1, simxInt intValue2, cons
 	return (retVal);
 }
 
-simxUChar *_getCommandPointer_s(simxInt cmdRaw, const simxUChar *stringValue, const simxUChar *commandBufferStart,
-																simxInt commandBufferSize)
+simxUChar *_getCommandPointer_s(simxInt cmdRaw, const simxUChar *stringValue, const simxUChar *commandBufferStart, simxInt commandBufferSize)
 {
 	simxUChar *retVal = 0;
 	simxInt offset = 0;
@@ -1539,9 +1355,7 @@ simxUChar *_getCommandPointer_s(simxInt cmdRaw, const simxUChar *stringValue, co
 	return (retVal);
 }
 
-simxUChar *
-_getCommandPointer_iss(simxInt cmdRaw, simxInt intValue, const simxUChar *stringValue1, const simxUChar *stringValue2,
-											 const simxUChar *commandBufferStart, simxInt commandBufferSize)
+simxUChar *_getCommandPointer_iss(simxInt cmdRaw, simxInt intValue, const simxUChar *stringValue1, const simxUChar *stringValue2, const simxUChar *commandBufferStart, simxInt commandBufferSize)
 {
 	simxUChar *retVal = 0;
 	simxInt offset = 0;
@@ -1554,12 +1368,12 @@ _getCommandPointer_iss(simxInt cmdRaw, simxInt intValue, const simxUChar *string
 					extApi_endianConversionInt(intValue))
 			{
 				if (extApi_areStringsSame((simxChar *) stringValue1,
-																	(simxChar *) commandBufferStart + offset + SIMX_SUBHEADER_SIZE +
-																	sizeof(simxInt)) != 0)
+																	(simxChar *) commandBufferStart + offset + SIMX_SUBHEADER_SIZE + sizeof(simxInt)) !=
+						0)
 				{
 					if (extApi_areStringsSame((simxChar *) stringValue2,
-																		(simxChar *) commandBufferStart + offset + SIMX_SUBHEADER_SIZE +
-																		sizeof(simxInt) + extApi_getStringLength(
+																		(simxChar *) commandBufferStart + offset + SIMX_SUBHEADER_SIZE + sizeof(simxInt) +
+																		extApi_getStringLength(
 																						(simxChar *) commandBufferStart + offset + SIMX_SUBHEADER_SIZE +
 																						sizeof(simxInt)) + 1) != 0)
 					{
@@ -1575,22 +1389,17 @@ _getCommandPointer_iss(simxInt cmdRaw, simxInt intValue, const simxUChar *string
 	return (retVal);
 }
 
-simxVoid
-_removeChunkFromBuffer(const simxUChar *bufferStart, simxUChar *chunkStart, simxInt chunkSize, simxInt *buffer_dataSize)
+simxVoid _removeChunkFromBuffer(const simxUChar *bufferStart, simxUChar *chunkStart, simxInt chunkSize, simxInt *buffer_dataSize)
 {
 	simxInt i, off, l;
 	off = (simxInt) (chunkStart - bufferStart);
 	l = buffer_dataSize[0] - off - chunkSize;
 	for (i = 0; i < l; i++)
-	{
 		chunkStart[i] = chunkStart[chunkSize + i];
-	}
 	buffer_dataSize[0] -= chunkSize;
 }
 
-simxUChar *
-_appendCommand_(simxInt cmd, simxUChar options, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize,
-								simxInt *buffer_dataSize)
+simxUChar *_appendCommand_(simxInt cmd, simxUChar options, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 0];
 	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 0);
@@ -1605,9 +1414,7 @@ _appendCommand_(simxInt cmd, simxUChar options, simxUShort delayOrSplit, simxUCh
 	return (_appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 0, buffer, buffer_bufferSize, buffer_dataSize));
 }
 
-simxUChar *
-_appendCommand_null_buff(simxInt cmd, simxUChar options, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit,
-												 simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
+simxUChar *_appendCommand_null_buff(simxInt cmd, simxUChar options, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1624,18 +1431,14 @@ _appendCommand_null_buff(simxInt cmd, simxUChar options, simxUChar *buffer, simx
 	((simxUShort *) (data + simx_cmdheaderoffset_delay_or_split))[0] = extApi_endianConversionUShort(delayOrSplit);
 	data[simx_cmdheaderoffset_status] = options;
 	for (i = 0; i < bufferSize; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + 0 + i] = buffer[i];
-	}
 	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 0 + bufferSize, destBuffer, destBuffer_bufferSize,
 																destBuffer_dataSize);
 	extApi_releaseBuffer(data);
 	return (retVal);
 }
 
-simxUChar *
-_appendCommand_i(simxInt cmd, simxUChar options, simxInt intValue, simxUShort delayOrSplit, simxUChar *buffer,
-								 simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
+simxUChar *_appendCommand_i(simxInt cmd, simxUChar options, simxInt intValue, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 4];
 	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 4);
@@ -1651,9 +1454,7 @@ _appendCommand_i(simxInt cmd, simxUChar options, simxInt intValue, simxUShort de
 	return (_appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 4, buffer, buffer_bufferSize, buffer_dataSize));
 }
 
-simxUChar *
-_appendCommand_ii(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxUShort delayOrSplit,
-									simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
+simxUChar *_appendCommand_ii(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 8];
 	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 8);
@@ -1670,8 +1471,7 @@ _appendCommand_ii(simxInt cmd, simxUChar options, simxInt intValue1, simxInt int
 	return (_appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 8, buffer, buffer_bufferSize, buffer_dataSize));
 }
 
-simxUChar *_appendCommand_s(simxInt cmd, simxUChar options, const simxUChar *stringValue, simxUShort delayOrSplit,
-														simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
+simxUChar *_appendCommand_s(simxInt cmd, simxUChar options, const simxUChar *stringValue, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1689,19 +1489,14 @@ simxUChar *_appendCommand_s(simxInt cmd, simxUChar options, const simxUChar *str
 	((simxUShort *) (data + simx_cmdheaderoffset_delay_or_split))[0] = extApi_endianConversionUShort(delayOrSplit);
 	data[simx_cmdheaderoffset_status] = options;
 	for (i = 0; i < strLength; i++)
-	{
 		(data + SIMX_SUBHEADER_SIZE)[i] = stringValue[i];
-	}
 	(data + SIMX_SUBHEADER_SIZE)[strLength] = 0; /* terminal 0 */
-	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + strLength + 1, buffer, buffer_bufferSize,
-																buffer_dataSize);
+	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + strLength + 1, buffer, buffer_bufferSize, buffer_dataSize);
 	extApi_releaseBuffer(data);
 	return (retVal);
 }
 
-simxUChar *
-_appendCommand_i_i(simxInt cmd, simxUChar options, simxInt intValue, simxInt intValue2, simxUShort delayOrSplit,
-									 simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
+simxUChar *_appendCommand_i_i(simxInt cmd, simxUChar options, simxInt intValue, simxInt intValue2, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 4 + 4];
 	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 4 + 4);
@@ -1720,13 +1515,10 @@ _appendCommand_i_i(simxInt cmd, simxUChar options, simxInt intValue, simxInt int
 }
 
 
-simxUChar *_appendCommand_ii_i(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxInt intValue3,
-															 simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize,
-															 simxInt *buffer_dataSize)
+simxUChar *_appendCommand_ii_i(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxInt intValue3, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 4 + 4 + 4];
-	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(
-					SIMX_SUBHEADER_SIZE + 4 + 4 + 4);
+	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 4 + 4 + 4);
 
 	((simxInt *) (data + simx_cmdheaderoffset_full_mem_size))[0] = extApi_endianConversionInt(
 					SIMX_SUBHEADER_SIZE + 4 + 4 + 4);
@@ -1743,9 +1535,7 @@ simxUChar *_appendCommand_ii_i(simxInt cmd, simxUChar options, simxInt intValue1
 }
 
 
-simxUChar *
-_appendCommand_i_f(simxInt cmd, simxUChar options, simxInt intValue, simxFloat floatValue, simxUShort delayOrSplit,
-									 simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
+simxUChar *_appendCommand_i_f(simxInt cmd, simxUChar options, simxInt intValue, simxFloat floatValue, simxUShort delayOrSplit, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxUChar data[SIMX_SUBHEADER_SIZE + 4 + 4];
 	((simxInt *) (data + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(SIMX_SUBHEADER_SIZE + 4 + 4);
@@ -1764,10 +1554,7 @@ _appendCommand_i_f(simxInt cmd, simxUChar options, simxInt intValue, simxFloat f
 }
 
 
-simxUChar *
-_appendCommand_i_buff(simxInt cmd, simxUChar options, simxInt intValue, simxUChar *buffer, simxInt bufferSize,
-											simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize,
-											simxInt *destBuffer_dataSize)
+simxUChar *_appendCommand_i_buff(simxInt cmd, simxUChar options, simxInt intValue, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1785,19 +1572,14 @@ _appendCommand_i_buff(simxInt cmd, simxUChar options, simxInt intValue, simxUCha
 	data[simx_cmdheaderoffset_status] = options;
 	((simxInt *) (data + SIMX_SUBHEADER_SIZE))[0] = extApi_endianConversionInt(intValue);
 	for (i = 0; i < bufferSize; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + 4 + i] = buffer[i];
-	}
 	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 4 + bufferSize, destBuffer, destBuffer_bufferSize,
 																destBuffer_dataSize);
 	extApi_releaseBuffer(data);
 	return (retVal);
 }
 
-simxUChar *
-_appendCommand_ii_buff(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxUChar *buffer,
-											 simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer,
-											 simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
+simxUChar *_appendCommand_ii_buff(simxInt cmd, simxUChar options, simxInt intValue1, simxInt intValue2, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1816,18 +1598,14 @@ _appendCommand_ii_buff(simxInt cmd, simxUChar options, simxInt intValue1, simxIn
 	((simxInt *) (data + SIMX_SUBHEADER_SIZE))[0] = extApi_endianConversionInt(intValue1);
 	((simxInt *) (data + SIMX_SUBHEADER_SIZE))[1] = extApi_endianConversionInt(intValue2);
 	for (i = 0; i < bufferSize; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + 4 + 4 + i] = buffer[i];
-	}
 	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + 4 + 4 + bufferSize, destBuffer, destBuffer_bufferSize,
 																destBuffer_dataSize);
 	extApi_releaseBuffer(data);
 	return (retVal);
 }
 
-simxUChar *_appendCommand_s_buff(simxInt cmd, simxUChar options, const simxUChar *stringValue, simxUChar *buffer,
-																 simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer,
-																 simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
+simxUChar *_appendCommand_s_buff(simxInt cmd, simxUChar options, const simxUChar *stringValue, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1846,23 +1624,17 @@ simxUChar *_appendCommand_s_buff(simxInt cmd, simxUChar options, const simxUChar
 	((simxUShort *) (data + simx_cmdheaderoffset_delay_or_split))[0] = extApi_endianConversionUShort(delayOrSplit);
 	data[simx_cmdheaderoffset_status] = options;
 	for (i = 0; i < extApi_getStringLength((simxChar *) stringValue) + 1; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + i] = stringValue[i];
-	}
 	for (i = 0; i < bufferSize; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue) + 1 + i] = buffer[i];
-	}
-	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue) + 1 +
-																			bufferSize, destBuffer, destBuffer_bufferSize, destBuffer_dataSize);
+	retVal = _appendChunkToBuffer(data,
+																SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue) + 1 + bufferSize,
+																destBuffer, destBuffer_bufferSize, destBuffer_dataSize);
 	extApi_releaseBuffer(data);
 	return (retVal);
 }
 
-simxUChar *_appendCommand_iss_buff(simxInt cmd, simxUChar options, simxInt intValue, const simxUChar *stringValue1,
-																	 const simxUChar *stringValue2, simxUChar *buffer, simxInt bufferSize,
-																	 simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize,
-																	 simxInt *destBuffer_dataSize)
+simxUChar *_appendCommand_iss_buff(simxInt cmd, simxUChar options, simxInt intValue, const simxUChar *stringValue1, const simxUChar *stringValue2, simxUChar *buffer, simxInt bufferSize, simxUShort delayOrSplit, simxUChar *destBuffer, simxInt *destBuffer_bufferSize, simxInt *destBuffer_dataSize)
 {
 	simxInt i;
 	simxUChar *retVal;
@@ -1884,18 +1656,12 @@ simxUChar *_appendCommand_iss_buff(simxInt cmd, simxUChar options, simxInt intVa
 	data[simx_cmdheaderoffset_status] = options;
 	((simxInt *) (data + SIMX_SUBHEADER_SIZE))[0] = extApi_endianConversionInt(intValue);
 	for (i = 0; i < extApi_getStringLength((simxChar *) stringValue1) + 1; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + i + 4] = stringValue1[i];
-	}
 	for (i = 0; i < extApi_getStringLength((simxChar *) stringValue2) + 1; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + i + 4 + extApi_getStringLength((simxChar *) stringValue1) + 1] = stringValue2[i];
-	}
 	for (i = 0; i < bufferSize; i++)
-	{
 		data[SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue1) +
 				 extApi_getStringLength((simxChar *) stringValue2) + 6 + i] = buffer[i];
-	}
 	retVal = _appendChunkToBuffer(data, SIMX_SUBHEADER_SIZE + extApi_getStringLength((simxChar *) stringValue1) +
 																			extApi_getStringLength((simxChar *) stringValue2) + 6 + bufferSize, destBuffer,
 																destBuffer_bufferSize, destBuffer_dataSize);
@@ -1903,9 +1669,7 @@ simxUChar *_appendCommand_iss_buff(simxInt cmd, simxUChar options, simxInt intVa
 	return (retVal);
 }
 
-simxUChar *
-_appendChunkToBuffer(const simxUChar *chunk, simxInt chunkSize, simxUChar *buffer, simxInt *buffer_bufferSize,
-										 simxInt *buffer_dataSize)
+simxUChar *_appendChunkToBuffer(const simxUChar *chunk, simxInt chunkSize, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxInt i, incr;
 	simxUChar *retBuffer;
@@ -1913,38 +1677,26 @@ _appendChunkToBuffer(const simxUChar *chunk, simxInt chunkSize, simxUChar *buffe
 	{ /* not enough space in the buffer. Allocate more! */
 		incr = chunkSize - (buffer_bufferSize[0] - buffer_dataSize[0]);
 		if (incr < SIMX_MIN_BUFF_INCR)
-		{
 			incr = SIMX_MIN_BUFF_INCR;
-		}
 		retBuffer = extApi_allocateBuffer(buffer_bufferSize[0] + incr);
 		for (i = 0; i < buffer_dataSize[0]; i++)
-		{
 			retBuffer[i] = buffer[i];
-		}
 		extApi_releaseBuffer(buffer);
 		buffer_bufferSize[0] += incr;
 	}
 	else
-	{
 		retBuffer = buffer;
-	}
 	/* insert the data (if chunk is not NULL) */
 	if (chunk != 0)
 	{
 		for (i = 0; i < chunkSize; i++)
-		{
 			retBuffer[buffer_dataSize[0] + i] = chunk[i];
-		}
 	}
 	buffer_dataSize[0] += chunkSize;
 	return (retBuffer);
 }
 
-simxUChar *_appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(const simxUChar *cmdPtr, simxUChar *cmdBuffer,
-																																					simxInt cmdBufferSize, const simxUChar *chunk,
-																																					simxInt chunkSize, simxUChar *buffer,
-																																					simxInt *buffer_bufferSize,
-																																					simxInt *buffer_dataSize)
+simxUChar *_appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(const simxUChar *cmdPtr, simxUChar *cmdBuffer, simxInt cmdBufferSize, const simxUChar *chunk, simxInt chunkSize, simxUChar *buffer, simxInt *buffer_bufferSize, simxInt *buffer_dataSize)
 {
 	simxInt cmdRaw, cmdSizeWithoutPureData, previousPureDataSize, totalSize;
 	simxUChar *prevCmdPtr;
@@ -1959,15 +1711,13 @@ simxUChar *_appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(const 
 
 			cmdSizeWithoutPureData = SIMX_SUBHEADER_SIZE + (simxInt) extApi_endianConversionUShort(
 							((simxUShort *) (cmdPtr + simx_cmdheaderoffset_pdata_offset0))[0]);
-			previousPureDataSize =
-							extApi_endianConversionInt(((simxInt *) (prevCmdPtr + simx_cmdheaderoffset_mem_size))[0]) -
-							cmdSizeWithoutPureData;
+			previousPureDataSize = extApi_endianConversionInt(((simxInt *) (prevCmdPtr + simx_cmdheaderoffset_mem_size))[0]) -
+														 cmdSizeWithoutPureData;
 
 			if (previousPureDataSize != 0)
 			{
 				/* 1. we append the new header part: */
-				buffer = _appendChunkToBuffer(chunk, cmdSizeWithoutPureData, buffer, buffer_bufferSize,
-																			buffer_dataSize);
+				buffer = _appendChunkToBuffer(chunk, cmdSizeWithoutPureData, buffer, buffer_bufferSize, buffer_dataSize);
 				totalSize = totalSize + cmdSizeWithoutPureData;
 
 				/* 2. we append the previous data: */
@@ -1976,8 +1726,8 @@ simxUChar *_appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(const 
 				totalSize = totalSize + previousPureDataSize;
 
 				/* 3. we append the current data: */
-				buffer = _appendChunkToBuffer(chunk + cmdSizeWithoutPureData, chunkSize - cmdSizeWithoutPureData,
-																			buffer, buffer_bufferSize, buffer_dataSize);
+				buffer = _appendChunkToBuffer(chunk + cmdSizeWithoutPureData, chunkSize - cmdSizeWithoutPureData, buffer,
+																			buffer_bufferSize, buffer_dataSize);
 				totalSize = totalSize + (chunkSize - cmdSizeWithoutPureData);
 
 				/* 4. we correct some header values: */
@@ -1994,10 +1744,8 @@ simxUChar *_appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(const 
 																 buffer_dataSize)); /* default behaviour is simply to append */
 	}
 	else
-	{
 		return (_appendChunkToBuffer(chunk, chunkSize, buffer, buffer_bufferSize,
-																 buffer_dataSize));
-	} /* default behaviour is simply to append */
+																 buffer_dataSize)); /* default behaviour is simply to append */
 }
 
 simxUChar *_getSameCommandPointer(const simxUChar *cmdPtr, simxUChar *cmdBuffer, simxInt cmdBufferSize)
@@ -2008,42 +1756,32 @@ simxUChar *_getSameCommandPointer(const simxUChar *cmdPtr, simxUChar *cmdBuffer,
 	off = 0;
 	while (off < cmdBufferSize)
 	{
-		cmd2Raw = extApi_endianConversionInt(((simxInt *) (cmdBuffer + off + simx_cmdheaderoffset_cmd))[0]) &
-							simx_cmdmask;
+		cmd2Raw = extApi_endianConversionInt(((simxInt *) (cmdBuffer + off + simx_cmdheaderoffset_cmd))[0]) & simx_cmdmask;
 		if (cmd1Raw == cmd2Raw)
 		{ /* The commands are same. We need to check if the command data is same too */
 			if ((cmd1Raw > simx_cmd4bytes_start) && (cmd1Raw < simx_cmd8bytes_start))
 			{
-				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] ==
-						((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
-				{
+				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] == ((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
 					return (cmdBuffer + off);
-				}
 			}
 			if ((cmd1Raw > simx_cmd8bytes_start) && (cmd1Raw < simx_cmd1string_start))
 			{
-				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] ==
-						((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
+				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] == ((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
 				{
 					if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE + 4))[0] ==
 							((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE + 4))[0])
-					{
 						return (cmdBuffer + off);
-					}
 				}
 			}
 			if ((cmd1Raw > simx_cmd1string_start) && (cmd1Raw < simx_cmd4bytes2strings_start))
 			{
 				if (extApi_areStringsSame((simxChar *) cmdPtr + SIMX_SUBHEADER_SIZE,
 																	(simxChar *) cmdBuffer + off + SIMX_SUBHEADER_SIZE) != 0)
-				{
 					return (cmdBuffer + off);
-				}
 			}
 			if ((cmd1Raw > simx_cmd4bytes2strings_start) && (cmd1Raw < simx_cmd4bytes2strings_end))
 			{
-				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] ==
-						((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
+				if (((simxInt *) (cmdPtr + SIMX_SUBHEADER_SIZE))[0] == ((simxInt *) (cmdBuffer + off + SIMX_SUBHEADER_SIZE))[0])
 				{
 					if (extApi_areStringsSame((simxChar *) cmdPtr + SIMX_SUBHEADER_SIZE + 4,
 																		(simxChar *) cmdBuffer + off + SIMX_SUBHEADER_SIZE + 4) != 0)
@@ -2051,9 +1789,7 @@ simxUChar *_getSameCommandPointer(const simxUChar *cmdPtr, simxUChar *cmdBuffer,
 						tmp = extApi_getStringLength((simxChar *) cmdPtr + SIMX_SUBHEADER_SIZE + 4) + 1;
 						if (extApi_areStringsSame((simxChar *) cmdPtr + SIMX_SUBHEADER_SIZE + 4 + tmp,
 																			(simxChar *) cmdBuffer + off + SIMX_SUBHEADER_SIZE + 4 + tmp) != 0)
-						{
 							return (cmdBuffer + off);
-						}
 					}
 				}
 			}
@@ -2070,17 +1806,11 @@ simxInt _getCmdDataSize(simxUChar *commandPointer)
 	simxInt cmdRaw =
 					extApi_endianConversionInt(((simxInt *) (commandPointer + simx_cmdheaderoffset_cmd))[0]) & simx_cmdmask;
 	if ((cmdRaw > simx_cmd4bytes_start) && (cmdRaw < simx_cmd8bytes_start))
-	{
 		retVal = 4;
-	}
 	if ((cmdRaw > simx_cmd8bytes_start) && (cmdRaw < simx_cmd1string_start))
-	{
 		retVal = 8;
-	}
 	if ((cmdRaw > simx_cmd1string_start) && (cmdRaw < simx_cmd4bytes2strings_start))
-	{
 		retVal = extApi_getStringLength((simxChar *) commandPointer + SIMX_SUBHEADER_SIZE) + 1;
-	}
 	if ((cmdRaw > simx_cmd4bytes2strings_start) && (cmdRaw < simx_cmd4bytes2strings_end))
 	{
 		tmp = extApi_getStringLength((simxChar *) commandPointer + SIMX_SUBHEADER_SIZE + 4) + 1;
@@ -2090,8 +1820,7 @@ simxInt _getCmdDataSize(simxUChar *commandPointer)
 }
 
 
-simxUChar _sendMessage_socketOrSharedMem(simxInt clientID, const simxUChar *message, simxInt messageSize,
-																				 simxUChar usingSharedMem)
+simxUChar _sendMessage_socketOrSharedMem(simxInt clientID, const simxUChar *message, simxInt messageSize, simxUChar usingSharedMem)
 { /* return 1: success */
 	simxShort packetCount = 0;
 	simxInt s = messageSize;
@@ -2099,16 +1828,12 @@ simxUChar _sendMessage_socketOrSharedMem(simxInt clientID, const simxUChar *mess
 	simxInt sizeToSend;
 
 	if (messageSize == 0)
-	{
 		return (0);
-	}
 
 	if (usingSharedMem)
 	{ /* send the message via shared memory */
 		if (extApi_send_sharedMem(clientID, message, messageSize) != messageSize)
-		{
 			return (0);
-		}
 	}
 	else
 	{ /* send the message via sockets */
@@ -2117,13 +1842,9 @@ simxUChar _sendMessage_socketOrSharedMem(simxInt clientID, const simxUChar *mess
 		{
 			packetCount++;
 			if (s > SOCKET_MAX_PACKET_SIZE - SOCKET_HEADER_LENGTH)
-			{
 				s -= SOCKET_MAX_PACKET_SIZE - SOCKET_HEADER_LENGTH;
-			}
 			else
-			{
 				s = 0;
-			}
 		}
 		s = messageSize;
 		while (s != 0)
@@ -2131,14 +1852,10 @@ simxUChar _sendMessage_socketOrSharedMem(simxInt clientID, const simxUChar *mess
 			packetCount--;
 			sizeToSend = s;
 			if (s > SOCKET_MAX_PACKET_SIZE - SOCKET_HEADER_LENGTH)
-			{
 				sizeToSend = SOCKET_MAX_PACKET_SIZE - SOCKET_HEADER_LENGTH;
-			}
 			s -= sizeToSend;
 			if (_sendSimplePacket_socket(clientID, message + ptr, (simxShort) sizeToSend, packetCount) == 0)
-			{
 				return (0);
-			}
 			ptr += sizeToSend;
 		}
 	}
@@ -2166,19 +1883,13 @@ simxUChar *_receiveReplyMessage_socketOrSharedMem(simxInt clientID, simxInt *mes
 			if (result < 0)
 			{
 				if (cnt != 0)
-				{
 					extApi_releaseBuffer(retBuff);
-				}
 				return (0);
 			}
 			if (cnt == 0)
-			{
 				retBuff = extApi_allocateBuffer((1 + result) * (inDatSize + SOCKET_HEADER_LENGTH));
-			}
 			for (i = 0; i < inDatSize; i++)
-			{
 				retBuff[retBuffSize + i] = inDat[i];
-			}
 			extApi_releaseBuffer(inDat);
 			retBuffSize += inDatSize;
 			if (result == 0)
@@ -2192,16 +1903,13 @@ simxUChar *_receiveReplyMessage_socketOrSharedMem(simxInt clientID, simxInt *mes
 	return (0);
 }
 
-simxUChar
-_sendSimplePacket_socket(simxInt clientID, const simxUChar *packet, simxShort packetLength, simxShort packetsLeft)
+simxUChar _sendSimplePacket_socket(simxInt clientID, const simxUChar *packet, simxShort packetLength, simxShort packetsLeft)
 {
 	simxInt i;
 	simxUChar toSend[SOCKET_MAX_PACKET_SIZE];
 
 	if (packetLength == 0)
-	{
 		return (0);
-	}
 
 	/* Prepare the header */
 	((simxShort *) toSend)[0] = extApi_endianConversionShort(1); /* Allows to detect Endianness on the other side */
@@ -2210,16 +1918,11 @@ _sendSimplePacket_socket(simxInt clientID, const simxUChar *packet, simxShort pa
 
 	/* Prepare the rest of the packet */
 	for (i = 0; i < packetLength; i++)
-	{
 		toSend[SOCKET_HEADER_LENGTH + i] = packet[i];
-	}
 
 	/* Send the packet */
-	if (extApi_send_socket(clientID, toSend, packetLength + SOCKET_HEADER_LENGTH) ==
-			packetLength + SOCKET_HEADER_LENGTH)
-	{
+	if (extApi_send_socket(clientID, toSend, packetLength + SOCKET_HEADER_LENGTH) == packetLength + SOCKET_HEADER_LENGTH)
 		return (1);
-	}
 	return (0);
 }
 
@@ -2236,21 +1939,15 @@ simxInt _receiveSimplePacket_socket(simxInt clientID, simxUChar **packet, simxSh
 	{
 		nb = extApi_recv_socket(clientID, headerAndSize + totalReceived, SOCKET_HEADER_LENGTH - totalReceived);
 		if (nb < 1)
-		{
 			break;
-		}
 		totalReceived += nb;
 		if (extApi_getTimeDiffInMs(startT) > SOCKET_TIMEOUT_READ)
-		{
 			break;
-		}
 	}
 
 	/* 2. Check if the header is consistent */
 	if (totalReceived != SOCKET_HEADER_LENGTH)
-	{
 		return (-1);
-	}
 	dataLength = extApi_endianConversionShort(((simxShort *) headerAndSize)[1]);
 	packetsLeft = extApi_endianConversionShort(((simxShort *) headerAndSize)[2]);
 
@@ -2263,14 +1960,10 @@ simxInt _receiveSimplePacket_socket(simxInt clientID, simxUChar **packet, simxSh
 	{
 		nb = extApi_recv_socket(clientID, packet[0] + totalReceived, dataLength - totalReceived);
 		if (nb < 1)
-		{
 			break;
-		}
 		totalReceived += nb;
 		if (extApi_getTimeDiffInMs(startT) > 3000)
-		{
 			break;
-		}
 	}
 	if (totalReceived != dataLength)
 	{
@@ -2329,12 +2022,9 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 						extApi_lockResources(clientID);
 						waitBeforeSendingAgainWhenMessageIDArrived_copy = _waitBeforeSendingAgainWhenMessageIDArrived[clientID];
 						extApi_unlockResources(clientID);
-						if ((_lastReceivedMessageID[clientID] <
-								 _waitBeforeSendingAgainWhenMessageIDArrived[clientID]) ||
+						if ((_lastReceivedMessageID[clientID] < _waitBeforeSendingAgainWhenMessageIDArrived[clientID]) ||
 								(waitBeforeSendingAgainWhenMessageIDArrived_copy == -1))
-						{
 							break;
-						}
 						extApi_switchThread();
 					}
 				}
@@ -2351,9 +2041,7 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 				/* Take care of non-split commands first */
 				tempBuffer = extApi_allocateBuffer(_messageToSend_dataSize[clientID]);
 				for (i = 0; i < _messageToSend_dataSize[clientID]; i++)
-				{
 					tempBuffer[i] = _messageToSend[clientID][i];
-				}
 				tempBufferDataSize = _messageToSend_dataSize[clientID];
 				tempBufferBufferSize = tempBufferDataSize;
 				_messageToSend_dataSize[clientID] = SIMX_HEADER_SIZE; /* remove all non-split commands */
@@ -2364,38 +2052,32 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 					memSize = extApi_endianConversionInt(
 									((simxInt *) (_splitCommandsToSend[clientID] + off + simx_cmdheaderoffset_mem_size))[0]);
 					pureDataOffset0 = extApi_endianConversionUShort(
-									((simxUShort *) (_splitCommandsToSend[clientID] + off +
-																	 simx_cmdheaderoffset_pdata_offset0))[0]);
-					pureDataOffset1 = extApi_endianConversionInt(((simxInt *) (_splitCommandsToSend[clientID] + off +
-																																		 simx_cmdheaderoffset_pdata_offset1))[0]);
+									((simxUShort *) (_splitCommandsToSend[clientID] + off + simx_cmdheaderoffset_pdata_offset0))[0]);
+					pureDataOffset1 = extApi_endianConversionInt(
+									((simxInt *) (_splitCommandsToSend[clientID] + off + simx_cmdheaderoffset_pdata_offset1))[0]);
 					maxPureDataSize = extApi_endianConversionUShort(
-									((simxUShort *) (_splitCommandsToSend[clientID] + off +
-																	 simx_cmdheaderoffset_delay_or_split))[0]);
+									((simxUShort *) (_splitCommandsToSend[clientID] + off + simx_cmdheaderoffset_delay_or_split))[0]);
 					pureDataSize = memSize - SIMX_SUBHEADER_SIZE - pureDataOffset0 - pureDataOffset1;
 					if (pureDataSize > maxPureDataSize)
-					{
 						pureDataSize = maxPureDataSize;
-					}
-					tempBuffer = _appendChunkToBuffer(_splitCommandsToSend[clientID] + off,
-																						SIMX_SUBHEADER_SIZE + pureDataOffset0, tempBuffer,
-																						&tempBufferBufferSize, &tempBufferDataSize);
+					tempBuffer = _appendChunkToBuffer(_splitCommandsToSend[clientID] + off, SIMX_SUBHEADER_SIZE + pureDataOffset0,
+																						tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
 					tempBuffer = _appendChunkToBuffer(
-									_splitCommandsToSend[clientID] + off + SIMX_SUBHEADER_SIZE + pureDataOffset0 +
-									pureDataOffset1, pureDataSize, tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
-					((simxInt *) (tempBuffer + tempBufferDataSize - pureDataSize - pureDataOffset0 -
-												SIMX_SUBHEADER_SIZE + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(
+									_splitCommandsToSend[clientID] + off + SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1,
+									pureDataSize, tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
+					((simxInt *) (tempBuffer + tempBufferDataSize - pureDataSize - pureDataOffset0 - SIMX_SUBHEADER_SIZE +
+												simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(
 									SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataSize);
 					if (SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1 + pureDataSize >= memSize)
 					{ /* command completely sent, we can remove it */
-						_removeChunkFromBuffer(_splitCommandsToSend[clientID], _splitCommandsToSend[clientID] + off,
-																	 memSize, &_splitCommandsToSend_dataSize[clientID]);
+						_removeChunkFromBuffer(_splitCommandsToSend[clientID], _splitCommandsToSend[clientID] + off, memSize,
+																	 &_splitCommandsToSend_dataSize[clientID]);
 					}
 					else
 					{ /* command not yet completely sent. Keep it, but adjust the pure data offset1 */
 						pureDataOffset1 += pureDataSize;
 						((simxInt *) (_splitCommandsToSend[clientID] + off +
-													simx_cmdheaderoffset_pdata_offset1))[0] = extApi_endianConversionInt(
-										pureDataOffset1);
+													simx_cmdheaderoffset_pdata_offset1))[0] = extApi_endianConversionInt(pureDataOffset1);
 						off += memSize;
 					}
 				}
@@ -2420,9 +2102,7 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 				/* 4. Read the reply (the server always replies!) */
 				replyData = _receiveReplyMessage_socketOrSharedMem(clientID, &replyDataSize, usingSharedMem);
 				if (replyData == 0)
-				{
 					break;
-				}
 
 				/* Check the CRC */
 				/* CRC calculation represents a bottleneck for large transmissions, and is anyway not needed with tcp or shared memory transmissions */
@@ -2443,16 +2123,12 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 						if (tmp == -1)
 						{
 							for (i = 0; i < SIMX_HEADER_SIZE; i++)
-							{
 								tempBuffer[i] = _messageReceived[clientID][i];
-							}
 						}
 						else
 						{
 							for (i = 0; i < SIMX_HEADER_SIZE; i++)
-							{
 								tempBuffer[i] = replyData[i];
-							}
 						}
 						tempBufferDataSize = SIMX_HEADER_SIZE;
 
@@ -2460,29 +2136,33 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 						off = SIMX_HEADER_SIZE;
 						while (off < replyDataSize)
 						{
-							memSize = extApi_endianConversionInt(
-											((simxInt *) (replyData + off + simx_cmdheaderoffset_mem_size))[0]);
+							memSize = extApi_endianConversionInt(((simxInt *) (replyData + off + simx_cmdheaderoffset_mem_size))[0]);
 							fullMemSize = extApi_endianConversionInt(
 											((simxInt *) (replyData + off + simx_cmdheaderoffset_full_mem_size))[0]);
 							if (memSize == fullMemSize)
 							{ /* the full data was sent at once! */
-								cmd = extApi_endianConversionInt(
-												((simxInt *) (replyData + off + simx_cmdheaderoffset_cmd))[0]);
+								cmd = extApi_endianConversionInt(((simxInt *) (replyData + off + simx_cmdheaderoffset_cmd))[0]);
 								if ((cmd - (cmd & simx_cmdmask)) !=
 										simx_opmode_discontinue) /* only discontinue mode commands are not added */
 								{
-									tempBuffer = _appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(
-													replyData + off, _messageReceived[clientID] + SIMX_HEADER_SIZE,
-													_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE, replyData + off,
-													extApi_endianConversionInt(
-																	((simxInt *) (replyData + off + simx_cmdheaderoffset_mem_size))[0]),
-													tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
+									tempBuffer = _appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(replyData + off,
+																																															_messageReceived[clientID] +
+																																															SIMX_HEADER_SIZE,
+																																															_messageReceived_dataSize[clientID] -
+																																															SIMX_HEADER_SIZE,
+																																															replyData + off,
+																																															extApi_endianConversionInt(
+																																																			((simxInt *) (
+																																																							replyData +
+																																																							off +
+																																																							simx_cmdheaderoffset_mem_size))[0]),
+																																															tempBuffer,
+																																															&tempBufferBufferSize,
+																																															&tempBufferDataSize);
 									/* tempBuffer=_appendChunkToBuffer(replyData+off,extApi_endianConversionInt(((simxInt*)(replyData+off+simx_cmdheaderoffset_mem_size))[0]),tempBuffer,&tempBufferBufferSize,&tempBufferDataSize); */
 								}
-								cmdPointer = _getSameCommandPointer(replyData + off,
-																										_messageReceived[clientID] + SIMX_HEADER_SIZE,
-																										_messageReceived_dataSize[clientID] -
-																										SIMX_HEADER_SIZE);
+								cmdPointer = _getSameCommandPointer(replyData + off, _messageReceived[clientID] + SIMX_HEADER_SIZE,
+																										_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 								if (cmdPointer != 0)
 								{ /* unmark this command (we already added its newer version) */
 									((simxInt *) (cmdPointer + simx_cmdheaderoffset_cmd))[0] = 0;
@@ -2496,8 +2176,7 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 																										_splitCommandsReceived_dataSize[clientID]);
 								if (cmdPointer != 0)
 								{ /* there is previous partial data. Is it valid? */
-									memSize2 = extApi_endianConversionInt(
-													((simxInt *) (cmdPointer + simx_cmdheaderoffset_mem_size))[0]);
+									memSize2 = extApi_endianConversionInt(((simxInt *) (cmdPointer + simx_cmdheaderoffset_mem_size))[0]);
 									if (memSize2 != fullMemSize)
 									{ /* we cannot use the previous version, since it has a different size. Remove it */
 										_removeChunkFromBuffer(_splitCommandsReceived[clientID], cmdPointer, memSize2,
@@ -2511,44 +2190,37 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 																																					_splitCommandsReceived[clientID],
 																																					&_splitCommandsReceived_bufferSize[clientID],
 																																					&_splitCommandsReceived_dataSize[clientID]);
-									cmdPointer = _splitCommandsReceived[clientID] +
-															 _splitCommandsReceived_dataSize[clientID] - fullMemSize;
+									cmdPointer =
+													_splitCommandsReceived[clientID] + _splitCommandsReceived_dataSize[clientID] - fullMemSize;
 								}
 								/* Now we have to overwrite the subheader, the command data, and the partial data */
 								for (i = 0; i < SIMX_SUBHEADER_SIZE; i++)
-								{
 									cmdPointer[i] = replyData[off + i];
-								}
-								((simxInt *) (cmdPointer +
-															simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(
+								((simxInt *) (cmdPointer + simx_cmdheaderoffset_mem_size))[0] = extApi_endianConversionInt(
 												fullMemSize); /* Important!! */
 
 								pureDataOffset0 = extApi_endianConversionUShort(
 												((simxUShort *) (cmdPointer + simx_cmdheaderoffset_pdata_offset0))[0]);
 								for (i = 0; i < pureDataOffset0; i++)
-								{
 									cmdPointer[SIMX_SUBHEADER_SIZE + i] = replyData[off + SIMX_SUBHEADER_SIZE + i];
-								}
 
 								pureDataOffset1 = extApi_endianConversionInt(
 												((simxInt *) (cmdPointer + simx_cmdheaderoffset_pdata_offset1))[0]);
 								pureDataSize = memSize - SIMX_SUBHEADER_SIZE - pureDataOffset0;
 								for (i = 0; i < pureDataSize; i++)
-								{
-									cmdPointer[SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1 + i] = replyData[
-													off + SIMX_SUBHEADER_SIZE + pureDataOffset0 + i];
-								}
+									cmdPointer[SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1 + i] = replyData[off +
+																																																			SIMX_SUBHEADER_SIZE +
+																																																			pureDataOffset0 +
+																																																			i];
 
 								/* Is the partial data complete yet? */
-								if (SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1 + pureDataSize >=
-										fullMemSize)
+								if (SIMX_SUBHEADER_SIZE + pureDataOffset0 + pureDataOffset1 + pureDataSize >= fullMemSize)
 								{ /* yes!! Copy the data from the partial command buffer to the tempBuffer, and erase it from the partial command buffer */
 
 									tempBuffer = _appendCommandToBufferAndTakeIntoAccountPreviouslyReceivedData(
-													tempBuffer + tempBufferDataSize - fullMemSize,
-													_messageReceived[clientID] + SIMX_HEADER_SIZE,
-													_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE, cmdPointer,
-													fullMemSize, tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
+													tempBuffer + tempBufferDataSize - fullMemSize, _messageReceived[clientID] + SIMX_HEADER_SIZE,
+													_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE, cmdPointer, fullMemSize, tempBuffer,
+													&tempBufferBufferSize, &tempBufferDataSize);
 									/* tempBuffer=_appendChunkToBuffer(cmdPointer,fullMemSize,tempBuffer,&tempBufferBufferSize,&tempBufferDataSize); */
 
 									_removeChunkFromBuffer(_splitCommandsReceived[clientID], cmdPointer, fullMemSize,
@@ -2556,16 +2228,14 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 									/* make sure we unmark any similar command in the _messageReceived[clientID] buffer */
 									cmdPointer = _getSameCommandPointer(tempBuffer + tempBufferDataSize - fullMemSize,
 																											_messageReceived[clientID] + SIMX_HEADER_SIZE,
-																											_messageReceived_dataSize[clientID] -
-																											SIMX_HEADER_SIZE);
+																											_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 									if (cmdPointer != 0)
 									{ /* unmark this command (we already added its newer version) */
 										((simxInt *) (cmdPointer + simx_cmdheaderoffset_cmd))[0] = 0;
 									}
 								}
 							}
-							off += extApi_endianConversionInt(
-											((simxInt *) (replyData + off + simx_cmdheaderoffset_mem_size))[0]);
+							off += extApi_endianConversionInt(((simxInt *) (replyData + off + simx_cmdheaderoffset_mem_size))[0]);
 						}
 						/* d) go through the old received data, and add only commands that were not unmarked */
 						off = SIMX_HEADER_SIZE;
@@ -2575,16 +2245,12 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 											((simxInt *) (_messageReceived[clientID] + off + simx_cmdheaderoffset_cmd))[0]);
 							if (cmd != 0)
 							{ /* ok, this command was not unmarked. We add it */
-								tempBuffer = _appendChunkToBuffer(_messageReceived[clientID] + off,
-																									extApi_endianConversionInt(
-																													((simxInt *) (_messageReceived[clientID] +
-																																				off +
-																																				simx_cmdheaderoffset_mem_size))[0]),
-																									tempBuffer, &tempBufferBufferSize,
-																									&tempBufferDataSize);
+								tempBuffer = _appendChunkToBuffer(_messageReceived[clientID] + off, extApi_endianConversionInt(
+												((simxInt *) (_messageReceived[clientID] + off + simx_cmdheaderoffset_mem_size))[0]),
+																									tempBuffer, &tempBufferBufferSize, &tempBufferDataSize);
 							}
-							off += extApi_endianConversionInt(((simxInt *) (_messageReceived[clientID] + off +
-																															simx_cmdheaderoffset_mem_size))[0]);
+							off += extApi_endianConversionInt(
+											((simxInt *) (_messageReceived[clientID] + off + simx_cmdheaderoffset_mem_size))[0]);
 						}
 						/* e) switch buffers and release 2 of them */
 						extApi_releaseBuffer(replyData);
@@ -2593,20 +2259,14 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 						_messageReceived_bufferSize[clientID] = tempBufferBufferSize;
 						_messageReceived_dataSize[clientID] = tempBufferDataSize;
 						if (tmp != -1)
-						{
 							_lastReceivedMessageID[clientID] = tmp;
-						}
 						extApi_unlockResources(clientID);
 					}
 					else
-					{
 						extApi_releaseBuffer(replyData);
-					}
 				}
 				else
-				{
 					extApi_releaseBuffer(replyData);
-				}
 
 			}
 			extApi_lockResources(clientID);
@@ -2628,9 +2288,7 @@ SIMX_THREAD_RET_TYPE _communicationThread(simxVoid *p)
 			}
 		}
 		else
-		{
 			extApi_sleepMs(100);
-		}
 		if (_tempDoNotReconnectOnceDisconnected[clientID])
 		{ /* sit here until the other thread sets _communicationThreadRunning[clientID] to 0 */
 			while (_communicationThreadRunning[clientID] != 0)
@@ -2654,13 +2312,9 @@ simxUShort _getCRC(const simxUChar *data, simxInt length)
 		for (j = 0; j < 8; j++)
 		{
 			if (crc & ((simxUShort) 0x8000))
-			{
 				crc = (crc << 1) ^ ((simxUShort) 0x1021);
-			}
 			else
-			{
 				crc <<= 1;
-			}
 		}
 		p++;
 	}
@@ -2675,15 +2329,11 @@ simxInt _removeCommandReply_null(simxInt clientID, simxInt cmdRaw)
 	cmdPtr = _getCommandPointer_(cmdRaw, _messageReceived[clientID] + SIMX_HEADER_SIZE,
 															 _messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 	if (cmdPtr != 0)
-	{
 		_removeChunkFromBuffer(_messageReceived[clientID], cmdPtr,
 													 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 													 &_messageReceived_dataSize[clientID]);
-	}
 	else
-	{
 		retVal = simx_return_novalue_flag;
-	}
 	/* Data is removed, but buffer keeps same size. It will be resized next time we receive something */
 	extApi_unlockResources(clientID);
 	return (retVal);
@@ -2697,15 +2347,11 @@ simxInt _removeCommandReply_int(simxInt clientID, simxInt cmdRaw, simxInt intVal
 	cmdPtr = _getCommandPointer_i(cmdRaw, intValue, _messageReceived[clientID] + SIMX_HEADER_SIZE,
 																_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 	if (cmdPtr != 0)
-	{
 		_removeChunkFromBuffer(_messageReceived[clientID], cmdPtr,
 													 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 													 &_messageReceived_dataSize[clientID]);
-	}
 	else
-	{
 		retVal = simx_return_novalue_flag;
-	}
 	/* Data is removed, but buffer keeps same size. It will be resized next time we receive something */
 	extApi_unlockResources(clientID);
 	return (retVal);
@@ -2719,15 +2365,11 @@ simxInt _removeCommandReply_intint(simxInt clientID, simxInt cmdRaw, simxInt int
 	cmdPtr = _getCommandPointer_ii(cmdRaw, intValue1, intValue2, _messageReceived[clientID] + SIMX_HEADER_SIZE,
 																 _messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 	if (cmdPtr != 0)
-	{
 		_removeChunkFromBuffer(_messageReceived[clientID], cmdPtr,
 													 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 													 &_messageReceived_dataSize[clientID]);
-	}
 	else
-	{
 		retVal = simx_return_novalue_flag;
-	}
 	/* Data is removed, but buffer keeps same size. It will be resized next time we receive something */
 	extApi_unlockResources(clientID);
 	return (retVal);
@@ -2741,23 +2383,17 @@ simxInt _removeCommandReply_string(simxInt clientID, simxInt cmdRaw, const simxU
 	cmdPtr = _getCommandPointer_s(cmdRaw, stringValue, _messageReceived[clientID] + SIMX_HEADER_SIZE,
 																_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 	if (cmdPtr != 0)
-	{
 		_removeChunkFromBuffer(_messageReceived[clientID], cmdPtr,
 													 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 													 &_messageReceived_dataSize[clientID]);
-	}
 	else
-	{
 		retVal = simx_return_novalue_flag;
-	}
 	/* Data is removed, but buffer keeps same size. It will be resized next time we receive something */
 	extApi_unlockResources(clientID);
 	return (retVal);
 }
 
-simxInt
-_removeCommandReply_intstringstring(simxInt clientID, simxInt cmdRaw, simxInt intValue, const simxUChar *stringValue1,
-																		const simxUChar *stringValue2)
+simxInt _removeCommandReply_intstringstring(simxInt clientID, simxInt cmdRaw, simxInt intValue, const simxUChar *stringValue1, const simxUChar *stringValue2)
 {
 	simxUChar *cmdPtr;
 	simxInt retVal = simx_return_ok;
@@ -2766,15 +2402,11 @@ _removeCommandReply_intstringstring(simxInt clientID, simxInt cmdRaw, simxInt in
 																	_messageReceived[clientID] + SIMX_HEADER_SIZE,
 																	_messageReceived_dataSize[clientID] - SIMX_HEADER_SIZE);
 	if (cmdPtr != 0)
-	{
 		_removeChunkFromBuffer(_messageReceived[clientID], cmdPtr,
 													 extApi_endianConversionInt(((simxInt *) (cmdPtr + simx_cmdheaderoffset_mem_size))[0]),
 													 &_messageReceived_dataSize[clientID]);
-	}
 	else
-	{
 		retVal = simx_return_novalue_flag;
-	}
 	/* Data is removed, but buffer keeps same size. It will be resized next time we receive something */
 	extApi_unlockResources(clientID);
 	return (retVal);
@@ -2791,9 +2423,7 @@ Following are the remote API helper functions
 EXTAPI_DLLEXPORT simxInt simxGetConnectionId(simxInt clientID)
 {
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (-1);
-	}
 	return (_connectionID[clientID]);
 }
 
@@ -2802,9 +2432,7 @@ EXTAPI_DLLEXPORT simxInt simxGetPingTime(simxInt clientID, simxInt *pingTime)
 	simxInt res, dummyVal;
 	simxInt startTime = extApi_getTimeInMs();
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (0);
-	}
 	res = simxGetIntegerParameter(clientID, sim_intparam_program_version, &dummyVal,
 																simx_opmode_blocking); /* just a dummy command */
 	res = (res | simx_return_remote_error_flag) - simx_return_remote_error_flag;
@@ -2816,9 +2444,7 @@ EXTAPI_DLLEXPORT simxInt simxSynchronousTrigger(simxInt clientID)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	_exec_null(clientID, simx_cmd_synchronous_next, simx_opmode_blocking, 0, &returnValue);
 	return (returnValue);
 }
@@ -2828,13 +2454,9 @@ EXTAPI_DLLEXPORT simxInt simxSynchronous(simxInt clientID, simxUChar enable)
 	simxInt returnValue;
 	simxInt cmd = simx_cmd_synchronous_disable;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (enable)
-	{
 		cmd = simx_cmd_synchronous_enable;
-	}
 	_exec_null(clientID, cmd, simx_opmode_blocking, 0, &returnValue);
 	return (returnValue);
 }
@@ -2842,17 +2464,11 @@ EXTAPI_DLLEXPORT simxInt simxSynchronous(simxInt clientID, simxUChar enable)
 EXTAPI_DLLEXPORT simxInt simxPauseCommunication(simxInt clientID, simxUChar pause)
 {
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (pause)
-	{
 		extApi_lockSendStart(clientID);
-	}
 	else
-	{
 		extApi_unlockSendStart(clientID);
-	}
 	return (0);
 }
 
@@ -2865,9 +2481,7 @@ EXTAPI_DLLEXPORT simxInt simxGetInMessageInfo(simxInt clientID, simxInt infoType
 {
 	simxInt retVal = -1;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (-1);
-	}
 	extApi_lockResources(clientID);
 	if (_messageReceived_dataSize[clientID] >= SIMX_HEADER_SIZE)
 	{
@@ -2908,9 +2522,7 @@ EXTAPI_DLLEXPORT simxInt simxGetOutMessageInfo(simxInt clientID, simxInt infoTyp
 	}
 
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (-1);
-	}
 
 	extApi_lockResources(clientID);
 	if (infoType == simx_headeroffset_message_id)
@@ -2938,79 +2550,55 @@ Following are the remote API functions
 **********************************************
 */
 
-EXTAPI_DLLEXPORT simxInt
-simxGetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat *position, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat *position, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_joint_position, jointHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_joint_position, operationMode, 0, jointHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		position[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat position, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat position, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_joint_position, jointHandle));
-	}
 	_exec_int_float(clientID, simx_cmd_set_joint_position, operationMode, 0, jointHandle, position, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetJointMatrix(simxInt clientID, simxInt jointHandle, simxFloat *matrix, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetJointMatrix(simxInt clientID, simxInt jointHandle, simxFloat *matrix, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, i;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_joint_matrix, jointHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_joint_matrix, operationMode, 0, jointHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		for (i = 0; i < 12; i++)
-		{
 			matrix[i] = _readPureDataFloat(dataPointer, 0, 4 * i);
-		}
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetSphericalJointMatrix(simxInt clientID, simxInt jointHandle, simxFloat *matrix, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetSphericalJointMatrix(simxInt clientID, simxInt jointHandle, simxFloat *matrix, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_spherical_joint_matrix, jointHandle));
-	}
 	_exec_int_buffer(clientID, simx_cmd_set_spherical_joint_matrix, operationMode, 0, jointHandle, (simxUChar *) matrix,
 									 4 * 12, &returnValue);
 	return (returnValue);
@@ -3025,61 +2613,43 @@ EXTAPI_DLLEXPORT simxFloat mtlb_simxTest(simxFloat* b)
 */
 
 
-EXTAPI_DLLEXPORT simxInt
-simxSetJointTargetVelocity(simxInt clientID, simxInt jointHandle, simxFloat targetVelocity, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetJointTargetVelocity(simxInt clientID, simxInt jointHandle, simxFloat targetVelocity, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_joint_target_velocity, jointHandle));
-	}
 	_exec_int_float(clientID, simx_cmd_set_joint_target_velocity, operationMode, 0, jointHandle, targetVelocity,
 									&returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetJointTargetPosition(simxInt clientID, simxInt jointHandle, simxFloat targetPosition, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetJointTargetPosition(simxInt clientID, simxInt jointHandle, simxFloat targetPosition, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_joint_target_position, jointHandle));
-	}
 	_exec_int_float(clientID, simx_cmd_set_joint_target_position, operationMode, 0, jointHandle, targetPosition,
 									&returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadProximitySensor(simxInt clientID, simxInt sensorHandle, simxUChar *detectionState, simxFloat *detectedPoint,
-												simxInt *detectedObjectHandle, simxFloat *detectedSurfaceNormalVector, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadProximitySensor(simxInt clientID, simxInt sensorHandle, simxUChar *detectionState, simxFloat *detectedPoint, simxInt *detectedObjectHandle, simxFloat *detectedSurfaceNormalVector, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_read_proximity_sensor, sensorHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_read_proximity_sensor, operationMode, 0, sensorHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		if (detectionState != 0)
-		{
 			detectionState[0] = _readPureDataChar(dataPointer, 0, 0);
-		}
 		if (detectedPoint != 0)
 		{
 			detectedPoint[0] = _readPureDataFloat(dataPointer, 0, 1);
@@ -3087,9 +2657,7 @@ simxReadProximitySensor(simxInt clientID, simxInt sensorHandle, simxUChar *detec
 			detectedPoint[2] = _readPureDataFloat(dataPointer, 0, 9);
 		}
 		if (detectedObjectHandle != 0)
-		{
 			detectedObjectHandle[0] = _readPureDataInt(dataPointer, 0, 13);
-		}
 		if (detectedSurfaceNormalVector != 0)
 		{
 			detectedSurfaceNormalVector[0] = _readPureDataFloat(dataPointer, 0, 17);
@@ -3104,13 +2672,9 @@ EXTAPI_DLLEXPORT simxInt simxStartSimulation(simxInt clientID, simxInt operation
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_start_pause_stop_simulation, 0));
-	}
 	_exec_int(clientID, simx_cmd_start_pause_stop_simulation, operationMode, 0, 0, &returnValue);
 	return (returnValue);
 }
@@ -3119,13 +2683,9 @@ EXTAPI_DLLEXPORT simxInt simxPauseSimulation(simxInt clientID, simxInt operation
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_start_pause_stop_simulation, 1));
-	}
 	_exec_int(clientID, simx_cmd_start_pause_stop_simulation, operationMode, 0, 1, &returnValue);
 	return (returnValue);
 }
@@ -3134,83 +2694,55 @@ EXTAPI_DLLEXPORT simxInt simxStopSimulation(simxInt clientID, simxInt operationM
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_start_pause_stop_simulation, 2));
-	}
 	_exec_int(clientID, simx_cmd_start_pause_stop_simulation, operationMode, 0, 2, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectHandle(simxInt clientID, const simxChar *objectName, simxInt *handle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectHandle(simxInt clientID, const simxChar *objectName, simxInt *handle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_object_handle, (simxUChar *) objectName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_object_handle, operationMode, 0, (simxUChar *) objectName,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		handle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetUIHandle(simxInt clientID, const simxChar *uiName, simxInt *handle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetUIHandle(simxInt clientID, const simxChar *uiName, simxInt *handle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_ui_handle, (simxUChar *) uiName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_ui_handle, operationMode, 0, (simxUChar *) uiName, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		handle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetVisionSensorImage(simxInt clientID, simxInt sensorHandle, simxInt *resolution, simxUChar **image,
-												 simxUChar options, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetVisionSensorImage(simxInt clientID, simxInt sensorHandle, simxInt *resolution, simxUChar **image, simxUChar options, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	simxInt cmd;
 	if (options & 1)
-	{
 		cmd = simx_cmd_get_vision_sensor_image_bw;
-	}
 	else
-	{
 		cmd = simx_cmd_get_vision_sensor_image_rgb;
-	}
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, cmd, sensorHandle));
-	}
 	dataPointer = _exec_int(clientID, cmd, operationMode, 0, sensorHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -3221,35 +2753,23 @@ simxGetVisionSensorImage(simxInt clientID, simxInt sensorHandle, simxInt *resolu
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetVisionSensorImage(simxInt clientID, simxInt sensorHandle, simxUChar *image, simxInt bufferSize,
-												 simxUChar options, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetVisionSensorImage(simxInt clientID, simxInt sensorHandle, simxUChar *image, simxInt bufferSize, simxUChar options, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxInt cmd;
 	if (options & 1)
-	{
 		cmd = simx_cmd_set_vision_sensor_image_bw;
-	}
 	else
-	{
 		cmd = simx_cmd_set_vision_sensor_image_rgb;
-	}
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, cmd, sensorHandle));
-	}
 	_exec_int_buffer(clientID, cmd, operationMode, 0, sensorHandle, image, bufferSize, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetVisionSensorDepthBuffer(simxInt clientID, simxInt sensorHandle, simxInt *resolution, simxFloat **buffer,
-															 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetVisionSensorDepthBuffer(simxInt clientID, simxInt sensorHandle, simxInt *resolution, simxFloat **buffer, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
@@ -3257,13 +2777,9 @@ simxGetVisionSensorDepthBuffer(simxInt clientID, simxInt sensorHandle, simxInt *
 	simxInt i;
 #endif
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_vision_sensor_depth_buffer, sensorHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_vision_sensor_depth_buffer, operationMode, 0, sensorHandle,
 													&returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -3279,83 +2795,58 @@ simxGetVisionSensorDepthBuffer(simxInt clientID, simxInt sensorHandle, simxInt *
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxJointGetForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxJointGetForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
 { /* DEPRECATED since V3.1.2 */
 	return (simxGetJointForce(clientID, jointHandle, force, operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetJointForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetJointForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_joint_force, jointHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_joint_force, operationMode, 0, jointHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		force[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetJointForce(simxInt clientID, simxInt jointHandle, simxFloat force, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetJointForce(simxInt clientID, simxInt jointHandle, simxFloat force, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_joint_force, jointHandle));
-	}
 	_exec_int_float(clientID, simx_cmd_set_joint_force, operationMode, 0, jointHandle, force, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadForceSensor(simxInt clientID, simxInt forceSensorHandle, simxUChar *state, simxFloat *forceVector,
-										simxFloat *torqueVector, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadForceSensor(simxInt clientID, simxInt forceSensorHandle, simxUChar *state, simxFloat *forceVector, simxFloat *torqueVector, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, i;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_read_force_sensor, forceSensorHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_read_force_sensor, operationMode, 0, forceSensorHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		if (state != 0)
-		{
 			state[0] = _readPureDataChar(dataPointer, 0, 0);
-		}
 		if (forceVector != 0)
 		{
 			for (i = 0; i < 3; i++)
-			{
 				forceVector[i] = _readPureDataFloat(dataPointer, 0, 1 + 4 * i);
-			}
 		}
 		if (torqueVector != 0)
 		{
 			for (i = 0; i < 3; i++)
-			{
 				torqueVector[i] = _readPureDataFloat(dataPointer, 0, 1 + 12 + 4 * i);
-			}
 		}
 	}
 	return (returnValue);
@@ -3365,38 +2856,26 @@ EXTAPI_DLLEXPORT simxInt simxBreakForceSensor(simxInt clientID, simxInt forceSen
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_break_force_sensor, forceSensorHandle));
-	}
 	_exec_int(clientID, simx_cmd_break_force_sensor, operationMode, 0, forceSensorHandle, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadVisionSensor(simxInt clientID, simxInt sensorHandle, simxUChar *detectionState, simxFloat **auxValues,
-										 simxInt **auxValuesCount, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadVisionSensor(simxInt clientID, simxInt sensorHandle, simxUChar *detectionState, simxFloat **auxValues, simxInt **auxValuesCount, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, i, packetCnt, auxValCnt;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_read_vision_sensor, sensorHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_read_vision_sensor, operationMode, 0, sensorHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		if (detectionState != 0)
-		{
 			detectionState[0] = _readPureDataChar(dataPointer, 0, 0);
-		}
 		if ((auxValues != 0) && (auxValuesCount != 0))
 		{
 			packetCnt = _readPureDataInt(dataPointer, 0, 1);
@@ -3410,78 +2889,53 @@ simxReadVisionSensor(simxInt clientID, simxInt sensorHandle, simxUChar *detectio
 			}
 			auxValues[0] = (simxFloat *) extApi_allocateBuffer(4 * auxValCnt);
 			for (i = 0; i < auxValCnt; i++)
-			{
 				auxValues[0][i] = _readPureDataFloat(dataPointer, 0, 1 + 4 * (1 + packetCnt + i));
-			}
 		}
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectParent(simxInt clientID, simxInt childObjectHandle, simxInt *parentObjectHandle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectParent(simxInt clientID, simxInt childObjectHandle, simxInt *parentObjectHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_object_parent, childObjectHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_object_parent, operationMode, 0, childObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		parentObjectHandle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectChild(simxInt clientID, simxInt parentObjectHandle, simxInt childIndex, simxInt *childObjectHandle,
-									 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectChild(simxInt clientID, simxInt parentObjectHandle, simxInt childIndex, simxInt *childObjectHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_child, parentObjectHandle, childIndex));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_child, operationMode, 0, parentObjectHandle, childIndex,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		childObjectHandle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxTransferFile(simxInt clientID, const simxChar *filePathAndName, const simxChar *fileName_serverSide,
-								 simxInt timeOut, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxTransferFile(simxInt clientID, const simxChar *filePathAndName, const simxChar *fileName_serverSide, simxInt timeOut, simxInt operationMode)
 {
 	simxInt returnValue = 0;
 	simxInt bufferLength, tmpTimeout;
 	simxUChar *buffer;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_transfer_file, (simxUChar *) filePathAndName));
-	}
 	buffer = extApi_readFile(filePathAndName, &bufferLength);
 	if (buffer == 0)
-	{
 		return (simx_return_local_error_flag);
-	}
 	tmpTimeout = _replyWaitTimeoutInMs[clientID];
 	_replyWaitTimeoutInMs[clientID] = timeOut;
 	_exec_string_buffer(clientID, simx_cmd_transfer_file, operationMode, 0, (simxUChar *) fileName_serverSide, buffer,
@@ -3495,32 +2949,22 @@ EXTAPI_DLLEXPORT simxInt simxEraseFile(simxInt clientID, const simxChar *fileNam
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_erase_file, (simxUChar *) fileName_serverSide));
-	}
 	_exec_string(clientID, simx_cmd_erase_file, operationMode, 0, (simxUChar *) fileName_serverSide, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxLoadModel(simxInt clientID, const simxChar *modelPathAndName, simxUChar options, simxInt *baseHandle,
-							simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxLoadModel(simxInt clientID, const simxChar *modelPathAndName, simxUChar options, simxInt *baseHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer = 0;
 	simxInt returnValue;
 	simxChar tmpFileName[] = "REMOTE_API_TEMPFILE_XXXX.ttm";
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_load_model, (simxUChar *) modelPathAndName));
-	}
 	if (options & 1)
 	{ /* give some pseudo-random name to the temp file: */
 		tmpFileName[20] = '0' + (char) (extApi_rand() * 9.1f);
@@ -3538,33 +2982,23 @@ simxLoadModel(simxInt clientID, const simxChar *modelPathAndName, simxUChar opti
 		simxTransferFile(clientID, modelPathAndName, tmpFileName, _replyWaitTimeoutInMs[clientID], simx_opmode_remove);
 	}
 	else
-	{
 		dataPointer = _exec_string(clientID, simx_cmd_load_model, operationMode, 0, (simxUChar *) modelPathAndName,
 															 &returnValue);
-	}
 	if ((dataPointer != 0) && (returnValue == 0) && (baseHandle != 0))
-	{
 		baseHandle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxLoadUI(simxInt clientID, const simxChar *uiPathAndName, simxUChar options, simxInt *count, simxInt **uiHandles,
-					 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxLoadUI(simxInt clientID, const simxChar *uiPathAndName, simxUChar options, simxInt *count, simxInt **uiHandles, simxInt operationMode)
 {
 	simxUChar *dataPointer = 0;
 	simxInt returnValue, i;
 	simxChar tmpFileName[] = "REMOTE_API_TEMPFILE_XXXX.ttb";
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_load_ui, (simxUChar *) uiPathAndName));
-	}
 	if (options & 1)
 	{ /* give some pseudo-random name to the temp file: */
 		tmpFileName[20] = '0' + (char) (extApi_rand() * 9.1f);
@@ -3575,42 +3009,31 @@ simxLoadUI(simxInt clientID, const simxChar *uiPathAndName, simxUChar options, s
 																	 simx_opmode_blocking);
 		if (returnValue == 0)
 		{
-			dataPointer = _exec_string(clientID, simx_cmd_load_ui, operationMode, 0, (simxUChar *) tmpFileName,
-																 &returnValue);
+			dataPointer = _exec_string(clientID, simx_cmd_load_ui, operationMode, 0, (simxUChar *) tmpFileName, &returnValue);
 			simxEraseFile(clientID, tmpFileName, simx_opmode_oneshot);
 		}
 		simxTransferFile(clientID, uiPathAndName, tmpFileName, _replyWaitTimeoutInMs[clientID], simx_opmode_remove);
 	}
 	else
-	{
-		dataPointer = _exec_string(clientID, simx_cmd_load_ui, operationMode, 0, (simxUChar *) uiPathAndName,
-															 &returnValue);
-	}
+		dataPointer = _exec_string(clientID, simx_cmd_load_ui, operationMode, 0, (simxUChar *) uiPathAndName, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		count[0] = _readPureDataInt(dataPointer, 0, 0);
 		uiHandles[0] = (simxInt *) extApi_allocateBuffer(4 * count[0]);
 		for (i = 0; i < count[0]; i++)
-		{
 			((simxInt *) (uiHandles[0]))[i] = _readPureDataInt(dataPointer, 0, 4 + 4 * i);
-		}
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxLoadScene(simxInt clientID, const simxChar *scenePathAndName, simxUChar options, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxLoadScene(simxInt clientID, const simxChar *scenePathAndName, simxUChar options, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxChar tmpFileName[] = "REMOTE_API_TEMPFILE_XXXX.ttt";
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_load_scene, (simxUChar *) scenePathAndName));
-	}
 	if (options & 1)
 	{ /* give some pseudo-random name to the temp file: */
 		tmpFileName[20] = '0' + (char) (extApi_rand() * 9.1f);
@@ -3627,63 +3050,43 @@ simxLoadScene(simxInt clientID, const simxChar *scenePathAndName, simxUChar opti
 		simxTransferFile(clientID, scenePathAndName, tmpFileName, _replyWaitTimeoutInMs[clientID], simx_opmode_remove);
 	}
 	else
-	{
 		_exec_string(clientID, simx_cmd_load_scene, operationMode, 0, (simxUChar *) scenePathAndName, &returnValue);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetUISlider(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt *position, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetUISlider(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt *position, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_ui_slider, uiHandle, uiButtonID));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_ui_slider, operationMode, 0, uiHandle, uiButtonID, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		position[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetUISlider(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt position, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetUISlider(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt position, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_set_ui_slider, uiHandle, uiButtonID));
-	}
 	_exec_intint_int(clientID, simx_cmd_set_ui_slider, operationMode, 0, uiHandle, uiButtonID, position, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetUIEventButton(simxInt clientID, simxInt uiHandle, simxInt *uiEventButtonID, simxInt *auxValues,
-										 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetUIEventButton(simxInt clientID, simxInt uiHandle, simxInt *uiEventButtonID, simxInt *auxValues, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_ui_event_button, uiHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_ui_event_button, operationMode, 0, uiHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -3695,49 +3098,35 @@ simxGetUIEventButton(simxInt clientID, simxInt uiHandle, simxInt *uiEventButtonI
 		}
 		/* ******* SPECIAL CASE FOR THIS COMMAND ONLY !! ******** */
 		if ((operationMode == simx_opmode_buffer) && (uiEventButtonID[0] != -1))
-		{
 			_removeCommandReply_int(clientID, simx_cmd_get_ui_event_button,
-															uiHandle);
-		} /* We received an event! The continuous command was automatically deactivated on the server side. We remove the reply  in the input buffer on the client here! */
+															uiHandle); /* We received an event! The continuous command was automatically deactivated on the server side. We remove the reply  in the input buffer on the client here! */
 		/* ****************************************************** */
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetUIButtonProperty(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt *prop, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetUIButtonProperty(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt *prop, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_ui_button_property, uiHandle, uiButtonID));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_ui_button_property, operationMode, 0, uiHandle, uiButtonID,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		prop[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetUIButtonProperty(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt prop, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetUIButtonProperty(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, simxInt prop, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_set_ui_button_property, uiHandle, uiButtonID));
-	}
 	_exec_intint_int(clientID, simx_cmd_set_ui_button_property, operationMode, 0, uiHandle, uiButtonID, prop,
 									 &returnValue);
 	return (returnValue);
@@ -3747,63 +3136,40 @@ EXTAPI_DLLEXPORT simxInt simxAddStatusbarMessage(simxInt clientID, const simxCha
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_add_statusbar_message, (simxUChar *) message));
-	}
 	_exec_string(clientID, simx_cmd_add_statusbar_message, operationMode, 1, (simxUChar *) message, &returnValue);
 	return (returnValue);
 }
 
 
-EXTAPI_DLLEXPORT simxInt
-simxCreateDummy(simxInt clientID, simxFloat size, const simxUChar *colors, simxInt *objectHandle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxCreateDummy(simxInt clientID, simxFloat size, const simxUChar *colors, simxInt *objectHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, i;
 	simxUChar buffer[4 + 1 + 12];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_null(clientID, simx_cmd_create_dummy));
-	}
 
 	((simxFloat *) buffer)[0] = extApi_endianConversionFloat(size);
 	if (colors == NULL)
-	{
 		buffer[4 + 0] = 0; /* indicates default colors */
-	}
 	else
 	{
 		buffer[4 + 0] = 1;
 		for (i = 0; i < 12; i++)
-		{
 			buffer[4 + 1 + i] = colors[i];
-		}
 	}
-	dataPointer = _exec_null_buffer(clientID, simx_cmd_create_dummy, operationMode, 1, buffer, 4 + 1 + 12,
-																	&returnValue);
+	dataPointer = _exec_null_buffer(clientID, simx_cmd_create_dummy, operationMode, 1, buffer, 4 + 1 + 12, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		objectHandle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar *scriptDescription, simxInt options,
-																								const simxChar *functionName, simxInt inIntCnt, const simxInt *inInt,
-																								simxInt inFloatCnt, const simxFloat *inFloat, simxInt inStringCnt,
-																								const simxChar *inString, simxInt inBufferSize,
-																								const simxUChar *inBuffer, simxInt *outIntCnt, simxInt **outInt,
-																								simxInt *outFloatCnt, simxFloat **outFloat, simxInt *outStringCnt,
-																								simxChar **outString, simxInt *outBufferSize, simxUChar **outBuffer,
-																								simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar *scriptDescription, simxInt options, const simxChar *functionName, simxInt inIntCnt, const simxInt *inInt, simxInt inFloatCnt, const simxFloat *inFloat, simxInt inStringCnt, const simxChar *inString, simxInt inBufferSize, const simxUChar *inBuffer, simxInt *outIntCnt, simxInt **outInt, simxInt *outFloatCnt, simxFloat **outFloat, simxInt *outStringCnt, simxChar **outString, simxInt *outBufferSize, simxUChar **outBuffer, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
@@ -3811,20 +3177,14 @@ EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar
 	simxInt i, off, totStrSize, bufferSize, outIntC, outFloatC, outStringC, outBufferS;
 	simxChar *outStr;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intstringstring(clientID, simx_cmd_aux_console_open, options,
 																								(simxUChar *) scriptDescription, (simxUChar *) functionName));
-	}
 
 	totStrSize = 0;
 	for (i = 0; i < inStringCnt; i++)
-	{
 		totStrSize += extApi_getStringLength(inString + totStrSize) + 1;
-	}
 	bufferSize = 4 + 4 + 4 + 4 + 4 * (inIntCnt + inFloatCnt) + totStrSize + inBufferSize;
 	buffer = extApi_allocateBuffer(bufferSize);
 
@@ -3834,25 +3194,17 @@ EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar
 	((simxInt *) buffer)[3] = extApi_endianConversionInt(inBufferSize);
 	off = 4;
 	for (i = 0; i < inIntCnt; i++)
-	{
 		((simxInt *) buffer)[off + i] = extApi_endianConversionInt(inInt[i]);
-	}
 	off += inIntCnt;
 	for (i = 0; i < inFloatCnt; i++)
-	{
 		((simxFloat *) buffer)[off + i] = extApi_endianConversionFloat(inFloat[i]);
-	}
 	off += inFloatCnt;
 	off *= 4;
 	for (i = 0; i < totStrSize; i++)
-	{
 		buffer[off + i] = (simxUChar) inString[i];
-	}
 	off += totStrSize;
 	for (i = 0; i < inBufferSize; i++)
-	{
 		buffer[off + i] = inBuffer[i];
-	}
 
 	dataPointer = _exec_intstringstring_buffer(clientID, simx_cmd_call_script_function, operationMode, 1, options,
 																						 (simxUChar *) scriptDescription, (simxUChar *) functionName, buffer,
@@ -3892,9 +3244,7 @@ EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar
 		}
 		totStrSize = 0;
 		for (i = 0; i < outStringC; i++)
-		{
 			totStrSize += extApi_getStringLength(outStr + totStrSize) + 1;
-		}
 		off += totStrSize;
 
 		if ((outBufferSize != 0) && (outBuffer != 0))
@@ -3906,22 +3256,15 @@ EXTAPI_DLLEXPORT simxInt simxCallScriptFunction(simxInt clientID, const simxChar
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxAuxiliaryConsoleOpen(simxInt clientID, const simxChar *title, simxInt maxLines, simxInt mode, simxInt *position,
-												 simxInt *size, simxFloat *textColor, simxFloat *backgroundColor, simxInt *consoleHandle,
-												 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxAuxiliaryConsoleOpen(simxInt clientID, const simxChar *title, simxInt maxLines, simxInt mode, simxInt *position, simxInt *size, simxFloat *textColor, simxFloat *backgroundColor, simxInt *consoleHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	simxUChar buffer[12 * 4];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_aux_console_open, (simxUChar *) title));
-	}
 	((simxInt *) buffer)[0] = extApi_endianConversionInt(maxLines);
 	((simxInt *) buffer)[1] = extApi_endianConversionInt(mode);
 	((simxInt *) buffer)[2] = extApi_endianConversionInt(98765);
@@ -3950,12 +3293,10 @@ simxAuxiliaryConsoleOpen(simxInt clientID, const simxChar *title, simxInt maxLin
 		((simxFloat *) buffer)[10] = extApi_endianConversionFloat(backgroundColor[1]);
 		((simxFloat *) buffer)[11] = extApi_endianConversionFloat(backgroundColor[2]);
 	}
-	dataPointer = _exec_string_buffer(clientID, simx_cmd_aux_console_open, operationMode, 0, (simxUChar *) title,
-																		buffer, 12 * 4, &returnValue);
+	dataPointer = _exec_string_buffer(clientID, simx_cmd_aux_console_open, operationMode, 0, (simxUChar *) title, buffer,
+																		12 * 4, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		consoleHandle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
@@ -3963,73 +3304,49 @@ EXTAPI_DLLEXPORT simxInt simxAuxiliaryConsoleClose(simxInt clientID, simxInt con
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_aux_console_close, consoleHandle));
-	}
 	_exec_int(clientID, simx_cmd_aux_console_close, operationMode, 0, consoleHandle, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxAuxiliaryConsolePrint(simxInt clientID, simxInt consoleHandle, const simxChar *txt, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxAuxiliaryConsolePrint(simxInt clientID, simxInt consoleHandle, const simxChar *txt, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_aux_console_print, consoleHandle));
-	}
 	if (txt == 0)
-	{
 		_exec_int_buffer(clientID, simx_cmd_aux_console_print, operationMode, 1, consoleHandle, 0, 0, &returnValue);
-	}
 	else
-	{
 		_exec_int_buffer(clientID, simx_cmd_aux_console_print, operationMode, 1, consoleHandle, (simxUChar *) txt,
 										 extApi_getStringLength(txt) + 1, &returnValue);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxAuxiliaryConsoleShow(simxInt clientID, simxInt consoleHandle, simxUChar showState, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxAuxiliaryConsoleShow(simxInt clientID, simxInt consoleHandle, simxUChar showState, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_aux_console_show, consoleHandle));
-	}
 	_exec_int_int(clientID, simx_cmd_aux_console_show, operationMode, 0, consoleHandle, (simxInt) showState,
 								&returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *eulerAngles,
-												 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *eulerAngles, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_orientation2, objectHandle,
 																			 relativeToObjectHandle));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_orientation2, operationMode, 0, objectHandle,
 														 relativeToObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -4057,21 +3374,14 @@ simxGetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativ
     */
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectPosition(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *position,
-											simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectPosition(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *position, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
-		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_position2, objectHandle,
-																			 relativeToObjectHandle));
-	}
+		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_position2, objectHandle, relativeToObjectHandle));
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_position2, operationMode, 0, objectHandle,
 														 relativeToObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -4099,21 +3409,14 @@ simxGetObjectPosition(simxInt clientID, simxInt objectHandle, simxInt relativeTo
     */
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectQuaternion(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *quaternion,
-												simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectQuaternion(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, simxFloat *quaternion, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
-		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_quaternion, objectHandle,
-																			 relativeToObjectHandle));
-	}
+		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_quaternion, objectHandle, relativeToObjectHandle));
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_quaternion, operationMode, 0, objectHandle,
 														 relativeToObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -4142,20 +3445,14 @@ simxGetObjectQuaternion(simxInt clientID, simxInt objectHandle, simxInt relative
     */
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle,
-												 const simxFloat *eulerAngles, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, const simxFloat *eulerAngles, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxUChar buffer[4 * 4];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_object_orientation, objectHandle));
-	}
 	((simxInt *) buffer)[0] = extApi_endianConversionInt(relativeToObjectHandle);
 	((simxFloat *) buffer)[1] = extApi_endianConversionFloat(eulerAngles[0]);
 	((simxFloat *) buffer)[2] = extApi_endianConversionFloat(eulerAngles[1]);
@@ -4165,42 +3462,30 @@ simxSetObjectOrientation(simxInt clientID, simxInt objectHandle, simxInt relativ
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectPosition(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, const simxFloat *position,
-											simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectPosition(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, const simxFloat *position, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxUChar buffer[4 * 4];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_object_position, objectHandle));
-	}
 	((simxInt *) buffer)[0] = extApi_endianConversionInt(relativeToObjectHandle);
 	((simxFloat *) buffer)[1] = extApi_endianConversionFloat(position[0]);
 	((simxFloat *) buffer)[2] = extApi_endianConversionFloat(position[1]);
 	((simxFloat *) buffer)[3] = extApi_endianConversionFloat(position[2]);
-	_exec_int_buffer(clientID, simx_cmd_set_object_position, operationMode, 0, objectHandle, buffer, 4 * 4,
-									 &returnValue);
+	_exec_int_buffer(clientID, simx_cmd_set_object_position, operationMode, 0, objectHandle, buffer, 4 * 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt simxSetObjectQuaternion(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle,
-																								 const simxFloat *quaternion, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectQuaternion(simxInt clientID, simxInt objectHandle, simxInt relativeToObjectHandle, const simxFloat *quaternion, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxUChar buffer[5 * 4];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_object_quaternion, objectHandle));
-	}
 	((simxInt *) buffer)[0] = extApi_endianConversionInt(relativeToObjectHandle);
 	((simxFloat *) buffer)[1] = extApi_endianConversionFloat(quaternion[0]);
 	((simxFloat *) buffer)[2] = extApi_endianConversionFloat(quaternion[1]);
@@ -4211,71 +3496,50 @@ EXTAPI_DLLEXPORT simxInt simxSetObjectQuaternion(simxInt clientID, simxInt objec
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectParent(simxInt clientID, simxInt objectHandle, simxInt parentObject, simxUChar keepInPlace,
-										simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectParent(simxInt clientID, simxInt objectHandle, simxInt parentObject, simxUChar keepInPlace, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxUChar buffer[4 + 1];
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_object_parent, objectHandle));
-	}
 	((simxInt *) buffer)[0] = extApi_endianConversionInt(parentObject);
 	buffer[4] = keepInPlace;
 	_exec_int_buffer(clientID, simx_cmd_set_object_parent, operationMode, 0, objectHandle, buffer, 4 + 1, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetUIButtonLabel(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, const simxChar *upStateLabel,
-										 const simxChar *downStateLabel, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetUIButtonLabel(simxInt clientID, simxInt uiHandle, simxInt uiButtonID, const simxChar *upStateLabel, const simxChar *downStateLabel, simxInt operationMode)
 {
 	simxInt returnValue;
 	simxInt strL1, strL2, i;
 	simxUChar *buffer;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_set_ui_button_label, uiHandle, uiButtonID));
-	}
 	strL1 = extApi_getStringLength(upStateLabel);
 	strL2 = extApi_getStringLength(downStateLabel);
 	buffer = extApi_allocateBuffer(strL1 + strL2 + 1 + 1);
 	for (i = 0; i < strL1 + 1; i++)
-	{
 		buffer[i] = upStateLabel[i];
-	}
 	for (i = 0; i < strL2 + 1; i++)
-	{
 		buffer[strL1 + 1 + i] = downStateLabel[i];
-	}
 	_exec_intint_buffer(clientID, simx_cmd_set_ui_button_label, operationMode, 0, uiHandle, uiButtonID, buffer,
 											strL1 + strL2 + 1 + 1, &returnValue);
 	extApi_releaseBuffer(buffer);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetLastErrors(simxInt clientID, simxInt *errorCnt, simxChar **errorStrings, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetLastErrors(simxInt clientID, simxInt *errorCnt, simxChar **errorStrings, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_null(clientID, simx_cmd_get_last_errors));
-	}
 	dataPointer = _exec_null(clientID, simx_cmd_get_last_errors, operationMode, 0, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -4285,287 +3549,196 @@ simxGetLastErrors(simxInt clientID, simxInt *errorCnt, simxChar **errorStrings, 
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetArrayParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValues, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetArrayParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValues, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, i;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_array_parameter, paramIdentifier));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_array_parameter, operationMode, 0, paramIdentifier, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		for (i = 0; i < 3; i++)
-		{
 			paramValues[i] = _readPureDataFloat(dataPointer, 0, 4 * i);
-		}
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetArrayParameter(simxInt clientID, simxInt paramIdentifier, const simxFloat *paramValues, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetArrayParameter(simxInt clientID, simxInt paramIdentifier, const simxFloat *paramValues, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_array_parameter, paramIdentifier));
-	}
-	_exec_int_buffer(clientID, simx_cmd_set_array_parameter, operationMode, 0, paramIdentifier,
-									 (simxUChar *) paramValues, 3 * 4, &returnValue);
+	_exec_int_buffer(clientID, simx_cmd_set_array_parameter, operationMode, 0, paramIdentifier, (simxUChar *) paramValues,
+									 3 * 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetBooleanParameter(simxInt clientID, simxInt paramIdentifier, simxUChar *paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetBooleanParameter(simxInt clientID, simxInt paramIdentifier, simxUChar *paramValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_boolean_parameter, paramIdentifier));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_boolean_parameter, operationMode, 0, paramIdentifier, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		paramValue[0] = (simxUChar) _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetBooleanParameter(simxInt clientID, simxInt paramIdentifier, simxUChar paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetBooleanParameter(simxInt clientID, simxInt paramIdentifier, simxUChar paramValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_boolean_parameter, paramIdentifier));
-	}
 	_exec_int_int(clientID, simx_cmd_set_boolean_parameter, operationMode, 0, paramIdentifier, (simxInt) paramValue,
 								&returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetIntegerParameter(simxInt clientID, simxInt paramIdentifier, simxInt *paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetIntegerParameter(simxInt clientID, simxInt paramIdentifier, simxInt *paramValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_integer_parameter, paramIdentifier));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_integer_parameter, operationMode, 0, paramIdentifier, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		paramValue[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetIntegerParameter(simxInt clientID, simxInt paramIdentifier, simxInt paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetIntegerParameter(simxInt clientID, simxInt paramIdentifier, simxInt paramValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_integer_parameter, paramIdentifier));
-	}
-	_exec_int_int(clientID, simx_cmd_set_integer_parameter, operationMode, 0, paramIdentifier, paramValue,
-								&returnValue);
+	_exec_int_int(clientID, simx_cmd_set_integer_parameter, operationMode, 0, paramIdentifier, paramValue, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_floating_parameter, paramIdentifier));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_floating_parameter, operationMode, 0, paramIdentifier, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		paramValue[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat paramValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_floating_parameter, paramIdentifier));
-	}
 	_exec_int_float(clientID, simx_cmd_set_floating_parameter, operationMode, 0, paramIdentifier, paramValue,
 									&returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetStringParameter(simxInt clientID, simxInt paramIdentifier, simxChar **paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetStringParameter(simxInt clientID, simxInt paramIdentifier, simxChar **paramValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_string_parameter, paramIdentifier));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_string_parameter, operationMode, 0, paramIdentifier, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		paramValue[0] = (simxChar *) dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetCollisionHandle(simxInt clientID, const simxChar *collisionObjectName, simxInt *handle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetCollisionHandle(simxInt clientID, const simxChar *collisionObjectName, simxInt *handle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_collision_handle, (simxUChar *) collisionObjectName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_collision_handle, operationMode, 0,
 														 (simxUChar *) collisionObjectName, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		handle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetDistanceHandle(simxInt clientID, const simxChar *distanceObjectName, simxInt *handle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetDistanceHandle(simxInt clientID, const simxChar *distanceObjectName, simxInt *handle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_distance_handle, (simxUChar *) distanceObjectName));
-	}
-	dataPointer = _exec_string(clientID, simx_cmd_get_distance_handle, operationMode, 0,
-														 (simxUChar *) distanceObjectName, &returnValue);
+	dataPointer = _exec_string(clientID, simx_cmd_get_distance_handle, operationMode, 0, (simxUChar *) distanceObjectName,
+														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		handle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetCollectionHandle(simxInt clientID, const simxChar *collectionName, simxInt *handle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetCollectionHandle(simxInt clientID, const simxChar *collectionName, simxInt *handle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_collection_handle, (simxUChar *) collectionName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_collection_handle, operationMode, 0, (simxUChar *) collectionName,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		handle[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadCollision(simxInt clientID, simxInt collisionObjectHandle, simxUChar *collisionState, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadCollision(simxInt clientID, simxInt collisionObjectHandle, simxUChar *collisionState, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_read_collision, collisionObjectHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_read_collision, operationMode, 0, collisionObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		collisionState[0] = (simxUChar) _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadDistance(simxInt clientID, simxInt distanceObjectHandle, simxFloat *minimumDistance, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadDistance(simxInt clientID, simxInt distanceObjectHandle, simxFloat *minimumDistance, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_read_distance, distanceObjectHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_read_distance, operationMode, 0, distanceObjectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		minimumDistance[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
@@ -4573,13 +3746,9 @@ EXTAPI_DLLEXPORT simxInt simxRemoveObject(simxInt clientID, simxInt objectHandle
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_remove_object, objectHandle));
-	}
 	_exec_int(clientID, simx_cmd_remove_object, operationMode, 0, objectHandle, &returnValue);
 	return (returnValue);
 }
@@ -4588,13 +3757,9 @@ EXTAPI_DLLEXPORT simxInt simxRemoveModel(simxInt clientID, simxInt objectHandle,
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_remove_model, objectHandle));
-	}
 	_exec_int(clientID, simx_cmd_remove_model, operationMode, 0, objectHandle, &returnValue);
 	return (returnValue);
 }
@@ -4603,13 +3768,9 @@ EXTAPI_DLLEXPORT simxInt simxRemoveUI(simxInt clientID, simxInt uiHandle, simxIn
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_remove_ui, uiHandle));
-	}
 	_exec_int(clientID, simx_cmd_remove_ui, operationMode, 0, uiHandle, &returnValue);
 	return (returnValue);
 }
@@ -4618,20 +3779,14 @@ EXTAPI_DLLEXPORT simxInt simxCloseScene(simxInt clientID, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_null(clientID, simx_cmd_close_scene));
-	}
 	_exec_null(clientID, simx_cmd_close_scene, operationMode, 0, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjects(simxInt clientID, simxInt objectType, simxInt *objectCount, simxInt **objectHandles,
-							 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjects(simxInt clientID, simxInt objectType, simxInt *objectCount, simxInt **objectHandles, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, off;
@@ -4639,13 +3794,9 @@ simxGetObjects(simxInt clientID, simxInt objectType, simxInt *objectCount, simxI
 	simxInt i;
 #endif
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_objects, objectType));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_objects, operationMode, 0, objectType, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -4660,54 +3811,39 @@ simxGetObjects(simxInt clientID, simxInt objectType, simxInt *objectCount, simxI
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxDisplayDialog(simxInt clientID, const simxChar *titleText, const simxChar *mainText, simxInt dialogType,
-									const simxChar *initialText, const simxFloat *titleColors, const simxFloat *dialogColors,
-									simxInt *dialogHandle, simxInt *uiHandle, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxDisplayDialog(simxInt clientID, const simxChar *titleText, const simxChar *mainText, simxInt dialogType, const simxChar *initialText, const simxFloat *titleColors, const simxFloat *dialogColors, simxInt *dialogHandle, simxInt *uiHandle, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, str1L, str2L, i, off;
 	simxUChar *buffer;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_display_dialog, (simxUChar *) titleText));
-	}
 	str1L = extApi_getStringLength(mainText);
 	str2L = extApi_getStringLength(initialText);
 	buffer = extApi_allocateBuffer(str1L + 1 + 4 + str2L + 1 + 4 * 6 + 4 * 6);
 	off = 0;
 	for (i = 0; i < str1L + 1; i++)
-	{
 		buffer[off + i] = mainText[i];
-	}
 	off += str1L + 1;
 	((simxInt *) (buffer + off))[0] = extApi_endianConversionInt(dialogType);
 	off += 4;
 	for (i = 0; i < str2L + 1; i++)
-	{
 		buffer[off + i] = initialText[i];
-	}
 	off += str2L + 1;
 	((simxFloat *) (buffer + off))[0] = extApi_endianConversionFloat(-10.0f);
 	if (titleColors != 0)
 	{
 		for (i = 0; i < 6; i++)
-		{
 			((simxFloat *) (buffer + off))[i] = extApi_endianConversionFloat(titleColors[i]);
-		}
 	}
 	off += 4 * 6;
 	((simxFloat *) (buffer + off))[0] = extApi_endianConversionFloat(-10.0f);
 	if (dialogColors != 0)
 	{
 		for (i = 0; i < 6; i++)
-		{
 			((simxFloat *) (buffer + off))[i] = extApi_endianConversionFloat(dialogColors[i]);
-		}
 	}
 	dataPointer = _exec_string_buffer(clientID, simx_cmd_display_dialog, operationMode, 0, (simxUChar *) titleText,
 																		buffer, str1L + 1 + 4 + str2L + 1 + 4 * 6 + 4 * 6, &returnValue);
@@ -4716,9 +3852,7 @@ simxDisplayDialog(simxInt clientID, const simxChar *titleText, const simxChar *m
 	{
 		dialogHandle[0] = _readPureDataInt(dataPointer, 0, 0);
 		if (uiHandle != NULL)
-		{
 			uiHandle[0] = _readPureDataInt(dataPointer, 0, 4);
-		}
 	}
 	return (returnValue);
 }
@@ -4727,30 +3861,21 @@ EXTAPI_DLLEXPORT simxInt simxEndDialog(simxInt clientID, simxInt dialogHandle, s
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_end_dialog, dialogHandle));
-	}
 	_exec_int(clientID, simx_cmd_end_dialog, operationMode, 0, dialogHandle, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetDialogInput(simxInt clientID, simxInt dialogHandle, simxChar **inputText, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetDialogInput(simxInt clientID, simxInt dialogHandle, simxChar **inputText, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_dialog_input, dialogHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_dialog_input, operationMode, 0, dialogHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -4759,19 +3884,14 @@ simxGetDialogInput(simxInt clientID, simxInt dialogHandle, simxChar **inputText,
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetDialogResult(simxInt clientID, simxInt dialogHandle, simxInt *result, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetDialogResult(simxInt clientID, simxInt dialogHandle, simxInt *result, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_dialog_result, dialogHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_dialog_result, operationMode, 0, dialogHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -4780,9 +3900,7 @@ simxGetDialogResult(simxInt clientID, simxInt dialogHandle, simxInt *result, sim
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxCopyPasteObjects(simxInt clientID, const simxInt *objectHandles, simxInt objectCount, simxInt **newObjectHandles,
-										 simxInt *newObjectCount, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxCopyPasteObjects(simxInt clientID, const simxInt *objectHandles, simxInt objectCount, simxInt **newObjectHandles, simxInt *newObjectCount, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, off;
@@ -4790,13 +3908,9 @@ simxCopyPasteObjects(simxInt clientID, const simxInt *objectHandles, simxInt obj
 	simxInt i;
 #endif
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_copy_paste_objects, 0));
-	}
 	dataPointer = _exec_int_buffer(clientID, simx_cmd_copy_paste_objects, operationMode, 1, 0,
 																 (simxUChar *) objectHandles, objectCount * 4, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -4812,8 +3926,7 @@ simxCopyPasteObjects(simxInt clientID, const simxInt *objectHandles, simxInt obj
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectSelection(simxInt clientID, simxInt **objectHandles, simxInt *objectCount, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectSelection(simxInt clientID, simxInt **objectHandles, simxInt *objectCount, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, off;
@@ -4821,13 +3934,9 @@ simxGetObjectSelection(simxInt clientID, simxInt **objectHandles, simxInt *objec
 	simxInt i;
 #endif
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_null(clientID, simx_cmd_get_object_selection));
-	}
 	dataPointer = _exec_null(clientID, simx_cmd_get_object_selection, operationMode, 0, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -4842,18 +3951,13 @@ simxGetObjectSelection(simxInt clientID, simxInt **objectHandles, simxInt *objec
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectSelection(simxInt clientID, const simxInt *objectHandles, simxInt objectCount, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectSelection(simxInt clientID, const simxInt *objectHandles, simxInt objectCount, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_object_selection, 0));
-	}
 	_exec_int_buffer(clientID, simx_cmd_set_object_selection, operationMode, 0, 0, (simxUChar *) objectHandles,
 									 objectCount * 4, &returnValue);
 	return (returnValue);
@@ -4863,13 +3967,9 @@ EXTAPI_DLLEXPORT simxInt simxClearFloatSignal(simxInt clientID, const simxChar *
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_clear_float_signal, (simxUChar *) signalName));
-	}
 	_exec_string(clientID, simx_cmd_clear_float_signal, operationMode, 0, (simxUChar *) signalName, &returnValue);
 	return (returnValue);
 }
@@ -4878,13 +3978,9 @@ EXTAPI_DLLEXPORT simxInt simxClearIntegerSignal(simxInt clientID, const simxChar
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_clear_integer_signal, (simxUChar *) signalName));
-	}
 	_exec_string(clientID, simx_cmd_clear_integer_signal, operationMode, 0, (simxUChar *) signalName, &returnValue);
 	return (returnValue);
 }
@@ -4893,142 +3989,100 @@ EXTAPI_DLLEXPORT simxInt simxClearStringSignal(simxInt clientID, const simxChar 
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_clear_string_signal, (simxUChar *) signalName));
-	}
 	_exec_string(clientID, simx_cmd_clear_string_signal, operationMode, 0, (simxUChar *) signalName, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat *signalValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat *signalValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_float_signal, (simxUChar *) signalName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_float_signal, operationMode, 0, (simxUChar *) signalName,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		signalValue[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetIntegerSignal(simxInt clientID, const simxChar *signalName, simxInt *signalValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetIntegerSignal(simxInt clientID, const simxChar *signalName, simxInt *signalValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_integer_signal, (simxUChar *) signalName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_integer_signal, operationMode, 0, (simxUChar *) signalName,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		signalValue[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetStringSignal(simxInt clientID, const simxChar *signalName, simxUChar **signalValue, simxInt *signalLength,
-										simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetStringSignal(simxInt clientID, const simxChar *signalName, simxUChar **signalValue, simxInt *signalLength, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_string_signal, (simxUChar *) signalName));
-	}
 	dataPointer = _exec_string(clientID, simx_cmd_get_string_signal, operationMode, 0, (simxUChar *) signalName,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		signalValue[0] = dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer);
-		signalLength[0] =
-						extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
-						SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
+		signalLength[0] = extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
+											SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetAndClearStringSignal(simxInt clientID, const simxChar *signalName, simxUChar **signalValue,
-														simxInt *signalLength, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetAndClearStringSignal(simxInt clientID, const simxChar *signalName, simxUChar **signalValue, simxInt *signalLength, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_get_and_clear_string_signal, (simxUChar *) signalName));
-	}
-	dataPointer = _exec_string(clientID, simx_cmd_get_and_clear_string_signal, operationMode, 0,
-														 (simxUChar *) signalName, &returnValue);
+	dataPointer = _exec_string(clientID, simx_cmd_get_and_clear_string_signal, operationMode, 0, (simxUChar *) signalName,
+														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		signalValue[0] = dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer);
-		signalLength[0] =
-						extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
-						SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
+		signalLength[0] = extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
+											SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
 
 		/* ******* SPECIAL CASE FOR THIS COMMAND ONLY !! ******** */
-		if (operationMode == simx_opmode_buffer)
-		{/* &&(signalLength[0]>0)) */
+		if (operationMode == simx_opmode_buffer)/* &&(signalLength[0]>0)) */
 			_removeCommandReply_string(clientID, simx_cmd_get_and_clear_string_signal,
-																 (simxUChar *) signalName);
-		} /* We received a signal value! The continuous command was automatically deactivated on the server side. We remove the reply  in the input buffer on the client here! */
+																 (simxUChar *) signalName); /* We received a signal value! The continuous command was automatically deactivated on the server side. We remove the reply  in the input buffer on the client here! */
 		/* ****************************************************** */
 
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxReadStringStream(simxInt clientID, const simxChar *signalName, simxUChar **signalValue, simxInt *signalLength,
-										 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxReadStringStream(simxInt clientID, const simxChar *signalName, simxUChar **signalValue, simxInt *signalLength, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_read_string_stream, (simxUChar *) signalName));
-	}
 
 	/* following 2 lines special here */
 	if (operationMode == simx_opmode_blocking)
-	{
 		return (simx_return_illegal_opmode_flag);
-	}
 
 	extApi_lockResources(clientID); /* special here */
 	dataPointer = _exec_string(clientID, simx_cmd_read_string_stream, operationMode, 0, (simxUChar *) signalName,
@@ -5036,9 +4090,8 @@ simxReadStringStream(simxInt clientID, const simxChar *signalName, simxUChar **s
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
 		signalValue[0] = dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer);
-		signalLength[0] =
-						extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
-						SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
+		signalLength[0] = extApi_endianConversionInt(((simxInt *) (dataPointer + simx_cmdheaderoffset_full_mem_size))[0]) -
+											SIMX_SUBHEADER_SIZE - _getCmdDataSize(dataPointer);
 
 		/* ******* SPECIAL CASE FOR THIS COMMAND ONLY !! ******** */
 		_removeCommandReply_string(clientID, simx_cmd_read_string_stream,
@@ -5049,209 +4102,143 @@ simxReadStringStream(simxInt clientID, const simxChar *signalName, simxUChar **s
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat signalValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat signalValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_set_float_signal, (simxUChar *) signalName));
-	}
 	signalValue = extApi_endianConversionFloat(signalValue);
 	_exec_string_buffer(clientID, simx_cmd_set_float_signal, operationMode, 0, (simxUChar *) signalName,
 											(simxUChar *) &signalValue, 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetIntegerSignal(simxInt clientID, const simxChar *signalName, simxInt signalValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetIntegerSignal(simxInt clientID, const simxChar *signalName, simxInt signalValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_set_integer_signal, (simxUChar *) signalName));
-	}
 	signalValue = extApi_endianConversionInt(signalValue);
 	_exec_string_buffer(clientID, simx_cmd_set_integer_signal, operationMode, 0, (simxUChar *) signalName,
 											(simxUChar *) &signalValue, 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetStringSignal(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength,
-										simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetStringSignal(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_set_string_signal, (simxUChar *) signalName));
-	}
 	_exec_string_buffer(clientID, simx_cmd_set_string_signal, operationMode, 0, (simxUChar *) signalName,
 											(simxUChar *) signalValue, signalLength, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxAppendStringSignal(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength,
-											 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxAppendStringSignal(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength, simxInt operationMode)
 { /* since 31.1.2013: append mode */
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_string(clientID, simx_cmd_append_string_signal, (simxUChar *) signalName));
-	}
 	_exec_string_buffer(clientID, simx_cmd_append_string_signal, operationMode, 1, (simxUChar *) signalName,
 											(simxUChar *) signalValue, signalLength, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxWriteStringStream(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength,
-											simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxWriteStringStream(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength, simxInt operationMode)
 { /* this is just a convenience function */
 	return (simxAppendStringSignal(clientID, signalName, signalValue, signalLength, operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat *parameterValue,
-														simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat *parameterValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_float_parameter, objectHandle, parameterID));
-	}
-	dataPointer = _exec_intint(clientID, simx_cmd_get_object_float_parameter, operationMode, 0, objectHandle,
-														 parameterID, &returnValue);
+	dataPointer = _exec_intint(clientID, simx_cmd_get_object_float_parameter, operationMode, 0, objectHandle, parameterID,
+														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		parameterValue[0] = _readPureDataFloat(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat parameterValue,
-														simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat parameterValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_set_object_float_parameter, objectHandle, parameterID));
-	}
 	parameterValue = extApi_endianConversionFloat(parameterValue);
 	_exec_intint_buffer(clientID, simx_cmd_set_object_float_parameter, operationMode, 0, objectHandle, parameterID,
 											(simxUChar *) &parameterValue, 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectIntParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxInt *parameterValue,
-													simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectIntParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxInt *parameterValue, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_int_parameter, objectHandle, parameterID));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_int_parameter, operationMode, 0, objectHandle, parameterID,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		parameterValue[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetObjectIntParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxInt parameterValue,
-													simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetObjectIntParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxInt parameterValue, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_set_object_int_parameter, objectHandle, parameterID));
-	}
 	parameterValue = extApi_endianConversionInt(parameterValue);
 	_exec_intint_buffer(clientID, simx_cmd_set_object_int_parameter, operationMode, 0, objectHandle, parameterID,
 											(simxUChar *) &parameterValue, 4, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetModelProperty(simxInt clientID, simxInt objectHandle, simxInt *prop, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetModelProperty(simxInt clientID, simxInt objectHandle, simxInt *prop, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_model_property, objectHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_model_property, operationMode, 0, objectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
-	{
 		prop[0] = _readPureDataInt(dataPointer, 0, 0);
-	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxSetModelProperty(simxInt clientID, simxInt objectHandle, simxInt prop, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxSetModelProperty(simxInt clientID, simxInt objectHandle, simxInt prop, simxInt operationMode)
 {
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_set_model_property, objectHandle));
-	}
 	_exec_int_int(clientID, simx_cmd_set_model_property, operationMode, 0, objectHandle, prop, &returnValue);
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxQuery(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength,
-					const simxChar *retSignalName, simxUChar **retSignalValue, simxInt *retSignalLength, simxInt timeOutInMs)
+EXTAPI_DLLEXPORT simxInt simxQuery(simxInt clientID, const simxChar *signalName, const simxUChar *signalValue, simxInt signalLength, const simxChar *retSignalName, simxUChar **retSignalValue, simxInt *retSignalLength, simxInt timeOutInMs)
 {
 	simxInt err;
 	simxInt startTime = extApi_getTimeInMs();
@@ -5262,36 +4249,24 @@ simxQuery(simxInt clientID, const simxChar *signalName, const simxUChar *signalV
 	simxGetAndClearStringSignal(clientID, retSignalName, retSignalValue, retSignalLength, simx_opmode_streaming);
 	err = simxSetStringSignal(clientID, signalName, signalValue, signalLength, simx_opmode_blocking);
 	if (err != 0)
-	{
 		return (err);
-	}
 	while (extApi_getTimeDiffInMs(startTime) < timeOutInMs)
 	{
-		if (simxGetAndClearStringSignal(clientID, retSignalName, retSignalValue, retSignalLength, simx_opmode_buffer) ==
-				0)
-		{
-			return (0);
-		} /* success */
+		if (simxGetAndClearStringSignal(clientID, retSignalName, retSignalValue, retSignalLength, simx_opmode_buffer) == 0)
+			return (0); /* success */
 		extApi_switchThread();
 	}
 	return (simx_return_timeout_flag);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectGroupData(simxInt clientID, simxInt objectType, simxInt dataType, simxInt *handlesCount, simxInt **handles,
-											 simxInt *intDataCount, simxInt **intData, simxInt *floatDataCount, simxFloat **floatData,
-											 simxInt *stringDataCount, simxChar **stringData, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectGroupData(simxInt clientID, simxInt objectType, simxInt dataType, simxInt *handlesCount, simxInt **handles, simxInt *intDataCount, simxInt **intData, simxInt *floatDataCount, simxFloat **floatData, simxInt *stringDataCount, simxChar **stringData, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue, additionalOffset, intDataCount_, floatDataCount_, stringDataCount_;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_intint(clientID, simx_cmd_get_object_group_data, objectType, dataType));
-	}
 	dataPointer = _exec_intint(clientID, simx_cmd_get_object_group_data, operationMode, 0, objectType, dataType,
 														 &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
@@ -5303,59 +4278,40 @@ simxGetObjectGroupData(simxInt clientID, simxInt objectType, simxInt dataType, s
 		additionalOffset = 16;
 
 		if (intDataCount != NULL)
-		{
 			intDataCount[0] = intDataCount_;
-		}
 		if (floatDataCount != NULL)
-		{
 			floatDataCount[0] = floatDataCount_;
-		}
 		if (stringDataCount != NULL)
-		{
 			stringDataCount[0] = stringDataCount_;
-		}
 
 		handles[0] = ((simxInt *) (dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer) +
 															 additionalOffset)); /* little/big endian conversion happened on the server side */
 		additionalOffset += handlesCount[0] * 4;
 
 		if (intData != NULL)
-		{
 			intData[0] = ((simxInt *) (dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer) +
-																 additionalOffset));
-		} /* little/big endian conversion happened on the server side */
+																 additionalOffset)); /* little/big endian conversion happened on the server side */
 		additionalOffset += intDataCount_ * 4;
 
 		if (floatData != NULL)
-		{
 			floatData[0] = ((simxFloat *) (dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer) +
-																		 additionalOffset));
-		} /* little/big endian conversion happened on the server side */
+																		 additionalOffset)); /* little/big endian conversion happened on the server side */
 		additionalOffset += floatDataCount_ * 4;
 
 		if (stringData != NULL)
-		{
-			stringData[0] =
-							(simxChar *) dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer) + additionalOffset;
-		}
+			stringData[0] = (simxChar *) dataPointer + SIMX_SUBHEADER_SIZE + _getCmdDataSize(dataPointer) + additionalOffset;
 	}
 	return (returnValue);
 }
 
-EXTAPI_DLLEXPORT simxInt
-simxGetObjectVelocity(simxInt clientID, simxInt objectHandle, simxFloat *linearVelocity, simxFloat *angularVelocity,
-											simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt simxGetObjectVelocity(simxInt clientID, simxInt objectHandle, simxFloat *linearVelocity, simxFloat *angularVelocity, simxInt operationMode)
 {
 	simxUChar *dataPointer;
 	simxInt returnValue;
 	if (_communicationThreadRunning[clientID] == 0)
-	{
 		return (simx_return_initialize_error_flag);
-	}
 	if (operationMode == simx_opmode_remove)
-	{
 		return (_removeCommandReply_int(clientID, simx_cmd_get_object_velocity, objectHandle));
-	}
 	dataPointer = _exec_int(clientID, simx_cmd_get_object_velocity, operationMode, 0, objectHandle, &returnValue);
 	if ((dataPointer != 0) && (returnValue == 0))
 	{
@@ -5376,61 +4332,48 @@ simxGetObjectVelocity(simxInt clientID, simxInt objectHandle, simxFloat *linearV
 }
 
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat *position, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetJointPosition(simxInt clientID, simxInt jointHandle, simxFloat *position, simxInt operationMode)
 {
 	return (simxSetJointPosition(clientID, jointHandle, position[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetJointTargetVelocity(simxInt clientID, simxInt jointHandle, simxFloat *targetVelocity, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetJointTargetVelocity(simxInt clientID, simxInt jointHandle, simxFloat *targetVelocity, simxInt operationMode)
 {
 	return (simxSetJointTargetVelocity(clientID, jointHandle, targetVelocity[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetJointTargetPosition(simxInt clientID, simxInt jointHandle, simxFloat *targetPosition, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetJointTargetPosition(simxInt clientID, simxInt jointHandle, simxFloat *targetPosition, simxInt operationMode)
 {
 	return (simxSetJointTargetPosition(clientID, jointHandle, targetPosition[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetJointForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetJointForce(simxInt clientID, simxInt jointHandle, simxFloat *force, simxInt operationMode)
 {
 	return (simxSetJointForce(clientID, jointHandle, force[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat *signalValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetFloatSignal(simxInt clientID, const simxChar *signalName, simxFloat *signalValue, simxInt operationMode)
 {
 	return (simxSetFloatSignal(clientID, signalName, signalValue[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat *parameterValue,
-																 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetObjectFloatParameter(simxInt clientID, simxInt objectHandle, simxInt parameterID, simxFloat *parameterValue, simxInt operationMode)
 {
 	return (simxSetObjectFloatParameter(clientID, objectHandle, parameterID, parameterValue[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxSetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValue, simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxSetFloatingParameter(simxInt clientID, simxInt paramIdentifier, simxFloat *paramValue, simxInt operationMode)
 {
 	return (simxSetFloatingParameter(clientID, paramIdentifier, paramValue[0], operationMode));
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxCreateDummy(simxInt clientID, simxFloat *size, const simxUChar *colors, simxInt *objectHandle,
-										 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxCreateDummy(simxInt clientID, simxFloat *size, const simxUChar *colors, simxInt *objectHandle, simxInt operationMode)
 {
 	return (simxCreateDummy(clientID, size[0], colors, objectHandle, operationMode));
 }
 
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxReadProximitySensor(simxInt *clientIDandSensorHandle, simxUChar *detectionState, simxFloat *detectedPoint,
-														 simxInt *detectedObjectHandle, simxFloat *detectedSurfaceNormalVector,
-														 simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxReadProximitySensor(simxInt *clientIDandSensorHandle, simxUChar *detectionState, simxFloat *detectedPoint, simxInt *detectedObjectHandle, simxFloat *detectedSurfaceNormalVector, simxInt operationMode)
 {
 	int ret;
 	ret = simxReadProximitySensor(clientIDandSensorHandle[0], clientIDandSensorHandle[1], detectionState, detectedPoint,
@@ -5438,10 +4381,7 @@ mtlb_simxReadProximitySensor(simxInt *clientIDandSensorHandle, simxUChar *detect
 	return (ret);
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxAuxiliaryConsoleOpen(simxInt *clientIDandMaxLinesAndModeAndPositionAndSize, const simxChar *title,
-															simxFloat *textColor, simxFloat *backgroundColor, simxInt *consoleHandle,
-															simxInt operationMode)
+EXTAPI_DLLEXPORT simxInt mtlb_simxAuxiliaryConsoleOpen(simxInt *clientIDandMaxLinesAndModeAndPositionAndSize, const simxChar *title, simxFloat *textColor, simxFloat *backgroundColor, simxInt *consoleHandle, simxInt operationMode)
 {
 	int ret;
 	int p_[2];
@@ -5455,13 +4395,9 @@ mtlb_simxAuxiliaryConsoleOpen(simxInt *clientIDandMaxLinesAndModeAndPositionAndS
 	p = p_;
 	s = s_;
 	if (p_[0] < -9999)
-	{
 		p = NULL;
-	}
 	if (s_[0] < -9999)
-	{
 		s = NULL;
-	}
 	ret = simxAuxiliaryConsoleOpen(clientIDandMaxLinesAndModeAndPositionAndSize[0], title,
 																 clientIDandMaxLinesAndModeAndPositionAndSize[1],
 																 clientIDandMaxLinesAndModeAndPositionAndSize[2], p, s, textColor, backgroundColor,
@@ -5469,10 +4405,7 @@ mtlb_simxAuxiliaryConsoleOpen(simxInt *clientIDandMaxLinesAndModeAndPositionAndS
 	return (ret);
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxDisplayDialog(simxInt *clientIDandDlgTypeAndOperationMode, const simxChar *titleText, const simxChar *mainText,
-											 const simxChar *initialText, const simxFloat *titleColorsAndDlgColors,
-											 simxInt *dialogHandleAndUiHandle)
+EXTAPI_DLLEXPORT simxInt mtlb_simxDisplayDialog(simxInt *clientIDandDlgTypeAndOperationMode, const simxChar *titleText, const simxChar *mainText, const simxChar *initialText, const simxFloat *titleColorsAndDlgColors, simxInt *dialogHandleAndUiHandle)
 {
 	int ret, i;
 	float titleColors_[6];
@@ -5487,23 +4420,16 @@ mtlb_simxDisplayDialog(simxInt *clientIDandDlgTypeAndOperationMode, const simxCh
 	titleColors = titleColors_;
 	dialogColors = dialogColors_;
 	if (titleColors_[0] < -9999.0f)
-	{
 		titleColors = NULL;
-	}
 	if (dialogColors_[0] < -9999.0f)
-	{
 		dialogColors = NULL;
-	}
 	ret = simxDisplayDialog(clientIDandDlgTypeAndOperationMode[0], titleText, mainText,
 													clientIDandDlgTypeAndOperationMode[1], initialText, titleColors, dialogColors,
-													dialogHandleAndUiHandle, dialogHandleAndUiHandle + 1,
-													clientIDandDlgTypeAndOperationMode[2]);
+													dialogHandleAndUiHandle, dialogHandleAndUiHandle + 1, clientIDandDlgTypeAndOperationMode[2]);
 	return (ret);
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxQuery(simxInt *clientIDandSignalLengthAndTimeOutInMs, const simxChar *signalName, const simxUChar *signalValue,
-							 const simxChar *retSignalName, simxUChar **retSignalValue, simxInt *retSignalLength)
+EXTAPI_DLLEXPORT simxInt mtlb_simxQuery(simxInt *clientIDandSignalLengthAndTimeOutInMs, const simxChar *signalName, const simxUChar *signalValue, const simxChar *retSignalName, simxUChar **retSignalValue, simxInt *retSignalLength)
 {
 	int ret;
 	ret = simxQuery(clientIDandSignalLengthAndTimeOutInMs[0], signalName, signalValue,
@@ -5512,10 +4438,7 @@ mtlb_simxQuery(simxInt *clientIDandSignalLengthAndTimeOutInMs, const simxChar *s
 	return (ret);
 }
 
-EXTAPI_DLLEXPORT simxInt mtlb_simxGetObjectGroupData(simxInt *clientIDandObjectTypeAndDataTypeAndOperationMode,
-																										 simxInt *handlesCountAndIntDataCountAndFloatDataCountAndStringDataCount,
-																										 simxInt **handles, simxInt **intData, simxFloat **floatData,
-																										 simxChar **stringData)
+EXTAPI_DLLEXPORT simxInt mtlb_simxGetObjectGroupData(simxInt *clientIDandObjectTypeAndDataTypeAndOperationMode, simxInt *handlesCountAndIntDataCountAndFloatDataCountAndStringDataCount, simxInt **handles, simxInt **intData, simxFloat **floatData, simxChar **stringData)
 {
 	int ret;
 	ret = simxGetObjectGroupData(clientIDandObjectTypeAndDataTypeAndOperationMode[0],
@@ -5529,10 +4452,7 @@ EXTAPI_DLLEXPORT simxInt mtlb_simxGetObjectGroupData(simxInt *clientIDandObjectT
 	return (ret);
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxCallScriptFunction_a(const simxInt *variousIntsIn, const simxChar *scriptDescriptionAndFunctionName,
-															const simxInt *inInt, const simxFloat *inFloat, const simxChar *inString,
-															const simxUChar *inBuffer)
+EXTAPI_DLLEXPORT simxInt mtlb_simxCallScriptFunction_a(const simxInt *variousIntsIn, const simxChar *scriptDescriptionAndFunctionName, const simxInt *inInt, const simxFloat *inFloat, const simxChar *inString, const simxUChar *inBuffer)
 {
 	int clientID;
 	int i, off, tmp;
@@ -5547,9 +4467,7 @@ mtlb_simxCallScriptFunction_a(const simxInt *variousIntsIn, const simxChar *scri
 
 	off = 0;
 	for (i = 0; i < variousIntsIn[4]; i++)
-	{
 		off += extApi_getStringLength(inString + off) + 1;
-	}
 	cnt += off;
 	cnt += variousIntsIn[5];
 
@@ -5567,46 +4485,32 @@ mtlb_simxCallScriptFunction_a(const simxInt *variousIntsIn, const simxChar *scri
 	tmp = extApi_getStringLength(scriptDescriptionAndFunctionName) + 1;
 	tmp += extApi_getStringLength(scriptDescriptionAndFunctionName + tmp) + 1;
 	for (i = 0; i < tmp; i++)
-	{
 		_tmpBuffer[clientID][off + i] = scriptDescriptionAndFunctionName[i];
-	}
 	off += tmp;
 
 	for (i = 0; i < variousIntsIn[2]; i++)
-	{
 		((simxInt *) (_tmpBuffer[clientID] + off))[i] = inInt[i];
-	}
 	off += variousIntsIn[2] * 4;
 
 	for (i = 0; i < variousIntsIn[3]; i++)
-	{
 		((simxFloat *) (_tmpBuffer[clientID] + off))[i] = inFloat[i];
-	}
 	off += variousIntsIn[3] * 4;
 
 	/* put buffer before strings, easier after */
 	for (i = 0; i < variousIntsIn[5]; i++)
-	{
 		_tmpBuffer[clientID][off + i] = inBuffer[i];
-	}
 	off += variousIntsIn[5];
 
 	tmp = 0;
 	for (i = 0; i < variousIntsIn[4]; i++)
-	{
 		tmp += extApi_getStringLength(inString + tmp) + 1;
-	}
 	for (i = 0; i < tmp; i++)
-	{
 		_tmpBuffer[clientID][off + i] = inString[i];
-	}
 	off += tmp;
 	return (0);
 }
 
-EXTAPI_DLLEXPORT simxInt
-mtlb_simxCallScriptFunction_b(simxInt clientID, simxInt *variousIntsOut, simxInt **outInt, simxFloat **outFloat,
-															simxChar **outString, simxUChar **outBuffer)
+EXTAPI_DLLEXPORT simxInt mtlb_simxCallScriptFunction_b(simxInt clientID, simxInt *variousIntsOut, simxInt **outInt, simxFloat **outFloat, simxChar **outString, simxUChar **outBuffer)
 {
 
 	simxInt ret, off;

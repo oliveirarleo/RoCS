@@ -13,7 +13,6 @@ extern "C"
 }
 
 
-
 PioneerP3DXModel::PioneerP3DXModel() : robot_name{"Pioneer_p3dx"}, robot_handle{-1}, connection{}, robot_position{},
 																			 sonars{}
 {
@@ -36,14 +35,13 @@ void PioneerP3DXModel::verifyConnection()
 }
 
 
-
 void PioneerP3DXModel::connectToRobot()
 {
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) robot_name.c_str(), (simxInt *) &robot_handle,
 													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 	{
-		std::cout << "Connected to robot: " << robot_name << " handle: " << robot_handle <<  std::endl;
-		fetchRobotPosition();
+		std::cout << "Connected to robot: " << robot_name << " handle: " << robot_handle << std::endl;
+		connectToPositionSensor();
 		connectToSonars();
 		connectToOrientationSensor();
 		connectToWheels();
@@ -67,7 +65,15 @@ void PioneerP3DXModel::connectToSonars()
 
 void PioneerP3DXModel::connectToOrientationSensor()
 {
-	orientation_sensor = new OrientationSensor("OrientationSensor", *this);
+	orientation_sensor = new OrientationVREPSensor("OrientationVREPSensor", *this);
+	orientation_sensor->getData(robot_orientation);
+}
+
+void PioneerP3DXModel::connectToPositionSensor()
+{
+	position_sensor = new PositionVREPSensor{"PositionSensor", *this};
+	position_sensor->getData(robot_position);
+	std::cout << "First Pos: " << robot_position << std::endl;
 }
 
 void PioneerP3DXModel::connectToWheels()
@@ -77,13 +83,6 @@ void PioneerP3DXModel::connectToWheels()
 
 	std::string right_wheel_name = "Pioneer_p3dx_rightMotor";
 	wheels.push_back(new WheelVREP{right_wheel_name, *this});
-}
-
-void PioneerP3DXModel::fetchRobotPosition()
-{
-	float pos[3];
-	simxGetObjectPosition(connection.getClientId(), robot_handle, -1, pos, simx_opmode_streaming);
-	std::cout << "Position: " << pos[0] << pos[1] << pos[2] <<std::endl;
 }
 
 //
@@ -126,9 +125,14 @@ std::vector<RangeVREP *> &PioneerP3DXModel::getSonars()
 	return sonars;
 }
 
-OrientationSensor* PioneerP3DXModel::getOrientationSensor()
+OrientationVREPSensor *PioneerP3DXModel::getOrientationSensor()
 {
 	return orientation_sensor;
+}
+
+PositionVREPSensor *PioneerP3DXModel::getPositionSensor()
+{
+	return position_sensor;
 }
 
 std::vector<WheelVREP *> &PioneerP3DXModel::getWheels()

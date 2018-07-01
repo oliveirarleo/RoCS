@@ -10,7 +10,7 @@
 
 #include <Execute/execute.h>
 
-class ExecuteP3DX: public Execute
+class ExecuteP3DX : public Execute
 {
 
 };

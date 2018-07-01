@@ -10,19 +10,19 @@
 
 #include <Sensors/sensor.h>
 #include <Knowledge/robot_model.h>
-#include "../Knowledge/euler_angle.h"
+#include "../Knowledge/Data/euler_angle.h"
 #include "../Connection/connection.h"
 
-class OrientationSensor: public Sensor<EulerAngle>
+class OrientationVREPSensor : public Sensor<EulerAngle>
 {
 public:
-	RobotModel& robot;
-	Connection& connection;
+	RobotModel &robot;
+	Connection &connection;
 	int handle;
 
 
 public:
-	OrientationSensor(const std::string name_, RobotModel &robot);
+	OrientationVREPSensor(const std::string name_, RobotModel &robot);
 
 	bool getData(EulerAngle &value) override;
 

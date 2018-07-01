@@ -6,14 +6,14 @@
 
 #include <Util/pipeline.h>
 
-void Pipeline::push(Action* action)
+void Pipeline::push(Action *action)
 {
 	actions.push_back(action);
 }
 
-bool Pipeline::next(Action** act)
+bool Pipeline::next(Action **act)
 {
-	if(!actions.empty())
+	if (!actions.empty())
 	{
 		*act = actions.back();
 		actions.pop_back();
@@ -23,6 +23,7 @@ bool Pipeline::next(Action** act)
 
 }
 
-bool Pipeline::isEmpty(){
+bool Pipeline::isEmpty()
+{
 	return actions.empty();
 }

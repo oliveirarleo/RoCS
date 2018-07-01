@@ -15,8 +15,7 @@ public:
 	//------------------------
 	static void getInputDataForFunctionRegistration(const int *dat, std::vector<int> &outDat);
 
-	bool readDataFromLua(const SLuaCallBack *p, const int *expectedArguments, int requiredArgumentCount,
-											 const char *functionName);
+	bool readDataFromLua(const SLuaCallBack *p, const int *expectedArguments, int requiredArgumentCount, const char *functionName);
 
 	std::vector<CLuaFunctionDataItem> *getInDataPtr();
 
@@ -31,8 +30,7 @@ public:
 
 	void writeDataToLua_luaFunctionCall(SLuaCallBack *p, const int *expectedArguments);
 
-	bool readDataFromLua_luaFunctionCall(const SLuaCallBack *p, const int *expectedArguments, int requiredArgumentCount,
-																			 const char *functionName);
+	bool readDataFromLua_luaFunctionCall(const SLuaCallBack *p, const int *expectedArguments, int requiredArgumentCount, const char *functionName);
 
 	std::vector<CLuaFunctionDataItem> *getOutDataPtr_luaFunctionCall();
 

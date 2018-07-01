@@ -27,8 +27,7 @@
 class CSocketOutConnection
 {
 public:
-	CSocketOutConnection(const char *theConnectionAddress, int theConnectionPort, unsigned short maxPacketSize = 250,
-											 char headerID1 = 59, char headerID2 = 57);
+	CSocketOutConnection(const char *theConnectionAddress, int theConnectionPort, unsigned short maxPacketSize = 250, char headerID1 = 59, char headerID2 = 57);
 
 	virtual ~CSocketOutConnection();
 

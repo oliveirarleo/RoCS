@@ -26,21 +26,13 @@ extern "C" {
 #endif
 
 bool create_shared_memory(shared_memory_info_t *info);
-
 bool destroy_shared_memory(shared_memory_info_t *info);
-
 bool open_shared_memory(shared_memory_info_t *info);
-
 bool close_shared_memory(shared_memory_info_t *info);
-
 bool map_shared_memory(shared_memory_info_t *info);
-
 bool unmap_shared_memory(shared_memory_info_t *info);
-
 void set_shared_memory_name(shared_memory_info_t *info, int identifier);
-
 void set_shared_memory_size(shared_memory_info_t *info, size_t size);
-
 bool is_valid_shared_memory_handle(shared_memory_info_t *info);
 
 #ifdef __cplusplus

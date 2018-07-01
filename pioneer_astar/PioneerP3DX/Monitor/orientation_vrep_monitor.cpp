@@ -8,11 +8,11 @@
 
 void OrientationVREPMonitor::publishLoop()
 {
-	while(publishing)
+	while (publishing)
 	{
-		std::vector<EulerAngle > angle{1};
+		std::vector<EulerAngle> angle{1};
 		int i = 0;
-		for(Sensor<EulerAngle>* s: sensors)
+		for (Sensor<EulerAngle> *s: sensors)
 		{
 			s->getData(angle[i]);
 			i++;
@@ -23,6 +23,7 @@ void OrientationVREPMonitor::publishLoop()
 
 }
 
-OrientationVREPMonitor::OrientationVREPMonitor(std::vector< OrientationSensor *> &sensors_) : Monitor((std::vector< Sensor<EulerAngle> * > &)sensors_)
+OrientationVREPMonitor::OrientationVREPMonitor(std::vector<OrientationVREPSensor *> &sensors_) : Monitor(
+				(std::vector<Sensor<EulerAngle> *> &) sensors_)
 {
 }

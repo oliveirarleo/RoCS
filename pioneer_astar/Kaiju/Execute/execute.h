@@ -18,16 +18,16 @@ class Execute
 private:
 	bool running;
 	Pipeline pipeline;
-	std::thread* execute_thread;
+	std::thread *execute_thread;
 public:
-	Execute(): running(true), pipeline()
+	Execute() : running(true), pipeline()
 	{
 	}
 
 	~Execute()
 	{
 		running = false;
-		if(execute_thread && execute_thread->joinable())
+		if (execute_thread && execute_thread->joinable())
 			execute_thread->join();
 	}
 
@@ -36,11 +36,12 @@ public:
 		execute_thread = new std::thread(&Execute::run, this);
 	}
 
-	void run(){
-		while(running)
+	void run()
+	{
+		while (running)
 		{
-			Action* action;
-			if(pipeline.next(&action))
+			Action *action;
+			if (pipeline.next(&action))
 				action->act();
 			std::this_thread::sleep_for(std::chrono::milliseconds(15));
 		}

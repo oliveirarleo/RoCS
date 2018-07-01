@@ -6,20 +6,20 @@
 
 #include <remoteApi/extApiPlatform.h>
 #include "sonars_vrep_monitor.h"
-#include "../Sensors/range_vrep.h"
 
-SonarsVREPMonitor::SonarsVREPMonitor(std::vector<RangeVREP *>& sensors_) : Monitor((std::vector< Sensor<SonarOutput> * > &)sensors_)
+SonarsVREPMonitor::SonarsVREPMonitor(std::vector<RangeVREP *> &sensors_) : Monitor(
+				(std::vector<Sensor<SonarOutput> *> &) sensors_)
 {
 }
 
 
 void SonarsVREPMonitor::publishLoop()
 {
-	while(publishing)
+	while (publishing)
 	{
-		std::vector<SonarOutput >positions{16};
+		std::vector<SonarOutput> positions{16};
 		int i = 0;
-		for(Sensor<SonarOutput>* s: sensors)
+		for (Sensor<SonarOutput> *s: sensors)
 		{
 			s->getData(positions[i]);
 			i++;

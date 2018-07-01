@@ -9,7 +9,7 @@
 
 #include <Knowledge/reactive_model.h>
 
-class AvoidWallModel: public ReactiveModel
+class AvoidWallModel : public ReactiveModel
 {
 public:
 	double no_detection_dist;

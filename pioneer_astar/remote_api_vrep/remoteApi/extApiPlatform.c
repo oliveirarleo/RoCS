@@ -4,9 +4,7 @@
 #include <stdio.h>
 
 #ifndef DO_NOT_USE_SHARED_MEMORY
-
 #include "shared_memory.h"
-
 #endif
 
 #ifdef _WIN32
@@ -29,13 +27,8 @@ WSADATA _socketWsaData;
 #include <unistd.h>
 #include <string.h>
 #include <netinet/in.h>
-#include <fcntl.h>      /* Defines O_ * constants */
-#include <sys/stat.h>   /* Defines mode constants */
-#include <sys/mman.h>
 #include <sys/time.h>
-#include <sys/socket.h>
 #include <arpa/inet.h>
-#include <netdb.h>
 
 #define MUTEX_HANDLE pthread_mutex_t
 #define MUTEX_HANDLE_X MUTEX_HANDLE*
@@ -142,9 +135,7 @@ simxInt extApi_getTimeInMs()
 	struct timeval tv;
 	DWORD result = 0;
 	if (gettimeofday(&tv, NULL) == 0)
-	{
 		result = (tv.tv_sec * 1000 + tv.tv_usec / 1000) & 0x03ffffff;
-	}
 	return (result);
 #endif
 }
@@ -153,9 +144,7 @@ simxInt extApi_getTimeDiffInMs(simxInt lastTime)
 {
 	simxInt currentTime = extApi_getTimeInMs();
 	if (currentTime < lastTime)
-	{
 		return (currentTime + 0x03ffffff - lastTime);
-	}
 	return (currentTime - lastTime);
 }
 
@@ -181,23 +170,21 @@ simxVoid extApi_sleepMs(simxInt ms)
 simxVoid extApi_switchThread()
 { /* or just use a extApi_sleepMs(1) here */
 	extApi_sleepMs(1);
-	/*
-	#ifdef _WIN32
-			extApi_sleepMs(1);
-	#elif defined (__APPLE__)
-			pthread_yield_np();
-	#elif defined (__linux)
-			pthread_yield();
-	#endif
-	*/
+/*
+#ifdef _WIN32
+    extApi_sleepMs(1);
+#elif defined (__APPLE__)
+    pthread_yield_np();
+#elif defined (__linux)
+    pthread_yield();
+#endif
+*/
 }
 
 simxUChar extApi_areStringsSame(const simxChar *str1, const simxChar *str2)
 {
 	if (strcmp(str1, str2) == 0)
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -394,9 +381,7 @@ simxVoid extApi_unlockResources(simxInt clientID)
 		_simpleUnlock(&_mutex1[clientID]);
 	}
 	else
-	{
 		_simpleUnlock(&_mutex1Aux[clientID]);
-	}
 #endif
 }
 
@@ -456,9 +441,7 @@ simxVoid extApi_unlockSendStart(simxInt clientID)
 		_simpleUnlock(&_mutex2[clientID]);
 	}
 	else
-	{
 		_simpleUnlock(&_mutex2Aux[clientID]);
-	}
 #endif
 }
 
@@ -479,8 +462,7 @@ simxVoid extApi_endThread()
 #endif
 }
 
-simxUChar
-extApi_connectToServer_socket(simxInt clientID, const simxChar *theConnectionAddress, simxInt theConnectionPort)
+simxUChar extApi_connectToServer_socket(simxInt clientID, const simxChar *theConnectionAddress, simxInt theConnectionPort)
 { /* return 1: success */
 	/* struct hostent *hp;
 	simxUInt addr; */
@@ -562,28 +544,26 @@ simxInt extApi_recv_socket(simxInt clientID, simxUChar *data, simxInt maxDataLen
 simxUChar extApi_connectToServer_sharedMem(simxInt clientID, simxInt theConnectionPort)
 { /* return 1: success */
 #ifndef DO_NOT_USE_SHARED_MEMORY
-	theConnectionPort = -theConnectionPort;
+	theConnectionPort=-theConnectionPort;
 	shared_memory_info_t shared_memory_info;
 	set_shared_memory_name(&shared_memory_info, theConnectionPort);
 	set_shared_memory_size(&shared_memory_info, 2);
 
-	if (open_shared_memory(&shared_memory_info))
+	if(open_shared_memory(&shared_memory_info))
 	{
-		if (map_shared_memory(&shared_memory_info))
+		if(map_shared_memory(&shared_memory_info))
 		{
-			if (shared_memory_info.buffer[0] == 0)
+			if(shared_memory_info.buffer[0]==0)
 			{
-				set_shared_memory_size(&shared_memory_info, ((simxInt *) (shared_memory_info.buffer + 1))[0]);
+				set_shared_memory_size(&shared_memory_info, ((simxInt*)(shared_memory_info.buffer+1))[0]);
 
-				if (map_shared_memory(&shared_memory_info) == false)
-				{
-					fprintf(stderr, "Connect (%d): Failed to remap the shared memory \"%s\"\n", clientID,
-									shared_memory_info.name);
+				if(map_shared_memory(&shared_memory_info) == false) {
+					fprintf(stderr, "Connect (%d): Failed to remap the shared memory \"%s\"\n", clientID,shared_memory_info.name);
 				}
 				fflush(stderr);
 
-				shared_memory_info.buffer[5] = 0; /* client has nothing to send */
-				shared_memory_info.buffer[0] = 1; /* connected */
+				shared_memory_info.buffer[5]=0; /* client has nothing to send */
+				shared_memory_info.buffer[0]=1; /* connected */
 
 				_shmInfo[clientID] = shared_memory_info;
 				return 1;
@@ -591,8 +571,7 @@ simxUChar extApi_connectToServer_sharedMem(simxInt clientID, simxInt theConnecti
 		}
 		else
 		{
-			fprintf(stderr, "Connect (%d): Failed to map the shared memory \"%s\"\n", clientID,
-							shared_memory_info.name);
+			fprintf(stderr, "Connect (%d): Failed to map the shared memory \"%s\"\n", clientID, shared_memory_info.name);
 		}
 	}
 	else
@@ -611,13 +590,11 @@ simxVoid extApi_cleanUp_sharedMem(simxInt clientID)
 	_shmInfo[clientID].buffer[0] = 0;
 #if defined (__linux) || defined (__APPLE__)
 	// Doesn't work on Windows, don't known why...
-	if (unmap_shared_memory(&_shmInfo[clientID]) == false)
-	{
+	if(unmap_shared_memory(&_shmInfo[clientID]) == false) {
 		fprintf(stderr, "Clean up (%d): Failed to unmap the shared memory \"%s\"\n", clientID, _shmInfo[clientID].name);
 	}
 #endif
-	if (close_shared_memory(&_shmInfo[clientID]) == false)
-	{
+	if(close_shared_memory(&_shmInfo[clientID]) == false) {
 		fprintf(stderr, "Clean up (%d): Failed to close the shared memory \"%s\"\n", clientID, _shmInfo[clientID].name);
 	}
 	fflush(stderr);
@@ -628,16 +605,14 @@ simxInt extApi_send_sharedMem(simxInt clientID, const simxUChar *data, simxInt d
 {
 #ifndef DO_NOT_USE_SHARED_MEMORY
 	simxInt startTime;
-	simxInt off = 0;
-	simxInt initDataLength = dataLength;
-	if (dataLength == 0)
-	{
-		return (0);
-	}
-	startTime = extApi_getTimeInMs();
+	simxInt off=0;
+	simxInt initDataLength=dataLength;
+	if (dataLength==0)
+		return(0);
+	startTime=extApi_getTimeInMs();
 	if (_shmInfo[clientID].buffer[0] != 1)
 	{
-		return (0);
+		return(0);
 	}
 
 	while (dataLength > 0)
@@ -645,33 +620,33 @@ simxInt extApi_send_sharedMem(simxInt clientID, const simxUChar *data, simxInt d
 		/* Wait for previous data to be gone: */
 		while (_shmInfo[clientID].buffer[5] != 0)
 		{
-			if (extApi_getTimeDiffInMs(startTime) > 1000)
+			if (extApi_getTimeDiffInMs(startTime)>1000)
 			{
-				return (0);
+				return(0);
 			}
 		}
 
 		/* ok, we can send the data: */
 		if (dataLength <= _shmInfo[clientID].size)
 		{     /* we can send the data in one shot: */
-			memcpy(_shmInfo[clientID].buffer + _shmInfo[clientID].header_size, data + off, dataLength);
-			((int *) (_shmInfo[clientID].buffer + 6))[0] = dataLength;
-			((int *) (_shmInfo[clientID].buffer + 6))[1] = _shmInfo[clientID].header_size;
-			((int *) (_shmInfo[clientID].buffer + 6))[2] = initDataLength;
-			dataLength = 0;
+			memcpy(_shmInfo[clientID].buffer+_shmInfo[clientID].header_size, data+off, dataLength);
+			((int*)(_shmInfo[clientID].buffer+6))[0] = dataLength;
+			((int*)(_shmInfo[clientID].buffer+6))[1] = _shmInfo[clientID].header_size;
+			((int*)(_shmInfo[clientID].buffer+6))[2] = initDataLength;
+			dataLength=0;
 		}
 		else
 		{     /* just send a smaller part first: */
-			memcpy(_shmInfo[clientID].buffer + _shmInfo[clientID].header_size, data + off, _shmInfo[clientID].size);
-			((int *) (_shmInfo[clientID].buffer + 6))[0] = _shmInfo[clientID].size;
-			((int *) (_shmInfo[clientID].buffer + 6))[1] = _shmInfo[clientID].header_size;
-			((int *) (_shmInfo[clientID].buffer + 6))[2] = initDataLength;
+			memcpy(_shmInfo[clientID].buffer+_shmInfo[clientID].header_size, data+off, _shmInfo[clientID].size);
+			((int*)(_shmInfo[clientID].buffer+6))[0] = _shmInfo[clientID].size;
+			((int*)(_shmInfo[clientID].buffer+6))[1] = _shmInfo[clientID].header_size;
+			((int*)(_shmInfo[clientID].buffer+6))[2] = initDataLength;
 			dataLength -= _shmInfo[clientID].size;
 			off += _shmInfo[clientID].size;
 		}
 		_shmInfo[clientID].buffer[5] = 1;     /* client has something to send! */
 	}
-	return (initDataLength);
+	return(initDataLength);
 #else
 	return (0);
 #endif
@@ -681,43 +656,41 @@ simxUChar *extApi_recv_sharedMem(simxInt clientID, simxInt *dataLength)
 {
 #ifndef DO_NOT_USE_SHARED_MEMORY
 	simxInt startT;
-	simxInt l = 0;
-	simxInt off = 0;
-	simxInt retDataOff = 0;
-	simxUChar *retData = 0;
-	simxInt totalLength = -1;
+	simxInt l=0;
+	simxInt off=0;
+	simxInt retDataOff=0;
+	simxUChar* retData=0;
+	simxInt totalLength=-1;
 	if (_shmInfo[clientID].buffer[0] != 1)
 	{     /* we are not connected anymore */
-		return (0);
+		return(0);
 	}
 
-	startT = extApi_getTimeInMs();
-	while (retDataOff != totalLength)
+	startT=extApi_getTimeInMs();
+	while (retDataOff!=totalLength)
 	{
 		/* Wait for data: */
-		while (_shmInfo[clientID].buffer[5] != 2)
+		while (_shmInfo[clientID].buffer[5]!=2)
 		{
-			if (extApi_getTimeDiffInMs(startT) > 1000)
+			if (extApi_getTimeDiffInMs(startT)>1000)
 			{
-				return (0);
+				return(0);
 			}
 		}
 		/* ok, data is there! */
 		/* Read the data with correct length: */
-		l = ((int *) (_shmInfo[clientID].buffer + 6))[0];
-		off = ((int *) (_shmInfo[clientID].buffer + 6))[1];
-		totalLength = ((int *) (_shmInfo[clientID].buffer + 6))[2];
-		if (retData == 0)
-		{
-			retData = extApi_allocateBuffer(totalLength);
-		}
-		memcpy(retData + retDataOff, _shmInfo[clientID].buffer + off, l);
-		retDataOff = retDataOff + l;
+		l=((int*)(_shmInfo[clientID].buffer+6))[0];
+		off=((int*)(_shmInfo[clientID].buffer+6))[1];
+		totalLength=((int*)(_shmInfo[clientID].buffer+6))[2];
+		if (retData==0)
+			retData=extApi_allocateBuffer(totalLength);
+		memcpy(retData+retDataOff,_shmInfo[clientID].buffer+off,l);
+		retDataOff=retDataOff+l;
 		/* Tell the other side we have read that part and additional parts could be sent (if present): */
-		_shmInfo[clientID].buffer[5] = 0;
+		_shmInfo[clientID].buffer[5]=0;
 	}
-	dataLength[0] = retDataOff;
-	return (retData);
+	dataLength[0]=retDataOff;
+	return(retData);
 #else
 	return (0);
 #endif

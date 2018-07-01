@@ -11,11 +11,11 @@
 #include <Execute/action.h>
 #include "../../Actuators/wheel_vrep.h"
 
-class GoToOrigin: Action
+class GoToOrigin : Action
 {
 private:
-	RobotModel& robot;
-	std::vector<WheelVREP *>& wheels;
+	RobotModel &robot;
+	std::vector<WheelVREP *> &wheels;
 
 public:
 	GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels);

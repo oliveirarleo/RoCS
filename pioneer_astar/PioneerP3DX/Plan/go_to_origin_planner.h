@@ -10,17 +10,19 @@
 #include <Plan/planner.h>
 #include <Knowledge/position.h>
 #include <Util/pipeline.h>
-#include "../Analyze/pass_sonar_position.h"
+#include "../Analyze/pass_sonar.h"
 #include "../Analyze/pass_orientation.h"
+#include "../Analyze/pass_position.h"
 
-class GoToOriginPlanner: public Planner
+class GoToOriginPlanner : public Planner
 {
 private:
-	PassOrientation& pass_orientation;
+	PassOrientation &pass_orientation;
+	PassPosition &pass_position;
 
 
 public:
-	GoToOriginPlanner(RobotModel &robot, Pipeline& pipeline_, PassOrientation& pass_orientation_);
+	GoToOriginPlanner(RobotModel &robot, Pipeline &pipeline_, PassOrientation &pass_orientation_, PassPosition &pass_position_);
 
 	void run() override;
 };

@@ -36,7 +36,7 @@ public:
 		return os;
 	}
 
-	virtual bool getData(Value& value) = 0;
+	virtual bool getData(Value &value) = 0;
 
 	const std::string &getName() const
 	{

@@ -13,10 +13,11 @@
 #include <Knowledge/robot_model.h>
 #include <Knowledge/position.h>
 
-#include "../Connection/connection.h"
-#include "../Sensors/range_vrep.h"
-#include "../Actuators/wheel_vrep.h"
-#include "../Sensors/orientation_sensor.h"
+#include "../../Connection/connection.h"
+#include "../../Sensors/range_vrep.h"
+#include "../../Actuators/wheel_vrep.h"
+#include "../../Sensors/orientation_vrep_sensor.h"
+#include "../../Sensors/position_vrep_sensor.h"
 
 class PioneerP3DXModel : public RobotModel
 {
@@ -24,10 +25,17 @@ private:
 	std::string robot_name;
 	int robot_handle;
 	Connection connection;
+
 	Position robot_position;
+	EulerAngle robot_orientation;
+
+//	SENSORS
 	std::vector<RangeVREP *> sonars;
-	OrientationSensor* orientation_sensor;
+	OrientationVREPSensor *orientation_sensor;
+	PositionVREPSensor *position_sensor;
 //		std::vector< ForceSensorVREP > force_sensors;
+
+//	ACTUATORS
 	std::vector<WheelVREP *> wheels;
 
 private:
@@ -38,11 +46,11 @@ private:
 
 	void connectToOrientationSensor();
 
+	void connectToPositionSensor();
+
 	void connectToWheels();
 
 	void connectToRobot();
-
-
 
 public:
 	PioneerP3DXModel();
@@ -57,13 +65,13 @@ public:
 
 	Connection &getConnection();
 
-	void fetchRobotPosition();
-
 	Position &getRobotPosition();
 
 	std::vector<RangeVREP *> &getSonars();
 
-	OrientationSensor* getOrientationSensor();
+	OrientationVREPSensor *getOrientationSensor();
+
+	PositionVREPSensor *getPositionSensor();
 
 	std::vector<WheelVREP *> &getWheels();
 

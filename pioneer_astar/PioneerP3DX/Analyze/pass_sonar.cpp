@@ -5,13 +5,13 @@
 //
 
 #include <remoteApi/extApiPlatform.h>
-#include "pass_sonar_position.h"
+#include "pass_sonar.h"
 
-PassSonarPosition::PassSonarPosition(const RobotModel &robot) : Analyze(robot)
+PassSonar::PassSonar(const RobotModel &robot) : Analyze(robot)
 {
 }
 
-void PassSonarPosition::publishLoop()
+void PassSonar::publishLoop()
 {
 	while (publishing)
 	{

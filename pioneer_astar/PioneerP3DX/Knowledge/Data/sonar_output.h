@@ -10,12 +10,12 @@
 
 #include <Knowledge/position.h>
 
-class SonarOutput: public Position
+class SonarOutput : public Position
 {
 public:
 	bool state;
 
-	SonarOutput(): Position{}, state{false}
+	SonarOutput() : Position{}, state{false}
 	{
 	}
 

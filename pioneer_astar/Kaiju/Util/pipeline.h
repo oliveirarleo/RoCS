@@ -15,8 +15,9 @@ class Pipeline
 protected:
 	std::vector<Action *> actions;
 public:
-	void push(Action* action);
-	bool next(Action** action);
+	void push(Action *action);
+
+	bool next(Action **action);
 
 	bool isEmpty();
 };
