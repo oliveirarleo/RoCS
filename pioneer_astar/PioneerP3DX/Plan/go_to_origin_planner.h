@@ -11,15 +11,16 @@
 #include <Knowledge/position.h>
 #include <Util/pipeline.h>
 #include "../Analyze/pass_sonar_position.h"
+#include "../Analyze/pass_orientation.h"
 
 class GoToOriginPlanner: public Planner
 {
 private:
-	std::vector<PassSonarPosition *>& sonar_analyze_observers;
+	PassOrientation& pass_orientation;
 
 
 public:
-	GoToOriginPlanner(RobotModel &robot, Pipeline& pipeline_, std::vector<PassSonarPosition*> sonar_analyze_observers_);
+	GoToOriginPlanner(RobotModel &robot, Pipeline& pipeline_, PassOrientation& pass_orientation_);
 
 	void run() override;
 };

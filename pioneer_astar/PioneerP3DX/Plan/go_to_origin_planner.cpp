@@ -9,21 +9,16 @@
 #include "../Knowledge/pioneer_p3dx_model.h"
 #include "../Execute/Actions/move_wheels.h"
 
-GoToOriginPlanner::GoToOriginPlanner(RobotModel &robot_, Pipeline& pipeline_, std::vector<PassSonarPosition*> sonar_analyze_observers_)
-				: Planner(robot_, pipeline_), sonar_analyze_observers(sonar_analyze_observers_)
+GoToOriginPlanner::GoToOriginPlanner(RobotModel &robot_, Pipeline& pipeline_, PassOrientation& pass_orientation_)
+				: Planner(robot_, pipeline_), pass_orientation(pass_orientation_)
 {
 }
 
 void GoToOriginPlanner::run()
 {
-	while (running && ((PioneerP3DXModel &) robot).getConnection().isConnected())
+	while (running)
 	{
-//		if(pipeline.isEmpty())
-//		{
-//
-//			pipeline.push();
-//		}
-
+//		std::cout << pass_orientation.getValue()[0] << "\n";
 
 	}
 

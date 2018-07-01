@@ -42,9 +42,10 @@ void PioneerP3DXModel::connectToRobot()
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) robot_name.c_str(), (simxInt *) &robot_handle,
 													(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 	{
-		std::cout << "Connected to robot: " << robot_name << std::endl;
-
+		std::cout << "Connected to robot: " << robot_name << " handle: " << robot_handle <<  std::endl;
+		fetchRobotPosition();
 		connectToSonars();
+		connectToOrientationSensor();
 		connectToWheels();
 	}
 	else
@@ -60,8 +61,13 @@ void PioneerP3DXModel::connectToSonars()
 	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
 	{
 		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
-		sonars.push_back(new SonarVREP{sonar_name, *this});
+		sonars.push_back(new RangeVREP{sonar_name, *this});
 	}
+}
+
+void PioneerP3DXModel::connectToOrientationSensor()
+{
+	orientation_sensor = new OrientationSensor("OrientationSensor", *this);
 }
 
 void PioneerP3DXModel::connectToWheels()
@@ -71,6 +77,13 @@ void PioneerP3DXModel::connectToWheels()
 
 	std::string right_wheel_name = "Pioneer_p3dx_rightMotor";
 	wheels.push_back(new WheelVREP{right_wheel_name, *this});
+}
+
+void PioneerP3DXModel::fetchRobotPosition()
+{
+	float pos[3];
+	simxGetObjectPosition(connection.getClientId(), robot_handle, -1, pos, simx_opmode_streaming);
+	std::cout << "Position: " << pos[0] << pos[1] << pos[2] <<std::endl;
 }
 
 //
@@ -108,9 +121,14 @@ Connection &PioneerP3DXModel::getConnection()
 	return connection;
 }
 
-std::vector<SonarVREP *> &PioneerP3DXModel::getSonars()
+std::vector<RangeVREP *> &PioneerP3DXModel::getSonars()
 {
 	return sonars;
+}
+
+OrientationSensor* PioneerP3DXModel::getOrientationSensor()
+{
+	return orientation_sensor;
 }
 
 std::vector<WheelVREP *> &PioneerP3DXModel::getWheels()

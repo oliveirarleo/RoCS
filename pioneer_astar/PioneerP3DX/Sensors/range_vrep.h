@@ -10,9 +10,9 @@
 #include <Sensors/range.h>
 #include <Knowledge/robot_model.h>
 #include "../Connection/connection.h"
-#include "sonar_output.h"
+#include "../Knowledge/sonar_output.h"
 
-class SonarVREP: public Range<SonarOutput>
+class RangeVREP: public Range<SonarOutput>
 {
 private:
 	int handle;
@@ -22,7 +22,7 @@ private:
 public:
 	int getHandle() const;
 
-	SonarVREP(const std::string &name_, RobotModel& robot_);
+	RangeVREP(const std::string &name_, RobotModel& robot_);
 
 	bool getData(SonarOutput &value) override;
 

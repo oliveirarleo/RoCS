@@ -4,7 +4,7 @@
 // Github:      https://github.com/oramleo
 //
 
-#include "sonar_vrep.h"
+#include "range_vrep.h"
 
 #include <iostream>
 
@@ -16,7 +16,7 @@ extern "C"
 
 #include "../Knowledge/pioneer_p3dx_model.h"
 
-SonarVREP::SonarVREP(const std::string &name_, RobotModel &robot_)
+RangeVREP::RangeVREP(const std::string &name_, RobotModel &robot_)
 				: Range(name_), robot(robot_), handle(-1),
 					connection(const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection()))
 {
@@ -38,7 +38,7 @@ SonarVREP::SonarVREP(const std::string &name_, RobotModel &robot_)
 }
 
 
-bool SonarVREP::getData(SonarOutput &position)
+bool RangeVREP::getData(SonarOutput &position)
 {
 	float point[3];
 	char state;
@@ -52,7 +52,7 @@ bool SonarVREP::getData(SonarOutput &position)
 	return false;
 }
 
-bool SonarVREP::getData(SonarOutput &position, char &state)
+bool RangeVREP::getData(SonarOutput &position, char &state)
 {
 	float point[3];
 	if (simxReadProximitySensor(connection.getClientId(), handle, (simxUChar *) &state, point,
@@ -66,7 +66,7 @@ bool SonarVREP::getData(SonarOutput &position, char &state)
 	return false;
 }
 
-int SonarVREP::getHandle() const
+int RangeVREP::getHandle() const
 {
 	return handle;
 }

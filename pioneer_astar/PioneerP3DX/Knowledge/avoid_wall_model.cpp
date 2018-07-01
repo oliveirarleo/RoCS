@@ -6,7 +6,7 @@
 
 #include "avoid_wall_model.h"
 #include "../Execute/Actions/move_wheels.h"
-#include "../Sensors/sonar_output.h"
+#include "sonar_output.h"
 #include "pioneer_p3dx_model.h"
 
 AvoidWallModel::AvoidWallModel(RobotModel &robot, Pipeline &pipeline)
@@ -24,7 +24,7 @@ void AvoidWallModel::run()
 	{
 		//		std::cout << "running" << std::endl;
 		std::vector<WheelVREP *> wheels = ((PioneerP3DXModel &) robot).getWheels();
-		std::vector<SonarVREP *> sonars = ((PioneerP3DXModel &) robot).getSonars();
+		std::vector<RangeVREP *> sonars = ((PioneerP3DXModel &) robot).getSonars();
 		for (int i = 0; i < 16; i++)
 		{
 			SonarOutput coord;

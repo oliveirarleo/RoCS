@@ -14,8 +14,9 @@
 #include <Knowledge/position.h>
 
 #include "../Connection/connection.h"
-#include "../Sensors/sonar_vrep.h"
+#include "../Sensors/range_vrep.h"
 #include "../Actuators/wheel_vrep.h"
+#include "../Sensors/orientation_sensor.h"
 
 class PioneerP3DXModel : public RobotModel
 {
@@ -24,7 +25,8 @@ private:
 	int robot_handle;
 	Connection connection;
 	Position robot_position;
-	std::vector<SonarVREP *> sonars;
+	std::vector<RangeVREP *> sonars;
+	OrientationSensor* orientation_sensor;
 //		std::vector< ForceSensorVREP > force_sensors;
 	std::vector<WheelVREP *> wheels;
 
@@ -33,6 +35,8 @@ private:
 	void verifyConnection();
 
 	void connectToSonars();
+
+	void connectToOrientationSensor();
 
 	void connectToWheels();
 
@@ -53,9 +57,13 @@ public:
 
 	Connection &getConnection();
 
+	void fetchRobotPosition();
+
 	Position &getRobotPosition();
 
-	std::vector<SonarVREP *> &getSonars();
+	std::vector<RangeVREP *> &getSonars();
+
+	OrientationSensor* getOrientationSensor();
 
 	std::vector<WheelVREP *> &getWheels();
 

@@ -11,7 +11,7 @@
 #include <Analyze/analyze.h>
 #include <thread>
 #include <Knowledge/robot_model.h>
-#include "../Sensors/sonar_output.h"
+#include "../Knowledge/sonar_output.h"
 
 class PassSonarPosition : public Analyze<std::vector<SonarOutput>, std::vector<SonarOutput>>
 {
