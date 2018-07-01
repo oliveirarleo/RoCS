@@ -28,8 +28,7 @@ private:
 //		std::vector< ForceSensorVREP > force_sensors;
 	std::vector<WheelVREP *> wheels;
 
-public:
-	PioneerP3DXModel();
+private:
 
 	void verifyConnection();
 
@@ -38,6 +37,11 @@ public:
 	void connectToWheels();
 
 	void connectToRobot();
+
+
+
+public:
+	PioneerP3DXModel();
 
 //		Get Methods
 

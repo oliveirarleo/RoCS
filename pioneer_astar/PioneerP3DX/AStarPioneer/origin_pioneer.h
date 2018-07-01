@@ -8,10 +8,10 @@
 #define PIONEER_A_STAR_PIONEER_H_
 
 
-class AStarPioneer
+class OriginPioneer
 {
 public:
-	AStarPioneer();
+	OriginPioneer();
 };
 
 

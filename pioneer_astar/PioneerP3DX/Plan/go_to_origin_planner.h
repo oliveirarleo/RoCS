@@ -12,24 +12,14 @@
 #include <Util/pipeline.h>
 #include "../Analyze/pass_sonar_position.h"
 
-class BraitPlan: public Planner
+class GoToOriginPlanner: public Planner
 {
 private:
 	std::vector<PassSonarPosition *>& sonar_analyze_observers;
-	bool running;
-	Pipeline& pipeline;
 
-	double no_detection_dist;
-	double max_detection_dist;
-	std::vector<double> detect;
-	std::vector<double> braitenberg_l;
-	std::vector<double> braitenberg_r;
-	double v0;
-	double v_left;
-	double v_right;
 
 public:
-	BraitPlan(RobotModel &robot, std::vector<PassSonarPosition *>& sonar_analyze_observers, Pipeline& pipeline_);
+	GoToOriginPlanner(RobotModel &robot, Pipeline& pipeline_, std::vector<PassSonarPosition*> sonar_analyze_observers_);
 
 	void run() override;
 };

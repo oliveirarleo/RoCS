@@ -37,14 +37,14 @@ set(ARCH_SOURCES
 
 set(HEADERS
         ${ARCH_SOURCES}
-        PioneerP3DX/AStarPioneer/a_star_pioneer.h
+        PioneerP3DX/AStarPioneer/origin_pioneer.h
         PioneerP3DX/Knowledge/pioneer_p3dx_model.h
         PioneerP3DX/Connection/connection.h
         PioneerP3DX/Sensors/sonar_vrep.h
         PioneerP3DX/Actuators/wheel_vrep.h
         PioneerP3DX/Monitor/sonars_vrep_monitor.h
         PioneerP3DX/Analyze/pass_sonar_position.h
-        PioneerP3DX/Plan/brait_plan.h
+        PioneerP3DX/Plan/go_to_origin_planner.h
         PioneerP3DX/Sensors/sonar_output.h
         PioneerP3DX/Execute/execute_p3dx.h
         PioneerP3DX/Execute/Actions/move_wheels.h
@@ -52,15 +52,15 @@ set(HEADERS
 
 set(SOURCES
         main.cpp
-        PioneerP3DX/AStarPioneer/a_star_pioneer.cpp
+        PioneerP3DX/AStarPioneer/origin_pioneer.cpp
         PioneerP3DX/Knowledge/pioneer_p3dx_model.cpp
         PioneerP3DX/Connection/connection.cpp
         PioneerP3DX/Sensors/sonar_vrep.cpp
         PioneerP3DX/Actuators/wheel_vrep.cpp
         PioneerP3DX/Monitor/sonars_vrep_monitor.cpp
         PioneerP3DX/Analyze/pass_sonar_position.cpp
-        PioneerP3DX/Plan/brait_plan.cpp
-        PioneerP3DX/Execute/Actions/move_wheels.cpp Kaiju/Util/pipeline.cpp)
+        PioneerP3DX/Plan/go_to_origin_planner.cpp
+        PioneerP3DX/Execute/Actions/move_wheels.cpp Kaiju/Util/pipeline.cpp PioneerP3DX/Knowledge/avoid_wall_model.cpp PioneerP3DX/Knowledge/avoid_wall_model.h Kaiju/Knowledge/reactive_model.h PioneerP3DX/Execute/Actions/go_to_origin.cpp PioneerP3DX/Execute/Actions/go_to_origin.h)
 
 find_package(Threads)
 

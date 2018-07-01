@@ -16,7 +16,9 @@ protected:
 	std::vector<Action *> actions;
 public:
 	void push(Action* action);
-	Action* next();
+	bool next(Action** action);
+
+	bool isEmpty();
 };
 
 

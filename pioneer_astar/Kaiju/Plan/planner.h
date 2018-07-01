@@ -11,24 +11,28 @@
 #include <Knowledge/robot_model.h>
 #include <Util/observer.h>
 #include <Analyze/analyze.h>
+#include <Util/pipeline.h>
 
 class Planner
 {
 protected:
 	RobotModel &robot;
-	bool publishing;
+	Pipeline& pipeline;
+
+	bool running;
 	std::thread* planner_thread;
 
+
+
 public:
-//	No way to put analyzes or observers here, because of templates structure
-	Planner(RobotModel &robot) : robot(robot), publishing(true)
+	Planner(RobotModel &robot, Pipeline& pipeline) : robot(robot), pipeline(pipeline), running(true)
 	{
 
 	}
 
 	~Planner()
 	{
-		publishing = false;
+		running = false;
 		if (planner_thread && planner_thread->joinable())
 			planner_thread->join();
 	}

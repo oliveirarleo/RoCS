@@ -1,10 +1,10 @@
-#include "PioneerP3DX/AStarPioneer/a_star_pioneer.h"
+#include "PioneerP3DX/AStarPioneer/origin_pioneer.h"
 
 
 
 int main()
 {
-	AStarPioneer a_star_pioneer{};
+	OriginPioneer a_star_pioneer{};
 
 	return 0;
 }

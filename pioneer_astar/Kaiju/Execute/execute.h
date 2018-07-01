@@ -24,7 +24,7 @@ public:
 	{
 	}
 
-	virtual ~Execute()
+	~Execute()
 	{
 		running = false;
 		if(execute_thread && execute_thread->joinable())
@@ -39,11 +39,10 @@ public:
 	void run(){
 		while(running)
 		{
-			Action* action = pipeline.next();
-			if(action != nullptr)
+			Action* action;
+			if(pipeline.next(&action))
 				action->act();
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+			std::this_thread::sleep_for(std::chrono::milliseconds(15));
 		}
 	}
 

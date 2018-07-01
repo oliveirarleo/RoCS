@@ -5,16 +5,19 @@
 //
 
 #include <Analyze/analyze.h>
-#include "a_star_pioneer.h"
+#include "origin_pioneer.h"
 #include "../Knowledge/pioneer_p3dx_model.h"
 #include "../Monitor/sonars_vrep_monitor.h"
 #include "../Analyze/pass_sonar_position.h"
-#include "../Plan/brait_plan.h"
+#include "../Plan/go_to_origin_planner.h"
 #include "../Execute/execute_p3dx.h"
+#include "../Knowledge/avoid_wall_model.h"
 
-AStarPioneer::AStarPioneer()
+OriginPioneer::OriginPioneer()
 {
 	PioneerP3DXModel p3dx_model{};
+	Connection connection = p3dx_model.getConnection();
+
 
 	std::vector<SonarVREP *> sonars = p3dx_model.getSonars();
 
@@ -26,18 +29,21 @@ AStarPioneer::AStarPioneer()
 	analyzes.push_back(&analyze);
 
 	ExecuteP3DX execute{};
-	BraitPlan planner{p3dx_model, analyzes, execute.getPipeline()};
+
+//	GoToOriginPlanner planner{p3dx_model, analyzes, execute.getPipeline()};
+	AvoidWallModel awmReactiveModel{p3dx_model, execute.getPipeline()};
 
 	sonar_monitor.startThread();
 	analyze.startThread();
 
 	std::this_thread::sleep_for(std::chrono::seconds(3));
-	planner.startThread();
+	awmReactiveModel.startThread();
+//	planner.startThread();
 	execute.startThread();
 
-	while (true)
+	while (connection.isConnected())
 	{
-		std::this_thread::sleep_for(std::chrono::hours::max());
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
 }

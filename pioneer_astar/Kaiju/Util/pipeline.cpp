@@ -11,14 +11,18 @@ void Pipeline::push(Action* action)
 	actions.push_back(action);
 }
 
-Action* Pipeline::next()
+bool Pipeline::next(Action** act)
 {
 	if(!actions.empty())
 	{
-		Action* ac = actions.back();
+		*act = actions.back();
 		actions.pop_back();
-		return ac;
+		return true;
 	}
-	return nullptr;
+	return false;
 
+}
+
+bool Pipeline::isEmpty(){
+	return actions.empty();
 }

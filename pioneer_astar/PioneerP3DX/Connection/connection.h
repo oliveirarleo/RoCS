@@ -31,9 +31,6 @@ private:
 public:
 	Connection();
 
-	Connection(const std::string &server_ip, int server_port, simxInt time_out_in_ms, simxInt comm_thread_cycle_in_ms,
-						 bool waitUntilConnected, bool doNotReconnectOnceDisconnected, int client_id);
-
 	virtual ~Connection();
 
 	bool isConnected() const;
