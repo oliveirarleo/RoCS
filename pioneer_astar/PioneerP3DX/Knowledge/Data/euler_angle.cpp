@@ -16,6 +16,11 @@ EulerAngle::EulerAngle() : alpha(0), beta(0), gama(0), valid(false)
 
 void EulerAngle::setEulerAngle(double alpha_, double beta_, double gama_)
 {
+	if(gama_ > 3.14 || gama_ < -3.14)
+	{
+		valid = false;
+		return;
+	}
 	alpha = alpha_;
 	beta = beta_;
 	gama = gama_;

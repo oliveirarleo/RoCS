@@ -20,6 +20,7 @@ private:
 	double angle;
 	double base_angle;
 	double base_speed;
+	double max_speed;
 
 public:
 	void setAngle(double angle);

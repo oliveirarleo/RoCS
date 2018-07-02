@@ -11,15 +11,7 @@
 void GoToOrigin::act()
 {
 //	std::cout << "GotoOrigin: "<< position << angle << std::endl;
-	double des_angle = (3.14/2);
-	while((angle.getGama() - des_angle) > 0.1 )
-	{
-		if(angle.isValid())
-		{
-			TurnAngle ta{robot, wheels, angle.getGama(), des_angle};
-			ta.act();
-		}
-	}
+
 
 }
 

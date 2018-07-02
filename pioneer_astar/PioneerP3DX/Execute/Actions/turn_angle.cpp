@@ -5,18 +5,30 @@
 //
 
 #include <iostream>
+#include <cmath>
 #include "turn_angle.h"
 
 void TurnAngle::act()
 {
-	std::cout << "Turning " << angle << std::endl;
-	wheels[0]->setSpeed(base_speed*(angle-base_angle)/3.14);
-	wheels[1]->setSpeed(-base_speed*(angle-base_angle)/3.14);
-//	wheels[0]->setSpeed(1);
-//	wheels[1]->setSpeed(-1);
+	std::cout << "Turning " << base_angle - angle << std::endl;
+	double final_speed = max_speed;
+	double calc_speed;
+
+	double an = base_angle - angle;
+	if(an >= M_PI)
+		an = an - 2*M_PI;
+	calc_speed = base_speed * ((an) / (M_PI));
+
+	if (calc_speed <= final_speed)
+		final_speed = calc_speed;
+
+	wheels[0]->setSpeed(-final_speed);
+	wheels[1]->setSpeed(final_speed);
+
 }
 
-TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels) : robot(robot), wheels(wheels), angle(0), base_speed(1), Action(2), base_angle(0)
+TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels)
+				: robot(robot), wheels(wheels), angle(0), base_speed(1), Action(2), base_angle(0), max_speed(1.5)
 {
 }
 
@@ -26,6 +38,6 @@ void TurnAngle::setAngle(double angle)
 }
 
 TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels, double angle, double base_angle_)
-				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_),base_speed(1)
+				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_), base_speed(1.5), max_speed(2)
 {
 }
