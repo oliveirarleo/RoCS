@@ -14,7 +14,13 @@ class Pipeline
 {
 protected:
 	std::vector<Action *> actions;
+	std::mutex mu;
+	std::unique_lock<std::mutex> ul;
+	double top_value;
+
 public:
+	Pipeline();
+
 	void push(Action *action);
 
 	bool next(Action **action);

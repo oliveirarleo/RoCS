@@ -14,8 +14,12 @@ void MoveWheels::act()
 }
 
 
-MoveWheels::MoveWheels(std::vector<WheelVREP *> &wheels_, double v_left_, double v_right_) : Action(), wheels(wheels_),
-																																														 v_left(v_left_),
-																																														 v_right(v_right_)
+MoveWheels::MoveWheels(std::vector<WheelVREP *> &wheels_, double v_left_, double v_right_)
+				: Action(2), wheels(wheels_), v_left(v_left_), v_right(v_right_)
+{
+}
+
+MoveWheels::MoveWheels(std::vector<WheelVREP *> &wheels, double v_left, double v_right, double value_)
+				: Action(value_), wheels(wheels), v_left(v_left), v_right(v_right)
 {
 }

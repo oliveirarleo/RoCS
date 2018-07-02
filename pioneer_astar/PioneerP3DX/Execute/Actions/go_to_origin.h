@@ -10,15 +10,20 @@
 
 #include <Execute/action.h>
 #include "../../Actuators/wheel_vrep.h"
+#include "../../Knowledge/Data/euler_angle.h"
 
-class GoToOrigin : Action
+class GoToOrigin : public Action
 {
 private:
 	RobotModel &robot;
 	std::vector<WheelVREP *> &wheels;
 
+	Position origin;
+	Position position;
+	EulerAngle angle;
+
 public:
-	GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels);
+	GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels, const Position &position, const EulerAngle &angle);
 
 	void act() override;
 

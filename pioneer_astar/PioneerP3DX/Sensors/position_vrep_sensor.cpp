@@ -37,6 +37,6 @@ bool PositionVREPSensor::getData(Position &value)
 		value.setPosition(pos[0], pos[1], pos[2]);
 		return true;
 	}
-	std::cout << "nao deu \n";
+//	std::cout << "nao deu \n";
 	return false;
 }

@@ -13,10 +13,15 @@
 class Action
 {
 protected:
-
+	double value;
 public:
-	Action()
+	Action(double value_): value(value_)
 	{
+	}
+
+	double getValue() const
+	{
+		return value;
 	}
 
 	virtual void act() = 0;
