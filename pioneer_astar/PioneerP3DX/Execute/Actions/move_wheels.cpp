@@ -4,13 +4,14 @@
 // Github:      https://github.com/oramleo
 //
 
+#include <thread>
 #include "move_wheels.h"
 
 void MoveWheels::act()
 {
 	(wheels[0])->setSpeed(v_left);
 	(wheels[1])->setSpeed(v_right);
-
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 

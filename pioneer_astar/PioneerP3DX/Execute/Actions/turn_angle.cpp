@@ -17,14 +17,14 @@ void TurnAngle::act()
 	double an = base_angle - angle;
 	if(an >= M_PI)
 		an = an - 2*M_PI;
-	std::cout << "Turning " << an << std::endl;
-	calc_speed = base_speed * ((an) / (M_PI));
+//	std::cout << "Turning " << an << std::endl;
+	calc_speed = ((an) / (M_PI));
 
 	if (calc_speed <= final_speed)
 		final_speed = calc_speed;
 
-	wheels[0]->setSpeed(-final_speed);
-	wheels[1]->setSpeed(final_speed);
+	wheels[0]->setSpeed(base_speed-final_speed);
+	wheels[1]->setSpeed(base_speed+final_speed);
 
 }
 
@@ -39,6 +39,6 @@ void TurnAngle::setAngle(double angle)
 }
 
 TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels, double angle, double base_angle_)
-				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_), base_speed(1.5), max_speed(2)
+				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_), base_speed(0), max_speed(2)
 {
 }
