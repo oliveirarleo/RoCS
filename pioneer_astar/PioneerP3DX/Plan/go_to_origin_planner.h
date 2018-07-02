@@ -13,12 +13,15 @@
 #include "../Analyze/pass_sonar.h"
 #include "../Analyze/pass_orientation.h"
 #include "../Analyze/pass_position.h"
+#include "../Actuators/wheel_vrep.h"
 
 class GoToOriginPlanner : public Planner
 {
 private:
 	PassOrientation &pass_orientation;
 	PassPosition &pass_position;
+
+	std::vector< WheelVREP * > wheels;
 
 
 public:

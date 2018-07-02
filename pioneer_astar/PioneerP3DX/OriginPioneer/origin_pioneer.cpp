@@ -66,7 +66,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 
 //	REACTIVE MODEL, PLANNER AND EXECUTE
 	awmReactiveModel.startThread();
-//	planner.startThread();
+	planner.startThread();
 	execute.startThread();
 
 	while (connection.isConnected())

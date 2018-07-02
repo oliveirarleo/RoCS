@@ -18,6 +18,7 @@ private:
 	std::vector<WheelVREP *> &wheels;
 
 	double angle;
+	double base_angle;
 	double base_speed;
 
 public:
@@ -25,6 +26,9 @@ public:
 
 public:
 	TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels);
+
+	TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels, double angle, double base_angle_);
+
 	void act() override;
 
 };

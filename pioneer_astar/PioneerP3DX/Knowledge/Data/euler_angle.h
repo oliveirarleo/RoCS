@@ -37,6 +37,10 @@ public:
 
 	void setGama(double gama);
 
+	bool isValid() const;
+
+	void setValid(bool valid);
+
 };
 
 

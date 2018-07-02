@@ -60,11 +60,11 @@ void AvoidWallModel::run()
 			v_right = v_right + braitenberg_r[i] * detect[i];
 		}
 		// atualiza velocidades dos motores
-//		if(v_right < 0 && v_left < 0)
-//		{
+		if(v_right < 0 && v_left < 0)
+		{
 			MoveWheels mw{wheels, v_left, v_right, 10};
 			pipeline.push(&mw);
-//		}
+		}
 
 		// espera um pouco antes de reiniciar a leitura dos sensores
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));

@@ -36,6 +36,7 @@ bool OrientationVREPSensor::getData(EulerAngle &value)
 		value.setEulerAngle(angle[0], angle[1], angle[2]);
 		return true;
 	}
+	value.setValid(false);
 	return false;
 }
 

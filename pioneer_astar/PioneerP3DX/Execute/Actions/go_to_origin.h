@@ -19,11 +19,11 @@ private:
 	std::vector<WheelVREP *> &wheels;
 
 	Position origin;
-	Position position;
-	EulerAngle angle;
+	Position& position;
+	EulerAngle& angle;
 
 public:
-	GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels, const Position &position, const EulerAngle &angle);
+	GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels, Position &position, EulerAngle &angle);
 
 	void act() override;
 

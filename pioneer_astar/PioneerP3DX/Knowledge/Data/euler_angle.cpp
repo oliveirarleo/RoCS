@@ -57,3 +57,13 @@ std::ostream &operator<<(std::ostream &os, const EulerAngle &angle)
 	os << "alpha: " << angle.alpha << " beta: " << angle.beta << " gama: " << angle.gama << " valid: " << angle.valid;
 	return os;
 }
+
+bool EulerAngle::isValid() const
+{
+	return valid;
+}
+
+void EulerAngle::setValid(bool valid)
+{
+	EulerAngle::valid = valid;
+}
