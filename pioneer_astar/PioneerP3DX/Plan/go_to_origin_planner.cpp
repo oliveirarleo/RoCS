@@ -29,12 +29,21 @@ void GoToOriginPlanner::run()
 
 
 		double des_angle = (5.3);
-		if (angle.isValid())
+		double an = des_angle - angle.getGama();
+		if (an >= M_PI)
+			an = an - 2 * M_PI;
+		double epsilon = 0.002;
+		while (!((an) < epsilon && an > -epsilon))
 		{
-			TurnAngle ta{robot, wheels, angle.getGama(), des_angle};
-			pipeline.push(&ta);
+			angle = pass_orientation.getValue()[0];
+			if (angle.isValid() && pipeline.isEmpty())
+			{
+				pipeline.push(new TurnAngle{robot, wheels, angle.getGama(), des_angle});
+			}
+			an = des_angle - angle.getGama();
+			if (an >= M_PI)
+				an = an - 2 * M_PI;
 		}
-
 
 
 //		if(pipeline.isEmpty())

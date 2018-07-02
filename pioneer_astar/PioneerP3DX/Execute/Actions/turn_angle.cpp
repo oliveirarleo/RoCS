@@ -10,13 +10,14 @@
 
 void TurnAngle::act()
 {
-	std::cout << "Turning " << base_angle - angle << std::endl;
+
 	double final_speed = max_speed;
 	double calc_speed;
 
 	double an = base_angle - angle;
 	if(an >= M_PI)
 		an = an - 2*M_PI;
+	std::cout << "Turning " << an << std::endl;
 	calc_speed = base_speed * ((an) / (M_PI));
 
 	if (calc_speed <= final_speed)
