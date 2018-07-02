@@ -4,8 +4,8 @@
 // Github:      https://github.com/oramleo
 //
 
-#ifndef PIONEER_AVOID_WALL_H_
-#define PIONEER_AVOID_WALL_H_
+#ifndef PIONEER_AVOID_WALL_MODEL_H_
+#define PIONEER_AVOID_WALL_MODEL_H_
 
 #include <Knowledge/reactive_model.h>
 
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif // PIONEER_AVOID_WALL_H_
+#endif // PIONEER_AVOID_WALL_MODEL_H_

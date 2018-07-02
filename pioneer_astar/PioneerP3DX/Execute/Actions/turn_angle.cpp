@@ -29,7 +29,7 @@ void TurnAngle::act()
 }
 
 TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels)
-				: robot(robot), wheels(wheels), angle(0), base_speed(1), Action(2), base_angle(0), max_speed(1.5)
+				: robot(robot), wheels(wheels), angle(0), base_speed(0), Action(2), base_angle(0), max_speed(1.5)
 {
 }
 
@@ -39,6 +39,6 @@ void TurnAngle::setAngle(double angle)
 }
 
 TurnAngle::TurnAngle(RobotModel &robot, std::vector<WheelVREP *> &wheels, double angle, double base_angle_)
-				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_), base_speed(0), max_speed(2)
+				: Action(20), robot(robot), wheels(wheels), angle(angle), base_angle(base_angle_), base_speed(0.1), max_speed(2)
 {
 }

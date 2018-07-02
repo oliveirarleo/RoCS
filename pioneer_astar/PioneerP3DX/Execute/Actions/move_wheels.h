@@ -17,12 +17,15 @@ private:
 	std::vector<WheelVREP *> &wheels;
 	double v_left;
 	double v_right;
+	int wait;
 public:
 	void act() override;
 
 	MoveWheels(std::vector<WheelVREP *> &wheels, double v_left, double v_right);
 
 	MoveWheels(std::vector<WheelVREP *> &wheels, double v_left, double v_right, double value_);
+
+	MoveWheels(std::vector<WheelVREP *> &wheels, double v_left, double v_right,double value_, int wait);
 
 };
 

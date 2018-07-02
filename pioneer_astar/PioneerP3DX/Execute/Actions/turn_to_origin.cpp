@@ -17,7 +17,7 @@ void TurnToOrigin::act()
 
 	double an;
 	EulerAngle angle;
-	double epsilon = 0.002;
+	double epsilon = 0.05;
 	double des_angle = (5.3);
 
 	do{
