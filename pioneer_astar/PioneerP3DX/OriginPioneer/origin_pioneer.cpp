@@ -7,7 +7,7 @@
 #include <Analyze/analyze.h>
 #include <include/v_repConst.h>
 #include "origin_pioneer.h"
-#include "../Monitor/sonars_vrep_monitor.h"
+#include "../Monitor/range_vrep_monitor.h"
 #include "../Plan/go_to_origin_planner.h"
 #include "../Execute/execute_p3dx.h"
 #include "../Knowledge/ReactiveModels/avoid_wall_model.h"
@@ -23,8 +23,8 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 //	CONNECTING SENSORS, CREATING MONITORS AND ANALYZES
 // Sonars
 //	std::vector<RangeVREP *> sonars = p3dx_model.getSonars();
-//	SonarsVREPMonitor sonar_monitor{sonars};
-//	PassSonar sonar_position_analyze{p3dx_model};
+//	RangeVREPMonitor sonar_monitor{sonars};
+//	PassRange sonar_position_analyze{p3dx_model};
 //	sonar_monitor.attach(&sonar_position_analyze);
 
 //	Orientation sensor

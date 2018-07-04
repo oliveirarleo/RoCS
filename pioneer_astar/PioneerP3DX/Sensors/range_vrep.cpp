@@ -37,7 +37,7 @@ RangeVREP::RangeVREP(const std::string &name_, RobotModel &robot_)
 }
 
 
-bool RangeVREP::getData(SonarOutput &position)
+bool RangeVREP::getData(RangeOutput &position)
 {
 	float point[3];
 	char state;
@@ -51,7 +51,7 @@ bool RangeVREP::getData(SonarOutput &position)
 	return false;
 }
 
-bool RangeVREP::getData(SonarOutput &position, char &state)
+bool RangeVREP::getData(RangeOutput &position, char &state)
 {
 	float point[3];
 	if (simxReadProximitySensor(connection.getClientId(), handle, (simxUChar *) &state, point,

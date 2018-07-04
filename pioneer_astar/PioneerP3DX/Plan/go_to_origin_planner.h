@@ -10,7 +10,7 @@
 #include <Plan/planner.h>
 #include <Knowledge/position.h>
 #include <Util/pipeline.h>
-#include "../Analyze/pass_sonar.h"
+#include "../Analyze/pass_range.h"
 #include "../Analyze/pass_orientation.h"
 #include "../Analyze/pass_position.h"
 #include "../Actuators/wheel_vrep.h"

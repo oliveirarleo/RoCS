@@ -10,11 +10,11 @@
 #include "turn_angle.h"
 #include "../../Sensors/orientation_vrep_sensor.h"
 #include "../../Knowledge/RobotModels/pioneer_p3dx_model.h"
-#include "move_wheels.h"
+#include "set_wheel_speed.h"
 
 void AvoidWall::act()
 {
-	MoveWheels mw1{wheels, 0, 0};
+	SetWheelSpeed mw1{wheels, 0, 0};
 	mw1.act();
 
 	OrientationVREPSensor* os = ((PioneerP3DXModel &)robot).getOrientationSensor();
@@ -42,7 +42,7 @@ void AvoidWall::act()
 	}while (std::abs(an) >0.02);
 
 
-	MoveWheels mw{wheels, 2, 2};
+	SetWheelSpeed mw{wheels, 2, 2};
 	mw.act();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));

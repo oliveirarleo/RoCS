@@ -10,9 +10,9 @@
 #include <Sensors/range.h>
 #include <Knowledge/robot_model.h>
 #include "../Connection/connection.h"
-#include "../Knowledge/Data/sonar_output.h"
+#include "../Knowledge/Data/range_output.h"
 
-class RangeVREP : public Range<SonarOutput>
+class RangeVREP : public Range<RangeOutput>
 {
 private:
 	int handle;
@@ -24,9 +24,9 @@ public:
 
 	RangeVREP(const std::string &name_, RobotModel &robot_);
 
-	bool getData(SonarOutput &value) override;
+	bool getData(RangeOutput &value) override;
 
-	bool getData(SonarOutput &value, char &state);
+	bool getData(RangeOutput &value, char &state);
 
 
 };

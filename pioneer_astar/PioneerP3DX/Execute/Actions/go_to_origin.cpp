@@ -9,7 +9,7 @@
 #include "turn_angle.h"
 #include "turn_to_origin.h"
 #include "../../Analyze/pass_orientation.h"
-#include "move_wheels.h"
+#include "set_wheel_speed.h"
 
 void GoToOrigin::act()
 {
@@ -17,7 +17,7 @@ void GoToOrigin::act()
 	TurnToOrigin tto{2, robot, wheels, pass_orientation};
 	tto.act();
 
-	MoveWheels mw{wheels, 1,1};
+	SetWheelSpeed mw{wheels, 1,1};
 	mw.act();
 }
 
