@@ -5,11 +5,11 @@
 //
 
 #include <Analyze/analyze.h>
+#include <Execute/execute.h>
 #include <include/v_repConst.h>
 #include "origin_pioneer.h"
 #include "../Monitor/range_vrep_monitor.h"
 #include "../Plan/go_to_origin_planner.h"
-#include "../Execute/execute_p3dx.h"
 #include "../Knowledge/ReactiveModels/avoid_wall_model.h"
 #include "../Monitor/orientation_vrep_monitor.h"
 #include "../Monitor/position_vrep_monitor.h"
@@ -43,7 +43,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 
 
 // EXECUTE AND PLANNING CONNECTION, REACTION MODELS
-	ExecuteP3DX execute{};
+	Execute execute{};
 
 	GoToOriginPlanner planner{p3dx_model, execute.getPipeline(), pass_orientation, pass_position};
 

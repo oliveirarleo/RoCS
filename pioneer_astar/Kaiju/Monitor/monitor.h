@@ -14,11 +14,11 @@
 #include "Sensors/sensor.h"
 #include "Util/publisher.h"
 
-template<typename Value>
+template<typename RawData, typename Value>
 class Monitor : public Publisher<std::vector<Value>>
 {
 protected:
-	std::vector<Sensor<Value> *> &sensors;
+	std::vector<Sensor<RawData> *> &sensors;
 	bool publishing;
 	std::thread *publish_thread;
 
@@ -35,12 +35,32 @@ public:
 			publish_thread->join();
 	}
 
+
+
 	void startThread()
 	{
 		publish_thread = new std::thread(&Monitor::publishLoop, this);
 	}
 
-	virtual void publishLoop() = 0;
+	virtual Value interpret(RawData raw) = 0;
+
+	virtual void publishLoop()
+	{
+		while (publishing)
+		{
+			std::vector<Value> values{sensors.size()};
+			int i = 0;
+			for (Sensor<RawData> *s: sensors)
+			{
+				RawData r;
+				s->getData(r);
+				values[i] = interpret(r);
+				i++;
+			}
+			this->publish(values);
+			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		}
+	};
 
 };
 

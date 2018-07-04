@@ -11,12 +11,14 @@
 #include <Monitor/monitor.h>
 #include "../Sensors/orientation_vrep_sensor.h"
 
-class OrientationVREPMonitor : public Monitor<EulerAngle>
+class OrientationVREPMonitor : public Monitor<EulerAngle, EulerAngle>
 {
 public:
 	OrientationVREPMonitor(std::vector<OrientationVREPSensor *> &sensors_);
 
-	void publishLoop() override;
+	EulerAngle interpret(EulerAngle raw) override;
+
+//	void publishLoop() override;
 
 };
 

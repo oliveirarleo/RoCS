@@ -17,7 +17,7 @@ template<typename Value>
 class Observer
 {
 protected:
-	Value value;
+	Value observed_value;
 	std::mutex write_mu;
 	std::unique_lock<std::mutex> ul;
 
@@ -35,7 +35,7 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &os, const Observer<Value> &observer)
 	{
-		os << "value: " << observer.value;
+		os << "value: " << observer.observed_value;
 		return os;
 	}
 };
@@ -49,7 +49,7 @@ public:
 
 
 template<typename Value>
-Observer<Value>::Observer() : value{}, write_mu{}, ul{write_mu, std::defer_lock}
+Observer<Value>::Observer() : observed_value{}, write_mu{}, ul{write_mu, std::defer_lock}
 {
 }
 
@@ -58,7 +58,7 @@ template<typename Value>
 Value Observer<Value>::getValue()
 {
 	while (ul.owns_lock());
-	return value;
+	return observed_value;
 }
 
 // PRINT VALUE
@@ -74,7 +74,7 @@ void Observer<Value>::update(Value value)
 {
 //	std::cout << "Updating value from " << this->value << " to " << value << std::endl;
 	ul.lock();
-	Observer::value = value;
+	Observer::observed_value = value;
 	ul.unlock();
 }
 

@@ -6,24 +6,14 @@
 
 #include "orientation_vrep_monitor.h"
 
-void OrientationVREPMonitor::publishLoop()
-{
-	while (publishing)
-	{
-		std::vector<EulerAngle> angle{1};
-		int i = 0;
-		for (Sensor<EulerAngle> *s: sensors)
-		{
-			s->getData(angle[i]);
-			i++;
-		}
-		publish(angle);
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	}
-
-}
 
 OrientationVREPMonitor::OrientationVREPMonitor(std::vector<OrientationVREPSensor *> &sensors_) : Monitor(
 				(std::vector<Sensor<EulerAngle> *> &) sensors_)
 {
+}
+
+
+EulerAngle OrientationVREPMonitor::interpret(EulerAngle raw)
+{
+	return raw;
 }

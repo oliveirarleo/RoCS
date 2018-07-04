@@ -12,13 +12,12 @@
 #include <Monitor/monitor.h>
 #include "../Sensors/position_vrep_sensor.h"
 
-class PositionVREPMonitor : public Monitor<Position>
+class PositionVREPMonitor : public Monitor<Position, Position>
 {
 public:
 	PositionVREPMonitor(std::vector<PositionVREPSensor *> &sensors_);
 
-	void publishLoop() override;
-
+	Position interpret(Position raw) override;
 };
 
 

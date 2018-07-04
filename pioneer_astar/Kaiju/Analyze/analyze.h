@@ -36,7 +36,17 @@ public:
 		publish_thread = new std::thread(&Analyze::publishLoop, this);
 	}
 
-	virtual void publishLoop() = 0;
+	void publishLoop()
+	{
+		while (publishing)
+		{
+			PublishedValue p = mergeAndProcess(this->observed_value);
+			this->publish(p);
+			std::this_thread::sleep_for(std::chrono::milliseconds(25));
+		}
+	}
+
+	virtual PublishedValue mergeAndProcess(ObservedValue ov) = 0;
 
 };
 

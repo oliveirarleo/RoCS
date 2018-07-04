@@ -46,7 +46,6 @@ set(HEADERS
         PioneerP3DX/Analyze/pass_range.h
         PioneerP3DX/Plan/go_to_origin_planner.h
         PioneerP3DX/Knowledge/Data/range_output.h
-        PioneerP3DX/Execute/execute_p3dx.h
         PioneerP3DX/Execute/Actions/set_wheel_speed.h
         )
 

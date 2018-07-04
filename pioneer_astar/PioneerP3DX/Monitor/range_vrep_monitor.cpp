@@ -13,18 +13,18 @@ RangeVREPMonitor::RangeVREPMonitor(std::vector<RangeVREP *> &sensors_) : Monitor
 }
 
 
-void RangeVREPMonitor::publishLoop()
-{
-	while (publishing)
-	{
-		std::vector<RangeOutput> positions{16};
-		int i = 0;
-		for (Sensor<RangeOutput> *s: sensors)
-		{
-			s->getData(positions[i]);
-			i++;
-		}
-		publish(positions);
-		extApi_sleepMs(50);
-	}
-}
+//void RangeVREPMonitor::publishLoop()
+//{
+//	while (publishing)
+//	{
+//		std::vector<RangeOutput> positions{16};
+//		int i = 0;
+//		for (Sensor<RangeOutput> *s: sensors)
+//		{
+//			s->getData(positions[i]);
+//			i++;
+//		}
+//		publish(positions);
+//		extApi_sleepMs(50);
+//	}
+//}

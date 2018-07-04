@@ -12,12 +12,12 @@
 #include "../Knowledge/Data/range_output.h"
 #include "../Sensors/range_vrep.h"
 
-class RangeVREPMonitor : public Monitor<RangeOutput>
+class RangeVREPMonitor : public Monitor<RangeOutput, RangeOutput>
 {
 public:
 	RangeVREPMonitor(std::vector<RangeVREP *> &sensors_);
 
-	void publishLoop() override;
+//	void publishLoop() override;
 
 };
 

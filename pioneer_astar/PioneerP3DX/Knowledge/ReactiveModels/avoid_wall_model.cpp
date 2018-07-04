@@ -22,8 +22,6 @@ AvoidWallModel::AvoidWallModel(RobotModel &robot, Pipeline &pipeline)
 
 void AvoidWallModel::run()
 {
-	//		std::cout << "running" << std::endl;
-
 	while (running)
 	{
 		std::vector<WheelVREP *>& wheels = ((PioneerP3DXModel &) robot).getWheels();
@@ -42,7 +40,6 @@ void AvoidWallModel::run()
 
 		if(count > 3)
 		{
-			std::cout<< "ENTROOO"<<std::endl;
 			AvoidWall aw{15, robot, wheels, sonars};
 			pipeline.push(&aw);
 		}

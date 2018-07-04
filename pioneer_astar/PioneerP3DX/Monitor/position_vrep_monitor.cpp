@@ -11,20 +11,7 @@ PositionVREPMonitor::PositionVREPMonitor(std::vector<PositionVREPSensor *> &sens
 {
 }
 
-void PositionVREPMonitor::publishLoop()
+Position PositionVREPMonitor::interpret(Position raw)
 {
-	while (publishing)
-	{
-		std::vector<Position> position{1};
-		int i = 0;
-		for (Sensor<Position> *s: sensors)
-		{
-			s->getData(position[i]);
-//			std::cout<< "GetDAta" << position[i] << std::endl;
-			i++;
-		}
-		publish(position);
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	}
-
+	return raw;
 }

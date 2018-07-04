@@ -16,7 +16,8 @@ class PassPosition : public Analyze<std::vector<Position>, std::vector<Position>
 public:
 	PassPosition(const RobotModel &robot);
 
-	void publishLoop() override;
+
+	std::vector<Position> mergeAndProcess(std::vector<Position> ov) override;
 
 };
 
