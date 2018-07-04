@@ -18,9 +18,10 @@ class Analyze : public Observer<ObservedValue>, public Publisher<PublishedValue>
 protected:
 	RobotModel robot;
 	bool publishing;
+	int waiting_time;
 	std::thread *publish_thread;
 public:
-	Analyze(const RobotModel &robot) : robot(robot), publishing(true)
+	Analyze(const RobotModel &robot) : robot(robot), publishing(true), waiting_time(25)
 	{
 	}
 
@@ -42,7 +43,7 @@ public:
 		{
 			PublishedValue p = mergeAndProcess(this->observed_value);
 			this->publish(p);
-			std::this_thread::sleep_for(std::chrono::milliseconds(25));
+			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
 	}
 

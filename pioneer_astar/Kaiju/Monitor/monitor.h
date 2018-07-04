@@ -20,10 +20,11 @@ class Monitor : public Publisher<std::vector<Value>>
 protected:
 	std::vector<Sensor<RawData> *> &sensors;
 	bool publishing;
+	int waiting_time;
 	std::thread *publish_thread;
 
 public:
-	Monitor(std::vector<Sensor<Value> *> &sensors_) : sensors(sensors_), publishing(true)
+	Monitor(std::vector<Sensor<Value> *> &sensors_) : sensors(sensors_), publishing(true), waiting_time(50)
 	{
 
 	}
@@ -58,7 +59,7 @@ public:
 				i++;
 			}
 			this->publish(values);
-			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
 	};
 
