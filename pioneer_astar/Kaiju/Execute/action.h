@@ -13,26 +13,16 @@
 class Action
 {
 protected:
-	std::string name;
 	double value;
+
 public:
-	Action(std::string name, double value_): name(name), value(value_)
+	Action(double value_): value(value_)
 	{
 	}
 
 	double getValue() const
 	{
 		return value;
-	}
-
-	const std::string &getName() const
-	{
-		return name;
-	}
-
-	void setName(const std::string &name)
-	{
-		Action::name = name;
 	}
 
 	virtual void act() = 0;
