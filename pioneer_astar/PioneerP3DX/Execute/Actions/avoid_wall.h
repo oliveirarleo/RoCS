@@ -16,6 +16,7 @@
 class AvoidWall: public Action
 {
 private:
+
 	RobotModel& robot;
 	std::vector < WheelVREP *>& wheels;
 	std::vector < RangeVREP *>& ranges;

@@ -23,9 +23,6 @@ void GoToOriginPlanner::run()
 {
 	while (running)
 	{
-//		std::cout << pass_orientation.getValue()[0] << "\n";
-//		std::cout << pass_position.getValue()[0] << "\n";
-
 		Position pos = pass_position.getValue()[0];
 		EulerAngle angle;
 

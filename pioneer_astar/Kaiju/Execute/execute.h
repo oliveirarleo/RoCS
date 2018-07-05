@@ -16,12 +16,13 @@
 class Execute
 {
 private:
+	RobotModel& robot;
 	Pipeline pipeline;
 	bool running;
 	int waiting_time;
 	std::thread *execute_thread;
 public:
-	Execute() : running(true), pipeline(), waiting_time(25)
+	Execute(RobotModel& robot_) : robot(robot_), running(true), pipeline(), waiting_time(25)
 	{
 	}
 
@@ -43,7 +44,10 @@ public:
 		{
 			Action *action;
 			if (pipeline.next(&action))
+			{
 				action->act();
+			}
+
 			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
 	}

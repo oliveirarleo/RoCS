@@ -22,7 +22,7 @@ void GoToOrigin::act()
 }
 
 GoToOrigin::GoToOrigin(RobotModel &robot, std::vector<WheelVREP *> &wheels, PassOrientation& pass_orientation_)
-				: robot(robot), wheels(wheels), pass_orientation(pass_orientation_), origin(), Action(1)
+				: robot(robot), wheels(wheels), pass_orientation(pass_orientation_), origin(), Action("GoToOrigin", 1)
 {
 }
 

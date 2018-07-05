@@ -12,6 +12,7 @@
 
 #include <Knowledge/robot_model.h>
 #include <Knowledge/position.h>
+#include <Execute/action.h>
 
 #include "../../Connection/connection.h"
 #include "../../Sensors/range_vrep.h"
@@ -28,6 +29,10 @@ private:
 
 	Position robot_position;
 	EulerAngle robot_orientation;
+	Action* current_action;
+
+
+private:
 
 //	SENSORS
 	std::vector<RangeVREP *> sonars;
@@ -65,7 +70,9 @@ public:
 
 	Connection &getConnection();
 
-	Position &getRobotPosition();
+	Position getRobotPosition();
+
+	EulerAngle getRobotOrientation();
 
 	std::vector<RangeVREP *> &getSonars();
 
@@ -74,6 +81,10 @@ public:
 	PositionVREPSensor *getPositionSensor();
 
 	std::vector<WheelVREP *> &getWheels();
+
+	void setCurrentAction(Action *current_action);
+
+	Action *getCurrentAction() const;
 
 };
 

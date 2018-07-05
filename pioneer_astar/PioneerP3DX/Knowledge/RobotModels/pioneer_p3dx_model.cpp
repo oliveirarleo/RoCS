@@ -13,8 +13,9 @@ extern "C"
 }
 
 
-PioneerP3DXModel::PioneerP3DXModel() : robot_name{"Pioneer_p3dx"}, robot_handle{-1}, connection{}, robot_position{},
-																			 sonars{}
+PioneerP3DXModel::PioneerP3DXModel() : robot_name{"Pioneer_p3dx"}, robot_handle{-1}, connection{},
+																			 robot_position{}, robot_orientation{}, sonars{}, position_sensor{nullptr},
+																			 orientation_sensor{nullptr}, current_action{nullptr}
 {
 	verifyConnection();
 	connectToRobot();
@@ -42,8 +43,8 @@ void PioneerP3DXModel::connectToRobot()
 	{
 		std::cout << "Connected to robot: " << robot_name << " handle: " << robot_handle << std::endl;
 		connectToPositionSensor();
-		connectToSonars();
 		connectToOrientationSensor();
+		connectToSonars();
 		connectToWheels();
 	}
 	else
@@ -73,7 +74,6 @@ void PioneerP3DXModel::connectToPositionSensor()
 {
 	position_sensor = new PositionVREPSensor{"PositionSensor", *this};
 	position_sensor->getData(robot_position);
-	std::cout << "First Pos: " << robot_position << std::endl;
 }
 
 void PioneerP3DXModel::connectToWheels()
@@ -98,15 +98,27 @@ std::string &PioneerP3DXModel::getRobotName()
 	return robot_name;
 }
 
-Position &PioneerP3DXModel::getRobotPosition()
+Position PioneerP3DXModel::getRobotPosition()
 {
-	float pos[3];
-	simxGetObjectPosition(connection.getClientId(), robot_handle, -1, pos, simx_opmode_streaming);
-	robot_position.setPosition((double) pos[0], (double) pos[1], (double) pos[2]);
+	if(position_sensor == nullptr)
+	{
+		Position position{};
+		return position;
+	}
+	Position p;
+	position_sensor->getData(p);
+	return p;
+}
 
-	std::cout << robot_position << std::endl;
-
-	return robot_position;
+EulerAngle PioneerP3DXModel::getRobotOrientation()
+{
+	if(orientation_sensor == nullptr)
+	{
+		EulerAngle ea{};
+		return ea;
+	}
+	orientation_sensor->getData(robot_orientation);
+	return robot_orientation;
 }
 
 
@@ -138,4 +150,14 @@ PositionVREPSensor *PioneerP3DXModel::getPositionSensor()
 std::vector<WheelVREP *> &PioneerP3DXModel::getWheels()
 {
 	return wheels;
+}
+
+Action *PioneerP3DXModel::getCurrentAction() const
+{
+	return current_action;
+}
+
+void PioneerP3DXModel::setCurrentAction(Action *current_action)
+{
+	PioneerP3DXModel::current_action = current_action;
 }

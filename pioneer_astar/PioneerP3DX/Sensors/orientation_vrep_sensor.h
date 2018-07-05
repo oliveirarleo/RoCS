@@ -15,7 +15,7 @@
 
 class OrientationVREPSensor : public Sensor<EulerAngle>
 {
-public:
+private:
 	RobotModel &robot;
 	Connection &connection;
 	int handle;

@@ -15,15 +15,17 @@
 
 class PositionVREPSensor : public Sensor<Position>
 {
-public:
+private:
 	RobotModel &robot;
+	Connection &connection;
+	int handle;
 
+public:
 	PositionVREPSensor(const std::string &name_, RobotModel &robot);
 
 	bool getData(Position &value) override;
 
-	Connection &connection;
-	int handle;
+
 };
 
 

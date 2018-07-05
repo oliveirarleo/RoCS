@@ -7,6 +7,7 @@
 #include <Analyze/analyze.h>
 #include <Execute/execute.h>
 #include <include/v_repConst.h>
+#include <Visualizer/file_visualizer.h>
 #include "origin_pioneer.h"
 #include "../Monitor/range_vrep_monitor.h"
 #include "../Plan/go_to_origin_planner.h"
@@ -19,7 +20,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 //	Connecting
 	Connection connection = p3dx_model.getConnection();
 
-
+	FileVisualizer fv{p3dx_model};
 //	CONNECTING SENSORS, CREATING MONITORS AND ANALYZES
 // Sonars
 //	std::vector<RangeVREP *> sonars = p3dx_model.getSonars();
@@ -43,7 +44,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 
 
 // EXECUTE AND PLANNING CONNECTION, REACTION MODELS
-	Execute execute{};
+	Execute execute{p3dx_model};
 
 	GoToOriginPlanner planner{p3dx_model, execute.getPipeline(), pass_orientation, pass_position};
 
@@ -68,6 +69,10 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 	awmReactiveModel.startThread();
 	planner.startThread();
 	execute.startThread();
+
+
+	fv.startThread();
+
 
 	while (connection.isConnected())
 	{

@@ -35,6 +35,6 @@ void TurnToOrigin::act()
 }
 
 TurnToOrigin::TurnToOrigin(double value_, RobotModel &robot, std::vector<WheelVREP *> &wheels, PassOrientation& pass_orientation_)
-				: Action(value_), robot(robot), wheels(wheels), pass_orientation(pass_orientation_)
+				: Action("TurnToOrigin", value_), robot(robot), wheels(wheels), pass_orientation(pass_orientation_)
 {
 }

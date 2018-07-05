@@ -49,6 +49,6 @@ void AvoidWall::act()
 }
 
 AvoidWall::AvoidWall(double value_, RobotModel &robot,  std::vector<WheelVREP *> &wheels,  std::vector<RangeVREP *> &ranges)
-				: Action(value_), robot(robot), wheels(wheels), ranges(ranges)
+				: Action("AvoidWall", value_), robot(robot), wheels(wheels), ranges(ranges)
 {
 }

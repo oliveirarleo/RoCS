@@ -13,10 +13,17 @@
 class Action
 {
 protected:
+	std::string name;
 	double value;
+
 public:
-	Action(double value_): value(value_)
+	Action(const std::string &name, double value) : name(name), value(value)
 	{
+	}
+
+	const std::string &getName() const
+	{
+		return name;
 	}
 
 	double getValue() const
