@@ -13,9 +13,10 @@
 class Action
 {
 protected:
+	std::string name;
 	double value;
 public:
-	Action(double value_): value(value_)
+	Action(std::string name, double value_): name(name), value(value_)
 	{
 	}
 
@@ -24,7 +25,19 @@ public:
 		return value;
 	}
 
+	const std::string &getName() const
+	{
+		return name;
+	}
+
+	void setName(const std::string &name)
+	{
+		Action::name = name;
+	}
+
 	virtual void act() = 0;
+
+
 };
 
 #endif //ARCH_ACTION_H_

@@ -43,7 +43,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 
 
 // EXECUTE AND PLANNING CONNECTION, REACTION MODELS
-	Execute execute{};
+	Execute execute{p3dx_model};
 
 	GoToOriginPlanner planner{p3dx_model, execute.getPipeline(), pass_orientation, pass_position};
 
