@@ -28,6 +28,8 @@
           UMLClass
         </span>
         
+          <span style="margin-left: 10px" class="alert alert-info">«Singleton»</span>
+        
       </section>
 
       <!-- Path -->
@@ -43,7 +45,7 @@
           <span class="label label-info"><a href='594af663de577680f35b13183109d675.html'><span class='node-icon staruml-icon icon-UMLModel'></span>framework</a></span>
         
           <span>::</span>
-          <span class="label label-info"><a href='e4c5b2514f912ded5a259d607557a939.html'><span class='node-icon staruml-icon icon-UMLClass'></span>Pipeline</a></span>
+          <span class="label label-info"><a href='e4c5b2514f912ded5a259d607557a939.html'><span class='node-icon staruml-icon icon-UMLClass'></span>«Singleton»Pipeline</a></span>
         
       </section>
 
@@ -130,26 +132,6 @@
 
       <!-- Attributes -->
 
-      
-      <section>
-        <h3>Attributes</h3>
-        <table class="table table-striped table-bordered">
-          <tr>
-            <th>Visibility</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-          
-          <tr>
-            <td>private</td>
-            <td><a href="061196734bec359f04d725780af35bc8.html">List Action&amp;</a></td>
-            <td><span class='label label-info'>none</span></td>
-            <td></td>
-          </tr>
-          
-        </table>
-      </section>
       
 
       <!-- Operations -->
@@ -291,7 +273,7 @@
     
     <tr>
         <td>stereotype</td>
-        <td><span class='label label-info'>null</span></td>
+        <td>Singleton</td>
     </tr>
     
     
@@ -383,9 +365,19 @@
     <h3>Relationships</h3>
     <ul class="nav nav-list">
         
-        <li><a href='8e2e6215bef8bcab7b901dfb473289af.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Planner—Pipeline)</a></li>
+        <li><a href='8e2e6215bef8bcab7b901dfb473289af.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Plan—Pipeline)</a></li>
         
         <li><a href='6d6d73cfe0d29c4cc0bb07fdc393f5ed.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Execute—Pipeline)</a></li>
+        
+        <li><a href='9a3f727c7611fe7bb7fb0e255e1fe1d3.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Execute—Pipeline)</a></li>
+        
+        <li><a href='7ea67b26a67a22ba89ac63d15f5400e1.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Pipeline—Execute)</a></li>
+        
+        <li><a href='1ca76ea35c8723fa0008433ba338bd2d.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Plan—Pipeline)</a></li>
+        
+        <li><a href='056f840c39db34ed2efa3ee49c73975d.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(ReactiveModel—Pipeline)</a></li>
+        
+        <li><a href='5c0061d68590c6a4f96d885365d15fd3.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Pipeline—Action)</a></li>
         
     </ul>
 </section>
@@ -396,6 +388,17 @@
 
       
       
+<section class="element-list">
+    <h3>Owned Elements</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='7ea67b26a67a22ba89ac63d15f5400e1.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Pipeline—Execute)</a></li>
+        
+        <li><a href='5c0061d68590c6a4f96d885365d15fd3.html'><span class='node-icon staruml-icon icon-UMLAssociation'></span>(Pipeline—Action)</a></li>
+        
+    </ul>
+</section>
+
 
 
     </div>
