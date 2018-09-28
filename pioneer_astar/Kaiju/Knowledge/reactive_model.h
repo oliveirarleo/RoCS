@@ -14,11 +14,10 @@
 class ReactiveModel
 {
 public:
-	bool running;
-	std::thread *reactive_model_thread;
-
 	RobotModel &robot;
 	Pipeline &pipeline;
+	bool running;
+	std::thread *reactive_model_thread;
 
 	ReactiveModel(RobotModel &robot, Pipeline &pipeline) : robot(robot), pipeline(pipeline), running(true),
 																												 reactive_model_thread(nullptr)

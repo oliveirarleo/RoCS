@@ -22,7 +22,7 @@ private:
 	int waiting_time;
 	std::thread *execute_thread;
 public:
-	Execute(RobotModel& robot_) : robot(robot_), running(true), pipeline(), waiting_time(25)
+	Execute(RobotModel& robot_) : robot(robot_), pipeline(), running(true), waiting_time(25)
 	{
 	}
 
