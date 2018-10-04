@@ -8,10 +8,12 @@
 #define ARCH_EXECUTE_H_
 
 #include <vector>
-#include <Util/pipeline.h>
 #include <thread>
-#include "action.h"
-#include "../Plan/behavior.h"
+
+#include <Util/pipeline.h>
+#include <Execute/action.h>
+#include <Plan/behavior.h>
+#include <Knowledge/robot_model.h>
 
 class Execute
 {
