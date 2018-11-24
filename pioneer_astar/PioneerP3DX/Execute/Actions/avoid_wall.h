@@ -11,16 +11,16 @@
 #include <Execute/action.h>
 #include <Knowledge/robot_model.h>
 #include "../../Actuators/wheel_vrep.h"
-#include "../../Sensors/range_vrep.h"
+#include "../../Sensors/range_vrep_sensor.h"
 
 class AvoidWall: public Action
 {
 private:
 	RobotModel& robot;
 	std::vector < WheelVREP *>& wheels;
-	std::vector < RangeVREP *>& ranges;
+	std::vector < RangeVREPSensor *>& ranges;
 public:
-	AvoidWall(double value_, RobotModel &robot,  std::vector<WheelVREP *> &wheels,  std::vector<RangeVREP *> &ranges);
+	AvoidWall(double value_, RobotModel &robot,  std::vector<WheelVREP *> &wheels,  std::vector<RangeVREPSensor *> &ranges);
 
 public:
 	void act() override;

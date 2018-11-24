@@ -7,7 +7,7 @@
 #ifndef PIONEER_PASS_POSITION_H_
 #define PIONEER_PASS_POSITION_H_
 
-#include <Knowledge/position.h>
+#include <Util/position.h>
 #include <Analyze/analyze.h>
 
 
@@ -17,7 +17,7 @@ public:
 	PassPosition(const RobotModel &robot);
 
 
-	std::vector<Position> mergeAndProcess(std::vector<Position> ov) override;
+	std::vector<Position> process(std::vector<Position> ov) override;
 
 };
 

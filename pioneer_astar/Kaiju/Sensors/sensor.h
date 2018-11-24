@@ -8,7 +8,7 @@
 #define ROCS_SENSOR_H_
 
 #include <ostream>
-#include "../Knowledge/position.h"
+#include "Util/position.h"
 
 template<typename Value>
 class Sensor

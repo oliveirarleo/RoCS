@@ -30,7 +30,7 @@ set(ARCH_SOURCES
         Kaiju/Execute/execute.h
         Kaiju/Execute/action.h
         Kaiju/Knowledge/robot_model.h
-        Kaiju/Knowledge/position.h
+        Kaiju/Util/position.h
         Kaiju/Util/publisher.h
         Kaiju/Util/observer.h
         Kaiju/Util/pipeline.h)
@@ -40,7 +40,7 @@ set(HEADERS
         PioneerP3DX/OriginPioneer/origin_pioneer.h
         PioneerP3DX/Knowledge/RobotModels/pioneer_p3dx_model.h
         PioneerP3DX/Connection/connection.h
-        PioneerP3DX/Sensors/range_vrep.h
+        PioneerP3DX/Sensors/range_vrep_sensor.h
         PioneerP3DX/Actuators/wheel_vrep.h
         PioneerP3DX/Monitor/range_vrep_monitor.h
         PioneerP3DX/Analyze/pass_range.h
@@ -54,12 +54,12 @@ set(SOURCES
         PioneerP3DX/OriginPioneer/origin_pioneer.cpp
         PioneerP3DX/Knowledge/RobotModels/pioneer_p3dx_model.cpp
         PioneerP3DX/Connection/connection.cpp
-        PioneerP3DX/Sensors/range_vrep.cpp
+        PioneerP3DX/Sensors/range_vrep_sensor.cpp
         PioneerP3DX/Actuators/wheel_vrep.cpp
         PioneerP3DX/Monitor/range_vrep_monitor.cpp
         PioneerP3DX/Analyze/pass_range.cpp
         PioneerP3DX/Plan/go_to_origin_planner.cpp
-        PioneerP3DX/Execute/Actions/set_wheel_speed.cpp Kaiju/Util/pipeline.cpp PioneerP3DX/Knowledge/ReactiveModels/avoid_wall_model.cpp PioneerP3DX/Knowledge/ReactiveModels/avoid_wall_model.h Kaiju/Knowledge/reactive_model.h PioneerP3DX/Execute/Actions/go_to_origin.cpp PioneerP3DX/Execute/Actions/go_to_origin.h PioneerP3DX/Analyze/pass_orientation.cpp PioneerP3DX/Analyze/pass_orientation.h PioneerP3DX/Sensors/orientation_vrep_sensor.cpp PioneerP3DX/Sensors/orientation_vrep_sensor.h PioneerP3DX/Knowledge/Data/euler_angle.cpp PioneerP3DX/Knowledge/Data/euler_angle.h PioneerP3DX/Monitor/orientation_vrep_monitor.cpp PioneerP3DX/Monitor/orientation_vrep_monitor.h PioneerP3DX/Sensors/position_vrep_sensor.cpp PioneerP3DX/Sensors/position_vrep_sensor.h PioneerP3DX/Monitor/position_vrep_monitor.cpp PioneerP3DX/Monitor/position_vrep_monitor.h PioneerP3DX/Analyze/pass_position.cpp PioneerP3DX/Analyze/pass_position.h PioneerP3DX/Execute/Actions/turn_angle.cpp PioneerP3DX/Execute/Actions/turn_angle.h PioneerP3DX/Execute/Actions/turn_to_origin.cpp PioneerP3DX/Execute/Actions/turn_to_origin.h PioneerP3DX/Execute/Actions/avoid_wall.cpp PioneerP3DX/Execute/Actions/avoid_wall.h)
+        PioneerP3DX/Execute/Actions/set_wheel_speed.cpp Kaiju/Util/pipeline.cpp PioneerP3DX/Knowledge/ReactiveModels/avoid_wall_model.cpp PioneerP3DX/Knowledge/ReactiveModels/avoid_wall_model.h Kaiju/Knowledge/reactive_model.h PioneerP3DX/Execute/Actions/go_to_origin.cpp PioneerP3DX/Execute/Actions/go_to_origin.h PioneerP3DX/Analyze/pass_orientation.cpp PioneerP3DX/Analyze/pass_orientation.h PioneerP3DX/Sensors/orientation_vrep_sensor.cpp PioneerP3DX/Sensors/orientation_vrep_sensor.h PioneerP3DX/Knowledge/Data/euler_angle.cpp PioneerP3DX/Knowledge/Data/euler_angle.h PioneerP3DX/Monitor/orientation_vrep_monitor.cpp PioneerP3DX/Monitor/orientation_vrep_monitor.h PioneerP3DX/Sensors/position_vrep_sensor.cpp PioneerP3DX/Sensors/position_vrep_sensor.h PioneerP3DX/Monitor/position_vrep_monitor.cpp PioneerP3DX/Monitor/position_vrep_monitor.h PioneerP3DX/Analyze/pass_position.cpp PioneerP3DX/Analyze/pass_position.h PioneerP3DX/Execute/Actions/turn_angle.cpp PioneerP3DX/Execute/Actions/turn_angle.h PioneerP3DX/Execute/Actions/turn_to_angle.cpp PioneerP3DX/Execute/Actions/turn_to_angle.h PioneerP3DX/Execute/Actions/avoid_wall.cpp PioneerP3DX/Execute/Actions/avoid_wall.h PioneerP3DX/Execute/Actions/turn_right.cpp PioneerP3DX/Execute/Actions/turn_right.h Kaiju/Knowledge/knowledge.cpp Kaiju/Knowledge/knowledge.h)
 
 find_package(Threads)
 

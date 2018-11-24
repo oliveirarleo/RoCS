@@ -27,6 +27,8 @@ public:
 	bool next(Action **action);
 
 	bool isEmpty();
+
+	void printValues();
 };
 
 

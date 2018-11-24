@@ -19,7 +19,7 @@ class PassRange : public Analyze<std::vector<RangeOutput>, std::vector<RangeOutp
 public:
 	PassRange(const RobotModel &robot);
 
-	std::vector<RangeOutput> mergeAndProcess(std::vector<RangeOutput> ov) override;
+	std::vector<RangeOutput> process(std::vector<RangeOutput> ov) override;
 
 
 };

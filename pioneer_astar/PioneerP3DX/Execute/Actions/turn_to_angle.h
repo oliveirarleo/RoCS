@@ -14,7 +14,7 @@
 #include "../../Knowledge/Data/euler_angle.h"
 #include "../../Analyze/pass_orientation.h"
 
-class TurnToOrigin: Action
+class TurnToAngle: Action
 {
 private:
 	RobotModel& robot;
@@ -24,7 +24,7 @@ private:
 
 public:
 
-	TurnToOrigin(double value_, RobotModel &robot, std::vector<WheelVREP *> &wheels, PassOrientation& pass_orientation_);
+	TurnToAngle(double value_, RobotModel &robot, std::vector<WheelVREP *> &wheels, PassOrientation& pass_orientation_);
 
 	void act() override;
 

@@ -16,7 +16,7 @@ class PassOrientation : public Analyze<std::vector<EulerAngle>, std::vector<Eule
 public:
 	PassOrientation(const RobotModel &robot);
 
-	std::vector<EulerAngle> mergeAndProcess(std::vector<EulerAngle> ov) override;
+	std::vector<EulerAngle> process(std::vector<EulerAngle> ov) override;
 
 };
 

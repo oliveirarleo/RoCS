@@ -16,7 +16,7 @@ void SetWheelSpeed::act()
 
 
 SetWheelSpeed::SetWheelSpeed(std::vector<WheelVREP *> &wheels_, double v_left_, double v_right_)
-				: Action(2), wheels(wheels_), v_left(v_left_), v_right(v_right_),wait(50)
+				: Action{2}, wheels(wheels_), v_left(v_left_), v_right(v_right_),wait(50)
 {
 }
 
@@ -25,7 +25,7 @@ SetWheelSpeed::SetWheelSpeed(std::vector<WheelVREP *> &wheels, double v_left, do
 {
 }
 
-SetWheelSpeed::SetWheelSpeed(std::vector<WheelVREP *> &wheels, double v_left, double v_right,double value_, int wait)
+SetWheelSpeed::SetWheelSpeed(std::vector<WheelVREP *> &wheels, double v_left, double v_right, double value_, int wait)
 				: Action(value_), wheels(wheels), v_left(v_left), v_right(v_right), wait(wait)
 {
 }

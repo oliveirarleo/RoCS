@@ -21,11 +21,12 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 
 
 //	CONNECTING SENSORS, CREATING MONITORS AND ANALYZES
+
 // Sonars
-//	std::vector<RangeVREP *> sonars = p3dx_model.getSonars();
-//	RangeVREPMonitor sonar_monitor{sonars};
-//	PassRange sonar_position_analyze{p3dx_model};
-//	sonar_monitor.attach(&sonar_position_analyze);
+	std::vector<RangeVREPSensor *> sonars = p3dx_model.getSonars();
+	RangeVREPMonitor sonar_monitor{sonars};
+	PassRange sonar_position_analyze{p3dx_model};
+	sonar_monitor.attach(&sonar_position_analyze);
 
 //	Orientation sensor
 	std::vector<OrientationVREPSensor *> os;
@@ -53,8 +54,8 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 //	STARTING THREADS
 
 //	SONAR
-//	sonar_monitor.startThread();
-//	sonar_position_analyze.startThread();
+	sonar_monitor.startThread();
+	sonar_position_analyze.startThread();
 
 //	ORIENTATION
 	orientation_monitor.startThread();
@@ -67,7 +68,7 @@ OriginPioneer::OriginPioneer() : p3dx_model{}
 //	REACTIVE MODEL, PLANNER AND EXECUTE
 	awmReactiveModel.startThread();
 	planner.startThread();
-	execute.startThread();
+	// execute.startThread();
 
 	while (connection.isConnected())
 	{

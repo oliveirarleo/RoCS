@@ -8,7 +8,7 @@
 #define PIONEER_BRAIT_PLAN_H_
 
 #include <Plan/planner.h>
-#include <Knowledge/position.h>
+#include <Util/position.h>
 #include <Util/pipeline.h>
 #include "../Analyze/pass_range.h"
 #include "../Analyze/pass_orientation.h"

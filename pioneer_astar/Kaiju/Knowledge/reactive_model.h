@@ -19,8 +19,7 @@ public:
 	bool running;
 	std::thread *reactive_model_thread;
 
-	ReactiveModel(RobotModel &robot, Pipeline &pipeline) : robot(robot), pipeline(pipeline), running(true),
-																												 reactive_model_thread(nullptr)
+	ReactiveModel(RobotModel &robot, Pipeline &pipeline) : robot(robot), pipeline(pipeline), running(false)
 	{
 	}
 
@@ -29,14 +28,17 @@ public:
 		running = false;
 		if (reactive_model_thread && reactive_model_thread->joinable())
 			reactive_model_thread->join();
-	}
 
-	void startThread()
-	{
-		reactive_model_thread = new std::thread(&ReactiveModel::run, this);
 	}
 
 	virtual void run() = 0;
+
+	void startThread()
+	{
+		reactive_model_thread = new std::thread( &ReactiveModel::run , this);
+	}
+
+
 };
 
 #endif //PIONEER_REACTIVE_MODEL_H_

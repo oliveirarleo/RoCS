@@ -10,16 +10,19 @@
 #include <Monitor/monitor.h>
 #include <thread>
 #include "../Knowledge/Data/range_output.h"
-#include "../Sensors/range_vrep.h"
+#include "../Sensors/range_vrep_sensor.h"
 
 class RangeVREPMonitor : public Monitor<RangeOutput, RangeOutput>
 {
 public:
-	RangeVREPMonitor(std::vector<RangeVREP *> &sensors_);
+	RangeVREPMonitor(std::vector<RangeVREPSensor *> &sensors_);
 
-//	void publishLoop() override;
+	void publishLoop() override;
+
+    RangeOutput interpret(RangeOutput raw) override;
 
 };
 
 
 #endif // PIONEER_SONAR_VREP_MONITOR_H_
+

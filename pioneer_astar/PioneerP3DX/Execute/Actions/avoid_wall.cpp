@@ -48,7 +48,7 @@ void AvoidWall::act()
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
-AvoidWall::AvoidWall(double value_, RobotModel &robot,  std::vector<WheelVREP *> &wheels,  std::vector<RangeVREP *> &ranges)
+AvoidWall::AvoidWall(double value_, RobotModel &robot,  std::vector<WheelVREP *> &wheels,  std::vector<RangeVREPSensor *> &ranges)
 				: Action(value_), robot(robot), wheels(wheels), ranges(ranges)
 {
 }

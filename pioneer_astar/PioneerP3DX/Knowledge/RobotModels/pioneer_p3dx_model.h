@@ -11,10 +11,10 @@
 #include <vector>
 
 #include <Knowledge/robot_model.h>
-#include <Knowledge/position.h>
+#include <Util/position.h>
 
 #include "../../Connection/connection.h"
-#include "../../Sensors/range_vrep.h"
+#include "../../Sensors/range_vrep_sensor.h"
 #include "../../Actuators/wheel_vrep.h"
 #include "../../Sensors/orientation_vrep_sensor.h"
 #include "../../Sensors/position_vrep_sensor.h"
@@ -30,7 +30,7 @@ private:
 	EulerAngle robot_orientation;
 
 //	SENSORS
-	std::vector<RangeVREP *> sonars;
+	std::vector<RangeVREPSensor *> sonars;
 	OrientationVREPSensor *orientation_sensor;
 	PositionVREPSensor *position_sensor;
 //		std::vector< ForceSensorVREP > force_sensors;
@@ -67,7 +67,7 @@ public:
 
 	Position &getRobotPosition();
 
-	std::vector<RangeVREP *> &getSonars();
+	std::vector<RangeVREPSensor *> &getSonars();
 
 	OrientationVREPSensor *getOrientationSensor();
 

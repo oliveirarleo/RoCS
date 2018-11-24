@@ -11,7 +11,7 @@ PassRange::PassRange(const RobotModel &robot) : Analyze(robot)
 {
 }
 
-std::vector<RangeOutput> PassRange::mergeAndProcess(std::vector<RangeOutput> ov)
+std::vector<RangeOutput> PassRange::process(std::vector<RangeOutput> ov)
 {
 	return ov;
 }

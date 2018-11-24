@@ -41,13 +41,13 @@ public:
 	{
 		while (publishing)
 		{
-			PublishedValue p = mergeAndProcess(this->observed_value);
+			PublishedValue p = process(this->observed_value);
 			this->publish(p);
 			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
 	}
 
-	virtual PublishedValue mergeAndProcess(ObservedValue ov) = 0;
+	virtual PublishedValue process(ObservedValue ov) = 0;
 
 };
 

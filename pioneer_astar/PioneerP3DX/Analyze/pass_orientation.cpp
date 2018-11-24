@@ -10,7 +10,7 @@ PassOrientation::PassOrientation(const RobotModel &robot) : Analyze(robot)
 {
 }
 
-std::vector<EulerAngle> PassOrientation::mergeAndProcess(std::vector<EulerAngle> ov)
+std::vector<EulerAngle> PassOrientation::process(std::vector<EulerAngle> ov)
 {
 	return ov;
 }

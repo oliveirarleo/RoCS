@@ -25,7 +25,7 @@ void AvoidWallModel::run()
 	while (running)
 	{
 		std::vector<WheelVREP *>& wheels = ((PioneerP3DXModel &) robot).getWheels();
-		std::vector<RangeVREP *>& sonars = ((PioneerP3DXModel &) robot).getSonars();
+		std::vector<RangeVREPSensor *>& sonars = ((PioneerP3DXModel &) robot).getSonars();
 		int count = 0;
 		for (int i = 2; i < 7; ++i)
 		{

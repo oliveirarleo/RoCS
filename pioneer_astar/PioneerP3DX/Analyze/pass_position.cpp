@@ -10,7 +10,7 @@ PassPosition::PassPosition(const RobotModel &robot) : Analyze(robot)
 {
 }
 
-std::vector<Position> PassPosition::mergeAndProcess(std::vector<Position> ov)
+std::vector<Position> PassPosition::process(std::vector<Position> ov)
 {
 	return ov;
 }

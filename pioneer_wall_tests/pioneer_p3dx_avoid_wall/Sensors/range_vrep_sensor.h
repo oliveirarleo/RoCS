@@ -9,10 +9,10 @@
 
 #include <Sensors/range.h>
 #include <Knowledge/robot_model.h>
+#include <Util/position.h>
 #include "../Connection/connection.h"
-#include "../Knowledge/Data/range_output.h"
 
-class RangeVREP : public Range<RangeOutput>
+class RangeVREPSensor : public Range<Position>
 {
 private:
 	int handle;
@@ -22,11 +22,10 @@ private:
 public:
 	int getHandle() const;
 
-	RangeVREP(const std::string &name_, RobotModel &robot_);
+	RangeVREPSensor(const std::string &name_, RobotModel &robot_);
 
-	bool getData(RangeOutput &value) override;
+	bool getData(Position &value);
 
-	bool getData(RangeOutput &value, char &state);
 
 
 };

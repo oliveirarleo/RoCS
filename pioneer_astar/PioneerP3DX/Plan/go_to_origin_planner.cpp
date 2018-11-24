@@ -11,6 +11,7 @@
 #include "../Execute/Actions/turn_angle.h"
 #include "../Execute/Actions/set_wheel_speed.h"
 #include "../Execute/Actions/go_to_origin.h"
+#include "../Execute/Actions/turn_to_angle.h"
 
 GoToOriginPlanner::GoToOriginPlanner(RobotModel &robot_, Pipeline &pipeline_, PassOrientation &pass_orientation_, PassPosition &pass_position_)
 				: Planner(robot_, pipeline_), pass_orientation(pass_orientation_), pass_position(pass_position_),
@@ -23,17 +24,19 @@ void GoToOriginPlanner::run()
 {
 	while (running)
 	{
-//		std::cout << pass_orientation.getValue()[0] << "\n";
-//		std::cout << pass_position.getValue()[0] << "\n";
-
 		Position pos = pass_position.getValue()[0];
 		EulerAngle angle;
 
 
 		if(pipeline.isEmpty())
 		{
-			GoToOrigin go_to_origin_action{robot, wheels, pass_orientation};
-			pipeline.push(&go_to_origin_action);
+			//pipeline.push(&go_to_origin_action);
+			//pipeline.printValues();
+			 TurnToAngle tto{2, robot, wheels, pass_orientation};
+			 tto.act();
+
+			//SetWheelSpeed mw{wheels, 2,2};
+			//mw.act();
 		}
 
 

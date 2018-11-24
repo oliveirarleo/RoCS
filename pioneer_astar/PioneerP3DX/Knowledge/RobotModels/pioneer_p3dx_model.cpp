@@ -59,7 +59,7 @@ void PioneerP3DXModel::connectToSonars()
 	for (int num_sonars = 1; num_sonars <= 16; ++num_sonars)
 	{
 		std::string sonar_name = "Pioneer_p3dx_ultrasonicSensor" + std::to_string(num_sonars);
-		sonars.push_back(new RangeVREP{sonar_name, *this});
+		sonars.push_back(new RangeVREPSensor{sonar_name, *this});
 	}
 }
 
@@ -120,7 +120,7 @@ Connection &PioneerP3DXModel::getConnection()
 	return connection;
 }
 
-std::vector<RangeVREP *> &PioneerP3DXModel::getSonars()
+std::vector<RangeVREPSensor *> &PioneerP3DXModel::getSonars()
 {
 	return sonars;
 }

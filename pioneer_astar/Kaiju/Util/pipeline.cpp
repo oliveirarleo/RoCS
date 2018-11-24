@@ -6,39 +6,27 @@
 
 #include <Util/pipeline.h>
 #include <thread>
+#include <iostream>
 
 void Pipeline::push(Action *action)
 {
-	while(true)
-	{
-		if(!ul.owns_lock())
+		if (ul.try_lock_for())
 		{
-			if(action->getValue() >= top_value)
-			{
-				actions.clear();
-				actions.push_back(action);
-				top_value = action->getValue();
-			}
-			return;
+			actions.push_back(action);
+			ul.unlock();
 		}
-		else
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	}
-
 }
 
-Pipeline::Pipeline(): actions{},  mu{}, ul{mu, std::defer_lock}, top_value(0)
+Pipeline::Pipeline() : actions{}, mu{}, ul{mu, std::defer_lock}, top_value(0)
 {
 }
 
 bool Pipeline::next(Action **act)
 {
-	if (!actions.empty())
+	if (ul.try_lock_for() && !actions.empty())
 	{
-		ul.lock();
 		*act = actions[0];
-		actions.erase(actions.begin());
-		if(!actions.empty())
+		if (!actions.empty())
 			top_value = actions[0]->getValue();
 		else
 			top_value = 0;
@@ -52,4 +40,13 @@ bool Pipeline::next(Action **act)
 bool Pipeline::isEmpty()
 {
 	return actions.empty();
+}
+
+void Pipeline::printValues()
+{
+	for (int i = 0; i < actions.size(); ++i)
+	{
+		std::cout << *(actions[i]) << std::endl;
+	}
+
 }

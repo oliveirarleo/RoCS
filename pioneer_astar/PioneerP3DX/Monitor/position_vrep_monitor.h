@@ -8,7 +8,7 @@
 #define PIONEER_POSITION_VREP_MONITOR_H_
 
 
-#include <Knowledge/position.h>
+#include <Util/position.h>
 #include <Monitor/monitor.h>
 #include "../Sensors/position_vrep_sensor.h"
 
