@@ -15,17 +15,15 @@ extern "C"
 }
 
 
-
-RangeVREPSensor::RangeVREPSensor(const std::string &name_, RobotModel &robot_)
-	: Range(name_), robot(robot_), handle(-1),
-		connection(const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection()))
+RangeVREPSensor::RangeVREPSensor(const std::string &name_, Connection &connection_)
+	:Range(name_), handle(-1), connection(connection_)
 {
 	while (handle == -1)
 	{
 		if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &handle,
-														(simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
+		                        (simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 		{
-			simxReadProximitySensor(connection.getClientId(), handle, NULL, NULL, NULL, NULL, simx_opmode_streaming);
+			simxReadProximitySensor(connection.getClientId(), handle, nullptr, nullptr, nullptr, nullptr, simx_opmode_streaming);
 			std::cout << "Connected to sensor " << name << " Handle: " << handle << std::endl;
 		}
 		else
@@ -43,9 +41,9 @@ bool RangeVREPSensor::getData(Position &position)
 	float point[3];
 	char state;
 	if ((simxReadProximitySensor(connection.getClientId(), handle, (simxUChar *) &state, point, nullptr, nullptr,
-															 simx_opmode_buffer) == simx_return_ok) && (state > 0))
+	                             simx_opmode_buffer) == simx_return_ok) && (state > 0))
 	{
-		position.setSonarOutput((double) point[0], (double) point[1], (double) point[2], state);
+		position.setPosition((double) point[0], (double) point[1], (double) point[2], (bool) state);
 		return true;
 	}
 //	std::cout << point[0] << point[1]<< point[2]<< std::endl;

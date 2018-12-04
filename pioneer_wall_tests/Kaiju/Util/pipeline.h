@@ -22,60 +22,51 @@ protected:
 	double top_value;
 
 public:
-	Pipeline();
-
-	void push(Action *action);
-
-	bool next(Action **action);
-
-	bool isEmpty();
-
-	void printValues();
-};
-
-
-void Pipeline::push(Action *action)
-{
-	if (ul.try_lock_for(std::chrono::milliseconds(5)))
+	Pipeline()
+		:actions{}, mu{}, ul{mu, std::defer_lock}, top_value(0)
 	{
-		actions.push_back(action);
-		ul.unlock();
 	}
-}
 
-Pipeline::Pipeline() : actions{}, mu{}, ul{mu, std::defer_lock}, top_value(0)
-{
-}
-
-bool Pipeline::next(Action **act)
-{
-	if (ul.try_lock_for(std::chrono::milliseconds(5)) && !actions.empty())
+	void push(Action *action)
 	{
-		*act = actions.front();
-		actions.pop_front();
+		if (ul.try_lock_for(std::chrono::milliseconds(5)))
+		{
+			actions.push_back(action);
+			ul.unlock();
+		}
+	}
+
+	bool next(Action **action)
+	{
+		if (ul.try_lock_for(std::chrono::milliseconds(5)) && !actions.empty())
+		{
+			*action = actions.front();
+			actions.pop_front();
 //		if (!actions.empty())
 //			top_value = actions[0].getValue();
 //		else
 //			top_value = 0;
-		ul.unlock();
-		return true;
+			ul.unlock();
+			return true;
+		}
+		return false;
 	}
-	return false;
-}
 
-bool Pipeline::isEmpty()
-{
-	return actions.empty();
-}
-
-void Pipeline::printValues()
-{
-	for (auto &action : actions)
+	bool isEmpty()
 	{
-		std::cout << action << std::endl;
+		return actions.empty();
 	}
 
-}
+
+	void printValues()
+	{
+		for (auto &action : actions)
+		{
+			std::cout << action << std::endl;
+		}
+
+	}
+};
 
 #endif // PIPELINE_H_
 

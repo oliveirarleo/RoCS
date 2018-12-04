@@ -11,17 +11,14 @@
 #include <Knowledge/knowledge.h>
 
 #include "wheel_vrep.h"
-#include "../PioneerP3DX/pioneer_p3dx.h"
 
-WheelVREP::WheelVREP(std::string name_, Knowledge &knowledge_) : RotaryMotor(std::move(name_)), handle(-1),
-																																 knowledge(knowledge_),
-																																 connection(
-																																	 const_cast<Connection &>(((P3DXKnowledge &) knowledge_).getConnection()))
+WheelVREP::WheelVREP(std::string name_, Connection &connection_)
+	:RotaryMotor(std::move(name_)), handle(-1), connection(connection_)
 {
 	int id = connection.getClientId();
 
 	if (simxGetObjectHandle(id, (const simxChar *) name.c_str(), (simxInt *) &handle,
-													(simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
+	                        (simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
 		std::cout << "Handle do motor" << name << " nao encontrado! " << " Handle:" << handle << std::endl;
 	else
 	{
@@ -32,6 +29,5 @@ WheelVREP::WheelVREP(std::string name_, Knowledge &knowledge_) : RotaryMotor(std
 
 void WheelVREP::setSpeed(double speed)
 {
-	simxSetJointTargetVelocity(((P3DXKnowledge &) knowledge).getConnection().getClientId(), handle, (simxFloat) speed,
-														 simx_opmode_streaming);
+	simxSetJointTargetVelocity(connection.getClientId(), handle, (simxFloat) speed, simx_opmode_streaming);
 }

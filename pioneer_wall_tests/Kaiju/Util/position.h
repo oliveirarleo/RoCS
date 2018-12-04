@@ -38,6 +38,14 @@ public:
 		valid = true;
 	}
 
+	void setPosition(double x_, double y_, double z_, bool valid_)
+	{
+		x = x_;
+		y = y_;
+		z = z_;
+		valid = valid_;
+	}
+
 	double getX()
 	{
 		return x;

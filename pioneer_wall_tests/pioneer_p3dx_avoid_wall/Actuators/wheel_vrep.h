@@ -15,14 +15,12 @@ class WheelVREP : public RotaryMotor
 {
 private:
 	int handle;
-	Knowledge &knowledge;
 	Connection &connection;
 public:
-	WheelVREP(std::string name_, Knowledge &knowledge);
+	WheelVREP(std::string name_, Connection &connection_);
 
 	void setSpeed(double speed);
 
 };
-
 
 #endif // PIONEER_WHEEL_VREP_H_

@@ -10,9 +10,9 @@
 #include "position_vrep_sensor.h"
 #include "../Knowledge/pioneer_p3dx_model.h"
 
-PositionVREPSensor::PositionVREPSensor(const std::string &name_, RobotModel &robot_)
-	: Sensor(name_), robot(robot_), handle(((PioneerP3DXModel &) robot_).getHandle()),
-		connection(const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection()))
+PositionVREPSensor::PositionVREPSensor(std::string name_, Connection& connection_, PioneerP3DXModel& robot_model_)
+	: Sensor(std::move(name_)),  connection(connection_), handle(robot_model_.getHandle())
+
 {
 	float position[3] = {0, 0, 0};
 

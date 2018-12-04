@@ -33,7 +33,7 @@ bool OrientationVREPSensor::getData(Orientation &value)
 	if (simx_return_ok == simxGetObjectOrientation(connection.getClientId(), handle, -1, angle, simx_opmode_buffer))
 	{
 //		std::cout << "GetDataOrientation: " << angle[0] << " " <<  angle[1]<< " " <<  angle[2] <<std::endl;
-		value.setEulerAngle(angle[0], angle[1], angle[2]);
+		value.setOrientation(angle[0], angle[1], angle[2]);
 		return true;
 	}
 	value.setValid(false);

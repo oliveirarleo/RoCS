@@ -16,15 +16,14 @@ class RangeVREPSensor : public Range<Position>
 {
 private:
 	int handle;
-	RobotModel &robot;
 	Connection &connection;
 
 public:
+	RangeVREPSensor(const std::string &name_, Connection &connection_);
+
 	int getHandle() const;
 
-	RangeVREPSensor(const std::string &name_, RobotModel &robot_);
-
-	bool getData(Position &value);
+	bool getData(Position &value) override;
 
 
 

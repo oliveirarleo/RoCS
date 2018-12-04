@@ -18,7 +18,7 @@ protected:
 	std::thread *reactive_model_thread;
 
 public:
-	ReactiveModel(Pipeline &pipeline) : pipeline(pipeline), running(false)
+	explicit ReactiveModel(Pipeline &pipeline) : pipeline(pipeline), running(false), reactive_model_thread(nullptr)
 	{
 	}
 
@@ -27,7 +27,6 @@ public:
 		running = false;
 		if (reactive_model_thread && reactive_model_thread->joinable())
 			reactive_model_thread->join();
-
 	}
 
 	virtual void run() = 0;

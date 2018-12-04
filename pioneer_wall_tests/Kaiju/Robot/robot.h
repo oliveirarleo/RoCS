@@ -21,14 +21,11 @@ protected:
 	Execute execute;
 
 public:
-	Robot();
+	Robot()
+		:knowledge(), reactive_models(), planner(nullptr), execute(knowledge)
+	{
+	}
 };
-
-Robot::Robot()
-	: knowledge(), reactive_models(), planner(nullptr), execute(knowledge)
-{
-}
-
 
 
 #endif //PIONEER_ROBOT_H

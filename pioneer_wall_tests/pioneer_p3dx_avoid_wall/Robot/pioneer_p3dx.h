@@ -8,6 +8,8 @@
 
 #include <Robot/robot.h>
 #include "../Knowledge/p3dx_knowledge.h"
+#include "../Knowledge/avoid_wall_model.h"
+
 
 class PioneerP3DX : public Robot
 {
