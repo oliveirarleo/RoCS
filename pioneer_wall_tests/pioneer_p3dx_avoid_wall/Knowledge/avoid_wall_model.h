@@ -11,16 +11,14 @@
 #include "../Sensors/range_vrep_sensor.h"
 #include "../Actuators/wheel_vrep.h"
 
-class AvoidWallModel : public ReactiveModel
+class AvoidWallModel : public ReactiveModel<std::vector<Position>>
 {
-private:
-	std::vector<RangeVREPSensor> &sonars;
-	std::vector<WheelVREP> &wheels;
-
 public:
-	AvoidWallModel(Pipeline &pipeline, std::vector<RangeVREPSensor> &sonars_, std::vector<WheelVREP> &wheels_);
+	AvoidWallModel();
 
-	void run() override;
+	explicit AvoidWallModel(Pipeline *pipeline);
+
+	void react() override;
 
 
 };

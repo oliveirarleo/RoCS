@@ -9,11 +9,17 @@
 #include <include/v_repConst.h>
 #include "position_vrep_sensor.h"
 #include "../Knowledge/pioneer_p3dx_model.h"
+#include "../Knowledge/p3dx_knowledge.h"
 
-PositionVREPSensor::PositionVREPSensor(std::string name_, Connection& connection_, PioneerP3DXModel& robot_model_)
-	: Sensor(std::move(name_)),  connection(connection_), handle(robot_model_.getHandle())
-
+PositionVREPSensor::PositionVREPSensor(Connection &connection_)
+	:Sensor("PositionSensor"), connection(connection_), handle(connection_.getRobotHandle())
 {
+
+}
+
+void PositionVREPSensor::connect(int handle_)
+{
+	handle = handle_;
 	float position[3] = {0, 0, 0};
 
 	simxGetObjectPosition(connection.getClientId(), handle, -1, position, simx_opmode_streaming);
@@ -26,6 +32,7 @@ PositionVREPSensor::PositionVREPSensor(std::string name_, Connection& connection
 	simxGetObjectPosition(connection.getClientId(), handle, -1, pos, simx_opmode_buffer);
 
 	std::cout << "Connected to " << name << std::endl;
+
 }
 
 bool PositionVREPSensor::getData(Position &value)

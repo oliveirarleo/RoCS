@@ -26,7 +26,6 @@ public:
 	bool getData(Position &value) override;
 
 
-
 };
 
 #endif // PIONEER_SONAR_VREP_H_

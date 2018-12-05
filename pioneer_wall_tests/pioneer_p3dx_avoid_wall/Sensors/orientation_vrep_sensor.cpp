@@ -11,10 +11,14 @@
 #include "orientation_vrep_sensor.h"
 #include "../Knowledge/pioneer_p3dx_model.h"
 
-OrientationVREPSensor::OrientationVREPSensor(const std::string name_, RobotModel &robot_)
-	: Sensor(name_), handle(((PioneerP3DXModel &) robot_).getHandle()), robot(robot_),
-		connection(const_cast<Connection &>(((PioneerP3DXModel &) robot_).getConnection()))
+OrientationVREPSensor::OrientationVREPSensor(Connection &connection_)
+	:Sensor("OrientationSensor"), connection(connection_), handle(connection_.getRobotHandle())
 {
+}
+
+void OrientationVREPSensor::connect(int handle_)
+{
+	handle = handle_;
 	float angle[3] = {0, 0, 0};
 
 	simxGetObjectOrientation(connection.getClientId(), handle, -1, angle, simx_opmode_streaming);
@@ -24,7 +28,6 @@ OrientationVREPSensor::OrientationVREPSensor(const std::string name_, RobotModel
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 	}
 	std::cout << "Connected to " << name << std::endl;
-
 }
 
 bool OrientationVREPSensor::getData(Orientation &value)

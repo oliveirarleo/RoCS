@@ -19,10 +19,10 @@ WheelVREP::WheelVREP(std::string name_, Connection &connection_)
 
 	if (simxGetObjectHandle(id, (const simxChar *) name.c_str(), (simxInt *) &handle,
 	                        (simxInt) simx_opmode_oneshot_wait) != simx_return_ok)
-		std::cout << "Handle do motor" << name << " nao encontrado! " << " Handle:" << handle << std::endl;
+		std::cout << "Motor handle " << name << " not found! " << " Handle:" << handle << std::endl;
 	else
 	{
-		std::cout << "Conectado ao motor" << name << " Handle:" << handle << std::endl;
+		std::cout << "Connected to motor " << name << " Handle:" << handle << std::endl;
 		setSpeed(0);
 	}
 }

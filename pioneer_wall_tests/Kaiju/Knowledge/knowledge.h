@@ -15,6 +15,7 @@ class Knowledge
 {
 protected:
 	std::vector<RobotModel *> robot_models;
+//	std::vector<ReactiveModel *> reactive_models;
 	std::vector<StrategyModel *> strategy_models;
 	WorldModel *world_model;
 

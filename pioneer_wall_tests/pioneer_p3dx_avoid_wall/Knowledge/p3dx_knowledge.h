@@ -2,8 +2,8 @@
 // Created by leonardo on 16/11/18.
 //
 
-#ifndef PIONEER_P_3_DX_KNOWLEDGE_H
-#define PIONEER_P_3_DX_KNOWLEDGE_H
+#ifndef PIONEER_P3DX_KNOWLEDGE_H
+#define PIONEER_P3DX_KNOWLEDGE_H
 
 
 #include <Knowledge/knowledge.h>
@@ -16,16 +16,18 @@ class P3DXKnowledge : public Knowledge
 private:
 	Connection connection;
 	PioneerP3DXModel pioneer_p3dx_model;
+	AvoidWallModel avoid_wall_model;
 
 public:
 	P3DXKnowledge();
 
-	const Connection &getConnection() const;
+	Connection &getConnection();
 
-	const PioneerP3DXModel &getPioneer_p3dx_model() const;
+	PioneerP3DXModel &getPioneerP3DXModel();
 
-	const AvoidWallModel &getAvoid_wall_model() const;
+	AvoidWallModel &getAvoidWallModel();
+
 };
 
 
-#endif //PIONEER_P_3_DX_KNOWLEDGE_H
+#endif //PIONEER_P3DX_KNOWLEDGE_H

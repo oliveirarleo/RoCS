@@ -11,6 +11,7 @@
 #include <ostream>
 #include <thread>
 
+#include <Knowledge/knowledge.h>
 #include "Sensors/sensor.h"
 #include "Util/publisher.h"
 
@@ -18,24 +19,47 @@ template<typename RawData, typename Value>
 class Monitor : public Publisher<std::vector<Value>>
 {
 protected:
+	Knowledge &knowledge;
 	std::vector<Sensor<RawData> *> sensors;
 	bool publishing;
 	int waiting_time;
 	std::thread *publish_thread;
 
 public:
-	Monitor(std::vector<Sensor<RawData> *> sensors_) : sensors(sensors_), publishing(true), waiting_time(50)
+	explicit Monitor(Knowledge &knowledge)
+		:knowledge(knowledge), sensors(), publishing(true), waiting_time(50), publish_thread(nullptr)
 	{
+	}
 
+	Monitor(Knowledge &knowledge, Sensor<RawData> *sensor_)
+		:knowledge(knowledge), sensors(), publishing(true), waiting_time(50), publish_thread(nullptr)
+	{
+		sensors.emplace_back(sensor_);
+	}
+
+	Monitor(Knowledge &knowledge, std::vector<Sensor<RawData> *> &sensors_)
+		:knowledge(knowledge), sensors(sensors_), publishing(true), waiting_time(50), publish_thread(nullptr)
+	{
+//		sensors.insert(sensors_);
 	}
 
 	~Monitor()
 	{
 		publishing = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		if (publish_thread && publish_thread->joinable())
 			publish_thread->join();
 	}
 
+	void insertSensor(Sensor<RawData> *sensor_)
+	{
+		sensors.emplace_back(sensor_);
+	}
+
+	void insertSensors(std::vector<Sensor<RawData> *> &sensors_)
+	{
+		sensors.emplace_back(sensors_);
+	}
 
 	void startThread()
 	{

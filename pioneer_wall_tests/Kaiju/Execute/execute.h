@@ -25,13 +25,15 @@ private:
 	std::thread *execute_thread;
 
 public:
-	Execute(Knowledge &knowledge_) : knowledge(knowledge_), pipeline(), running(true), waiting_time(50)
+	explicit Execute(Knowledge &knowledge_)
+		:knowledge(knowledge_), pipeline(), running(true), waiting_time(50), execute_thread(nullptr)
 	{
 	}
 
 	~Execute()
 	{
 		running = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		if (execute_thread && execute_thread->joinable())
 			execute_thread->join();
 	}
@@ -46,7 +48,7 @@ public:
 		while (running)
 		{
 			Action *action = nullptr;
-			if (pipeline.next(&action) && action != nullptr)
+			if (pipeline.next(&action) && action)
 			{
 				action->act();
 				action = nullptr;

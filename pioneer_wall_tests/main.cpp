@@ -7,7 +7,7 @@ int main()
 
 	PioneerP3DX pioneer_p3dx{};
 
-//	pioneer_p3dx.run();
+	pioneer_p3dx.run();
 
 	return 0;
 }

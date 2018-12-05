@@ -14,15 +14,14 @@
 class Robot
 {
 protected:
+	std::string name;
 	Knowledge knowledge;
-	std::vector<ReactiveModel *> reactive_models;
 
-	Planner *planner;
 	Execute execute;
 
 public:
-	Robot()
-		:knowledge(), reactive_models(), planner(nullptr), execute(knowledge)
+	explicit Robot(std::string name_)
+		:name(std::move(name_)), knowledge(), execute(knowledge)
 	{
 	}
 };

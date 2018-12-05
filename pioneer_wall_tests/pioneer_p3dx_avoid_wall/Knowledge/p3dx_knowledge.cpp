@@ -4,16 +4,21 @@
 
 #include "p3dx_knowledge.h"
 
-P3DXKnowledge::P3DXKnowledge() : connection{}, pioneer_p3dx_model{*this}
+P3DXKnowledge::P3DXKnowledge():connection{}, pioneer_p3dx_model{}, avoid_wall_model{}
 {
 }
 
-const Connection &P3DXKnowledge::getConnection() const
+Connection &P3DXKnowledge::getConnection()
 {
 	return connection;
 }
 
-const PioneerP3DXModel &P3DXKnowledge::getPioneer_p3dx_model() const
+PioneerP3DXModel &P3DXKnowledge::getPioneerP3DXModel()
 {
 	return pioneer_p3dx_model;
+}
+
+AvoidWallModel &P3DXKnowledge::getAvoidWallModel()
+{
+	return avoid_wall_model;
 }

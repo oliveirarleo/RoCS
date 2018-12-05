@@ -28,6 +28,9 @@ private:
 
 	int client_id;
 
+	int robot_handle;
+
+
 public:
 	Connection();
 
@@ -36,6 +39,10 @@ public:
 	bool isConnected() const;
 
 	int getClientId() const;
+
+	int getRobotHandle() const;
+
+	void setRobotHandle(int robot_handle);
 };
 
 #endif // PIONEER_CONNECTION_H_

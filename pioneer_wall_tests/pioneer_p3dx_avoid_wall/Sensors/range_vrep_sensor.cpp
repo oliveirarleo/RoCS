@@ -23,7 +23,8 @@ RangeVREPSensor::RangeVREPSensor(const std::string &name_, Connection &connectio
 		if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &handle,
 		                        (simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
 		{
-			simxReadProximitySensor(connection.getClientId(), handle, nullptr, nullptr, nullptr, nullptr, simx_opmode_streaming);
+			simxReadProximitySensor(connection.getClientId(), handle, nullptr, nullptr, nullptr, nullptr,
+			                        simx_opmode_streaming);
 			std::cout << "Connected to sensor " << name << " Handle: " << handle << std::endl;
 		}
 		else

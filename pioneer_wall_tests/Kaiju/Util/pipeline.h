@@ -18,7 +18,7 @@ class Pipeline
 protected:
 	std::deque<Action *> actions;
 	std::timed_mutex mu;
-	std::unique_lock<std::timed_mutex> ul;
+	std::unique_lock<std::timed_mutex > ul;
 	double top_value;
 
 public:
@@ -38,16 +38,20 @@ public:
 
 	bool next(Action **action)
 	{
-		if (ul.try_lock_for(std::chrono::milliseconds(5)) && !actions.empty())
+		if (ul.try_lock_for(std::chrono::milliseconds(5)))
 		{
-			*action = actions.front();
-			actions.pop_front();
-//		if (!actions.empty())
-//			top_value = actions[0].getValue();
-//		else
-//			top_value = 0;
+			if(!actions.empty())
+			{
+				*action = actions.front();
+				actions.pop_front();
+//						if (!actions.empty())
+//							top_value = actions[0].getValue();
+//						else
+//							top_value = 0;
+				ul.unlock();
+				return true;
+			}
 			ul.unlock();
-			return true;
 		}
 		return false;
 	}

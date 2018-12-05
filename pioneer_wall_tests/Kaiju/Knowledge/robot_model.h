@@ -10,29 +10,24 @@
 #include <string>
 #include <Util/position.h>
 #include <Util/orientation.h>
-//#include <Knowledge/knowledge.h>
 
-class Knowledge;
 
 class RobotModel
 {
 protected:
 	std::string name;
-	Knowledge &knowledge;
 	Position position;
 	Orientation orientation;
 
-
-
 public:
 
-	RobotModel(std::string name_, Knowledge &knowledge_)
-		:name(std::move(name)), knowledge(knowledge_), position(), orientation()
+	explicit RobotModel(std::string name_)
+		:name(std::move(name)), position(), orientation()
 	{
 	}
 
-	RobotModel(std::string name_, Knowledge &knowledge_, Position position_, Orientation orientation_)
-		:name(std::move(name)), knowledge(knowledge_), position(position_), orientation(orientation_)
+	RobotModel(std::string name_, Position position_, Orientation orientation_)
+		:name(std::move(name)), position(position_), orientation(orientation_)
 	{
 	}
 

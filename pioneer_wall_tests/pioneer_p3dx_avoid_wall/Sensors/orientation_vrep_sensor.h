@@ -16,13 +16,13 @@
 class OrientationVREPSensor : public Sensor<Orientation>
 {
 public:
-	RobotModel &robot;
 	Connection &connection;
 	int handle;
 
-
 public:
-	OrientationVREPSensor(const std::string name_, RobotModel &robot);
+	explicit OrientationVREPSensor(Connection &connection_);
+
+	void connect(int handle_);
 
 	bool getData(Orientation &value) override;
 

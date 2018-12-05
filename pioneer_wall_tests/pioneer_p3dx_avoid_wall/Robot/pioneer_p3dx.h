@@ -9,16 +9,70 @@
 #include <Robot/robot.h>
 #include "../Knowledge/p3dx_knowledge.h"
 #include "../Knowledge/avoid_wall_model.h"
+#include "../Sensors/orientation_vrep_sensor.h"
+#include "../Sensors/position_vrep_sensor.h"
+#include "../Monitor/range_vrep_monitor.h"
+#include "../Monitor/position_vrep_monitor.h"
+#include "../Monitor/orientation_vrep_monitor.h"
+#include "../Analyze/pass_vrep_range.h"
+#include "../Analyze/pass_vrep_position.h"
+#include "../Analyze/pass_vrep_orientation.h"
 
 
 class PioneerP3DX : public Robot
 {
 private:
-	std::vector<RangeVREPSensor> sonars;
+	P3DXKnowledge knowledge;
+
+	Connection &connection;
+
+	//	SENSORS
+	std::vector<RangeVREPSensor> range_sensors;
+	OrientationVREPSensor orientation_sensor;
+	PositionVREPSensor position_sensor;
+//		std::vector< ForceSensorVREP > force_sensors;
+
+	//	ACTUATORS
 	std::vector<WheelVREP> wheels;
 
-	P3DXKnowledge knowledge;
-	AvoidWallModel avoid_wall_model;
+
+	//	MONITORS
+	RangeVREPMonitor range_monitor;
+	PositionVREPMonitor position_monitor;
+	OrientationVREPMonitor orientation_monitor;
+
+	//	ANALYZES
+	PassVREPRange range_analyze;
+	PassVREPPosition position_analyze;
+	PassVREPOrientation orientation_analyze;
+
+	//  PLANNER
+
+
+private:
+
+	void verifyConnection();
+
+	void connectToSonars();
+
+	void connectToOrientationSensor();
+
+	void connectToPositionSensor();
+
+	void connectToWheels();
+
+	void connectToRobot();
+
+	void setMonitors();
+
+	void setAnalyzes();
+
+	void setPlan();
+
+	void setExecute();
+
+	void setReactiveModels();
+
 
 public:
 	PioneerP3DX();

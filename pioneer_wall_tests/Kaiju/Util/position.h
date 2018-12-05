@@ -26,7 +26,7 @@ public:
 		valid = valid_;
 	}
 
-	Position() : x{0}, y{0}, z{0}, valid(false)
+	Position():x{0}, y{0}, z{0}, valid(false)
 	{
 	}
 
@@ -73,9 +73,10 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &os, const Position &position)
 	{
-		os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " ";
+		os << "x: " << position.x << " y: " << position.y << " z: " << position.z << " valid: " << position.valid;
 		return os;
 	}
+
 };
 
 #endif //ARCH_POSITION_H_

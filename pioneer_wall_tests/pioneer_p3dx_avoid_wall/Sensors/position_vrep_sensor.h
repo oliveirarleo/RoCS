@@ -13,6 +13,8 @@
 #include <Knowledge/robot_model.h>
 #include "../Connection/connection.h"
 #include "../Knowledge/pioneer_p3dx_model.h"
+#include "../Knowledge/p3dx_knowledge.h"
+
 
 class PositionVREPSensor : public Sensor<Position>
 {
@@ -21,7 +23,9 @@ private:
 	int handle;
 
 public:
-	PositionVREPSensor(std::string name_, Connection& connection_, PioneerP3DXModel& robot_model_);
+	explicit PositionVREPSensor(Connection &connection_);
+
+	void connect(int handle_);
 
 	bool getData(Position &value) override;
 

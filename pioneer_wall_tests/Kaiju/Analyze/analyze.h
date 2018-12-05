@@ -21,14 +21,18 @@ protected:
 	bool publishing;
 	int waiting_time;
 	std::thread *publish_thread;
+
 public:
-	Analyze(Knowledge &knowledge_) : knowledge(knowledge_), publishing(true), waiting_time(50)
+
+	explicit Analyze(Knowledge &knowledge_)
+		:knowledge(knowledge_), publishing(true), waiting_time(50), publish_thread(nullptr)
 	{
 	}
 
 	virtual ~Analyze()
 	{
 		publishing = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		if (publish_thread && publish_thread->joinable())
 			publish_thread->join();
 	}

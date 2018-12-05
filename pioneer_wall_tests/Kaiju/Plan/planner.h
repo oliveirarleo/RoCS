@@ -20,11 +20,13 @@ protected:
 	Pipeline &pipeline;
 
 	bool running;
+	int waiting_time;
 	std::thread *planner_thread;
 
 
 public:
-	Planner(Knowledge &knowledge, Pipeline &pipeline) : knowledge(knowledge), pipeline(pipeline), running(true)
+	Planner(Knowledge &knowledge, Pipeline &pipeline)
+		:knowledge(knowledge), pipeline(pipeline), running(true), waiting_time(50), planner_thread(nullptr)
 	{
 
 	}
@@ -32,6 +34,7 @@ public:
 	~Planner()
 	{
 		running = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		if (planner_thread && planner_thread->joinable())
 			planner_thread->join();
 	}
