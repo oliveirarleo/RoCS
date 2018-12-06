@@ -17,7 +17,7 @@ class Planner
 {
 protected:
 	Knowledge &knowledge;
-	Pipeline &pipeline;
+	Pipeline *pipeline;
 
 	bool running;
 	int waiting_time;
@@ -25,10 +25,21 @@ protected:
 
 
 public:
-	Planner(Knowledge &knowledge, Pipeline &pipeline)
+	Planner(Knowledge &knowledge)
+		:knowledge(knowledge), pipeline(nullptr), running(true), waiting_time(50), planner_thread(nullptr)
+	{
+
+	}
+
+	Planner(Knowledge &knowledge, Pipeline *pipeline)
 		:knowledge(knowledge), pipeline(pipeline), running(true), waiting_time(50), planner_thread(nullptr)
 	{
 
+	}
+
+	void setPipeline(Pipeline *pipeline)
+	{
+		Planner::pipeline = pipeline;
 	}
 
 	~Planner()
@@ -44,7 +55,16 @@ public:
 		planner_thread = new std::thread(&Planner::run, this);
 	}
 
-	virtual void run() = 0;
+	virtual void planIteration() = 0;
+
+	void run()
+	{
+		while (running)
+		{
+			planIteration();
+			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
+		}
+	}
 };
 
 

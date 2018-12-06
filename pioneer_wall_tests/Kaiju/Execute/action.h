@@ -7,10 +7,10 @@
 #ifndef ARCH_ACTION_H_
 #define ARCH_ACTION_H_
 
-#include<vector>
-#include<string>
+#include <vector>
+#include <string>
 #include <ostream>
-#include "../Actuators/actuator.h"
+#include <Actuators/actuator.h>
 
 class Action
 {
@@ -19,7 +19,7 @@ protected:
 	double value;
 
 public:
-	Action(std::string name_, double value_) : name(std::move(name_)), value(value_)
+	Action(std::string name_, double value_):name(std::move(name_)), value(value_)
 	{
 	}
 

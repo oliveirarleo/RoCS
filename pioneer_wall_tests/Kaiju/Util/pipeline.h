@@ -16,7 +16,7 @@
 class Pipeline
 {
 protected:
-	std::deque<Action *> actions;
+	std::deque< std::shared_ptr< Action > > actions;
 	std::timed_mutex mu;
 	std::unique_lock<std::timed_mutex > ul;
 	double top_value;
@@ -27,7 +27,7 @@ public:
 	{
 	}
 
-	void push(Action *action)
+	void push(std::shared_ptr< Action > action)
 	{
 		if (ul.try_lock_for(std::chrono::milliseconds(5)))
 		{
@@ -36,7 +36,7 @@ public:
 		}
 	}
 
-	bool next(Action **action)
+	bool next(std::shared_ptr<Action> *action)
 	{
 		if (ul.try_lock_for(std::chrono::milliseconds(5)))
 		{
@@ -66,7 +66,7 @@ public:
 	{
 		for (auto &action : actions)
 		{
-			std::cout << action << std::endl;
+			std::cout << *action << std::endl;
 		}
 
 	}

@@ -17,6 +17,7 @@
 #include "../Analyze/pass_vrep_range.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
+#include "../Plan/go_to_origin_planner.h"
 
 
 class PioneerP3DX : public Robot
@@ -47,7 +48,7 @@ private:
 	PassVREPOrientation orientation_analyze;
 
 	//  PLANNER
-
+	GoToOriginPlanner planner;
 
 private:
 

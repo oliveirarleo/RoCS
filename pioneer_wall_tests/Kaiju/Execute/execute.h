@@ -47,7 +47,7 @@ public:
 	{
 		while (running)
 		{
-			Action *action = nullptr;
+			std::shared_ptr< Action > action(nullptr);
 			if (pipeline.next(&action) && action)
 			{
 				action->act();

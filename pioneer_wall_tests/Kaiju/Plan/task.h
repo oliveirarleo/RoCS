@@ -8,7 +8,6 @@
 #define ARCH_TASK_H_
 
 #include <vector>
-#include "behavior.h"
 
 class Task
 {

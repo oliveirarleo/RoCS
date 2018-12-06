@@ -15,7 +15,7 @@ PioneerP3DX::PioneerP3DX()
 	:Robot("Pioneer_p3dx"), connection(knowledge.getConnection()), range_sensors(),
 	 orientation_sensor(connection), position_sensor(connection), wheels(), range_monitor(knowledge),
 	 position_monitor(knowledge), orientation_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
-	 orientation_analyze(knowledge)
+	 orientation_analyze(knowledge), planner(knowledge, position_analyze, orientation_analyze)
 {
 	verifyConnection();
 	connectToRobot();
@@ -42,6 +42,8 @@ void PioneerP3DX::run()
 	execute.startThread();
 
 	knowledge.getAvoidWallModel().startThread();
+
+	planner.startThread();
 
 	std::this_thread::sleep_for(std::chrono::seconds(10));
 
@@ -137,7 +139,7 @@ void PioneerP3DX::setAnalyzes()
 
 void PioneerP3DX::setPlan()
 {
-
+	planner.setPipeline(&execute.getPipeline());
 }
 
 void PioneerP3DX::setExecute()
