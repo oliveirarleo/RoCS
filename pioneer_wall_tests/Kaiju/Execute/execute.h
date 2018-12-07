@@ -24,9 +24,11 @@ private:
 	int waiting_time;
 	std::thread *execute_thread;
 
+	std::vector< std::vector< Actuator* > >	actuators;
+
 public:
 	explicit Execute(Knowledge &knowledge_)
-		:knowledge(knowledge_), pipeline(), running(true), waiting_time(50), execute_thread(nullptr)
+		:knowledge(knowledge_), pipeline(), running(true), waiting_time(50), execute_thread(nullptr), actuators()
 	{
 	}
 
@@ -50,11 +52,17 @@ public:
 			std::shared_ptr< Action > action(nullptr);
 			if (pipeline.next(&action) && action)
 			{
+				action->setActuators(actuators);
 				action->act();
 				action = nullptr;
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
+	}
+
+	void setActuators(const std::vector< std::vector< Actuator* > > &actuators)
+	{
+		Execute::actuators = actuators;
 	}
 
 	Pipeline &getPipeline()

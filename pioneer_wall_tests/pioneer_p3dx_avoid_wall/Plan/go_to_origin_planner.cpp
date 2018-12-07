@@ -3,6 +3,7 @@
 //
 
 #include "go_to_origin_planner.h"
+#include "../Execute/Actions/go_to_origin_action.h"
 
 GoToOriginPlanner::GoToOriginPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze)
 	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze)
@@ -19,6 +20,8 @@ void GoToOriginPlanner::planIteration()
 {
 	if (pipeline && pipeline->isEmpty())
 	{
+		std::shared_ptr <Action> go_to_origin(new GoToOriginAction("GoToOrigin", 1, *pipeline));
+		pipeline->push(go_to_origin);
 //		std::cout << position_analyze.getValue()[0] << "\n" << orientation_analyze.getValue()[0] << "\n";
 	}
 

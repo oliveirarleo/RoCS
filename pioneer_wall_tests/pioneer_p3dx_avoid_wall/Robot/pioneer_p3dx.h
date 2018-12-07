@@ -35,6 +35,8 @@ private:
 
 	//	ACTUATORS
 	std::vector<WheelVREP> wheels;
+	std::vector<Actuator*> wheel_ptrs;
+
 
 
 	//	MONITORS
@@ -54,15 +56,9 @@ private:
 
 	void verifyConnection();
 
-	void connectToSonars();
+	void setSensors();
 
-	void connectToOrientationSensor();
-
-	void connectToPositionSensor();
-
-	void connectToWheels();
-
-	void connectToRobot();
+	void setActuators();
 
 	void setMonitors();
 
@@ -73,6 +69,14 @@ private:
 	void setExecute();
 
 	void setReactiveModels();
+
+	void connectToSonars();
+
+	void connectToOrientationSensor();
+
+	void connectToPositionSensor();
+
+	void connectToWheels();
 
 
 public:

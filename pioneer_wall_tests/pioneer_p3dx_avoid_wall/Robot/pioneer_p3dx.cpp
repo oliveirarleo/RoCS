@@ -13,18 +13,32 @@ extern "C"
 
 PioneerP3DX::PioneerP3DX()
 	:Robot("Pioneer_p3dx"), connection(knowledge.getConnection()), range_sensors(),
-	 orientation_sensor(connection), position_sensor(connection), wheels(), range_monitor(knowledge),
+	 orientation_sensor(connection), position_sensor(connection), wheels(), wheel_ptrs(), range_monitor(knowledge),
 	 position_monitor(knowledge), orientation_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
 	 orientation_analyze(knowledge), planner(knowledge, position_analyze, orientation_analyze)
 {
 	verifyConnection();
-	connectToRobot();
 
-	setMonitors();
-	setAnalyzes();
-	setPlan();
-	setExecute();
-	setReactiveModels();
+	int robot_handle = -1;
+	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &robot_handle,
+	                        (simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
+	{
+		std::cout << "Connected to robot: " << name << " handle: " << robot_handle << std::endl;
+		connection.setRobotHandle(robot_handle);
+		setSensors();
+		setActuators();
+
+		setMonitors();
+		setAnalyzes();
+		setPlan();
+		setExecute();
+		setReactiveModels();
+	}
+	else
+	{
+		std::cout << "Could not connect to robot: " << name << std::endl;
+		exit(1);
+	}
 }
 
 
@@ -62,26 +76,6 @@ void PioneerP3DX::verifyConnection()
 	}
 }
 
-void PioneerP3DX::connectToRobot()
-{
-	int robot_handle = -1;
-	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) name.c_str(), (simxInt *) &robot_handle,
-	                        (simxInt) simx_opmode_oneshot_wait) == simx_return_ok)
-	{
-		std::cout << "Connected to robot: " << name << " handle: " << robot_handle << std::endl;
-		connection.setRobotHandle(robot_handle);
-		connectToSonars();
-		connectToWheels();
-		connectToOrientationSensor();
-		connectToPositionSensor();
-
-	}
-	else
-	{
-		std::cout << "Could not connect to robot: " << name << std::endl;
-		exit(1);
-	}
-}
 
 void PioneerP3DX::connectToSonars()
 {
@@ -119,6 +113,23 @@ void PioneerP3DX::connectToWheels()
 	wheels.emplace_back(right_wheel_name, connection);
 }
 
+void PioneerP3DX::setSensors()
+{
+	connectToSonars();
+	connectToOrientationSensor();
+	connectToPositionSensor();
+}
+
+
+void PioneerP3DX::setActuators()
+{
+	connectToWheels();
+	wheel_ptrs.push_back(&wheels[0]);
+	wheel_ptrs.push_back(&wheels[1]);
+	actuators.push_back(wheel_ptrs);
+
+}
+
 void PioneerP3DX::setMonitors()
 {
 	for(RangeVREPSensor &s : range_sensors)
@@ -144,7 +155,7 @@ void PioneerP3DX::setPlan()
 
 void PioneerP3DX::setExecute()
 {
-
+	execute.setActuators(actuators);
 }
 
 void PioneerP3DX::setReactiveModels()

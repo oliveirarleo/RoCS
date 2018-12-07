@@ -19,9 +19,11 @@ protected:
 
 	Execute execute;
 
+	std::vector< std::vector< Actuator* > > actuators;
+
 public:
 	explicit Robot(std::string name_)
-		:name(std::move(name_)), knowledge(), execute(knowledge)
+		:name(std::move(name_)), knowledge(), execute(knowledge), actuators()
 	{
 	}
 };

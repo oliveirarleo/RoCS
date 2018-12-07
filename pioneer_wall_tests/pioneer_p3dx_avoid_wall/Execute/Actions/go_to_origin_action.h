@@ -12,14 +12,19 @@
 class GoToOriginAction : public Action
 {
 private:
-	WheelVREP &left_wheel;
-	WheelVREP &right_wheel;
-	Pipeline &pipeline;
+	WheelVREP* left_wheel;
+	WheelVREP* right_wheel;
 
 public:
-	GoToOriginAction(const std::string &name_, double value_, WheelVREP &left_wheel, WheelVREP &right_wheel, Pipeline &pipeline);
+	GoToOriginAction(const std::string &name_, double value_, Pipeline &pipeline_);
+
+	void setActuators(std::vector<std::vector< Actuator* > > &actuators) override;
+
+	void act() override;
 
 };
+
+
 
 
 #endif //PIONEER_GO_TO_ORIGIN_ACTION_H

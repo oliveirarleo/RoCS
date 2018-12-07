@@ -32,11 +32,31 @@ set(SOURCES
         pioneer_p3dx_avoid_wall/Knowledge/avoid_wall_model.cpp
         pioneer_p3dx_avoid_wall/Knowledge/p3dx_knowledge.cpp
 
-        pioneer_p3dx_avoid_wall/Robot/pioneer_p3dx.cpp
 
         main.cpp
 
-        pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.cpp pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.h pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.cpp pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.h pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.cpp pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.h pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.cpp pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.h pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.cpp pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.h pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.cpp pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.h pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.cpp pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.h pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.cpp pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.h)
+        pioneer_p3dx_avoid_wall/Robot/pioneer_p3dx.cpp
+
+        pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.cpp
+        pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.h
+        pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.cpp
+        pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.h
+        pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.cpp
+        pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.h
+
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.cpp
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.h
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.cpp
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.h
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.cpp
+        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.h
+
+        pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.cpp
+        pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.h
+
+        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.cpp
+        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.h
+        )
 
 find_package(Threads)
 

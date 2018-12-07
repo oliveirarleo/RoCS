@@ -9,17 +9,23 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include <ostream>
 #include <Actuators/actuator.h>
+
+class Pipeline;
 
 class Action
 {
 protected:
 	std::string name;
 	double value;
+	Pipeline &pipeline;
+	std::vector< std::vector< Actuator*  > >	actuators;
+
 
 public:
-	Action(std::string name_, double value_):name(std::move(name_)), value(value_)
+	Action(std::string name_, double value_, Pipeline &pipeline_):name(std::move(name_)), value(value_), pipeline(pipeline_), actuators()
 	{
 	}
 
@@ -31,6 +37,11 @@ public:
 	double getValue() const
 	{
 		return value;
+	}
+
+	virtual void setActuators(std::vector< std::vector< Actuator* > > &actuators)
+	{
+		Action::actuators = actuators;
 	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Action &action)
