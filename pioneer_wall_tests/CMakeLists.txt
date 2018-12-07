@@ -54,9 +54,9 @@ set(SOURCES
         pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.cpp
         pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.h
 
-        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.cpp
-        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_origin_action.h
-        )
+        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.cpp
+        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.h
+        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.cpp pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.h pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.cpp pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.h)
 
 find_package(Threads)
 

@@ -20,12 +20,12 @@ class Action
 protected:
 	std::string name;
 	double value;
-	Pipeline &pipeline;
+	Pipeline *pipeline;
 	std::vector< std::vector< Actuator*  > >	actuators;
 
 
 public:
-	Action(std::string name_, double value_, Pipeline &pipeline_):name(std::move(name_)), value(value_), pipeline(pipeline_), actuators()
+	Action(std::string name_, double value_, Pipeline *pipeline_):name(std::move(name_)), value(value_), pipeline(pipeline_), actuators()
 	{
 	}
 
@@ -46,7 +46,7 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &os, const Action &action)
 	{
-		os << "value: " << action.value;
+		os << action.name << ", " << action.value;
 		return os;
 	}
 

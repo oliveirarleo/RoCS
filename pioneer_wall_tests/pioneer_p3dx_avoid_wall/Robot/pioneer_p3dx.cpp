@@ -59,7 +59,7 @@ void PioneerP3DX::run()
 
 	planner.startThread();
 
-	std::this_thread::sleep_for(std::chrono::seconds(10));
+	std::this_thread::sleep_for(std::chrono::seconds(150));
 
 }
 

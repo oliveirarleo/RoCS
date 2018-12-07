@@ -15,6 +15,8 @@ class GoToOriginPlanner : public Planner
 private:
 	PassVREPPosition &position_analyze;
 	PassVREPOrientation &orientation_analyze;
+	int state;
+	Position destination;
 
 public:
 	GoToOriginPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze);

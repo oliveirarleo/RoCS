@@ -9,14 +9,19 @@
 #include <Execute/action.h>
 #include "../../Actuators/wheel_vrep.h"
 
-class GoToOriginAction : public Action
+class GoToPosition : public Action
 {
 private:
 	WheelVREP* left_wheel;
 	WheelVREP* right_wheel;
+	Position position;
+	Orientation orientation;
+	Position origin;
+	double angle_threshold;
+	double distance_threshold;
 
 public:
-	GoToOriginAction(const std::string &name_, double value_, Pipeline &pipeline_);
+	GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_, Position position_, Orientation orientation_, Position destination);
 
 	void setActuators(std::vector<std::vector< Actuator* > > &actuators) override;
 

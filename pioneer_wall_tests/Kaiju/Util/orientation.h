@@ -14,13 +14,13 @@ class Orientation
 private:
 	double alpha;
 	double beta;
-	double gama;
+	double gamma;
 	bool valid;
 
 public:
-	Orientation(double alpha_, double beta_, double gama_)
+	Orientation(double alpha_, double beta_, double gamma_)
 	{
-		if (gama_ > 3.14 || gama_ < -3.14)
+		if (gamma_ > 3.14 || gamma_ < -3.14)
 		{
 			valid = false;
 		}
@@ -29,12 +29,28 @@ public:
 		{
 			alpha = alpha_;
 			beta = beta_;
-			gama = gama_;
+			gamma = gamma_;
 			valid = true;
 		}
 	}
 
-	Orientation() : alpha(0), beta(0), gama(0), valid(false)
+	Orientation(double alpha_, double beta_, double gamma_, bool valid_)
+	{
+		if (gamma_ > 3.14 || gamma_ < -3.14)
+		{
+			valid = false;
+		}
+
+		else
+		{
+			alpha = alpha_;
+			beta = beta_;
+			gamma = gamma_;
+			valid = valid_;
+		}
+	}
+
+	Orientation() : alpha(0), beta(0), gamma(0), valid(false)
 	{
 	}
 
@@ -49,7 +65,7 @@ public:
 		{
 			alpha = alpha_;
 			beta = beta_;
-			gama = gama_;
+			gamma = gama_;
 			valid = true;
 		}
 	}
@@ -74,14 +90,14 @@ public:
 		Orientation::beta = beta;
 	}
 
-	double getGama() const
+	double getGamma() const
 	{
-		return gama;
+		return gamma;
 	}
 
-	void setGama(double gama)
+	void setGamma(double gama)
 	{
-		Orientation::gama = gama;
+		Orientation::gamma = gama;
 	}
 
 	bool isValid() const
@@ -94,9 +110,21 @@ public:
 		Orientation::valid = valid;
 	}
 
+	Orientation operator+(Orientation &pos)
+	{
+		return Orientation(this->alpha + pos.getAlpha(), this->beta + pos.getBeta(), this->gamma + pos.getGamma(),this->valid && pos.isValid());
+	}
+
+
+	Orientation operator-(Orientation &pos)
+	{
+		return Orientation(this->alpha - pos.getAlpha(), this->beta - pos.getBeta(), this->gamma - pos.getGamma(), this->valid && pos.isValid());
+	}
+
+
 	friend std::ostream &operator<<(std::ostream &os, const Orientation &angle)
 	{
-		os << "alpha: " << angle.alpha << " beta: " << angle.beta << " gama: " << angle.gama << " valid: " << angle.valid;
+		os << "alpha: " << angle.alpha << " beta: " << angle.beta << " gamma: " << angle.gamma << " valid: " << angle.valid;
 		return os;
 	}
 };

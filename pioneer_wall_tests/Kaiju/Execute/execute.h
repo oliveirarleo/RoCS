@@ -53,8 +53,8 @@ public:
 			if (pipeline.next(&action) && action)
 			{
 				action->setActuators(actuators);
+//				std::cout << "Act! " << *action << "\n";
 				action->act();
-				action = nullptr;
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(waiting_time));
 		}
