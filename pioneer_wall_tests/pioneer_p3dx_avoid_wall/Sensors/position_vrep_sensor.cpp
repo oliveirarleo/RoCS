@@ -25,7 +25,7 @@ void PositionVREPSensor::connect(int handle_)
 	simxGetObjectPosition(connection.getClientId(), handle, -1, position, simx_opmode_streaming);
 	while (simxGetObjectPosition(connection.getClientId(), handle, -1, position, simx_opmode_buffer) != simx_return_ok)
 	{
-		std::cout << "Waiting to connect to " << name << std::endl;
+//		std::cout << "Waiting to connect to " << name << std::endl;
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 	float pos[3] = {0};

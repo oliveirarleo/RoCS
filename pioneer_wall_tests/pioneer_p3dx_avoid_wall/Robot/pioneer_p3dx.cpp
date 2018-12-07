@@ -44,7 +44,6 @@ PioneerP3DX::PioneerP3DX()
 
 void PioneerP3DX::run()
 {
-	std::cout << "rodando\n";
 	range_monitor.startThread();
 	position_monitor.startThread();
 	orientation_monitor.startThread();
@@ -59,7 +58,10 @@ void PioneerP3DX::run()
 
 	planner.startThread();
 
-	std::this_thread::sleep_for(std::chrono::seconds(150));
+
+	std::cout << "Threads running...\n";
+
+	std::this_thread::sleep_for(std::chrono::seconds(15));
 
 }
 
@@ -92,7 +94,7 @@ void PioneerP3DX::connectToOrientationSensor()
 	orientation_sensor.connect(connection.getRobotHandle());
 	Orientation robot_orientation;
 	orientation_sensor.getData(robot_orientation);
-	std::cout << "First Ori: " << robot_orientation << std::endl;
+//	std::cout << "First Ori: " << robot_orientation << std::endl;
 }
 
 void PioneerP3DX::connectToPositionSensor()
@@ -100,7 +102,7 @@ void PioneerP3DX::connectToPositionSensor()
 	position_sensor.connect(connection.getRobotHandle());
 	Position robot_position;
 	position_sensor.getData(robot_position);
-	std::cout << "First Pos: " << robot_position << std::endl;
+//	std::cout << "First Pos: " << robot_position << std::endl;
 }
 
 void PioneerP3DX::connectToWheels()

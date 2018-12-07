@@ -26,15 +26,11 @@ set(SOURCES
 
         pioneer_p3dx_avoid_wall/Connection/connection.cpp
 
+        pioneer_p3dx_avoid_wall/Robot/pioneer_p3dx.cpp
 
         pioneer_p3dx_avoid_wall/Knowledge/pioneer_p3dx_model.cpp
         pioneer_p3dx_avoid_wall/Knowledge/avoid_wall_model.cpp
         pioneer_p3dx_avoid_wall/Knowledge/p3dx_knowledge.cpp
-
-
-        main.cpp
-
-        pioneer_p3dx_avoid_wall/Robot/pioneer_p3dx.cpp
 
         pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.cpp
         pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.h
@@ -55,7 +51,13 @@ set(SOURCES
 
         pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.cpp
         pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.h
-        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.cpp pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.h pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.cpp pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.h)
+        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.cpp
+        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.h
+        pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.cpp
+        pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.h
+
+        main.cpp
+        )
 
 find_package(Threads)
 

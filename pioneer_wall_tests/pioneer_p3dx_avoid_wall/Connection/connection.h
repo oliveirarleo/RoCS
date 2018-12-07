@@ -43,6 +43,9 @@ public:
 	int getRobotHandle() const;
 
 	void setRobotHandle(int robot_handle);
+
+	void stopSimulation();
+
 };
 
 #endif // PIONEER_CONNECTION_H_

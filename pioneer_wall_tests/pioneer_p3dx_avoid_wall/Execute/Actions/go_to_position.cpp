@@ -45,13 +45,13 @@ void GoToPosition::act()
 
 		if (res.abs() < distance_threshold)
 		{
-			std::cout << "stop\n";
+//			std::cout << "stop\n";
 			std::shared_ptr<Action> stop(new SetWheelsSpeed("Stop", 1, pipeline, 0, 0));
 			pipeline->push(stop);
 		}
 		else if (angle_difference > angle_threshold)
 		{
-			std::cout << "turning clock " << angle_difference << " \n";
+//			std::cout << "turning clock " << angle_difference << " \n";
 			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, true));
 			pipeline->push(turn_to_angle);
 		}
@@ -63,7 +63,7 @@ void GoToPosition::act()
 		}
 		else
 		{
-			std::cout << "go ahead\n";
+//			std::cout << "go ahead\n";
 			std::shared_ptr<Action> go_ahead(new SetWheelsSpeed("GoAhead", 1, pipeline, 1, 1));
 			pipeline->push(go_ahead);
 		}

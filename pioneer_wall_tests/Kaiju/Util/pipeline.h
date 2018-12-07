@@ -19,44 +19,39 @@ class Pipeline
 protected:
 	std::deque<std::shared_ptr<Action> > actions;
 	std::mutex mu;
-	std::unique_lock<std::mutex> ul;
+//	std::unique_lock<std::mutex> ul;
 	double top_value;
 
 public:
 	Pipeline()
-		:actions{}, mu{}, ul{mu, std::defer_lock}, top_value(0)
+		:actions{}, mu{}, top_value(0)
 	{
 	}
 
-	void push(std::shared_ptr<Action> action)
+	void push(const std::shared_ptr<Action> &action)
 	{
-		if (ul.try_lock())
-		{
+		std::lock_guard<std::mutex> lg(mu);
 //			std::cout << "Pushing " << *action << "\n";
-			actions.push_back(action);
-			ul.unlock();
-		}
+		actions.push_back(action);
+
 	}
 
 	bool next(std::shared_ptr<Action> *action)
 	{
-		if (ul.try_lock())
+		std::lock_guard<std::mutex> lg(mu);
+		if (!actions.empty())
 		{
-			if (!actions.empty())
-			{
-				*action = actions.front();
-				actions.pop_front();
+			*action = actions.front();
+			actions.pop_front();
 //						if (!actions.empty())
 //							top_value = actions[0].getValue();
 //						else
 //							top_value = 0;
-				ul.unlock();
-				return true;
-			}
-			ul.unlock();
+			return true;
 		}
 		return false;
 	}
+
 
 	bool isEmpty()
 	{
