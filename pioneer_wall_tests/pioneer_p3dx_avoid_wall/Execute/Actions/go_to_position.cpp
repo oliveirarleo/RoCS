@@ -8,7 +8,7 @@
 #include "set_wheels_speed.h"
 
 GoToPosition::GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_,
-                       Position position_, Orientation orientation_, Position destination)
+                           Position position_, Orientation orientation_, Position destination)
 	:Action(name_, value_, pipeline_), left_wheel(nullptr), right_wheel(nullptr), position(position_),
 	 orientation(orientation_), origin(destination), angle_threshold(0.1), distance_threshold(0.1)
 {
@@ -34,7 +34,7 @@ void GoToPosition::act()
 		{
 			angle_difference += 2 * M_PI;
 		}
-		else if(angle_difference > M_PI)
+		else if (angle_difference > M_PI)
 		{
 			angle_difference -= 2 * M_PI;
 		}
@@ -51,7 +51,7 @@ void GoToPosition::act()
 		}
 		else if (angle_difference > angle_threshold)
 		{
-			std::cout << "turning clock " << angle_difference <<" \n";
+			std::cout << "turning clock " << angle_difference << " \n";
 			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, true));
 			pipeline->push(turn_to_angle);
 		}

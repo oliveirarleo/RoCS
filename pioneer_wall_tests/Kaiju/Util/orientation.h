@@ -6,7 +6,6 @@
 #define PIONEER_ORIENTATION_H
 
 
-
 #include <ostream>
 
 class Orientation
@@ -50,7 +49,7 @@ public:
 		}
 	}
 
-	Orientation() : alpha(0), beta(0), gamma(0), valid(false)
+	Orientation():alpha(0), beta(0), gamma(0), valid(false)
 	{
 	}
 
@@ -112,13 +111,15 @@ public:
 
 	Orientation operator+(Orientation &pos)
 	{
-		return Orientation(this->alpha + pos.getAlpha(), this->beta + pos.getBeta(), this->gamma + pos.getGamma(),this->valid && pos.isValid());
+		return Orientation(this->alpha + pos.getAlpha(), this->beta + pos.getBeta(), this->gamma + pos.getGamma(),
+		                   this->valid && pos.isValid());
 	}
 
 
 	Orientation operator-(Orientation &pos)
 	{
-		return Orientation(this->alpha - pos.getAlpha(), this->beta - pos.getBeta(), this->gamma - pos.getGamma(), this->valid && pos.isValid());
+		return Orientation(this->alpha - pos.getAlpha(), this->beta - pos.getBeta(), this->gamma - pos.getGamma(),
+		                   this->valid && pos.isValid());
 	}
 
 

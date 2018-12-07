@@ -35,8 +35,7 @@ private:
 
 	//	ACTUATORS
 	std::vector<WheelVREP> wheels;
-	std::vector<Actuator*> wheel_ptrs;
-
+	std::vector<Actuator *> wheel_ptrs;
 
 
 	//	MONITORS

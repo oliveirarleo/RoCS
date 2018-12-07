@@ -21,7 +21,7 @@ protected:
 
 public:
 	Odometer(double weight_, Position position_, double bandwidth_, double scan_interval_, double resolution_,
-					 std::vector<Tire> tires_) :
+	         std::vector<Tire> tires_):
 		Sensor(weight_, position_, bandwidth_)
 	{
 		scan_interval = scan_interval_;

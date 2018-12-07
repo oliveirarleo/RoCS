@@ -6,14 +6,15 @@
 #include "../Execute/Actions/go_to_position.h"
 
 GoToOriginPlanner::GoToOriginPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze)
-	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze), state(1), destination(2, 2, 0.1387)
-
+	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze), state(1),
+	 destination(2, 2, 0.1387)
 {
 }
 
 GoToOriginPlanner::GoToOriginPlanner(Knowledge &knowledge, Pipeline *pipeline, PassVREPPosition &position_analyze_,
                                      PassVREPOrientation &orientation_analyze_)
-	:Planner(knowledge, pipeline), position_analyze(position_analyze_), orientation_analyze(orientation_analyze_), state(1), destination(2, 2, 0.1387)
+	:Planner(knowledge, pipeline), position_analyze(position_analyze_), orientation_analyze(orientation_analyze_),
+	 state(1), destination(2, 2, 0.1387)
 {
 }
 

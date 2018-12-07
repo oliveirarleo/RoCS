@@ -17,7 +17,6 @@ ENDIF (CMAKE_COMPILER_IS_GNUCC)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
 
-
 set(SOURCES
         pioneer_p3dx_avoid_wall/Actuators/wheel_vrep.cpp
 

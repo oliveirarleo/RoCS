@@ -21,11 +21,12 @@ protected:
 	std::thread *reactive_model_thread;
 
 public:
-	ReactiveModel() : pipeline(nullptr), running(false), waiting_time(50), reactive_model_thread(nullptr)
+	ReactiveModel():pipeline(nullptr), running(false), waiting_time(50), reactive_model_thread(nullptr)
 	{
 	}
 
-	explicit ReactiveModel(Pipeline *pipeline) : pipeline(pipeline), running(false), waiting_time(50), reactive_model_thread(nullptr)
+	explicit ReactiveModel(Pipeline *pipeline):pipeline(pipeline), running(false), waiting_time(50),
+	                                           reactive_model_thread(nullptr)
 	{
 	}
 

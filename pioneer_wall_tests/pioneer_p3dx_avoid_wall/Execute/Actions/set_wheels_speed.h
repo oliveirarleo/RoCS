@@ -12,8 +12,8 @@
 class SetWheelsSpeed : public Action
 {
 private:
-	WheelVREP* left_wheel;
-	WheelVREP* right_wheel;
+	WheelVREP *left_wheel;
+	WheelVREP *right_wheel;
 
 	double left_wheel_speed;
 	double right_wheel_speed;
@@ -21,7 +21,7 @@ private:
 public:
 	SetWheelsSpeed(const std::string &name_, double value_, Pipeline *pipeline_, double left_wheel_speed_, double right_wheel_speed_);
 
-	void setActuators(std::vector<std::vector< Actuator* > > &actuators) override;
+	void setActuators(std::vector<std::vector<Actuator *> > &actuators) override;
 
 	void act() override;
 };

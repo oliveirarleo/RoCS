@@ -21,7 +21,7 @@ protected:
 
 public:
 	Accelerometer(double weight_, Position position_, double bandwidth_, int number_of_axes_, double output_range_,
-								double sensitivity_, double zero_g_offset_, double measurement_range_) :
+	              double sensitivity_, double zero_g_offset_, double measurement_range_):
 		Sensor(weight_, position_, bandwidth_)
 	{
 		number_of_axes = number_of_axes_;

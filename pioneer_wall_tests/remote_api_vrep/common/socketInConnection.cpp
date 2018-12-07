@@ -3,7 +3,7 @@
 #define HEADER_LENGTH 6 // byte1=id1, byte2=id2, byte3+byte4=packetSize, byte5+byte6=packetsLeftToRead
 
 CSocketInConnection::CSocketInConnection(int theConnectionPort, unsigned short maxPacketSize/*=250*/,
-																				 char headerID1/*=59*/, char headerID2/*=57*/)
+                                         char headerID1/*=59*/, char headerID2/*=57*/)
 {
 	_socketConnectionPort = theConnectionPort;
 	_socketConnectWasOk = false;

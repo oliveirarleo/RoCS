@@ -31,7 +31,7 @@ std::vector<CLuaFunctionDataItem> *CLuaFunctionData::getOutDataPtr_luaFunctionCa
 }
 
 bool CLuaFunctionData::readDataFromLua(const SLuaCallBack *p, const int *expectedArguments, int requiredArgumentCount,
-																			 const char *functionName)
+                                       const char *functionName)
 {
 	// use this when reading data from Lua from inside of a custom Lua function call
 	_inData.clear();
@@ -80,7 +80,7 @@ bool CLuaFunctionData::readDataFromLua(const SLuaCallBack *p, const int *expecte
 		if (!done)
 		{
 			if (p->inputArgTypeAndSize[i * 2 + 0] !=
-					((expectedArguments[1 + i * 2 + 0] | SIM_LUA_ARG_NIL_ALLOWED) - SIM_LUA_ARG_NIL_ALLOWED))
+			    ((expectedArguments[1 + i * 2 + 0] | SIM_LUA_ARG_NIL_ALLOWED) - SIM_LUA_ARG_NIL_ALLOWED))
 			{
 				std::ostringstream str;
 				str << "Argument " << i + 1 << " is not correct.";
@@ -90,7 +90,7 @@ bool CLuaFunctionData::readDataFromLua(const SLuaCallBack *p, const int *expecte
 			if (p->inputArgTypeAndSize[i * 2 + 0] & sim_lua_arg_table)
 			{ // we have a table
 				if ((p->inputArgTypeAndSize[i * 2 + 1] < expectedArguments[1 + i * 2 + 1]) &&
-						(expectedArguments[1 + i * 2 + 1] != 0))
+				    (expectedArguments[1 + i * 2 + 1] != 0))
 				{
 					std::ostringstream str;
 					str << "Argument " << i + 1 << " is not correct (wrong table size).";
@@ -208,7 +208,7 @@ bool CLuaFunctionData::readDataFromLua(const SLuaCallBack *p, const int *expecte
 				if (t == sim_lua_arg_charbuff)
 				{
 					if ((p->inputArgTypeAndSize[i * 2 + 1] < expectedArguments[1 + i * 2 + 1]) &&
-							(expectedArguments[1 + i * 2 + 1] != 0))
+					    (expectedArguments[1 + i * 2 + 1] != 0))
 					{
 						std::ostringstream str;
 						str << "Argument " << i + 1 << " is not correct (wrong buffer size).";
@@ -229,7 +229,7 @@ bool CLuaFunctionData::readDataFromLua(const SLuaCallBack *p, const int *expecte
 }
 
 bool CLuaFunctionData::readDataFromLua_luaFunctionCall(const SLuaCallBack *p, const int *expectedArguments,
-																											 int requiredArgumentCount, const char *functionName)
+                                                       int requiredArgumentCount, const char *functionName)
 {
 	// use this when reading data returned from a Lua function call from a plugin
 	_outData.clear();
@@ -278,7 +278,7 @@ bool CLuaFunctionData::readDataFromLua_luaFunctionCall(const SLuaCallBack *p, co
 		if (!done)
 		{
 			if (p->outputArgTypeAndSize[i * 2 + 0] !=
-					((expectedArguments[1 + i * 2 + 0] | SIM_LUA_ARG_NIL_ALLOWED) - SIM_LUA_ARG_NIL_ALLOWED))
+			    ((expectedArguments[1 + i * 2 + 0] | SIM_LUA_ARG_NIL_ALLOWED) - SIM_LUA_ARG_NIL_ALLOWED))
 			{
 				std::ostringstream str;
 				str << "Return argument " << i + 1 << " is not correct.";
@@ -288,7 +288,7 @@ bool CLuaFunctionData::readDataFromLua_luaFunctionCall(const SLuaCallBack *p, co
 			if (p->outputArgTypeAndSize[i * 2 + 0] & sim_lua_arg_table)
 			{ // we have a table
 				if ((p->outputArgTypeAndSize[i * 2 + 1] < expectedArguments[1 + i * 2 + 1]) &&
-						(expectedArguments[1 + i * 2 + 1] != 0))
+				    (expectedArguments[1 + i * 2 + 1] != 0))
 				{
 					std::ostringstream str;
 					str << "Return argument " << i + 1 << " is not correct (wrong table size).";
@@ -406,7 +406,7 @@ bool CLuaFunctionData::readDataFromLua_luaFunctionCall(const SLuaCallBack *p, co
 				if (t == sim_lua_arg_charbuff)
 				{
 					if ((p->outputArgTypeAndSize[i * 2 + 1] < expectedArguments[1 + i * 2 + 1]) &&
-							(expectedArguments[1 + i * 2 + 1] != 0))
+					    (expectedArguments[1 + i * 2 + 1] != 0))
 					{
 						std::ostringstream str;
 						str << "Return argument " << i + 1 << " is not correct (wrong buffer size).";
@@ -416,7 +416,7 @@ bool CLuaFunctionData::readDataFromLua_luaFunctionCall(const SLuaCallBack *p, co
 					else
 					{
 						CLuaFunctionDataItem dat(p->outputCharBuff + charBuffArgInd,
-																		 p->outputArgTypeAndSize[i * 2 + 1]);
+						                         p->outputArgTypeAndSize[i * 2 + 1]);
 						charBuffArgInd += p->outputArgTypeAndSize[i * 2 + 1];
 						_outData.push_back(dat);
 					}

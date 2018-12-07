@@ -69,7 +69,7 @@ public:
 
 	bool close(double x_, double y_, double threshold)
 	{
-		return ((fabs(x - x_) < threshold)  && (fabs(y - y_) < threshold));
+		return ((fabs(x - x_) < threshold) && (fabs(y - y_) < threshold));
 	}
 
 	double abs()
@@ -81,16 +81,16 @@ public:
 	{
 		if (this->x > 0)
 			return atan(this->y / this->x);
-		else if(this->x < 0)
+		else if (this->x < 0)
 		{
-			if(this->y >= 0)
+			if (this->y >= 0)
 				return (atan(this->y / this->x) + M_PI);
 			else
 				return (atan(this->y / this->x) - M_PI);
 		}
 		else
 		{
-			if(this->y > 0)
+			if (this->y > 0)
 				return -M_PI_2;
 			else
 				return M_PI_2;

@@ -8,7 +8,7 @@
 
 #include <Analyze/analyze.h>
 
-class PassVREPRange : public Analyze<std::vector< Position >, std::vector< Position >>
+class PassVREPRange : public Analyze<std::vector<Position>, std::vector<Position >>
 {
 public:
 	explicit PassVREPRange(Knowledge &knowledge_);

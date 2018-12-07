@@ -21,19 +21,19 @@ std::vector<CScriptFunctionDataItem> *CScriptFunctionData::getOutDataPtr_scriptF
 }
 
 bool CScriptFunctionData::readDataFromStack(int stackHandle, const int *expectedArguments, int requiredArgumentCount,
-																						const char *functionName)
+                                            const char *functionName)
 {  // use this when reading data from a script from inside of a custom script function call
 	bool retVal = _readData(stackHandle, expectedArguments, requiredArgumentCount, functionName, "arguments.",
-													"Argument ", _inData);
+	                        "Argument ", _inData);
 	simPopStackItem(stackHandle, 0); // clears the stack (which will serve as return value container from now)
 	return (retVal);
 }
 
 bool CScriptFunctionData::readDataFromStack_scriptFunctionCall(int stackHandle, const int *expectedArguments,
-																															 int requiredArgumentCount, const char *functionName)
+                                                               int requiredArgumentCount, const char *functionName)
 {   // use this when reading data returned from a Lua function call from a plugin
 	bool retVal = _readData(stackHandle, expectedArguments, requiredArgumentCount, functionName, "return arguments.",
-													"Return argument ", _outData);
+	                        "Return argument ", _outData);
 	simPopStackItem(stackHandle, 0); // clears the stack
 	return (retVal);
 }
@@ -59,8 +59,8 @@ void CScriptFunctionData::writeDataToStack_scriptFunctionCall(int stackHandle)
 }
 
 bool CScriptFunctionData::_readData(int stack, const int *expectedArguments, int requiredArgumentCount,
-																		const char *functionName, const char *argumentText1, const char *argumentText2,
-																		std::vector<CScriptFunctionDataItem> &inOutData)
+                                    const char *functionName, const char *argumentText1, const char *argumentText2,
+                                    std::vector<CScriptFunctionDataItem> &inOutData)
 {  // use this when reading data from a script from inside of a custom script function call
 	inOutData.clear();
 	int argCnt = simGetStackSize(stack);
@@ -431,7 +431,7 @@ void CScriptFunctionData::_writeData(int stack, std::vector<CScriptFunctionDataI
 				if (inOutData[i].doubleData.size() > 0)
 				{
 					simPushDoubleTableOntoStack(stack, &inOutData[i].doubleData[0],
-																			int(inOutData[i].doubleData.size()));
+					                            int(inOutData[i].doubleData.size()));
 				}
 				else
 				{
@@ -445,7 +445,7 @@ void CScriptFunctionData::_writeData(int stack, std::vector<CScriptFunctionDataI
 				{
 					simPushInt32OntoStack(stack, (int) j + 1); // the key
 					simPushStringOntoStack(stack, inOutData[i].stringData[j].c_str(),
-																 (int) inOutData[i].stringData[j].length()); // the value
+					                       (int) inOutData[i].stringData[j].length()); // the value
 					simInsertDataIntoStackTable(stack);
 				}
 			}
@@ -475,7 +475,7 @@ void CScriptFunctionData::_writeData(int stack, std::vector<CScriptFunctionDataI
 			if ((inOutData[i].getType() == 3) || (inOutData[i].getType() == 4))
 			{
 				simPushStringOntoStack(stack, inOutData[i].stringData[0].c_str(),
-															 (int) inOutData[i].stringData[0].length());
+				                       (int) inOutData[i].stringData[0].length());
 			}
 		}
 	}

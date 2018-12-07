@@ -22,23 +22,23 @@ AvoidWallModel::AvoidWallModel(Pipeline *pipeline)
 
 void AvoidWallModel::react()
 {
-		int count = 0;
-		for (int i = 2; i < 7; ++i)
-		{
-			Position coord;
+	int count = 0;
+	for (int i = 2; i < 7; ++i)
+	{
+		Position coord;
 //			sonars[i].getData(coord);
-			double dist = coord.getZ();
-			if (coord.isValid() && (dist < 0.8))
-			{
-				count++;
-			}
-		}
-
-		if (count > 3)
+		double dist = coord.getZ();
+		if (coord.isValid() && (dist < 0.8))
 		{
+			count++;
+		}
+	}
+
+	if (count > 3)
+	{
 //			AvoidWall aw{15, knowledge, wheels, sonars};
 //			pipeline.push(&aw);
-		}
+	}
 
 }
 

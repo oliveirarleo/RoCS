@@ -163,23 +163,23 @@ public:
 	inline void setMultResult(const C4X4Matrix &m1, const C4X4Matrix &m2)
 	{ // Use this routine to avoid temporary variables
 		M.axis[0](0) = m1.M.axis[0](0) * m2.M.axis[0](0) + m1.M.axis[1](0) * m2.M.axis[0](1) +
-									 m1.M.axis[2](0) * m2.M.axis[0](2);
+		               m1.M.axis[2](0) * m2.M.axis[0](2);
 		M.axis[0](1) = m1.M.axis[0](1) * m2.M.axis[0](0) + m1.M.axis[1](1) * m2.M.axis[0](1) +
-									 m1.M.axis[2](1) * m2.M.axis[0](2);
+		               m1.M.axis[2](1) * m2.M.axis[0](2);
 		M.axis[0](2) = m1.M.axis[0](2) * m2.M.axis[0](0) + m1.M.axis[1](2) * m2.M.axis[0](1) +
-									 m1.M.axis[2](2) * m2.M.axis[0](2);
+		               m1.M.axis[2](2) * m2.M.axis[0](2);
 		M.axis[1](0) = m1.M.axis[0](0) * m2.M.axis[1](0) + m1.M.axis[1](0) * m2.M.axis[1](1) +
-									 m1.M.axis[2](0) * m2.M.axis[1](2);
+		               m1.M.axis[2](0) * m2.M.axis[1](2);
 		M.axis[1](1) = m1.M.axis[0](1) * m2.M.axis[1](0) + m1.M.axis[1](1) * m2.M.axis[1](1) +
-									 m1.M.axis[2](1) * m2.M.axis[1](2);
+		               m1.M.axis[2](1) * m2.M.axis[1](2);
 		M.axis[1](2) = m1.M.axis[0](2) * m2.M.axis[1](0) + m1.M.axis[1](2) * m2.M.axis[1](1) +
-									 m1.M.axis[2](2) * m2.M.axis[1](2);
+		               m1.M.axis[2](2) * m2.M.axis[1](2);
 		M.axis[2](0) = m1.M.axis[0](0) * m2.M.axis[2](0) + m1.M.axis[1](0) * m2.M.axis[2](1) +
-									 m1.M.axis[2](0) * m2.M.axis[2](2);
+		               m1.M.axis[2](0) * m2.M.axis[2](2);
 		M.axis[2](1) = m1.M.axis[0](1) * m2.M.axis[2](0) + m1.M.axis[1](1) * m2.M.axis[2](1) +
-									 m1.M.axis[2](1) * m2.M.axis[2](2);
+		               m1.M.axis[2](1) * m2.M.axis[2](2);
 		M.axis[2](2) = m1.M.axis[0](2) * m2.M.axis[2](0) + m1.M.axis[1](2) * m2.M.axis[2](1) +
-									 m1.M.axis[2](2) * m2.M.axis[2](2);
+		               m1.M.axis[2](2) * m2.M.axis[2](2);
 		X(0) = m1.M.axis[0](0) * m2.X(0) + m1.M.axis[1](0) * m2.X(1) + m1.M.axis[2](0) * m2.X(2) + m1.X(0);
 		X(1) = m1.M.axis[0](1) * m2.X(0) + m1.M.axis[1](1) * m2.X(1) + m1.M.axis[2](1) * m2.X(2) + m1.X(1);
 		X(2) = m1.M.axis[0](2) * m2.X(0) + m1.M.axis[1](2) * m2.X(1) + m1.M.axis[2](2) * m2.X(2) + m1.X(2);
@@ -222,8 +222,8 @@ public:
 	{
 		// Speed optimized version:
 		return (C3Vector(M.axis[0](0) * v(0) + M.axis[1](0) * v(1) + M.axis[2](0) * v(2) + X(0),
-										 M.axis[0](1) * v(0) + M.axis[1](1) * v(1) + M.axis[2](1) * v(2) + X(1),
-										 M.axis[0](2) * v(0) + M.axis[1](2) * v(1) + M.axis[2](2) * v(2) + X(2)));
+		                 M.axis[0](1) * v(0) + M.axis[1](1) * v(1) + M.axis[2](1) * v(2) + X(1),
+		                 M.axis[0](2) * v(0) + M.axis[1](2) * v(1) + M.axis[2](2) * v(2) + X(2)));
 		// Normal version:
 		//  return(C3Vector((M*v)+X));
 	}

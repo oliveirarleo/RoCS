@@ -147,7 +147,7 @@ public:
 	inline bool isValid() const
 	{
 		return ((VREP_IS_FINITE(data[0]) != 0) && (VREP_IS_FINITE(data[1]) != 0) && (VREP_IS_FINITE(data[2]) != 0) &&
-						(VREP_IS_NAN(data[0]) == 0) && (VREP_IS_NAN(data[1]) == 0) && (VREP_IS_NAN(data[2]) == 0));
+		        (VREP_IS_NAN(data[0]) == 0) && (VREP_IS_NAN(data[1]) == 0) && (VREP_IS_NAN(data[2]) == 0));
 	}
 
 	inline void set(float v0, float v1, float v2)

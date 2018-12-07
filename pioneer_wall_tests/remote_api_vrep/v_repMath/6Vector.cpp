@@ -90,7 +90,7 @@ C6Vector C6Vector::operator-(const C6Vector &v) const
 float C6Vector::operator*(const C6Vector &v) const
 { // Scalar product of spatial vectors:
 	return (V[0](0) * v.V[1](0) + V[0](1) * v.V[1](1) + V[0](2) * v.V[1](2) + V[1](0) * v.V[0](0) +
-					V[1](1) * v.V[0](1) + V[1](2) * v.V[0](2));
+	        V[1](1) * v.V[0](1) + V[1](2) * v.V[0](2));
 }
 
 C6X6Matrix C6Vector::getSpatialCross() const

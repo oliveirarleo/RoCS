@@ -21,11 +21,12 @@ protected:
 	std::string name;
 	double value;
 	Pipeline *pipeline;
-	std::vector< std::vector< Actuator*  > >	actuators;
+	std::vector<std::vector<Actuator *> > actuators;
 
 
 public:
-	Action(std::string name_, double value_, Pipeline *pipeline_):name(std::move(name_)), value(value_), pipeline(pipeline_), actuators()
+	Action(std::string name_, double value_, Pipeline *pipeline_):name(std::move(name_)), value(value_),
+	                                                              pipeline(pipeline_), actuators()
 	{
 	}
 
@@ -39,7 +40,7 @@ public:
 		return value;
 	}
 
-	virtual void setActuators(std::vector< std::vector< Actuator* > > &actuators)
+	virtual void setActuators(std::vector<std::vector<Actuator *> > &actuators)
 	{
 		Action::actuators = actuators;
 	}

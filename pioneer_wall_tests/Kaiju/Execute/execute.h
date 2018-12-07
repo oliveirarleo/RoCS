@@ -24,7 +24,7 @@ private:
 	int waiting_time;
 	std::thread *execute_thread;
 
-	std::vector< std::vector< Actuator* > >	actuators;
+	std::vector<std::vector<Actuator *> > actuators;
 
 public:
 	explicit Execute(Knowledge &knowledge_)
@@ -49,7 +49,7 @@ public:
 	{
 		while (running)
 		{
-			std::shared_ptr< Action > action(nullptr);
+			std::shared_ptr<Action> action(nullptr);
 			if (pipeline.next(&action) && action)
 			{
 				action->setActuators(actuators);
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	void setActuators(const std::vector< std::vector< Actuator* > > &actuators)
+	void setActuators(const std::vector<std::vector<Actuator *> > &actuators)
 	{
 		Execute::actuators = actuators;
 	}

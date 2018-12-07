@@ -22,7 +22,7 @@ protected:
 
 public:
 	Range(std::string name_, double weight_, Position position_, double bandwidth_, double max_range_, double resolution_,
-				double fov_angle_, double beam_angle_, double scan_interval_) :
+	      double fov_angle_, double beam_angle_, double scan_interval_):
 		Sensor<Value>(name_, weight_, position_, bandwidth_)
 	{
 		max_range = max_range_;
@@ -32,17 +32,17 @@ public:
 		scan_interval = scan_interval_;
 	}
 
-	Range(std::string name_) : Sensor<Value>(name_), max_range{0}, resolution{0}, fov_angle{0}, beam_angle{0},
-														 scan_interval{0}
+	Range(std::string name_):Sensor<Value>(name_), max_range{0}, resolution{0}, fov_angle{0}, beam_angle{0},
+	                         scan_interval{0}
 	{
 	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Range<Value> &range)
 	{
 		os << static_cast<const Sensor<Value> &>(range) << " Max_range: " << range.max_range << " Resolution: "
-			 << range.resolution
-			 << " Fov_angle: " << range.fov_angle << " Beam_angle: " << range.beam_angle << " Scan_interval: "
-			 << range.scan_interval << " ";
+		   << range.resolution
+		   << " Fov_angle: " << range.fov_angle << " Beam_angle: " << range.beam_angle << " Scan_interval: "
+		   << range.scan_interval << " ";
 		return os;
 	}
 

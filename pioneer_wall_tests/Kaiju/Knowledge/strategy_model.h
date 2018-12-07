@@ -14,7 +14,7 @@ class StrategyModel
 	std::string name;
 
 public:
-	StrategyModel(std::string name) : name(std::move(name))
+	StrategyModel(std::string name):name(std::move(name))
 	{
 	}
 

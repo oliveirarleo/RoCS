@@ -55,7 +55,7 @@ void CStackObject::buildItemOntoStack(int stackId, CStackObject *obj)
 			if (arr->isNumberArray())
 			{
 				simPushDoubleTableOntoStack(stackId, &arr->getDoubles()->at(0),
-																		int(arr->getDoubles()->size())); // number array
+				                            int(arr->getDoubles()->size())); // number array
 			}
 			else
 			{ // mixed array

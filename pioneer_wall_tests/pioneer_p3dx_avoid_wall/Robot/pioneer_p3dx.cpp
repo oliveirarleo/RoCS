@@ -132,7 +132,7 @@ void PioneerP3DX::setActuators()
 
 void PioneerP3DX::setMonitors()
 {
-	for(RangeVREPSensor &s : range_sensors)
+	for (RangeVREPSensor &s : range_sensors)
 	{
 		range_monitor.insertSensor(&s);
 	}

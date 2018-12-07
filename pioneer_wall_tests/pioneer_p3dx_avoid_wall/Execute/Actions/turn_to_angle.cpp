@@ -8,8 +8,9 @@
 #include "set_wheels_speed.h"
 
 
-TurnToAngle::TurnToAngle(const std::string &name_, double value_, Pipeline *pipeline_, Orientation& orientation_ , double desired_orientation_, bool clockwise_)
-:Action(name_, value_, pipeline_), orientation(orientation_), desired_orientation(desired_orientation_), clockwise(clockwise_)
+TurnToAngle::TurnToAngle(const std::string &name_, double value_, Pipeline *pipeline_, Orientation &orientation_, double desired_orientation_, bool clockwise_)
+	:Action(name_, value_, pipeline_), orientation(orientation_), desired_orientation(desired_orientation_),
+	 clockwise(clockwise_)
 {
 }
 
@@ -20,7 +21,7 @@ void TurnToAngle::act()
 		double base_speed = 0;
 		double speed = 0.8;
 
-		double an = desired_orientation - orientation.getGamma() ;
+		double an = desired_orientation - orientation.getGamma();
 		if (an <= -M_PI)
 			an += 2 * M_PI;
 		if (an > M_PI)
@@ -37,9 +38,9 @@ void TurnToAngle::act()
 			speed = calc_speed;
 
 //		std::cout << "turn\n";
-		if(clockwise)
+		if (clockwise)
 		{
-			std::shared_ptr<Action> turn(new SetWheelsSpeed("Turn", 1, pipeline, base_speed-speed, base_speed+speed));
+			std::shared_ptr<Action> turn(new SetWheelsSpeed("Turn", 1, pipeline, base_speed - speed, base_speed + speed));
 			pipeline->push(turn);
 		}
 		else
@@ -56,8 +57,8 @@ void TurnToAngle::act()
 void TurnToAngle::setActuators(std::vector<std::vector<Actuator *> > &actuators)
 {
 	Action::actuators = actuators;
-	left_wheel =(WheelVREP*)(actuators[0][0]);
-	right_wheel = (WheelVREP*)(actuators[0][1]);
+	left_wheel = (WheelVREP *) (actuators[0][0]);
+	right_wheel = (WheelVREP *) (actuators[0][1]);
 }
 
 

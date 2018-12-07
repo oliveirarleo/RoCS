@@ -14,16 +14,16 @@ class Motor : public Actuator
 protected:
 	double max_speed;
 
-	Motor(std::string name_, double weight_, Position position_, double max_speed_) : Actuator(name_, weight_, position_),
-																																										max_speed(max_speed_)
+	Motor(std::string name_, double weight_, Position position_, double max_speed_):Actuator(name_, weight_, position_),
+	                                                                                max_speed(max_speed_)
 	{
 	}
 
-	Motor(std::string name_) : Actuator(name_), max_speed(0)
+	Motor(std::string name_):Actuator(name_), max_speed(0)
 	{
 	}
 
-	Motor() : Actuator{}, max_speed{0}
+	Motor():Actuator{}, max_speed{0}
 	{
 	}
 };

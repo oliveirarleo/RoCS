@@ -17,15 +17,15 @@ protected:
 	Position position;
 
 public:
-	Actuator(std::string name_, double weight_, Position position_) : name{name_}, weight(weight_), position(position_)
+	Actuator(std::string name_, double weight_, Position position_):name{name_}, weight(weight_), position(position_)
 	{
 	}
 
-	Actuator(std::string name_) : name(name_), weight{0}, position{}
+	Actuator(std::string name_):name(name_), weight{0}, position{}
 	{
 	}
 
-	Actuator() : name{}, weight{0}, position{}
+	Actuator():name{}, weight{0}, position{}
 	{
 	}
 };

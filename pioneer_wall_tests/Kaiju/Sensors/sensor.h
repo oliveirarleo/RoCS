@@ -20,19 +20,19 @@ protected:
 	int bandwidth;
 
 public:
-	Sensor(std::string name, double weight_, Position position_, int bandwidth_) :
+	Sensor(std::string name, double weight_, Position position_, int bandwidth_):
 		name(std::move(name)), weight(weight_), position(position_), bandwidth(bandwidth_)
 	{
 	}
 
-	Sensor(std::string name_) : name(std::move(name_)), weight{0}, position{}, bandwidth{50}
+	Sensor(std::string name_):name(std::move(name_)), weight{0}, position{}, bandwidth{50}
 	{
 	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Sensor<Value> &sensor)
 	{
 		os << "Name: " << sensor.name << " Weight: " << sensor.weight << " Position: " << sensor.position << " Bandwidth: "
-			 << sensor.bandwidth << " ";
+		   << sensor.bandwidth << " ";
 		return os;
 	}
 
