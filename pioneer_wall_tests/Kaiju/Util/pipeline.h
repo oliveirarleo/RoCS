@@ -32,8 +32,13 @@ public:
 	{
 		std::lock_guard<std::mutex> lg(mu);
 //			std::cout << "Pushing " << *action << "\n";
-		actions.push_back(action);
-
+		if(action->getValue() == top_value)
+			actions.push_back(action);
+		else if(action->getValue() > top_value)
+		{
+			actions.clear();
+			actions.push_back(action);
+		}
 	}
 
 	bool next(std::shared_ptr<Action> *action)
@@ -43,10 +48,10 @@ public:
 		{
 			*action = actions.front();
 			actions.pop_front();
-//						if (!actions.empty())
-//							top_value = actions[0].getValue();
-//						else
-//							top_value = 0;
+			if (!actions.empty())
+				top_value = actions[0]->getValue();
+			else
+				top_value = 0;
 			return true;
 		}
 		return false;

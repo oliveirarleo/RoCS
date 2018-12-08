@@ -22,11 +22,10 @@ protected:
 	std::mutex write_mu;
 	std::unique_lock<std::mutex> ul;
 
-
 public:
-	Observer(Value value);
-
 	Observer();
+
+	Observer(Value value);
 
 	Value getValue();
 

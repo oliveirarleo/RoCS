@@ -51,6 +51,9 @@ private:
 	//  PLANNER
 	GoToOriginPlanner planner;
 
+	std::chrono::seconds lifetime;
+
+
 private:
 
 	void verifyConnection();

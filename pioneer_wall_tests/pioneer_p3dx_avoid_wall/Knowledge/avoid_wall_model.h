@@ -10,9 +10,16 @@
 #include <Knowledge/reactive_model.h>
 #include "../Sensors/range_vrep_sensor.h"
 #include "../Actuators/wheel_vrep.h"
+#include "../Monitor/range_vrep_monitor.h"
 
 class AvoidWallModel : public ReactiveModel<std::vector<Position>>
 {
+private:
+	double no_detection_distance;
+	double min_detection_distance;
+	double base_speed;
+	std::vector< double > left_braitenberg;
+	std::vector< double > right_braitenberg;
 public:
 	AvoidWallModel();
 
