@@ -13,7 +13,8 @@
 
 AvoidWallModel::AvoidWallModel()
 	:ReactiveModel(), no_detection_distance(0.3), min_detection_distance(0.1), base_speed(1.5),
-	left_braitenberg{-0.2,-0.4,-0.6,-0.8,-1,-1.2,-1.4,-1.6}, right_braitenberg{-1.6,-1.4,-1.2,-1,-0.8,-0.6,-0.4,-0.2}
+	 left_braitenberg{-0.2, -0.4, -0.6, -0.8, -1, -1.2, -1.4, -1.6},
+	 right_braitenberg{-1.6, -1.4, -1.2, -1, -0.8, -0.6, -0.4, -0.2}
 {
 }
 
@@ -31,18 +32,18 @@ void AvoidWallModel::react()
 	for (int i = 0; i < 8; ++i)
 	{
 		double d = this->observed_value[i].getZ();
-		if(this->observed_value[i].isValid() && d < no_detection_distance)
+		if (this->observed_value[i].isValid() && d < no_detection_distance)
 		{
-			if(d > min_detection_distance)
+			if (d > min_detection_distance)
 				d = min_detection_distance;
-			double detection = 1 - ((d-min_detection_distance)/(no_detection_distance-min_detection_distance));
+			double detection = 1 - ((d - min_detection_distance) / (no_detection_distance - min_detection_distance));
 			left_v += left_braitenberg[i] * detection;
 			right_v += right_braitenberg[i] * detection;
 		}
 	}
 
 	double threshold = 0.1;
-	if(fabs(left_v-base_speed) > threshold || fabs(right_v-base_speed) > threshold )
+	if (fabs(left_v - base_speed) > threshold || fabs(right_v - base_speed) > threshold)
 	{
 		std::shared_ptr<Action> set_speed(new SetWheelsSpeed("Reaction", 60, pipeline, left_v, right_v));
 		pipeline->push(set_speed);

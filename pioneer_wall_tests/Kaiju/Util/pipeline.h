@@ -32,9 +32,9 @@ public:
 	{
 		std::lock_guard<std::mutex> lg(mu);
 //			std::cout << "Pushing " << *action << "\n";
-		if(action->getValue() == top_value)
+		if (action->getValue() == top_value)
 			actions.push_back(action);
-		else if(action->getValue() > top_value)
+		else if (action->getValue() > top_value)
 		{
 			actions.clear();
 			actions.push_back(action);

@@ -1,5 +1,7 @@
 //
-// Created by leleco on 24/11/18.
+// Laboratory of Robotics and Cognitive Science
+// Created by:  Leonardo de Oliveira Ramos
+// Github:      https://github.com/oramleo
 //
 
 #ifndef PIONEER_ROBOT_H

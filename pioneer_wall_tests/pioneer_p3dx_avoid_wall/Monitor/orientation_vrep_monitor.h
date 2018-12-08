@@ -1,5 +1,7 @@
 //
-// Created by leleco on 05/12/18.
+// Laboratory of Robotics and Cognitive Science
+// Created by:  Leonardo de Oliveira Ramos
+// Github:      https://github.com/oramleo
 //
 
 #ifndef PIONEER_ORIENTATION_VREP_MONITOR_H

@@ -18,8 +18,8 @@ private:
 	double no_detection_distance;
 	double min_detection_distance;
 	double base_speed;
-	std::vector< double > left_braitenberg;
-	std::vector< double > right_braitenberg;
+	std::vector<double> left_braitenberg;
+	std::vector<double> right_braitenberg;
 public:
 	AvoidWallModel();
 
