@@ -119,7 +119,8 @@ void Robotnik::connectToPositionSensor()
 
 void Robotnik::connectToP3DXPositionSensor()
 {
-	std::string robot_to_follow_name = "Pioneer_p3dx_vrep";
+	std::string robot_to_follow_name = "Pioneer_p3dx";
+//	std::string robot_to_follow_name = "broder";
 	int robot_to_follow_handle = -1;
 	if (simxGetObjectHandle(connection.getClientId(), (const simxChar *) robot_to_follow_name.c_str(), (simxInt *) &robot_to_follow_handle,
 							(simxInt) simx_opmode_oneshot_wait) == simx_return_ok) {
@@ -186,6 +187,8 @@ void Robotnik::setAnalyzes()
 
 void Robotnik::setVisualizers()
 {
+	orientation_monitor.attach( &(knowledge.getRobotModel()));
+	position_monitor.attach( &(knowledge.getRobotModel()));
 //	file_visualizer.setPipeline(&pipeline);
 }
 

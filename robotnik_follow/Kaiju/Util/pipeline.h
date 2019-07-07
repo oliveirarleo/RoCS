@@ -32,7 +32,6 @@ public:
 	void push(const std::shared_ptr<Action> &action)
 	{
 		std::lock_guard<std::mutex> lg(mu);
-//		std::cout << *action << "\n";
 		last_action = action->getName();
 		if (action->getValue() == top_value)
 			actions.push_back(action);

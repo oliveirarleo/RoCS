@@ -13,8 +13,9 @@
 #include <Knowledge/robot_model.h>
 #include <Util/position.h>
 #include <Util/orientation.h>
+#include <Util/observer.h>
 
-class RobotnikModel : public RobotModel
+class RobotnikModel : public RobotModel, public Observer<std::vector<Orientation> >, public Observer<std::vector<Position> >
 {
 private:
 	Position robot_position;

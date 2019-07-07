@@ -13,10 +13,10 @@ extern "C" {
 #include <include/v_repConst.h>
 #include "connection.h"
 
-Connection::Connection():server_ip("127.0.0.1"), server_port(19999), time_out_in_ms(1000), comm_thread_cycle_in_ms(5),
+Connection::Connection():server_ip("127.0.0.1"), server_port(19997), time_out_in_ms(1000), comm_thread_cycle_in_ms(5),
                          waitUntilConnected(true), doNotReconnectOnceDisconnected(true), client_id(-1), robot_handle(-1)
 {
-
+	std::cout << "Trying to connect\n";
 	while (!isConnected())
 	{
 		std::cout << "Trying to connect\n";

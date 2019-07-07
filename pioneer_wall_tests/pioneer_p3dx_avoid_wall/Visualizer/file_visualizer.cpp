@@ -11,7 +11,7 @@
 
 FileVisualizer::FileVisualizer(Knowledge& knowledge_): running(false), waiting_time(50), thread(nullptr), knowledge(knowledge_)
 {
-	std::cout << "Abrindo arquivo" << std::endl;
+	std::cout << "Abrindo arquivo pos_and_actions.txt" << std::endl;
 	my_file.open("pos_and_actions.txt");
 	my_file << "X, Y, T, Action" << std::endl;
 }

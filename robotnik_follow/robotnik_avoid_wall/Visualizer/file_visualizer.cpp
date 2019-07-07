@@ -41,6 +41,12 @@ void FileVisualizer::run()
 		Position pos = ((RobotnikKnowledge &) knowledge).getRobotPosition();
 		std::shared_ptr<Action> action = ((RobotnikKnowledge &) knowledge).getCurrentAction();
 
+//		double x = pos.getX();
+//		double y = pos.getY();
+//		double t = ea.getGamma();
+
+//		std::cout << x << ", " << y << ", " << t << ", " << action->getName() << "\n";
+
 		if(ea.isValid() && pos.isValid() && action != nullptr)
 		{
 			double x = pos.getX();

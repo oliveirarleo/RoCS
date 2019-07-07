@@ -18,10 +18,12 @@ private:
 	WheelVREP *right_wheel;
 	Orientation &orientation;
 	double desired_orientation;
-	bool clockwise;
+	double base_speed;
+	double turn_speed;
 
 public:
-	TurnToAngle(const std::string &name_, double value_, Pipeline *pipeline_, Orientation &orientation_, double desired_orientation_, bool clockwise_);
+	TurnToAngle(const std::string &name_, double value_, Pipeline *pipeline_, Orientation &orientation_, double desired_orientation_,
+				double base_speed_, double turn_speed_);
 
 private:
 	void setActuators(std::vector<std::vector<Actuator *> > &actuators) override;

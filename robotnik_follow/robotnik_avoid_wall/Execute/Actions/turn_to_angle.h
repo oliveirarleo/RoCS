@@ -16,8 +16,6 @@ class TurnToAngle : public Action
 private:
 	WheelVREP *left_wheel;
 	WheelVREP *right_wheel;
-	WheelVREP *back_left_wheel;
-	WheelVREP *back_right_wheel;
 	Orientation &orientation;
 	double desired_orientation;
 	double base_speed;

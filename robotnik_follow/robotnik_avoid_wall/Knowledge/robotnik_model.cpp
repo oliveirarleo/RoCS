@@ -15,16 +15,28 @@ RobotnikModel::RobotnikModel()
 }
 
 
+
 Position RobotnikModel::getRobotPosition()
 {
-
-	return robot_position;
+    if(!Observer<std::vector<Position> >::observed_value.empty()){
+        robot_position = Observer<std::vector<Position> >::observed_value[0];
+        return robot_position;
+    }
+    else
+        return Position();
 }
 
 Orientation RobotnikModel::getRobotOrientation()
 {
-	return robot_orientation;
+    if(!Observer<std::vector<Orientation> >::observed_value.empty()){
+
+        robot_orientation = Observer<std::vector<Orientation> >::observed_value[0];
+        return robot_orientation;
+    }
+    else
+        return Orientation();
 }
+
 
 
 //Position &RobotnikModel::getRobotPosition()

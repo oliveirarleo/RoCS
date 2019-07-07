@@ -32,6 +32,7 @@ void GoToP3DXPlanner::planIteration()
 		Position pos(position_analyze.getValue()[0]);
 
 		destination = p3dx_positon_analyze.getValue()[0];
+//		std::cout << destination << "\n";
 //		if (dif_vector.abs() < distance_threshold)
 //		{
 //			if (state == 1)

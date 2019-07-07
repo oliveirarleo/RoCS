@@ -29,6 +29,8 @@ void GoToPosition::act()
 {
 	if (pipeline)
 	{
+
+		double base_speed = 2;
 		Position res = origin - position;
 		double gamma = res.arg();
 
@@ -52,16 +54,16 @@ void GoToPosition::act()
 			std::shared_ptr<Action> stop(new SetWheelsSpeed("Stop", 1, pipeline, 0, 0));
 			pipeline->push(stop);
 		}
-		else if (angle_difference > angle_threshold)
+		else if ((angle_difference > angle_threshold*2) or (angle_difference < -angle_threshold*2))
 		{
 //			std::cout << "turning clock " << angle_difference << " \n";
-			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, true));
+			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, 0, base_speed*0.6));
 			pipeline->push(turn_to_angle);
 		}
-		else if (angle_difference < -angle_threshold)
+		else if ((angle_difference > angle_threshold) or (angle_difference < -angle_threshold))
 		{
 //			std::cout << "turning anticlock " <<angle_difference <<" \n";
-			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, false));
+			std::shared_ptr<Action> turn_to_angle(new TurnToAngle("TurnToAngle", 1, pipeline, orientation, gamma, base_speed, base_speed));
 			pipeline->push(turn_to_angle);
 		}
 		else

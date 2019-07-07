@@ -11,9 +11,9 @@
 
 
 AvoidWallModel::AvoidWallModel()
-	:ReactiveModel(), no_detection_distance(0.3), min_detection_distance(0.1), base_speed(1),
-	 left_braitenberg{-0, -0.8, -2},
-	 right_braitenberg{-2, -0.8, -0.2}
+	:ReactiveModel(), no_detection_distance(0.3), min_detection_distance(0.1), base_speed(0),
+	 left_braitenberg{-0.5, -1, -3},
+	 right_braitenberg{-3, -1, -0.5}
 {
 }
 

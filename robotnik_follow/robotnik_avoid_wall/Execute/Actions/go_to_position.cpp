@@ -13,7 +13,7 @@
 GoToPosition::GoToPosition(const std::string &name_, double value_, Pipeline *pipeline_,
                            Position position_, Orientation orientation_, Position destination)
 	:Action(name_, value_, pipeline_), left_wheel(nullptr), right_wheel(nullptr), position(position_),
-	 orientation(orientation_), origin(destination), angle_threshold(0.1), distance_threshold(0.2)
+	 orientation(orientation_), origin(destination), angle_threshold(0.1), distance_threshold(1.2)
 {
 
 }
@@ -29,7 +29,7 @@ void GoToPosition::act()
 {
 	if (pipeline)
 	{
-		double base_speed = 1.5;
+		double base_speed = 1;
 		Position res = origin - position;
 		double gamma = res.arg();
 
