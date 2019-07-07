@@ -19,3 +19,40 @@ RobotnikModel &RobotnikKnowledge::getRobotModel()
 {
 	return robot_model;
 }
+
+AvoidWallModel &RobotnikKnowledge::getAvoidWallModel()
+{
+	return avoid_wall_model;
+}
+
+void RobotnikKnowledge::setPipeline(Pipeline *pipeline_)
+{
+	RobotnikKnowledge::pipeline = pipeline_;
+}
+
+
+std::shared_ptr<Action> RobotnikKnowledge::getCurrentAction()
+{
+	if (pipeline != nullptr)
+		return  pipeline->getAction();
+	else
+	{
+		return nullptr;
+	}
+
+}
+
+Position RobotnikKnowledge::getRobotPosition()
+{
+
+	return robot_model.getRobotPosition();
+}
+
+Orientation RobotnikKnowledge::getRobotOrientation()
+{
+	return robot_model.getRobotOrientation();
+}
+
+
+
+

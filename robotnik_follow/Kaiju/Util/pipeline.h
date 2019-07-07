@@ -19,19 +19,21 @@ class Pipeline
 protected:
 	std::deque<std::shared_ptr<Action> > actions;
 	std::mutex mu;
-//	std::unique_lock<std::mutex> ul;
 	double top_value;
+	std::string last_action;
+
 
 public:
 	Pipeline()
-		:actions{}, mu{}, top_value(0)
+		:actions{}, mu{}, top_value(0), last_action{""}
 	{
 	}
 
 	void push(const std::shared_ptr<Action> &action)
 	{
 		std::lock_guard<std::mutex> lg(mu);
-//			std::cout << "Pushing " << *action << "\n";
+//		std::cout << *action << "\n";
+		last_action = action->getName();
 		if (action->getValue() == top_value)
 			actions.push_back(action);
 		else if (action->getValue() > top_value)
@@ -63,6 +65,17 @@ public:
 		return actions.empty();
 	}
 
+    std::shared_ptr<Action> getAction()
+    {
+        std::lock_guard<std::mutex> lg(mu);
+        if (!actions.empty())
+        {
+            return actions.front();
+        }
+
+        return nullptr;
+    }
+
 
 	void printValues()
 	{
@@ -70,6 +83,13 @@ public:
 		{
 			std::cout << *action << std::endl;
 		}
+
+	}
+
+
+	std::string getLastActionName()
+	{
+		return last_action;
 
 	}
 };

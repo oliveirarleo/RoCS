@@ -23,6 +23,7 @@
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
 #include "../Plan/go_to_origin_planner.h"
+#include "../Visualizer/file_visualizer.h"
 
 
 class Robotnik : public Robot
@@ -59,6 +60,8 @@ private:
 	//  PLANNER
 	GoToP3DXPlanner planner;
 
+	FileVisualizer file_visualizer;
+
 	std::chrono::seconds lifetime;
 
 
@@ -78,9 +81,13 @@ private:
 
 	void setExecute();
 
+	void setVisualizers();
+
 	void setReactiveModels();
 
-	void connectToSonars();
+	void setKnowledge();
+
+	void connectToProximitySensors();
 
 	void connectToOrientationSensor();
 

@@ -11,12 +11,15 @@
 #include <Knowledge/knowledge.h>
 #include "../Connection/connection.h"
 #include "robotnik_model.h"
+#include "avoid_wall_model.h"
 
 class RobotnikKnowledge : public Knowledge
 {
 private:
 	Connection connection;
 	RobotnikModel robot_model;
+	AvoidWallModel avoid_wall_model;
+	Pipeline *pipeline;
 
 public:
 	RobotnikKnowledge();
@@ -24,6 +27,16 @@ public:
 	Connection &getConnection();
 
 	RobotnikModel &getRobotModel();
+
+	AvoidWallModel &getAvoidWallModel();
+
+	void setPipeline(Pipeline *pipeline_);
+
+	std::shared_ptr<Action> getCurrentAction();
+
+	Position getRobotPosition();
+
+	Orientation getRobotOrientation();
 
 
 };

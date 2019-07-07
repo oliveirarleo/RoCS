@@ -81,6 +81,8 @@ void PioneerP3DX::verifyConnection()
 }
 
 
+
+
 void PioneerP3DX::connectToSonars()
 {
 

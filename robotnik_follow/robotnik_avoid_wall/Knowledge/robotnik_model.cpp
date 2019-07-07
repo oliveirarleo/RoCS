@@ -14,6 +14,19 @@ RobotnikModel::RobotnikModel()
 
 }
 
+
+Position RobotnikModel::getRobotPosition()
+{
+
+	return robot_position;
+}
+
+Orientation RobotnikModel::getRobotOrientation()
+{
+	return robot_orientation;
+}
+
+
 //Position &RobotnikModel::getRobotPosition()
 //{
 //	float pos[3];

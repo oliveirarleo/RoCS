@@ -14,9 +14,11 @@ extern "C"
 
 Robotnik::Robotnik()
 	:Robot("Robotnik_Summit_XL"), connection(knowledge.getConnection()), range_sensors(),
-	 orientation_sensor(connection), position_sensor(connection), p3dx_position_sensor(connection), wheels(), wheel_ptrs(), range_monitor(knowledge),
-	 position_monitor(knowledge), orientation_monitor(knowledge), p3dx_position_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
-	 orientation_analyze(knowledge), p3dx_position_analyze(knowledge), planner(knowledge, position_analyze, orientation_analyze, p3dx_position_analyze), lifetime(100)
+	 orientation_sensor(connection), position_sensor(connection), p3dx_position_sensor(connection), wheels(),
+	 wheel_ptrs(), range_monitor(knowledge), position_monitor(knowledge), orientation_monitor(knowledge),
+	 p3dx_position_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
+	 orientation_analyze(knowledge), p3dx_position_analyze(knowledge), planner(knowledge, position_analyze,
+	 		orientation_analyze, p3dx_position_analyze), file_visualizer{knowledge}, lifetime(100)
 {
 	verifyConnection();
 
@@ -30,10 +32,13 @@ Robotnik::Robotnik()
 		setActuators();
 
 		setMonitors();
-		setReactiveModels();
 		setAnalyzes();
 		setPlan();
 		setExecute();
+
+		setKnowledge();
+
+		setVisualizers();
 	}
 	else
 	{
@@ -45,6 +50,7 @@ Robotnik::Robotnik()
 
 void Robotnik::run()
 {
+	range_monitor.startThread();
 	position_monitor.startThread();
 	orientation_monitor.startThread();
 	p3dx_position_monitor.startThread();
@@ -56,8 +62,11 @@ void Robotnik::run()
 
 	execute.startThread();
 
+	knowledge.getAvoidWallModel().startThread();
+
 	planner.startThread();
 
+	file_visualizer.startThread();
 
 	std::cout << "Threads running...\n";
 
@@ -77,6 +86,19 @@ void Robotnik::verifyConnection()
 		exit(1);
 	}
 }
+
+
+
+void Robotnik::connectToProximitySensors()
+{
+	for (int num_sonars = 0; num_sonars <= 2; ++num_sonars)
+	{
+		std::string sonar_name = "prox_sensor" + std::to_string(num_sonars);
+		range_sensors.emplace_back(sonar_name, connection);
+
+	}
+}
+
 
 void Robotnik::connectToOrientationSensor()
 {
@@ -124,6 +146,7 @@ void Robotnik::connectToWheels()
 
 void Robotnik::setSensors()
 {
+	connectToProximitySensors();
 	connectToOrientationSensor();
 	connectToP3DXPositionSensor();
 	connectToPositionSensor();
@@ -161,6 +184,11 @@ void Robotnik::setAnalyzes()
 
 }
 
+void Robotnik::setVisualizers()
+{
+//	file_visualizer.setPipeline(&pipeline);
+}
+
 void Robotnik::setPlan()
 {
 	planner.setPipeline(&execute.getPipeline());
@@ -171,6 +199,14 @@ void Robotnik::setExecute()
 	execute.setActuators(actuators);
 }
 
+void Robotnik::setKnowledge()
+{
+	setReactiveModels();
+	knowledge.getAvoidWallModel().setPipeline(&execute.getPipeline());
+	knowledge.setPipeline(&execute.getPipeline());
+}
+
 void Robotnik::setReactiveModels()
 {
+	range_monitor.attach(&knowledge.getAvoidWallModel());
 }

@@ -91,6 +91,8 @@ set(SOURCES
         robotnik_avoid_wall/Execute/Actions/turn_to_angle.h
         robotnik_avoid_wall/Knowledge/robotnik_knowledge.cpp
         robotnik_avoid_wall/Knowledge/robotnik_knowledge.h
+        robotnik_avoid_wall/Knowledge/avoid_wall_model.h
+        robotnik_avoid_wall/Knowledge/avoid_wall_model.cpp
         robotnik_avoid_wall/Knowledge/robotnik_model.cpp
         robotnik_avoid_wall/Knowledge/robotnik_model.h
         robotnik_avoid_wall/Monitor/orientation_vrep_monitor.cpp
@@ -110,7 +112,16 @@ set(SOURCES
         robotnik_avoid_wall/Sensors/range_vrep_sensor.cpp
         robotnik_avoid_wall/Sensors/range_vrep_sensor.h
 
-        main.cpp robotnik_avoid_wall/Sensors/P3DXPositionSensor.cpp robotnik_avoid_wall/Sensors/P3DXPositionSensor.h robotnik_avoid_wall/Monitor/P3DXPositionMonitor.cpp robotnik_avoid_wall/Monitor/P3DXPositionMonitor.h robotnik_avoid_wall/Analyze/PassP3DXPosition.cpp robotnik_avoid_wall/Analyze/PassP3DXPosition.h)
+        main.cpp robotnik_avoid_wall/Sensors/P3DXPositionSensor.cpp
+        robotnik_avoid_wall/Sensors/P3DXPositionSensor.h
+        robotnik_avoid_wall/Monitor/P3DXPositionMonitor.cpp
+        robotnik_avoid_wall/Monitor/P3DXPositionMonitor.h
+        robotnik_avoid_wall/Analyze/PassP3DXPosition.cpp
+        robotnik_avoid_wall/Analyze/PassP3DXPosition.h
+
+        robotnik_avoid_wall/Visualizer/file_visualizer.h
+        robotnik_avoid_wall/Visualizer/file_visualizer.cpp
+        )
 
 
 find_package(Threads)

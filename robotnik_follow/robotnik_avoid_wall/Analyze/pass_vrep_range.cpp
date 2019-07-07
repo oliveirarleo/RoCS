@@ -12,5 +12,6 @@ PassVREPRange::PassVREPRange(Knowledge &knowledge_):Analyze(knowledge_)
 
 std::vector<Position> PassVREPRange::mergeAndProcess(std::vector<Position> ov)
 {
+//	std::cout << ov << '\n';
 	return ov;
 }

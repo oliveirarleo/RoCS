@@ -24,6 +24,8 @@ GoToP3DXPlanner::GoToP3DXPlanner(Knowledge &knowledge, Pipeline *pipeline, PassV
 
 void GoToP3DXPlanner::planIteration()
 {
+
+//	std::cout << position_analyze.getValue()[0] << "," << pipeline->getLastActionName() << '\n';
 	if (pipeline && pipeline->isEmpty())
 	{
 //		std::cout << position_analyze.getValue()[0] << "\n";
@@ -60,6 +62,7 @@ void GoToP3DXPlanner::planIteration()
 		std::shared_ptr<Action> go_to_origin(new GoToPosition("GoToPosition", 1, pipeline, position_analyze.getValue()[0],
 		                                                      orientation_analyze.getValue()[0], destination));
 		pipeline->push(go_to_origin);
+
 
 //		std::cout << position_analyze.getValue()[0] << "\n" << orientation_analyze.getValue()[0] << "\n";
 	}

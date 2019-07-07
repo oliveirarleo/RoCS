@@ -23,6 +23,10 @@ private:
 public:
 	RobotnikModel();
 
+	Position getRobotPosition();
+
+	Orientation getRobotOrientation();
+
 };
 
 #endif // PIONEER_PIONEER_P_3_DX_MODEL_H_
