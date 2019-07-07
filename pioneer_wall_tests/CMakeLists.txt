@@ -18,6 +18,8 @@ ENDIF (CMAKE_COMPILER_IS_GNUCC)
 
 
 set(SOURCES
+        pioneer_p3dx_avoid_wall/Visualizer/file_visualizer.cpp
+
         pioneer_p3dx_avoid_wall/Actuators/wheel_vrep.cpp
 
         pioneer_p3dx_avoid_wall/Sensors/orientation_vrep_sensor.cpp

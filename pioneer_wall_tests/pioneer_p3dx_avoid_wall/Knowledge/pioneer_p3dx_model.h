@@ -13,8 +13,9 @@
 #include <Knowledge/robot_model.h>
 #include <Util/position.h>
 #include <Util/orientation.h>
+#include <Util/observer.h>
 
-class PioneerP3DXModel : public RobotModel
+class PioneerP3DXModel : public RobotModel, public Observer<std::vector<Orientation> >, public Observer<std::vector<Position> >
 {
 private:
 	Position robot_position;
@@ -22,6 +23,10 @@ private:
 
 public:
 	PioneerP3DXModel();
+
+	Position getPosition();
+
+	Orientation getOrientation();
 
 };
 

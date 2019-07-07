@@ -72,6 +72,18 @@ public:
 		}
 
 	}
+
+	std::shared_ptr<Action> getAction()
+	{
+		std::lock_guard<std::mutex> lg(mu);
+		if (!actions.empty())
+		{
+			return actions.front();
+		}
+
+		return nullptr;
+	}
+
 };
 
 #endif // PIPELINE_H_

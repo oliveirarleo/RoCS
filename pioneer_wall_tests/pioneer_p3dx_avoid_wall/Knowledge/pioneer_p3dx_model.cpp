@@ -14,6 +14,23 @@ PioneerP3DXModel::PioneerP3DXModel()
 
 }
 
+
+Position PioneerP3DXModel::getPosition()
+{
+	if(!Observer<std::vector<Position> >::observed_value.empty())
+		return Observer<std::vector<Position> >::observed_value[0];
+	else
+		return Position();
+}
+
+Orientation PioneerP3DXModel::getOrientation()
+{
+	if(!Observer<std::vector<Orientation> >::observed_value.empty())
+		return Observer<std::vector<Orientation> >::observed_value[0];
+	else
+		return Orientation();
+}
+
 //Position &PioneerP3DXModel::getRobotPosition()
 //{
 //	float pos[3];

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
-#include <Knowledge/robot_model.h>
+#include <Knowledge/knowledge.h>
 
 class FileVisualizer
 {
@@ -21,16 +21,17 @@ private:
 	int waiting_time;
 	std::thread *thread;
 
-	RobotModel& robot;
+	Knowledge& knowledge;
 
 
 public:
-	FileVisualizer(RobotModel& robot_);
+	explicit FileVisualizer(Knowledge& knowledge_);
 
-	virtual ~FileVisualizer();
+	~FileVisualizer();
 
 	void startThread();
 
+private:
 	void run();
 
 };

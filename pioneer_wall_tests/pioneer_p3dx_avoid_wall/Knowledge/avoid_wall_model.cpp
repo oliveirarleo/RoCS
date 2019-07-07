@@ -45,7 +45,7 @@ void AvoidWallModel::react()
 	double threshold = 0.1;
 	if (fabs(left_v - base_speed) > threshold || fabs(right_v - base_speed) > threshold)
 	{
-		std::shared_ptr<Action> set_speed(new SetWheelsSpeed("Reaction", 60, pipeline, left_v, right_v));
+		std::shared_ptr<Action> set_speed(new SetWheelsSpeed("Reaction Braitenberg", 60, pipeline, left_v, right_v));
 		pipeline->push(set_speed);
 	}
 

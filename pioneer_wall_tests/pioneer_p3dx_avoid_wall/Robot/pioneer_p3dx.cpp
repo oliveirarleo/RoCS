@@ -17,7 +17,8 @@ PioneerP3DX::PioneerP3DX()
 	:Robot("Pioneer_p3dx"), connection(knowledge.getConnection()), range_sensors(),
 	 orientation_sensor(connection), position_sensor(connection), wheels(), wheel_ptrs(), range_monitor(knowledge),
 	 position_monitor(knowledge), orientation_monitor(knowledge), range_analyze(knowledge), position_analyze(knowledge),
-	 orientation_analyze(knowledge), planner(knowledge, position_analyze, orientation_analyze), lifetime(100)
+	 orientation_analyze(knowledge), planner(knowledge, position_analyze, orientation_analyze), lifetime(100),
+	 file_visualizer(knowledge)
 {
 	verifyConnection();
 
@@ -27,6 +28,9 @@ PioneerP3DX::PioneerP3DX()
 	{
 		std::cout << "Connected to robot: " << name << " handle: " << robot_handle << std::endl;
 		connection.setRobotHandle(robot_handle);
+
+		setKnowledge();
+
 		setSensors();
 		setActuators();
 
@@ -35,6 +39,8 @@ PioneerP3DX::PioneerP3DX()
 		setAnalyzes();
 		setPlan();
 		setExecute();
+
+		setVisualizer();
 	}
 	else
 	{
@@ -59,6 +65,8 @@ void PioneerP3DX::run()
 	knowledge.getAvoidWallModel().startThread();
 
 	planner.startThread();
+
+	file_visualizer.startThread();
 
 
 	std::cout << "Threads running...\n";
@@ -115,6 +123,18 @@ void PioneerP3DX::connectToWheels()
 
 	std::string right_wheel_name = "Pioneer_p3dx_rightMotor";
 	wheels.emplace_back(right_wheel_name, connection);
+}
+
+
+void PioneerP3DX::setVisualizer()
+{
+	orientation_monitor.attach( &(knowledge.getPioneerP3DXModel()));
+	position_monitor.attach( &(knowledge.getPioneerP3DXModel()));
+}
+
+void PioneerP3DX::setKnowledge()
+{
+	knowledge.setPipeline(&execute.getPipeline());
 }
 
 void PioneerP3DX::setSensors()
