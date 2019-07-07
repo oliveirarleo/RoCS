@@ -20,12 +20,14 @@
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
 #include "../Plan/go_to_origin_planner.h"
+#include "../Visualizer/file_visualizer.h"
 
 
 class PioneerP3DX : public Robot
 {
 private:
 	P3DXKnowledge knowledge;
+
 
 	Connection &connection;
 
@@ -55,10 +57,16 @@ private:
 
 	std::chrono::seconds lifetime;
 
+	FileVisualizer file_visualizer;
+
 
 private:
 
 	void verifyConnection();
+
+	void setVisualizer();
+
+	void setKnowledge();
 
 	void setSensors();
 

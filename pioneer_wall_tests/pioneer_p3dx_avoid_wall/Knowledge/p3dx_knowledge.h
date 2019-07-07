@@ -19,6 +19,7 @@ private:
 	Connection connection;
 	PioneerP3DXModel pioneer_p3dx_model;
 	AvoidWallModel avoid_wall_model;
+	Pipeline* pipeline;
 
 public:
 	P3DXKnowledge();
@@ -29,6 +30,13 @@ public:
 
 	AvoidWallModel &getAvoidWallModel();
 
+	void setPipeline(Pipeline *pipeline);
+
+	std::shared_ptr<Action> getCurrentAction();
+
+	Position getRobotPosition();
+
+	Orientation getRobotOrientation();
 };
 
 
