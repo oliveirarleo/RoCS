@@ -1,0 +1,122 @@
+cmake_minimum_required(VERSION 3.13)
+project(robotnik_follow)
+
+INCLUDE(FindPkgConfig)
+
+add_subdirectory(remote_api_vrep)
+
+include_directories(remote_api_vrep Kaiju)
+
+
+set(CMAKE_CXX_STANDARD 17)
+IF (CMAKE_COMPILER_IS_GNUCC)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -DBUILD_SHARED_LIBS=OFF -lpthread")
+ENDIF (CMAKE_COMPILER_IS_GNUCC)
+
+
+
+include_directories(Kaiju)
+include_directories(Kaiju/Actuators)
+include_directories(Kaiju/Analyze)
+include_directories(Kaiju/Execute)
+include_directories(Kaiju/Knowledge)
+include_directories(Kaiju/Monitor)
+include_directories(Kaiju/Plan)
+include_directories(Kaiju/Robot)
+include_directories(Kaiju/Sensors)
+include_directories(Kaiju/Util)
+include_directories(robotnik_avoid_wall/Actuators)
+include_directories(robotnik_avoid_wall/Analyze)
+include_directories(robotnik_avoid_wall/Connection)
+include_directories(robotnik_avoid_wall/Execute/Actions)
+include_directories(robotnik_avoid_wall/Knowledge)
+include_directories(robotnik_avoid_wall/Monitor)
+include_directories(robotnik_avoid_wall/P3DXConnection)
+include_directories(robotnik_avoid_wall/Plan)
+include_directories(robotnik_avoid_wall/Robot)
+include_directories(robotnik_avoid_wall/Sensors)
+
+set(SOURCES
+        Kaiju/Actuators/actuator.h
+        Kaiju/Actuators/motor.h
+        Kaiju/Actuators/rotary_motor.h
+        Kaiju/Actuators/servo_motor.h
+        Kaiju/Actuators/speaker.h
+        Kaiju/Analyze/analyze.h
+        Kaiju/Execute/action.h
+        Kaiju/Execute/execute.h
+        Kaiju/Knowledge/knowledge.h
+        Kaiju/Knowledge/reactive_model.h
+        Kaiju/Knowledge/robot_model.h
+        Kaiju/Knowledge/strategy_model.h
+        Kaiju/Knowledge/world_model.h
+        Kaiju/Monitor/monitor.h
+        Kaiju/Plan/behavior.h
+        Kaiju/Plan/planner.h
+        Kaiju/Plan/task.h
+        Kaiju/Robot/robot.h
+        Kaiju/Sensors/accelerometer.h
+        Kaiju/Sensors/camera.h
+        Kaiju/Sensors/gyroscope.h
+        Kaiju/Sensors/imu.h
+        Kaiju/Sensors/magnetometer.h
+        Kaiju/Sensors/odometer.h
+        Kaiju/Sensors/range.h
+        Kaiju/Sensors/rfid.h
+        Kaiju/Sensors/rgb_d.h
+        Kaiju/Sensors/sensor.h
+        Kaiju/Sensors/sonar.h
+        Kaiju/Util/observer.h
+        Kaiju/Util/orientation.h
+        Kaiju/Util/pipeline.h
+        Kaiju/Util/position.h
+        Kaiju/Util/publisher.h
+        robotnik_avoid_wall/Actuators/robotnik_wheel_vrep.cpp
+        robotnik_avoid_wall/Actuators/robotnik_wheel_vrep.h
+        robotnik_avoid_wall/Actuators/wheel_vrep.cpp
+        robotnik_avoid_wall/Actuators/wheel_vrep.h
+        robotnik_avoid_wall/Analyze/pass_vrep_orientation.cpp
+        robotnik_avoid_wall/Analyze/pass_vrep_orientation.h
+        robotnik_avoid_wall/Analyze/pass_vrep_position.cpp
+        robotnik_avoid_wall/Analyze/pass_vrep_position.h
+        robotnik_avoid_wall/Analyze/pass_vrep_range.cpp
+        robotnik_avoid_wall/Analyze/pass_vrep_range.h
+        robotnik_avoid_wall/Connection/connection.cpp
+        robotnik_avoid_wall/Connection/connection.h
+        robotnik_avoid_wall/Execute/Actions/go_to_position.cpp
+        robotnik_avoid_wall/Execute/Actions/go_to_position.h
+        robotnik_avoid_wall/Execute/Actions/set_wheels_speed.cpp
+        robotnik_avoid_wall/Execute/Actions/set_wheels_speed.h
+        robotnik_avoid_wall/Execute/Actions/turn_to_angle.cpp
+        robotnik_avoid_wall/Execute/Actions/turn_to_angle.h
+        robotnik_avoid_wall/Knowledge/robotnik_knowledge.cpp
+        robotnik_avoid_wall/Knowledge/robotnik_knowledge.h
+        robotnik_avoid_wall/Knowledge/robotnik_model.cpp
+        robotnik_avoid_wall/Knowledge/robotnik_model.h
+        robotnik_avoid_wall/Monitor/orientation_vrep_monitor.cpp
+        robotnik_avoid_wall/Monitor/orientation_vrep_monitor.h
+        robotnik_avoid_wall/Monitor/position_vrep_monitor.cpp
+        robotnik_avoid_wall/Monitor/position_vrep_monitor.h
+        robotnik_avoid_wall/Monitor/range_vrep_monitor.cpp
+        robotnik_avoid_wall/Monitor/range_vrep_monitor.h
+        robotnik_avoid_wall/Plan/go_to_origin_planner.cpp
+        robotnik_avoid_wall/Plan/go_to_origin_planner.h
+        robotnik_avoid_wall/Robot/robotnik.cpp
+        robotnik_avoid_wall/Robot/robotnik.h
+        robotnik_avoid_wall/Sensors/orientation_vrep_sensor.cpp
+        robotnik_avoid_wall/Sensors/orientation_vrep_sensor.h
+        robotnik_avoid_wall/Sensors/position_vrep_sensor.cpp
+        robotnik_avoid_wall/Sensors/position_vrep_sensor.h
+        robotnik_avoid_wall/Sensors/range_vrep_sensor.cpp
+        robotnik_avoid_wall/Sensors/range_vrep_sensor.h
+
+        main.cpp robotnik_avoid_wall/Sensors/P3DXPositionSensor.cpp robotnik_avoid_wall/Sensors/P3DXPositionSensor.h robotnik_avoid_wall/Monitor/P3DXPositionMonitor.cpp robotnik_avoid_wall/Monitor/P3DXPositionMonitor.h robotnik_avoid_wall/Analyze/PassP3DXPosition.cpp robotnik_avoid_wall/Analyze/PassP3DXPosition.h)
+
+
+find_package(Threads)
+
+add_executable(robotnik_follow ${SOURCES})
+
+target_link_libraries(robotnik_follow ${CMAKE_THREAD_LIBS_INIT} remote_api pthread)
+
+install(TARGETS robotnik_follow RUNTIME DESTINATION bin)
