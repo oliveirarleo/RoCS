@@ -7,8 +7,10 @@ include_directories(./../remote_api_vrep ./../FRoCS)
 
 
 set(CMAKE_CXX_STANDARD 17)
+add_compile_options("-lpthread")
+link_libraries("-lpthread")
 IF (CMAKE_COMPILER_IS_GNUCC)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -DBUILD_SHARED_LIBS=OFF -lpthread")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 ENDIF (CMAKE_COMPILER_IS_GNUCC)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -DBUILD_SHARED_LIBS=OFF")
@@ -61,8 +63,8 @@ set(SOURCES
 
 find_package(Threads)
 
-add_executable(Pioneer ${SOURCES})
+add_executable(Pioneer ${SOURCES} )
 
-target_link_libraries(Pioneer ${CMAKE_THREAD_LIBS_INIT} remote_api pthread)
+target_link_libraries(Pioneer  ${CMAKE_THREAD_LIBS_INIT} remote_api pthread)
 
 install(TARGETS Pioneer RUNTIME DESTINATION bin)

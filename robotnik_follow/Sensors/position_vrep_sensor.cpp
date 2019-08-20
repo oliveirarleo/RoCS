@@ -8,8 +8,7 @@
 #include <iostream>
 #include <include/v_repConst.h>
 #include "position_vrep_sensor.h"
-#include "robotnik_model.h"
-#include "robotnik_knowledge.h"
+#include "../Knowledge/robotnik_model.h"
 
 PositionVREPSensor::PositionVREPSensor(Connection &connection_)
 	:Sensor("PositionSensor"), connection(connection_), handle(connection_.getRobotHandle())

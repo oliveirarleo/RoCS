@@ -9,13 +9,15 @@
 
 
 #include <Robot/robot.h>
-#include <P3DXPositionSensor.h>
-#include <P3DXPositionMonitor.h>
-#include <PassP3DXPosition.h>
-#include "robotnik_knowledge.h"
+#include "../Analyze/pass_robotnik_position.h"
+#include "../Knowledge/robotnik_knowledge.h"
 #include "../Actuators/wheel_vrep.h"
+
+#include "../Sensors/P3DXPositionSensor.h"
 #include "../Sensors/orientation_vrep_sensor.h"
 #include "../Sensors/position_vrep_sensor.h"
+
+#include "../Monitor/P3DXPositionMonitor.h"
 #include "../Monitor/range_vrep_monitor.h"
 #include "../Monitor/position_vrep_monitor.h"
 #include "../Monitor/orientation_vrep_monitor.h"
@@ -55,7 +57,7 @@ private:
 	PassVREPRange range_analyze;
 	PassVREPPosition position_analyze;
 	PassVREPOrientation orientation_analyze;
-	PassP3DXPosition p3dx_position_analyze;
+	PassRobotnikPosition p3dx_position_analyze;
 
 	//  PLANNER
 	GoToP3DXPlanner planner;

@@ -7,7 +7,7 @@
 
 
 #include <Util/position.h>
-#include <../Connection/connection.h>
+#include "../Connection/connection.h"
 #include "position_vrep_sensor.h"
 
 class P3DXPositionSensor: public Sensor<Position>

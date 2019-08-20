@@ -5,7 +5,7 @@
 //
 
 #include "range_vrep_sensor.h"
-#include "robotnik_model.h"
+#include "../Knowledge/robotnik_model.h"
 
 #include <iostream>
 

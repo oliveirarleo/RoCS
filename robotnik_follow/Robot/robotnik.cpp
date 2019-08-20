@@ -5,7 +5,7 @@
 //
 
 #include "robotnik.h"
-#include "robotnik_knowledge.h"
+#include "../Knowledge/robotnik_knowledge.h"
 
 extern "C"
 {

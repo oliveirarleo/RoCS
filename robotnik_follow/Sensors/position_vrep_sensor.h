@@ -12,8 +12,7 @@
 #include <Sensors/sensor.h>
 #include <Knowledge/robot_model.h>
 #include "../Connection/connection.h"
-#include "robotnik_model.h"
-#include "robotnik_knowledge.h"
+#include "../Knowledge/robotnik_model.h"
 
 
 class PositionVREPSensor : public Sensor<Position>

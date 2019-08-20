@@ -8,10 +8,10 @@
 
 #include <Analyze/analyze.h>
 
-class PassP3DXPosition : public Analyze<std::vector<Position>, std::vector<Position>>
+class PassRobotnikPosition : public Analyze<std::vector<Position>, std::vector<Position>>
 {
 public:
-    explicit PassP3DXPosition(Knowledge &knowledge_);
+    explicit PassRobotnikPosition(Knowledge &knowledge_);
 
     std::vector<Position> mergeAndProcess(std::vector<Position> ov) override;
 };

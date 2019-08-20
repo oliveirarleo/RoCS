@@ -9,7 +9,7 @@
 #include <iostream>
 #include <thread>
 #include "orientation_vrep_sensor.h"
-#include "robotnik_model.h"
+#include "../Knowledge/robotnik_model.h"
 
 OrientationVREPSensor::OrientationVREPSensor(Connection &connection_)
 	:Sensor("OrientationSensor"), connection(connection_), handle(connection_.getRobotHandle())

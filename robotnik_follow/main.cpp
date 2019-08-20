@@ -1,5 +1,5 @@
 #include <iostream>
-#include "robotnik_avoid_wall/Robot/robotnik.h"
+#include "Robot/robotnik.h"
 
 int main()
 {

@@ -9,7 +9,7 @@
 
 
 #include <Plan/planner.h>
-#include <PassP3DXPosition.h>
+#include "../Analyze/pass_robotnik_position.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
 
@@ -18,17 +18,17 @@ class GoToP3DXPlanner : public Planner
 private:
 	PassVREPPosition &position_analyze;
 	PassVREPOrientation &orientation_analyze;
-	PassP3DXPosition &p3dx_positon_analyze;
+	PassRobotnikPosition &p3dx_positon_analyze;
 
 	int state;
 	Position destination;
 
 public:
 	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze,
-			PassVREPOrientation &orientation_analyze, PassP3DXPosition &p3dx_positon_analyze_);
+			PassVREPOrientation &orientation_analyze, PassRobotnikPosition &p3dx_positon_analyze_);
 
 	GoToP3DXPlanner(Knowledge &knowledge, Pipeline *pipeline, PassVREPPosition &position_analyze_,
-	                  PassVREPOrientation &orientation_analyze_, PassP3DXPosition &p3dx_positon_analyze_);
+	                  PassVREPOrientation &orientation_analyze_, PassRobotnikPosition &p3dx_positon_analyze_);
 
 	void planIteration() override;
 
