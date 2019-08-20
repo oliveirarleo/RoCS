@@ -3,9 +3,7 @@ project(Pioneer)
 
 INCLUDE(FindPkgConfig)
 
-add_subdirectory(remote_api_vrep)
-
-include_directories(remote_api_vrep Kaiju)
+include_directories(./../remote_api_vrep ./../FRoCS)
 
 
 set(CMAKE_CXX_STANDARD 17)

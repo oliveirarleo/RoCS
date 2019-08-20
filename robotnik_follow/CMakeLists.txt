@@ -3,9 +3,8 @@ project(robotnik_follow)
 
 INCLUDE(FindPkgConfig)
 
-add_subdirectory(remote_api_vrep)
 
-include_directories(remote_api_vrep Kaiju)
+include_directories(../remote_api_vrep ../FRoCS)
 
 
 set(CMAKE_CXX_STANDARD 17)
@@ -37,40 +36,6 @@ include_directories(robotnik_avoid_wall/Robot)
 include_directories(robotnik_avoid_wall/Sensors)
 
 set(SOURCES
-        Kaiju/Actuators/actuator.h
-        Kaiju/Actuators/motor.h
-        Kaiju/Actuators/rotary_motor.h
-        Kaiju/Actuators/servo_motor.h
-        Kaiju/Actuators/speaker.h
-        Kaiju/Analyze/analyze.h
-        Kaiju/Execute/action.h
-        Kaiju/Execute/execute.h
-        Kaiju/Knowledge/knowledge.h
-        Kaiju/Knowledge/reactive_model.h
-        Kaiju/Knowledge/robot_model.h
-        Kaiju/Knowledge/strategy_model.h
-        Kaiju/Knowledge/world_model.h
-        Kaiju/Monitor/monitor.h
-        Kaiju/Plan/behavior.h
-        Kaiju/Plan/planner.h
-        Kaiju/Plan/task.h
-        Kaiju/Robot/robot.h
-        Kaiju/Sensors/accelerometer.h
-        Kaiju/Sensors/camera.h
-        Kaiju/Sensors/gyroscope.h
-        Kaiju/Sensors/imu.h
-        Kaiju/Sensors/magnetometer.h
-        Kaiju/Sensors/odometer.h
-        Kaiju/Sensors/range.h
-        Kaiju/Sensors/rfid.h
-        Kaiju/Sensors/rgb_d.h
-        Kaiju/Sensors/sensor.h
-        Kaiju/Sensors/sonar.h
-        Kaiju/Util/observer.h
-        Kaiju/Util/orientation.h
-        Kaiju/Util/pipeline.h
-        Kaiju/Util/position.h
-        Kaiju/Util/publisher.h
         robotnik_avoid_wall/Actuators/robotnik_wheel_vrep.cpp
         robotnik_avoid_wall/Actuators/robotnik_wheel_vrep.h
         robotnik_avoid_wall/Actuators/wheel_vrep.cpp
