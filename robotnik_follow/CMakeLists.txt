@@ -5,8 +5,6 @@ INCLUDE(FindPkgConfig)
 
 include_directories(remote_api_vrep ../FRoCS)
 
-
-#set(GMOCK_DIR "../remote_api_vrep")
 add_subdirectory(../remote_api_vrep build)
 
 set(CMAKE_CXX_STANDARD 17)

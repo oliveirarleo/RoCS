@@ -5,6 +5,7 @@ INCLUDE(FindPkgConfig)
 
 include_directories(./../remote_api_vrep ./../FRoCS)
 
+add_subdirectory(../remote_api_vrep build)
 
 set(CMAKE_CXX_STANDARD 17)
 add_compile_options("-lpthread")
