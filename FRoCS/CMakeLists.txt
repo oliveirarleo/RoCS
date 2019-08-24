@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
-
-INCLUDE(FindPkgConfig)
+include(FindPkgConfig)
 
 set(CMAKE_CXX_STANDARD 17)
 #IF (CMAKE_COMPILER_IS_GNUCC)

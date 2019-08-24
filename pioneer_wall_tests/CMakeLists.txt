@@ -1,71 +1,25 @@
-cmake_minimum_required(VERSION 3.9)
-project(Pioneer)
+cmake_minimum_required(VERSION 3.1)
 
-INCLUDE(FindPkgConfig)
+project(pioneer_xwalk)
 
-include_directories(./../remote_api_vrep ./../FRoCS)
+include(FindPkgConfig)
+
+include_directories(../remote_api_vrep ../FRoCS)
 
 add_subdirectory(../remote_api_vrep build)
 
-set(CMAKE_CXX_STANDARD 17)
-add_compile_options("-lpthread")
-link_libraries("-lpthread")
 IF (CMAKE_COMPILER_IS_GNUCC)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 ENDIF (CMAKE_COMPILER_IS_GNUCC)
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -DBUILD_SHARED_LIBS=OFF")
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+file(GLOB SOURCES "./*/*.cpp"  "./*/*/*.cpp" main.cpp)
 
-
-set(SOURCES
-        pioneer_p3dx_avoid_wall/Visualizer/file_visualizer.cpp
-
-        pioneer_p3dx_avoid_wall/Actuators/wheel_vrep.cpp
-
-        pioneer_p3dx_avoid_wall/Sensors/orientation_vrep_sensor.cpp
-        pioneer_p3dx_avoid_wall/Sensors/range_vrep_sensor.cpp
-        pioneer_p3dx_avoid_wall/Sensors/position_vrep_sensor.cpp
-
-        pioneer_p3dx_avoid_wall/Connection/connection.cpp
-
-        pioneer_p3dx_avoid_wall/Robot/pioneer_p3dx.cpp
-
-        pioneer_p3dx_avoid_wall/Knowledge/pioneer_p3dx_model.cpp
-        pioneer_p3dx_avoid_wall/Knowledge/avoid_wall_model.cpp
-        pioneer_p3dx_avoid_wall/Knowledge/p3dx_knowledge.cpp
-
-        pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.cpp
-        pioneer_p3dx_avoid_wall/Monitor/orientation_vrep_monitor.h
-        pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.cpp
-        pioneer_p3dx_avoid_wall/Monitor/position_vrep_monitor.h
-        pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.cpp
-        pioneer_p3dx_avoid_wall/Monitor/range_vrep_monitor.h
-
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.cpp
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_orientation.h
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.cpp
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_position.h
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.cpp
-        pioneer_p3dx_avoid_wall/Analyze/pass_vrep_range.h
-
-        pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.cpp
-        pioneer_p3dx_avoid_wall/Plan/go_to_origin_planner.h
-
-        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.cpp
-        pioneer_p3dx_avoid_wall/Execute/Actions/go_to_position.h
-        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.cpp
-        pioneer_p3dx_avoid_wall/Execute/Actions/set_wheels_speed.h
-        pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.cpp
-        pioneer_p3dx_avoid_wall/Execute/Actions/turn_to_angle.h
-
-        main.cpp
-        )
+file(GLOB HEADERS "./*/*/*.h" "./*/*.h")
 
 find_package(Threads)
 
-add_executable(Pioneer ${SOURCES} )
+add_executable(pioneer_xwalk ${HEADERS} ${SOURCES})
 
-target_link_libraries(Pioneer  ${CMAKE_THREAD_LIBS_INIT} remote_api pthread)
+target_link_libraries(pioneer_xwalk  ${CMAKE_THREAD_LIBS_INIT} remote_api pthread)
 
-install(TARGETS Pioneer RUNTIME DESTINATION bin)
+install(TARGETS pioneer_xwalk RUNTIME DESTINATION bin)

@@ -49,13 +49,6 @@ void AvoidWallModel::react()
 		pipeline->push(set_speed);
 	}
 
-
-//	for(Position p : this->observed_value)
-//	{
-//		std::cout << std::fixed  << std::setprecision(3) << p.getZ() << " ";
-//	}
-//	std::cout << "\n";
-
 }
 
 

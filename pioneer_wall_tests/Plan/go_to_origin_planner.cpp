@@ -4,7 +4,7 @@
 // Github:      https://github.com/oramleo
 //
 
-#include "go_to_origin_planner.h"
+#include "go_to_p3dx_planner.h"
 #include "../Execute/Actions/go_to_position.h"
 
 GoToOriginPlanner::GoToOriginPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze, PassVREPOrientation &orientation_analyze)

@@ -24,7 +24,7 @@
 #include "../Analyze/pass_vrep_range.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
-#include "../Plan/go_to_origin_planner.h"
+#include "../Plan/go_to_p3dx_planner.h"
 #include "../Visualizer/file_visualizer.h"
 
 
@@ -39,8 +39,7 @@ private:
 	std::vector<RangeVREPSensor> range_sensors;
 	OrientationVREPSensor orientation_sensor;
 	PositionVREPSensor position_sensor;
-	P3DXPositionSensor p3dx_position_sensor;
-//		std::vector< ForceSensorVREP > force_sensors;
+	PositionVREPSensor p3dx_position_sensor;
 
 	//	ACTUATORS
 	std::vector<WheelVREP> wheels;
@@ -51,7 +50,7 @@ private:
 	RangeVREPMonitor range_monitor;
 	PositionVREPMonitor position_monitor;
 	OrientationVREPMonitor orientation_monitor;
-	P3DXPositionMonitor p3dx_position_monitor;
+	PositionVREPMonitor p3dx_position_monitor;
 
 	//	ANALYZES
 	PassVREPRange range_analyze;

@@ -27,9 +27,6 @@ public:
 	GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze,
 			PassVREPOrientation &orientation_analyze, PassRobotnikPosition &p3dx_positon_analyze_);
 
-	GoToP3DXPlanner(Knowledge &knowledge, Pipeline *pipeline, PassVREPPosition &position_analyze_,
-	                  PassVREPOrientation &orientation_analyze_, PassRobotnikPosition &p3dx_positon_analyze_);
-
 	void planIteration() override;
 
 };

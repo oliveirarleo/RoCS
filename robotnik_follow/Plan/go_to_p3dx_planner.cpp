@@ -4,7 +4,7 @@
 // Github:      https://github.com/oramleo
 //
 
-#include "go_to_origin_planner.h"
+#include "go_to_p3dx_planner.h"
 #include "../Execute/Actions/go_to_position.h"
 
 GoToP3DXPlanner::GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &position_analyze,
@@ -12,13 +12,6 @@ GoToP3DXPlanner::GoToP3DXPlanner(Knowledge &knowledge, PassVREPPosition &positio
 	:Planner(knowledge), position_analyze(position_analyze), orientation_analyze(orientation_analyze),
 	p3dx_positon_analyze(p3dx_positon_analyze_), state(1),
 	 destination(2, 2, 0.1387)
-{
-}
-
-GoToP3DXPlanner::GoToP3DXPlanner(Knowledge &knowledge, Pipeline *pipeline, PassVREPPosition &position_analyze_,
-                                     PassVREPOrientation &orientation_analyze_, PassRobotnikPosition &p3dx_positon_analyze_)
-	:Planner(knowledge, pipeline), position_analyze(position_analyze_), orientation_analyze(orientation_analyze_),
-	p3dx_positon_analyze(p3dx_positon_analyze_), state(1), destination(2, 2, 0.2)
 {
 }
 

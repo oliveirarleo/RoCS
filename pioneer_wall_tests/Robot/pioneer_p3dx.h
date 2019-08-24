@@ -19,7 +19,7 @@
 #include "../Analyze/pass_vrep_range.h"
 #include "../Analyze/pass_vrep_position.h"
 #include "../Analyze/pass_vrep_orientation.h"
-#include "../Plan/go_to_origin_planner.h"
+#include "../Plan/go_to_p3dx_planner.h"
 #include "../Visualizer/file_visualizer.h"
 
 
