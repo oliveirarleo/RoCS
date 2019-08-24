@@ -1,5 +1,5 @@
 # RoCS
-Laboratory of robotics and cognitive systems
+Laboratory of Robotics and Cognitive Systems
 
 # Author
 Leonardo de Oliveira Ramos
